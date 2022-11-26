@@ -1,0 +1,11 @@
+.*
+!.gitignore
+!.jvmopts
+!.sbtopts
+project/metals.sbt
+project/project/
+project/target/
+target/
+client/target/
+shared/target/
+server/target/
