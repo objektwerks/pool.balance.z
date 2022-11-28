@@ -17,11 +17,11 @@ object Server extends ZIOAppDefault:
   override val bootstrap: ZLayer[ZIOAppArgs, Any, Environment] =
     Runtime.removeDefaultLoggers >>> file(Path.of("./target/server.log"))
 
-  def router: Http[Any, Throwable, Request, Response] = Http.collectZIO[Request] {
+  val router: Http[Any, Throwable, Request, Response] = Http.collectZIO[Request] {
     case Method.GET -> !! / "now" => ZIO.succeed( Response.text(Instant.now.toString()) )
   }
 
-  def app: ZIO[HttpServer, Nothing, Nothing] =
+  val app: ZIO[HttpServer, Nothing, Nothing] =
     for
       _      <- ZIO.log(s"HttpServer running at http://localhost:$port")
       server <- HttpServer.serve(router)
