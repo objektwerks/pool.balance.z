@@ -17,7 +17,13 @@ lazy val client = project
   .dependsOn(shared)
   .settings(common)
   .settings(
-    mainClass in Compile := Some("objektwerks.Client")
+    mainClass in Compile := Some("objektwerks.Client"),
+    libraryDependencies ++= {
+      Seq(
+        "org.jfree" % "jfreechart" % "1.5.3",
+        "com.miglayout" % "miglayout-swing" % "11.0",
+      )
+    }
   )
 
 lazy val shared = project
