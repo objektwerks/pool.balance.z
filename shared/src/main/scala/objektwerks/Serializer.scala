@@ -2,6 +2,7 @@ package objektwerks
 
 import zio.json.{DeriveJsonDecoder, DeriveJsonEncoder, JsonDecoder, JsonEncoder}
 
+// Entity
 given JsonDecoder[Entity] = DeriveJsonDecoder.gen[Entity]
 given JsonEncoder[Entity] = DeriveJsonEncoder.gen[Entity]
 
@@ -17,6 +18,13 @@ given JsonEncoder[Measurement] = DeriveJsonEncoder.gen[Measurement]
 given JsonDecoder[Chemical] = DeriveJsonDecoder.gen[Chemical]
 given JsonEncoder[Chemical] = DeriveJsonEncoder.gen[Chemical]
 
+given JsonDecoder[TypeOfChemical] = DeriveJsonDecoder.gen[TypeOfChemical]
+given JsonEncoder[TypeOfChemical] = DeriveJsonEncoder.gen[TypeOfChemical]
+
+given JsonDecoder[UnitOfMeasure] = DeriveJsonDecoder.gen[UnitOfMeasure]
+given JsonEncoder[UnitOfMeasure] = DeriveJsonEncoder.gen[UnitOfMeasure]
+
+// Command
 given JsonDecoder[Command] = DeriveJsonDecoder.gen[Command]
 given JsonEncoder[Command] = DeriveJsonEncoder.gen[Command]
 
@@ -44,6 +52,7 @@ given JsonEncoder[ListChemicals] = DeriveJsonEncoder.gen[ListChemicals]
 given JsonDecoder[SaveChemical] = DeriveJsonDecoder.gen[SaveChemical]
 given JsonEncoder[SaveChemical] = DeriveJsonEncoder.gen[SaveChemical]
 
+// Event
 given JsonDecoder[Event] = DeriveJsonDecoder.gen[Event]
 given JsonEncoder[Event] = DeriveJsonEncoder.gen[Event]
 
