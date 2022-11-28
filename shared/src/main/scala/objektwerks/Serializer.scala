@@ -56,17 +56,17 @@ given JsonEncoder[PoolSaved] = DeriveJsonEncoder.gen[PoolSaved]
 given JsonDecoder[CleaningsListed] = DeriveJsonDecoder.gen[CleaningsListed]
 given JsonEncoder[CleaningsListed] = DeriveJsonEncoder.gen[CleaningsListed]
 
-given JsonDecoder[SaveCleaning] = DeriveJsonDecoder.gen[SaveCleaning]
-given JsonEncoder[SaveCleaning] = DeriveJsonEncoder.gen[SaveCleaning]
+given JsonDecoder[CleaningSaved] = DeriveJsonDecoder.gen[CleaningSaved]
+given JsonEncoder[CleaningSaved] = DeriveJsonEncoder.gen[CleaningSaved]
 
-given JsonDecoder[ListMeasurements] = DeriveJsonDecoder.gen[ListMeasurements]
-given JsonEncoder[ListMeasurements] = DeriveJsonEncoder.gen[ListMeasurements]
+given JsonDecoder[MeasurementsListed] = DeriveJsonDecoder.gen[MeasurementsListed]
+given JsonEncoder[MeasurementsListed] = DeriveJsonEncoder.gen[MeasurementsListed]
 
-given JsonDecoder[SaveMeasurement] = DeriveJsonDecoder.gen[SaveMeasurement]
-given JsonEncoder[SaveMeasurement] = DeriveJsonEncoder.gen[SaveMeasurement]
+given JsonDecoder[MeasurementSaved] = DeriveJsonDecoder.gen[MeasurementSaved]
+given JsonEncoder[MeasurementSaved] = DeriveJsonEncoder.gen[MeasurementSaved]
 
-given JsonDecoder[ListChemicals] = DeriveJsonDecoder.gen[ListChemicals]
-given JsonEncoder[ListChemicals] = DeriveJsonEncoder.gen[ListChemicals]
+given JsonDecoder[ChemicalsListed] = DeriveJsonDecoder.gen[ChemicalsListed]
+given JsonEncoder[ChemicalsListed] = DeriveJsonEncoder.gen[ChemicalsListed]
 
-given JsonDecoder[SaveChemical] = DeriveJsonDecoder.gen[SaveChemical]
-given JsonEncoder[SaveChemical] = DeriveJsonEncoder.gen[SaveChemical]
+given JsonDecoder[ChemicalSaved] = DeriveJsonDecoder.gen[ChemicalSaved]
+given JsonEncoder[ChemicalSaved] = DeriveJsonEncoder.gen[ChemicalSaved]
