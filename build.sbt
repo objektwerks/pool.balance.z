@@ -22,6 +22,8 @@ lazy val client = project
     mainClass in Compile := Some("objektwerks.Client"),
     libraryDependencies ++= {
       Seq(
+        "dev.zio" %% "zio" % zioVersion,
+        "dev.zio" %% "zio-json" % "0.3.0",
         "org.jfree" % "jfreechart" % "1.5.3",
         "com.miglayout" % "miglayout-swing" % "11.0",
       )
