@@ -21,8 +21,12 @@ object Server extends ZIOAppDefault:
     case Method.GET -> !! / "now" => ZIO.succeed( Response.text(Instant.now.toString()) )
   }
 
-  override def run: ZIO[Environment & (ZIOAppArgs & Scope ), Any, Any] =
+  def app: ZIO[HttpServer, Nothing, Nothing] =
     for
       _      <- ZIO.log(s"HttpServer running at http://localhost:$port")
-      server <- HttpServer.serve(router).provide(ServerConfig.live(config), HttpServer.live)
+      server <- HttpServer.serve(router)
     yield server
+
+  override def run: ZIO[Environment & (ZIOAppArgs & Scope ), Any, Any] =
+    app
+      .provide(ServerConfig.live(config), HttpServer.live)
