@@ -1,15 +1,6 @@
 package objektwerks
 
-import zio.json.{DeriveJsonDecoder, DeriveJsonEncoder, JsonDecoder, JsonEncoder}
-
 sealed trait Command
-
-object Command:
-  given JsonDecoder[Command] = DeriveJsonDecoder.gen[Command]
-  given JsonEncoder[Command] = DeriveJsonEncoder.gen[Command]
-
-  given JsonDecoder[ListPools] = DeriveJsonDecoder.gen[ListPools]
-  given JsonEncoder[ListPools] = DeriveJsonEncoder.gen[ListPools]
 
 final case class ListPools() extends Command
 final case class AddPool(pool: Pool) extends Command

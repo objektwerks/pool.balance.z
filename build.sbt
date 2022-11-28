@@ -1,3 +1,5 @@
+val zioVersion = "2.0.4"
+
 lazy val common = Defaults.coreDefaultSettings ++ Seq(
   organization := "objektwerks",
   version := "0.1-SNAPSHOT",
@@ -28,6 +30,14 @@ lazy val client = project
 
 lazy val shared = project
   .settings(common)
+  .settings(
+    libraryDependencies ++= {
+      Seq(
+        "dev.zio" %% "zio" % zioVersion,
+        "dev.zio" %% "zio-json" % "0.3.0"
+      )
+    }
+  )
 
 lazy val server = project
   .enablePlugins(JavaServerAppPackaging)
@@ -35,7 +45,6 @@ lazy val server = project
   .settings(common)
   .settings(
     libraryDependencies ++= {
-      val zioVersion = "2.0.4"
       val zioConfigVersion = "3.0.1"
       Seq(
         "dev.zio" %% "zio" % zioVersion,
