@@ -8,6 +8,12 @@ given JsonEncoder[Entity] = DeriveJsonEncoder.gen[Entity]
 given JsonDecoder[Pool] = DeriveJsonDecoder.gen[Pool]
 given JsonEncoder[Pool] = DeriveJsonEncoder.gen[Pool]
 
+given JsonDecoder[Cleaning] = DeriveJsonDecoder.gen[Cleaning]
+given JsonEncoder[Cleaning] = DeriveJsonEncoder.gen[Cleaning]
+
+given JsonDecoder[Measurement] = DeriveJsonDecoder.gen[Measurement]
+given JsonEncoder[Measurement] = DeriveJsonEncoder.gen[Measurement]
+
 given JsonDecoder[Command] = DeriveJsonDecoder.gen[Command]
 given JsonEncoder[Command] = DeriveJsonEncoder.gen[Command]
 
