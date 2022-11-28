@@ -27,6 +27,7 @@ lazy val client = project
   )
 
 lazy val shared = project
+  .settings(common)
 
 lazy val server = project
   .enablePlugins(JavaServerAppPackaging)
