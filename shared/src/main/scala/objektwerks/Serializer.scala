@@ -14,6 +14,9 @@ given JsonEncoder[Cleaning] = DeriveJsonEncoder.gen[Cleaning]
 given JsonDecoder[Measurement] = DeriveJsonDecoder.gen[Measurement]
 given JsonEncoder[Measurement] = DeriveJsonEncoder.gen[Measurement]
 
+given JsonDecoder[Chemical] = DeriveJsonDecoder.gen[Chemical]
+given JsonEncoder[Chemical] = DeriveJsonEncoder.gen[Chemical]
+
 given JsonDecoder[Command] = DeriveJsonDecoder.gen[Command]
 given JsonEncoder[Command] = DeriveJsonEncoder.gen[Command]
 
@@ -34,3 +37,6 @@ given JsonEncoder[AddCleaning] = DeriveJsonEncoder.gen[AddCleaning]
 
 given JsonDecoder[UpdateCleaning] = DeriveJsonDecoder.gen[UpdateCleaning]
 given JsonEncoder[UpdateCleaning] = DeriveJsonEncoder.gen[UpdateCleaning]
+
+given JsonDecoder[Event] = DeriveJsonDecoder.gen[Event]
+given JsonEncoder[Event] = DeriveJsonEncoder.gen[Event]
