@@ -1,9 +1,32 @@
 package objektwerks
 
-import java.time.{LocalDate, LocalDateTime}
+import java.time.{LocalDate, LocalTime, LocalDateTime}
+import java.time.format.DateTimeFormatter
 
 sealed trait Entity:
   val id: Long
+
+object Entity:
+  private def dateFormatterInstance: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+  private def timeFormatterInstance: DateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm")
+
+  def format(localDateTime: LocalDateTime): String = localDateTime.format(dateFormatterInstance)
+  def format(localDate: LocalDate): String = localDate.format(dateFormatterInstance)
+  def format(localTime: LocalTime): String = localTime.format(timeFormatterInstance)
+
+  def applyLocalDate(localDate: LocalDate, localDateTime: LocalDateTime): LocalDateTime =
+    localDateTime
+      .withYear(localDate.getYear)
+      .withMonth(localDate.getMonthValue)
+      .withDayOfMonth(localDate.getDayOfMonth)
+
+  def isNotInt(text: String): Boolean = !text.matches("\\d+")
+  def isNotDouble(text: String): Boolean = !text.matches("\\d{0,7}([\\.]\\d{0,4})?")
+
+  given poolOrdering: Ordering[Pool] = Ordering.by[Pool, String](p => p.name).reverse
+  given cleaningOrdering: Ordering[Cleaning] = Ordering.by[Cleaning, Long](c => c.cleaned.toLocalDate.toEpochDay).reverse
+  given measurementOrdering: Ordering[Measurement] = Ordering.by[Measurement, Long](m => m.measured.toLocalDate.toEpochDay).reverse
+  given chemicalOrdering: Ordering[Chemical] = Ordering.by[Chemical, Long](c => c.added.toLocalDate.toEpochDay).reverse
 
 final case class Pool(id: Long = 0,
                       name: String = "", 
@@ -34,13 +57,6 @@ final case class Measurement(id: Long = 0,
                              temperature: Int = 85,
                              measured: LocalDateTime = LocalDateTime.now) extends Entity
 
-final case class Chemical(id: Long = 0,
-                          poolId: Long,
-                          typeof: TypeOfChemical = TypeOfChemical.LiquidChlorine,
-                          amount: Double = 1.0, 
-                          unit: UnitOfMeasure = UnitOfMeasure.gl,
-                          added: LocalDateTime = LocalDateTime.now) extends Entity
-
 object Measurement:
   val totalChlorineRange = Range(1, 5).inclusive
   val freeChlorineRange = Range(1, 5).inclusive
@@ -52,6 +68,13 @@ object Measurement:
   val totalBromineRange = Range(2, 10).inclusive
   val saltRange = Range(2700, 3400).inclusive
   val temperatureRange = Range(50, 100).inclusive
+
+final case class Chemical(id: Long = 0,
+                          poolId: Long,
+                          typeof: TypeOfChemical = TypeOfChemical.LiquidChlorine,
+                          amount: Double = 1.0, 
+                          unit: UnitOfMeasure = UnitOfMeasure.gl,
+                          added: LocalDateTime = LocalDateTime.now) extends Entity
 
 enum TypeOfChemical(val display: String):
   case LiquidChlorine extends TypeOfChemical("Liquid Chlorine")
