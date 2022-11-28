@@ -1,15 +1,21 @@
-ThisBuild / organization := "objektwerks"
-ThisBuild / version := "0.1-SNAPSHOT"
-ThisBuild / scalaVersion := "3.2.1"
+lazy val common = Defaults.coreDefaultSettings ++ Seq(
+  organization := "objektwerks",
+  version := "0.1-SNAPSHOT",
+  scalaVersion := "3.2.1"
+)
 
-lazy val scalaTestVersion = "3.2.14"
-
-lazy val root = (project in file("."))
+lazy val poolbalance = (project in file("."))
   .aggregate(client, shared, server)
+  .settings(common)
+  .settings(
+    publish := {},
+    publishLocal := {}
+  )
 
 lazy val client = project
   .enablePlugins(JavaAppPackaging)
   .dependsOn(shared)
+  .settings(common)
   .settings(
     mainClass in Compile := Some("objektwerks.Client")
   )
@@ -19,10 +25,22 @@ lazy val shared = project
 lazy val server = project
   .enablePlugins(JavaServerAppPackaging)
   .dependsOn(shared)
+  .settings(common)
   .settings(
     libraryDependencies ++= {
+      val zioVersion = "2.0.4"
+      val zioConfigVersion = "3.0.1"
       Seq(
-        "org.scalatest" %% "scalatest" % scalaTestVersion % Test
+        "dev.zio" %% "zio" % zioVersion,
+        "dev.zio" %% "zio-http" % "0.0.3",
+        "dev.zio" %% "zio-json" % "0.3.0",
+        "dev.zio" %% "zio-config" % zioConfigVersion,
+        "dev.zio" %% "zio-config-typesafe" % zioConfigVersion,
+        "dev.zio" %% "zio-config-magnolia" % zioConfigVersion,
+        "dev.zio" %% "zio-logging" % "2.1.5",
+        compilerPlugin("com.github.ghik" % "zerowaste" % "0.2.1" cross CrossVersion.full),
+        "dev.zio" %% "zio-test" % zioVersion % Test,
+        "dev.zio" %% "zio-test-sbt" % zioVersion % Test
       )
     }
   )
