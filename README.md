@@ -10,9 +10,17 @@ Test
 ----
 1. sbt clean test
 
-Run
----
-1. sbt run
+Server Run
+----------
+1. sbt ( interactive session )
+2. project server
+3. run
+
+Client Run
+----------
+1. sbt ( interactive session )
+2. project client
+3. run
 
 Deploy
 ------
@@ -87,7 +95,7 @@ Charts
 
 Resources
 ---------
-1. [Swing](https://openjfx.io/index.html)
+1. [Swing](http://www.java2s.com/Tutorials/Java/Java_Swing/index.htm)
 4. [jDeploy](https://www.jdeploy.com/)
 
 License
