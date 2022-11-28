@@ -46,3 +46,27 @@ given JsonEncoder[SaveChemical] = DeriveJsonEncoder.gen[SaveChemical]
 
 given JsonDecoder[Event] = DeriveJsonDecoder.gen[Event]
 given JsonEncoder[Event] = DeriveJsonEncoder.gen[Event]
+
+given JsonDecoder[PoolsListed] = DeriveJsonDecoder.gen[PoolsListed]
+given JsonEncoder[PoolsListed] = DeriveJsonEncoder.gen[PoolsListed]
+
+given JsonDecoder[PoolSaved] = DeriveJsonDecoder.gen[PoolSaved]
+given JsonEncoder[PoolSaved] = DeriveJsonEncoder.gen[PoolSaved]
+
+given JsonDecoder[CleaningsListed] = DeriveJsonDecoder.gen[CleaningsListed]
+given JsonEncoder[CleaningsListed] = DeriveJsonEncoder.gen[CleaningsListed]
+
+given JsonDecoder[SaveCleaning] = DeriveJsonDecoder.gen[SaveCleaning]
+given JsonEncoder[SaveCleaning] = DeriveJsonEncoder.gen[SaveCleaning]
+
+given JsonDecoder[ListMeasurements] = DeriveJsonDecoder.gen[ListMeasurements]
+given JsonEncoder[ListMeasurements] = DeriveJsonEncoder.gen[ListMeasurements]
+
+given JsonDecoder[SaveMeasurement] = DeriveJsonDecoder.gen[SaveMeasurement]
+given JsonEncoder[SaveMeasurement] = DeriveJsonEncoder.gen[SaveMeasurement]
+
+given JsonDecoder[ListChemicals] = DeriveJsonDecoder.gen[ListChemicals]
+given JsonEncoder[ListChemicals] = DeriveJsonEncoder.gen[ListChemicals]
+
+given JsonDecoder[SaveChemical] = DeriveJsonDecoder.gen[SaveChemical]
+given JsonEncoder[SaveChemical] = DeriveJsonEncoder.gen[SaveChemical]
