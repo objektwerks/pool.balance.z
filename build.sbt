@@ -6,9 +6,14 @@ lazy val root = (project in file("."))
   .aggregate(client, shared, server)
 
 lazy val client = project
+  .enablePlugins(JavaAppPackaging)
   .dependsOn(shared)
+  .settings(
+    mainClass in Compile := Some("objektwerks.Client")
+  )
 
 lazy val shared = project
 
 lazy val server = project
+  .enablePlugins(JavaServerAppPackaging)
   .dependsOn(shared)
