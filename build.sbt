@@ -1,6 +1,6 @@
-organization := "objektwerks"
-version := "0.1-SNAPSHOT"
-scalaVersion := "3.2.1"
+ThisBuild / organization := "objektwerks"
+ThisBuild / version := "0.1-SNAPSHOT"
+ThisBuild / scalaVersion := "3.2.1"
 
 lazy val root = (project in file("."))
   .aggregate(client, shared, server)
