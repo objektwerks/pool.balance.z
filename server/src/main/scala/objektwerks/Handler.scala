@@ -1,8 +1,5 @@
 package objektwerks
 
-import Command.*
-import Event.*
-
 class Handler(store: Store): // Totally broken by 3 Quill type errors!
   def handle(listPools: ListPools): PoolsListed = PoolsListed(store.listPools)
   def handle(savePool: SavePool): PoolSaved =
