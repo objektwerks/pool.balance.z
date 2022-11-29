@@ -17,5 +17,5 @@ final case class MeasurementSaved(measurement: Measurement) extends Event
 final case class ChemicalsListed(chemicals: List[Chemical]) extends Event
 final case class ChemicalSaved(chemical: Chemical) extends Event
 
-final case class Fault(message: String,
+final case class Fault(cause: String,
                        occurred: String = Entity.instant) extends Event

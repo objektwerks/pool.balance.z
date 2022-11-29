@@ -29,7 +29,7 @@ object Server extends ZIOAppDefault:
           case SaveMeasurement(measurement) => Response.json( MeasurementSaved(measurement).toJson )
           case ListChemicals()              => Response.json( ChemicalsListed(Nil).toJson )
           case SaveChemical(chemical)       => Response.json( ChemicalSaved(chemical).toJson )
-        case Left(error) => Response.json( Fault(error).toJson )
+        case Left(cause) => Response.json( Fault(cause).toJson )
     }
   }
 
