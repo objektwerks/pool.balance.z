@@ -18,14 +18,11 @@ object Server extends ZIOAppDefault:
     case Method.GET -> !! / "now" => ZIO.succeed( Response.text(Instant.now.toString()) )
   }
 
-  val app: ZIO[HttpServer, Nothing, Nothing] = HttpServer.serve(router)
-
   override def run: ZIO[Environment & (ZIOAppArgs & Scope ), Any, Any] =
     for
-      args <- getArgs
-      port = args.headOption.getOrElse("7272").toInt
-      _    <- ZIO.log(s"HttpServer running at http://localhost:$port")
-    yield
-      val config = ServerConfig.default.port(port)
-      app
-        .provide(ServerConfig.live(config), HttpServer.live)
+      args   <- getArgs
+      port   =  args.headOption.getOrElse("7272").toInt
+      _      <- ZIO.log(s"HttpServer running at http://localhost:$port")
+      config =  ServerConfig.default.port(port)
+      server <- HttpServer.serve(router).provide(ServerConfig.live(config), HttpServer.live)
+    yield server
