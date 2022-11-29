@@ -56,6 +56,7 @@ lazy val server = project
         "dev.zio" %% "zio-config-typesafe" % zioConfigVersion,
         "dev.zio" %% "zio-config-magnolia" % zioConfigVersion,
         "dev.zio" %% "zio-logging" % "2.1.5",
+        "io.getquill" %% "quill-jdbc-zio" % "4.6.0",
         compilerPlugin("com.github.ghik" % "zerowaste" % "0.2.1" cross CrossVersion.full),
         "dev.zio" %% "zio-test" % zioVersion % Test,
         "dev.zio" %% "zio-test-sbt" % zioVersion % Test
