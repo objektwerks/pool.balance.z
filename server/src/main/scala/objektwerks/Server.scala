@@ -29,11 +29,11 @@ object Server extends ZIOAppDefault:
           case command @ ListPools()                  => Response.json( handler.handle(command).toJson )
           case command @ SavePool(pool)               => Response.json( handler.handle(command).toJson )
           case command @ ListCleanings()              => Response.json( CleaningsListed(Nil).toJson )
-          case command @ SaveCleaning(cleaning)       => Response.json( CleaningSaved(cleaning).toJson )
+          case command @ SaveCleaning(cleaning)       => Response.json( CleaningSaved(0L).toJson )
           case command @ ListMeasurements()           => Response.json( MeasurementsListed(Nil).toJson )
-          case command @ SaveMeasurement(measurement) => Response.json( MeasurementSaved(measurement).toJson )
+          case command @ SaveMeasurement(measurement) => Response.json( MeasurementSaved(0L).toJson )
           case command @ ListChemicals()              => Response.json( ChemicalsListed(Nil).toJson )
-          case command @ SaveChemical(chemical)       => Response.json( ChemicalSaved(chemical).toJson )
+          case command @ SaveChemical(chemical)       => Response.json( ChemicalSaved(0L).toJson )
         case Left(error) => Response.json( Fault( error ).toJson )
     }
   }
