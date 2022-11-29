@@ -2,53 +2,10 @@ Pool Balance
 ------------
 >Pool cleaning, measurement and chemical balancing app using Swing and Scala 3.
 
-Show Stopper Errors
--------------------
->With Quill inline methods:
-```
-[error] -- Error: /Users/tripletail/workspace/pool.balance.z/server/src/main/scala/objektwerks/Handler.scala:4:68 
-[error]  4 |  def handle(listPools: ListPools): PoolsListed = PoolsListed(store.listPools)
-[error]    |                                                              ^^^^^^^^^^^^^^^
-[error]    |                                       Could not summon a parser factory
-[error]    |----------------------------------------------------------------------------
-[error]    |Inline stack trace
-[error]    |- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-[error]    |This location contains code that was inlined from Handler.scala:4
-[error] 17 |  inline def listPools: List[Pool] = run( query[Pool] )
-[error]    |                                          ^^^^^^^^^^^
-[error]     ----------------------------------------------------------------------------
-[error] -- Error: /Users/tripletail/workspace/pool.balance.z/server/src/main/scala/objektwerks/Handler.scala:7:47 
-[error]   7 |    val id = if pool.id == 0 then store.addPool(pool)
-[error]     |                                  ^^^^^^^^^^^^^^^^^^^
-[error]     |      Cannot Find a 'scala.Long' Encoder of pool.id.asInstanceOf[Long]
-[error]     |---------------------------------------------------------------------------
-[error]     |Inline stack trace
-[error]     |- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-[error]     |This location contains code that was inlined from ElaborateStructure.scala:542
-[error]     |- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-[error]     |This location contains code that was inlined from ElaborateStructure.scala:542
-[error]  12 |    run( query[Pool].insertValue( lift(pool) ).returningGenerated(_.id) )
-[error]     |                                  ^^^^^^^^^^
-[error]      ---------------------------------------------------------------------------
-[error] -- Error: /Users/tripletail/workspace/pool.balance.z/server/src/main/scala/objektwerks/Handler.scala:8:34 
-[error]  8 |             else store.updatePool(pool)
-[error]    |                  ^^^^^^^^^^^^^^^^^^^^^^
-[error]    |                  Cannot Find a 'scala.Long' Encoder of pool.id
-[error]    |----------------------------------------------------------------------------
-[error]    |Inline stack trace
-[error]    |- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-[error]    |This location contains code that was inlined from Handler.scala:10
-[error] 10 |
-[error]    |                    ^^^^^^^
-[error]    |- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-[error]    |This location contains code that was inlined from Handler.scala:10
-[error] 15 |    run( query[Pool].filter(_.id == lift(pool.id) ).updateValue( lift(pool) ) )
-[error]    |                                    ^^^^^^^^^^^^^
-[error]     ----------------------------------------------------------------------------
-[error] three errors found
-[error] (server / Compile / compileIncremental) Compilation failed
-[error] Total time: 10 s, completed Nov 29, 2022, 4:24:27 PM
-```
+Warning
+-------
+>In VSCode, successfull Quill code will generage what looks like errors.
+>But they may not be! Check to see if said errors are actually infos! :)
 
 Build
 -----
