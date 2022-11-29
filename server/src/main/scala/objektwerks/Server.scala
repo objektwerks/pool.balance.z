@@ -10,6 +10,9 @@ import zio.http.model.Method
 import zio.json.{DecoderOps, EncoderOps}
 import zio.logging.{LogFormat, file}
 
+import Command.given
+import Event.given
+
 object Server extends ZIOAppDefault:
   override val bootstrap: ZLayer[ZIOAppArgs, Any, Environment] =
     Runtime.removeDefaultLoggers >>> file(Path.of("~/.poolbalance.z/server.log"))
