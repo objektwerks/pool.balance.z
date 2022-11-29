@@ -41,6 +41,9 @@ case class Store(quill: Quill.Postgres[SnakeCase]):
   inline def addChemical(chemical: Chemical): ZIO[Any, SQLException, Long] =
     run( query[Chemical].insertValue( lift(chemical) ).returningGenerated(_.id) )
 
+  inline def updateChemical(chemical: Chemical): ZIO[Any, SQLException, Long] =
+    run( query[Chemical].filter(_.id == lift(chemical.id) ).updateValue( lift(chemical) ) )
+
   inline def listChemicals: ZIO[Any, SQLException, List[Chemical]] = run( query[Chemical] )
 
 object Store:
