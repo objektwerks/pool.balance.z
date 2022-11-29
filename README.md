@@ -4,8 +4,8 @@ Pool Balance
 
 Warning
 -------
->In VSCode, successfull Quill code will generage what looks like errors.
->But they may not be! Check to see if said errors are actually infos! :)
+1. ZIO effect integration with a ZIO Http router is not really workable at this time.
+2. In VSCode, successfull Quill code will generage what looks like errors. Check to see if said errors are actually infos! :)
 
 Build
 -----
