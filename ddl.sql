@@ -3,11 +3,9 @@ CREATE SCHEMA PUBLIC;
 
 CREATE TABLE pool (
   id BIGSERIAL PRIMARY KEY,
-  license VARCHAR(36) REFERENCES account(license),
   name VARCHAR(24) NOT NULL,
-  built VARCHAR NOT NULL,
   volume INT NOT NULL,
-  cost INT NOT NULL
+  unit INT NOT NULL
 );
 
 CREATE TABLE measurement (
