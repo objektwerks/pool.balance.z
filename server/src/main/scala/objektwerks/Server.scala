@@ -1,5 +1,7 @@
 package objektwerks
 
+import com.typesafe.config.ConfigFactory
+
 import java.nio.file.Path
 import java.time.Instant
 
@@ -11,7 +13,6 @@ import zio.json.{DecoderOps, EncoderOps}
 import zio.logging.{LogFormat, file}
 
 import Serializer.given
-import com.typesafe.config.ConfigFactory
 
 object Server extends ZIOAppDefault:
   val config = ConfigFactory.load("server.conf")
