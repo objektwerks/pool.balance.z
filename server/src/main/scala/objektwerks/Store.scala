@@ -27,6 +27,9 @@ case class Store(quill: Quill.Postgres[SnakeCase]):
 
   inline def listCleanings: ZIO[Any, SQLException, List[Cleaning]] = run( query[Cleaning] )
 
+  inline def addMeasurement(measurement: Measurement): ZIO[Any, SQLException, Long] =
+    run( query[Measurement].insertValue( lift(measurement) ).returningGenerated(_.id) )
+
   inline def listMeasurements: ZIO[Any, SQLException, List[Measurement]] = run( query[Measurement] )
 
   inline def listChemicals: ZIO[Any, SQLException, List[Chemical]] = run( query[Chemical] )
