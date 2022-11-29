@@ -22,7 +22,7 @@ object Server extends ZIOAppDefault:
     for
       args   <- getArgs
       port   =  args.headOption.getOrElse("7272").toInt
-      _      <- ZIO.log(s"HttpServer running at http://localhost:$port")
       config =  ServerConfig.default.port(port)
+      _      <- ZIO.log(s"HttpServer running at http://localhost:$port")
       server <- HttpServer.serve(router).provide(ServerConfig.live(config), HttpServer.live)
     yield server
