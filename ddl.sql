@@ -8,6 +8,18 @@ CREATE TABLE pool (
   unit INT NOT NULL
 );
 
+CREATE TABLE cleaning (
+  id BIGSERIAL PRIMARY KEY,
+  pool_id BIGINT REFERENCES pool(id),
+  brush BOOL NOT NULL,
+  net BOOL NOT NULL,
+  skimmer_basket BOOL NOT NULL,
+  pump_basket BOOL NOT NULL,
+  pump_filter BOOL NOT NULL,
+  vacuum BOOL NOT NULL,
+  cleaned VARCHAR NOT NULL
+);
+
 CREATE TABLE measurement (
   id BIGSERIAL PRIMARY KEY,
   pool_id BIGINT REFERENCES pool(id),
@@ -20,19 +32,6 @@ CREATE TABLE measurement (
   ph NUMERIC(2, 1) NOT NULL,
   total_alkalinity INT NOT NULL,
   cyanuric_acid INT NOT NULL
-);
-
-CREATE TABLE cleaning (
-  id BIGSERIAL PRIMARY KEY,
-  pool_id BIGINT REFERENCES pool(id),
-  cleaned VARCHAR NOT NULL,
-  brush BOOL NOT NULL,
-  net BOOL NOT NULL,
-  vacuum BOOL NOT NULL,
-  skimmer_basket BOOL NOT NULL,
-  pump_basket BOOL NOT NULL,
-  pump_filter BOOL NOT NULL,
-  deck BOOL NOT NULL
 );
 
 CREATE TABLE chemical (
