@@ -6,7 +6,7 @@ import zio.json.{DecoderOps, EncoderOps}
 import Serializer.given
 
 final case class Handler():
-  def handle(request: Either[String, Command]) =
+  def handle(request: Either[String, Command]): ZIO[Any, Nothing, String] =
     ZIO.succeed(
       request match
         case Right(command) => command match // TODO!
