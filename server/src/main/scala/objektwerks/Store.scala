@@ -33,6 +33,9 @@ case class Store(quill: Quill.Postgres[SnakeCase]):
   inline def addMeasurement(measurement: Measurement): ZIO[Any, SQLException, Long] =
     run( query[Measurement].insertValue( lift(measurement) ).returningGenerated(_.id) )
 
+  inline def updateMeasurement(measurement: Measurement): ZIO[Any, SQLException, Long] =
+    run( query[Measurement].filter(_.id == lift(measurement.id) ).updateValue( lift(measurement) ) )
+
   inline def listMeasurements: ZIO[Any, SQLException, List[Measurement]] = run( query[Measurement] )
 
   inline def addChemical(chemical: Chemical): ZIO[Any, SQLException, Long] =
