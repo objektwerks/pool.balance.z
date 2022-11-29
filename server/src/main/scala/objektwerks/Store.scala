@@ -3,7 +3,6 @@ package objektwerks
 import com.typesafe.config.Config
 
 import io.getquill.*
-import io.getquill.jdbczio.Quill.H2
 
 import java.sql.SQLException
 
@@ -15,7 +14,7 @@ trait Store:
   def listPools: ZIO[Any, SQLException, List[Pool]]
 
 case class DefaultStore(config: Config) extends Store:
-  val ctx = H2(SnakeCase, new H2JdbcContext(SnakeCase, config).dataSource)
+  val ctx = PostgresJdbcContext(Literal, config)
   import ctx.*
 
   inline def addPool(pool: Pool): ZIO[Any, SQLException, Long] =
