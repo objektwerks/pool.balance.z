@@ -32,6 +32,9 @@ case class Store(quill: Quill.Postgres[SnakeCase]):
 
   inline def listMeasurements: ZIO[Any, SQLException, List[Measurement]] = run( query[Measurement] )
 
+  inline def addChemical(chemical: Chemical): ZIO[Any, SQLException, Long] =
+    run( query[Chemical].insertValue( lift(chemical) ).returningGenerated(_.id) )
+
   inline def listChemicals: ZIO[Any, SQLException, List[Chemical]] = run( query[Chemical] )
 
 object Store:
