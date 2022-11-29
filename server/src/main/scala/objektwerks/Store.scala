@@ -1,6 +1,6 @@
 package objektwerks
 
-import com.typesafe.config.{Config, ConfigFactory}
+import com.typesafe.config.Config
 
 import io.getquill.*
 import io.getquill.jdbczio.Quill.H2
@@ -38,6 +38,6 @@ object DefaultStore:
   val layer: ZLayer[Any, IOException, Store] =
     ZLayer {
       for
-        config <- Resources.loadConfig(path = "quill.conf", section = "quill.ctx")
+        config <- Resources.loadConfig(path = "store.conf", section = "db")
       yield DefaultStore(config)
     }
