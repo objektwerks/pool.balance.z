@@ -18,7 +18,7 @@ object Entity:
 final case class Pool(id: Long = 0,
                       name: String = "", 
                       volume: Int = 0,
-                      unit: UnitOfMeasure = UnitOfMeasure.gl) extends Entity
+                      unit: String = UnitOfMeasure.gl.toString) extends Entity
 
 final case class Cleaning(id: Long = 0,
                           poolId: Long,
@@ -58,9 +58,9 @@ object Measurement:
 
 final case class Chemical(id: Long = 0,
                           poolId: Long,
-                          typeof: TypeOfChemical = TypeOfChemical.LiquidChlorine,
+                          typeof: String = TypeOfChemical.LiquidChlorine.toString,
                           amount: Double = 1.0,
-                          unit: UnitOfMeasure = UnitOfMeasure.gl,
+                          unit: String = UnitOfMeasure.gl.toString,
                           added: String = Entity.instant) extends Entity
 
 enum TypeOfChemical(val display: String):
