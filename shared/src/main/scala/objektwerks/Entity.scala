@@ -1,32 +1,19 @@
 package objektwerks
 
-import java.time.{LocalDate, LocalTime, LocalDateTime}
+import java.time.{Instant, ZoneId}
 import java.time.format.DateTimeFormatter
 
 sealed trait Entity:
   val id: Long
 
 object Entity:
-  private def dateFormatterInstance: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-  private def timeFormatterInstance: DateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm")
-
-  def format(localDateTime: LocalDateTime): String = localDateTime.format(dateFormatterInstance)
-  def format(localDate: LocalDate): String = localDate.format(dateFormatterInstance)
-  def format(localTime: LocalTime): String = localTime.format(timeFormatterInstance)
-
-  def applyLocalDate(localDate: LocalDate, localDateTime: LocalDateTime): LocalDateTime =
-    localDateTime
-      .withYear(localDate.getYear)
-      .withMonth(localDate.getMonthValue)
-      .withDayOfMonth(localDate.getDayOfMonth)
-
-  def isNotInt(text: String): Boolean = !text.matches("\\d+")
-  def isNotDouble(text: String): Boolean = !text.matches("\\d{0,7}([\\.]\\d{0,4})?")
+  def instant: String = DateTimeFormatter.ISO_INSTANT.withZone(ZoneId.systemDefault()).format(Instant.now)
+  def parse(instant: String): Instant = Instant.parse(instant)
 
   given poolOrdering: Ordering[Pool] = Ordering.by[Pool, String](p => p.name).reverse
-  given cleaningOrdering: Ordering[Cleaning] = Ordering.by[Cleaning, Long](c => c.cleaned.toLocalDate.toEpochDay).reverse
-  given measurementOrdering: Ordering[Measurement] = Ordering.by[Measurement, Long](m => m.measured.toLocalDate.toEpochDay).reverse
-  given chemicalOrdering: Ordering[Chemical] = Ordering.by[Chemical, Long](c => c.added.toLocalDate.toEpochDay).reverse
+  given cleaningOrdering: Ordering[Cleaning] = Ordering.by[Cleaning, Long](c => parse(c.cleaned).toEpochMilli).reverse
+  given measurementOrdering: Ordering[Measurement] = Ordering.by[Measurement, Long](m => parse(m.measured).toEpochMilli).reverse
+  given chemicalOrdering: Ordering[Chemical] = Ordering.by[Chemical, Long](c => parse(c.added).toEpochMilli).reverse
 
 final case class Pool(id: Long = 0,
                       name: String = "", 
@@ -41,7 +28,7 @@ final case class Cleaning(id: Long = 0,
                           pumpBasket: Boolean = false,
                           pumpFilter: Boolean = false,
                           vacuum: Boolean = false,
-                          cleaned: LocalDateTime = LocalDateTime.now) extends Entity
+                          cleaned: String = Entity.instant) extends Entity
 
 final case class Measurement(id: Long = 0,
                              poolId: Long,
@@ -55,7 +42,7 @@ final case class Measurement(id: Long = 0,
                              totalBromine: Int = 5,
                              salt: Int = 3200,
                              temperature: Int = 85,
-                             measured: LocalDateTime = LocalDateTime.now) extends Entity
+                             measured: String = Entity.instant) extends Entity
 
 object Measurement:
   val totalChlorineRange = Range(1, 5).inclusive
@@ -72,9 +59,9 @@ object Measurement:
 final case class Chemical(id: Long = 0,
                           poolId: Long,
                           typeof: TypeOfChemical = TypeOfChemical.LiquidChlorine,
-                          amount: Double = 1.0, 
+                          amount: Double = 1.0,
                           unit: UnitOfMeasure = UnitOfMeasure.gl,
-                          added: LocalDateTime = LocalDateTime.now) extends Entity
+                          added: String = Entity.instant) extends Entity
 
 enum TypeOfChemical(val display: String):
   case LiquidChlorine extends TypeOfChemical("Liquid Chlorine")
