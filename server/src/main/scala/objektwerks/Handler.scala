@@ -9,7 +9,7 @@ final case class Handler():
   def handle(request: Either[String, Command]): ZIO[Any, Nothing, String] =
     ZIO.succeed(
       request match
-        case Right(command) => command match // TODO!
+        case Right(command) => command match // TODO! Authorizer, Validator, Handler, Store
           case ListPools()                  => PoolsListed(Nil).toJson
           case SavePool(pool)               => PoolSaved(pool).toJson
           case ListCleanings()              => CleaningsListed(Nil).toJson
