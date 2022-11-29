@@ -39,10 +39,10 @@ CREATE TABLE measurement (
 CREATE TABLE chemical (
   id BIGSERIAL PRIMARY KEY,
   pool_id BIGINT REFERENCES pool(id),
-  added VARCHAR NOT NULL,
-  chemical VARCHAR NOT NULL,
+  typeof VARCHAR NOT NULL,
   amount NUMERIC(5, 2),
-  unit VARCHAR NOT NULL
+  unit VARCHAR NOT NULL,
+  added VARCHAR NOT NULL
 );
 
 CREATE TABLE fault (
