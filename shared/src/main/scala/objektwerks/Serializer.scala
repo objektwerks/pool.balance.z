@@ -25,9 +25,6 @@ object Serializer:
   given JsonDecoder[UnitOfMeasure] = DeriveJsonDecoder.gen[UnitOfMeasure]
   given JsonEncoder[UnitOfMeasure] = DeriveJsonEncoder.gen[UnitOfMeasure]
 
-  given JsonDecoder[Fault] = DeriveJsonDecoder.gen[Fault]
-  given JsonEncoder[Fault] = DeriveJsonEncoder.gen[Fault]
-
   // Command
   given JsonDecoder[Command] = DeriveJsonDecoder.gen[Command]
   given JsonEncoder[Command] = DeriveJsonEncoder.gen[Command]
@@ -83,3 +80,6 @@ object Serializer:
 
   given JsonDecoder[ChemicalSaved] = DeriveJsonDecoder.gen[ChemicalSaved]
   given JsonEncoder[ChemicalSaved] = DeriveJsonEncoder.gen[ChemicalSaved]
+
+  given JsonDecoder[Fault] = DeriveJsonDecoder.gen[Fault]
+  given JsonEncoder[Fault] = DeriveJsonEncoder.gen[Fault]

@@ -100,9 +100,3 @@ object UnitOfMeasure:
   def litersToGallons(liters: Double): Double = liters * 0.264
   def poundsToKilograms(pounds: Double): Double = pounds * 0.454
   def kilogramsToPounds(kilograms: Double): Double = kilograms * 2.205
-
-final case class Fault(message: String,
-                       occurred: String = Fault.format(LocalDateTime.now))
-
-object Fault:
-  def format(localDateTime: LocalDateTime): String = localDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd,HH:mm"))
