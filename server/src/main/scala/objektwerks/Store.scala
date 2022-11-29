@@ -25,6 +25,9 @@ case class Store(quill: Quill.Postgres[SnakeCase]):
   inline def addCleaning(cleaning: Cleaning): ZIO[Any, SQLException, Long] =
     run( query[Cleaning].insertValue( lift(cleaning) ).returningGenerated(_.id) )
 
+  inline def updateCleaning(cleaning: Cleaning): ZIO[Any, SQLException, Long] =
+    run( query[Cleaning].filter(_.id == lift(cleaning.id) ).updateValue( lift(cleaning) ) )
+
   inline def listCleanings: ZIO[Any, SQLException, List[Cleaning]] = run( query[Cleaning] )
 
   inline def addMeasurement(measurement: Measurement): ZIO[Any, SQLException, Long] =
