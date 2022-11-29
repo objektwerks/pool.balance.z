@@ -3,15 +3,16 @@ package objektwerks
 import com.typesafe.config.Config
 
 import io.getquill.*
+import io.getquill.jdbczio.Quill
+import io.getquill.jdbczio.Quill.Postgres
 
 import java.io.IOException
 import java.sql.SQLException
 
 import zio.{ZIO, ZLayer}
 
-class Store(config: Config):
-  val ctx = PostgresJdbcContext(Literal, config)
-  import ctx.*
+case class Store(quill: Quill.Postgres[SnakeCase]):
+  import quill.*
 
   inline def addPool(pool: Pool) =
     run( 
@@ -29,10 +30,5 @@ class Store(config: Config):
 
   inline def listPools = run( query[Pool] )
 
-object DefaultStore:
-  val layer: ZLayer[Any, IOException, Store] =
-    ZLayer {
-      for
-        config <- Resources.loadConfig(path = "store.conf", section = "db")
-      yield Store(config)
-    }
+object Store:
+  val layer: ZLayer[Postgres[SnakeCase], Nothing, Store] = ZLayer.fromFunction(apply(_))
