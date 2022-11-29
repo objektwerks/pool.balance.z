@@ -11,7 +11,7 @@ import java.sql.SQLException
 
 import zio.{ZIO, ZLayer}
 
-case class Store(quill: Quill.Postgres[SnakeCase]):
+final case class Store(quill: Quill.Postgres[SnakeCase]):
   import quill.*
 
   inline def addPool(pool: Pool): ZIO[Any, SQLException, Long] =
