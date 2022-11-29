@@ -15,18 +15,10 @@ case class Store(quill: Quill.Postgres[SnakeCase]):
   import quill.*
 
   inline def addPool(pool: Pool): ZIO[Any, SQLException, Long] =
-    run( 
-      query[Pool]
-        .insertValue( lift(pool) )
-        .returningGenerated(_.id)
-    )
+    run( query[Pool].insertValue( lift(pool) ).returningGenerated(_.id) )
 
   inline def updatePool(pool: Pool): ZIO[Any, SQLException, Long] =
-    run(
-      query[Pool]
-        .filter(_.id == lift(pool.id))
-        .updateValue( lift(pool) )
-    )
+    run( query[Pool].filter(_.id == lift(pool.id) ).updateValue( lift(pool) ) )
 
   inline def listPools: ZIO[Any, SQLException, List[Pool]] = run( query[Pool] )
 
