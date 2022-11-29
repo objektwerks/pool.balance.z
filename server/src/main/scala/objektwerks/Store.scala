@@ -24,6 +24,7 @@ case class Store(quill: Quill.Postgres[SnakeCase]):
 
   inline def listCleanings: ZIO[Any, SQLException, List[Cleaning]] = run( query[Cleaning] )
 
+  inline def listMeasurements: ZIO[Any, SQLException, List[Measurement]] = run( query[Measurement] )
 
 object Store:
   val layer: ZLayer[Postgres[SnakeCase], Nothing, Store] = ZLayer.fromFunction(apply(_))
