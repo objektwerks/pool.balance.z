@@ -12,7 +12,7 @@ import zio.logging.{LogFormat, file}
 
 object Server extends ZIOAppDefault:
   override val bootstrap: ZLayer[ZIOAppArgs, Any, Environment] =
-    Runtime.removeDefaultLoggers >>> file(Path.of("./target/server.log"))
+    Runtime.removeDefaultLoggers >>> file(Path.of("~/.poolbalance.z/server.log"))
 
   val router: Http[Any, Throwable, Request, Response] = Http.collectZIO[Request] {
     case Method.GET -> !! / "now" => ZIO.succeed( Response.text(Instant.now.toString()) )
