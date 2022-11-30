@@ -113,27 +113,27 @@ Postgresql
 
 Database
 --------
->Example database url: postgresql://localhost:5432/poolmate?user=mycomputername&password=poolmate"
+>Example database url: postgresql://localhost:5432/poolbalance?user=mycomputername&password=poolbalance"
 1. psql postgres
-2. CREATE DATABASE poolmate OWNER [your computer name];
-3. GRANT ALL PRIVILEGES ON DATABASE poolmate TO [your computer name];
+2. CREATE DATABASE poolbalance OWNER [your computer name];
+3. GRANT ALL PRIVILEGES ON DATABASE poolbalance TO [your computer name];
 4. \l
 5. \q
-6. psql poolmate
+6. psql poolbalance
 7. \i ddl.sql
 8. \q
 
 DDL
 ---
->Alternatively run: psql -d poolmate -f ddl.sql
-1. psql poolmate
+>Alternatively run: psql -d poolbalance -f ddl.sql
+1. psql poolbalance
 2. \i ddl.sql
 3. \q
 
 Drop
 ----
 1. psql postgres
-2. drop database poolmate;
+2. drop database poolbalance;
 3. \q
 
 Resources
