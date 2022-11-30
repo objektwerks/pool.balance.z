@@ -27,7 +27,7 @@ object Server extends ZIOAppDefault:
             Response.json( event.toJson )
             /* event.toJson generates this error:
             Found:    zio.http.Http[Any, Throwable, zio.http.Request, Object]
-            Required: zio.http.Http[objektwerks.Handler, Throwable, zio.http.Request, zio.http.Response]
+            Required: zio.http.Http[Handler, Throwable, zio.http.Request, zio.http.Response]
             */
         case Left(error) =>
           Response.json( Fault(error).toJson )
