@@ -16,7 +16,7 @@ object Server extends ZIOAppDefault:
   override val bootstrap: ZLayer[ZIOAppArgs, Any, Environment] =
     Runtime.removeDefaultLoggers >>> file(Path.of("~/.poolbalance.z/server.log"))
 
-  val router: Http[Any, Throwable, Request, Response] = Http.collectZIO[Request] {
+  val router: Http[Handler, Throwable, Request, Response] = Http.collectZIO[Request] {
     case Method.GET -> !! / "now" => ZIO.succeed( Response.text(Instant.now.toString()) )
     case request @ Method.POST -> !! / "command" => request.body.asString.map { json =>
       for
@@ -26,7 +26,7 @@ object Server extends ZIOAppDefault:
       yield
         Response.json( event.toJson ) // TODO!
     }
-  }
+  }.provideLayer(Handler.layer)
 
   override def run: ZIO[Environment & (ZIOAppArgs & Scope ), Any, Any] =
     for
