@@ -24,8 +24,7 @@ object Server extends ZIOAppDefault:
             handler <- ZIO.service[Handler]
             event   <- handler.handle(command)
           yield Response.json( event.toJson )
-        case Left(error) =>
-          ZIO.succeed( Response.json( Fault(error).toJson ) )
+        case Left(error) => ZIO.succeed( Response.json( Fault(error).toJson ) )
     }
   }
 
