@@ -3,39 +3,48 @@ package objektwerks
 import com.typesafe.config.Config
 
 import io.getquill.*
+import io.getquill.jdbczio.Quill
+import io.getquill.jdbczio.Quill.Postgres
 
-class Store(config: Config):
-  val ctx = new PostgresJdbcContext(SnakeCase, config)
-  import ctx.*
+import java.io.IOException
+import java.sql.SQLException
 
-  def addPool(pool: Pool): Long =
+import zio.{ZIO, ZLayer}
+
+final case class Store(quill: Quill.Postgres[SnakeCase]):
+  import quill.*
+
+  inline def addPool(pool: Pool): ZIO[Any, SQLException, Long] =
     run( query[Pool].insertValue( lift(pool) ).returningGenerated(_.id) )
 
-  def updatePool(pool: Pool): Long =
+  inline def updatePool(pool: Pool): ZIO[Any, SQLException, Long] =
     run( query[Pool].filter(_.id == lift(pool.id) ).updateValue( lift(pool) ) )
 
-  def listPools: List[Pool] = run( query[Pool] )
+  inline def listPools: ZIO[Any, SQLException, List[Pool]] = run( query[Pool] )
 
-  def addCleaning(cleaning: Cleaning): Long =
+  inline def addCleaning(cleaning: Cleaning): ZIO[Any, SQLException, Long] =
     run( query[Cleaning].insertValue( lift(cleaning) ).returningGenerated(_.id) )
 
-  def updateCleaning(cleaning: Cleaning): Long =
+  inline def updateCleaning(cleaning: Cleaning): ZIO[Any, SQLException, Long] =
     run( query[Cleaning].filter(_.id == lift(cleaning.id) ).updateValue( lift(cleaning) ) )
 
-  def listCleanings: List[Cleaning] = run( query[Cleaning] )
+  inline def listCleanings: ZIO[Any, SQLException, List[Cleaning]] = run( query[Cleaning] )
 
-  def addMeasurement(measurement: Measurement): Long =
+  inline def addMeasurement(measurement: Measurement): ZIO[Any, SQLException, Long] =
     run( query[Measurement].insertValue( lift(measurement) ).returningGenerated(_.id) )
 
-  def updateMeasurement(measurement: Measurement): Long =
+  inline def updateMeasurement(measurement: Measurement): ZIO[Any, SQLException, Long] =
     run( query[Measurement].filter(_.id == lift(measurement.id) ).updateValue( lift(measurement) ) )
 
-  def listMeasurements: List[Measurement] = run( query[Measurement] )
+  inline def listMeasurements: ZIO[Any, SQLException, List[Measurement]] = run( query[Measurement] )
 
-  def addChemical(chemical: Chemical): Long =
+  inline def addChemical(chemical: Chemical): ZIO[Any, SQLException, Long] =
     run( query[Chemical].insertValue( lift(chemical) ).returningGenerated(_.id) )
 
-  def updateChemical(chemical: Chemical): Long =
+  inline def updateChemical(chemical: Chemical): ZIO[Any, SQLException, Long] =
     run( query[Chemical].filter(_.id == lift(chemical.id) ).updateValue( lift(chemical) ) )
 
-  def listChemicals: List[Chemical] = run( query[Chemical] )
+  inline def listChemicals: ZIO[Any, SQLException, List[Chemical]] = run( query[Chemical] )
+
+object Store:
+  val layer: ZLayer[Postgres[SnakeCase], Nothing, Store] = ZLayer.fromFunction(apply(_))
