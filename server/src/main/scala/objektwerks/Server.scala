@@ -23,7 +23,8 @@ object Server extends ZIOAppDefault:
         handler <- ZIO.service[Handler]
         command <- json.fromJson[Command]
         event   <- handler.handle(command)
-      yield Response.json( event.toJson ) // TODO!
+      yield
+        Response.json( event.toJson ) // TODO!
     }
   }
 
