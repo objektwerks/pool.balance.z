@@ -19,7 +19,11 @@ object Server extends ZIOAppDefault:
   val router: Http[Any, Throwable, Request, Response] = Http.collectZIO[Request] {
     case Method.GET -> !! / "now" => ZIO.succeed( Response.text(Instant.now.toString()) )
     case request @ Method.POST -> !! / "command" => request.body.asString.map { json =>
-      Response.json(json) // TODO!
+      for
+        handler <- ZIO.service[Handler]
+        command <- json.fromJson[Command]
+        event   <- handler.handle(command)
+      yield Response.json( event.toJson ) // TODO!
     }
   }
 
