@@ -8,7 +8,7 @@ import Serializer.given
 final case class Handler():
   def handle(command: Command): ZIO[Any, Nothing, Event] =
     ZIO.succeed(
-      command match // TODO! Authorizer, Validator, Handler, Store
+      command match // TODO! Handler > Authorizer > Validator > Handler > Store
         case ListPools()                  => PoolsListed(Nil)
         case SavePool(pool)               => PoolSaved(0L)
         case ListCleanings()              => CleaningsListed(Nil)
