@@ -2,6 +2,9 @@ package objektwerks
 
 import java.time.{Instant, ZoneId}
 import java.time.format.DateTimeFormatter
+import java.util.UUID
+
+import scala.util.Random
 
 sealed trait Entity:
   val id: Long
@@ -14,6 +17,43 @@ object Entity:
   given cleaningOrdering: Ordering[Cleaning] = Ordering.by[Cleaning, Long](c => parse(c.cleaned).toEpochMilli).reverse
   given measurementOrdering: Ordering[Measurement] = Ordering.by[Measurement, Long](m => parse(m.measured).toEpochMilli).reverse
   given chemicalOrdering: Ordering[Chemical] = Ordering.by[Chemical, Long](c => parse(c.added).toEpochMilli).reverse
+
+final case class Account(id: Long = 0,
+                         license: String = newLicense,
+                         emailAddress: String,
+                         pin: String = newPin,
+                         activated: String = Entity.instant,
+                         deactivated: String) extends Entity
+
+object Account:
+  private val specialChars = "~!@#$%^&*-+=<>?/:;".toList
+  private val random = new Random
+
+  private def newSpecialChar: Char = specialChars(random.nextInt(specialChars.length))
+
+  /**
+   * 26 letters + 10 numbers + 18 special characters = 54 combinations
+   * 7 alphanumeric char pin = 54^7 ( 1,338,925,209,984 )
+   */
+  private def newPin: String =
+    Random.shuffle(
+      Random
+        .alphanumeric
+        .take(5)
+        .mkString
+        .prepended(newSpecialChar)
+        .appended(newSpecialChar)
+    ).mkString
+
+  private def newLicense: String = UUID.randomUUID.toString
+
+  val empty = Account(
+    license = "",
+    emailAddress = "",
+    pin = "",
+    activated = "",
+    deactivated = ""
+  )
 
 final case class Pool(id: Long = 0,
                       name: String = "", 
