@@ -16,17 +16,18 @@ object Server extends ZIOAppDefault:
   override val bootstrap: ZLayer[ZIOAppArgs, Any, Environment] =
     Runtime.removeDefaultLoggers >>> file(Path.of("~/.poolbalance.z/server.log"))
 
-  val router: Http[Any, Throwable, Request, Response] = Http.collectZIO[Request] {
+  val router: Http[Handler, Throwable, Request, Response] = Http.collectZIO[Request] {
     case request @ Method.POST -> !! / "command" => request.body.asString.map { json =>
       json.fromJson[Command] match
         case Right(command) =>
-          for
-            handler <- ZIO.service[Handler]
-            event   <- handler.handle(command)
-          yield Response.json( event.toJson )
+          ZIO.service[Handler].map { handler =>
+            handler.handle(command).flatMap { event =>
+              Response.json( event.toJson )
+            }
+          }
           /*
-            Found:    zio.ZIO[Handler, Nothing, zio.http.Response]
-            Required: zio.http.Response
+            Found:    zio.http.Response
+            Required: zio.ZIO[Nothing, Any, Any]
           */
         case Left(error) =>
           Response.json( Fault(error).toJson )
