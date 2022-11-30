@@ -23,7 +23,12 @@ object Server extends ZIOAppDefault:
           for
             handler <- ZIO.service[Handler]
             event   <- handler.handle(command)
-          yield Response.json( event ) // event.toJson required, but fails!
+          yield
+            Response.json( event.toJson )
+            /* event.toJson generates this error:
+            Found:    zio.http.Http[Any, Throwable, zio.http.Request, Object]
+            Required: zio.http.Http[objektwerks.Handler, Throwable, zio.http.Request, zio.http.Response]
+            */
         case Left(error) =>
           Response.json( Fault(error).toJson )
     }
