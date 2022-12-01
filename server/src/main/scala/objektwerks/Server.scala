@@ -1,7 +1,5 @@
 package objektwerks
 
-import com.typesafe.config.ConfigFactory
-
 import io.getquill.jdbczio.Quill
 import io.getquill.SnakeCase
 
@@ -18,10 +16,6 @@ import zio.logging.{LogFormat, file}
 import Serializer.given
 
 object Server extends ZIOAppDefault:
-  val conf = ConfigFactory.load("server.conf")
-  val host = conf.getString("host")
-  val port = conf.getInt("port")
-
   override val bootstrap: ZLayer[ZIOAppArgs, Any, Environment] =
     Runtime.removeDefaultLoggers >>> file(Path.of("~/.poolbalance.z/server.log"))
 
@@ -41,6 +35,9 @@ object Server extends ZIOAppDefault:
 
   override def run: ZIO[Environment & (ZIOAppArgs & Scope ), Any, Any] =
     for
+      conf   <- Resources.loadConfig("server.conf")
+      host   =  conf.getString("host")
+      port   =  conf.getInt("port")
       _      <- ZIO.log(s"Server running at http://$host:$port")
       config =  ServerConfig.default.port(port)
       server <- HttpServer
