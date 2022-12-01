@@ -16,6 +16,8 @@ final case class Store(quill: Quill.Postgres[SnakeCase]):
   def authorize(license: String): Task[Boolean] =
     run( query[Account].filter(_.license == lift(license)).nonEmpty )
 
+  def register(account: Account): Task[Long] = addAccount(account)
+
   def listAccounts: Task[List[Account]] = run( query[Account] )
 
   def addAccount(account: Account): Task[Long] =

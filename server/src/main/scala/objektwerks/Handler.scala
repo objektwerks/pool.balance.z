@@ -34,7 +34,11 @@ final case class Handler(store: Store):
 
   def validate(command: Command): Task[Boolean] = ZIO.succeed(command.isValid)
 
-  def register: Task[Registered] = ???
+  def register: Task[Registered] =
+    val account = Account()
+    for
+      id <- store.register(account)
+    yield Registered( account.copy(id = id) )
 
   def login(pin: String): Task[LoggedIn] = ???
 
