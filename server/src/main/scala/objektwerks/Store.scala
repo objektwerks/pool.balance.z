@@ -33,10 +33,14 @@ final case class Store(quill: Quill.Postgres[SnakeCase]):
   def listPools: Task[List[Pool]] = run( query[Pool] )
 
   def addPool(pool: Pool): Task[Long] =
-    run( query[Pool].insertValue( lift(pool) ).returningGenerated(_.id) )
+    transaction (
+      run( query[Pool].insertValue( lift(pool) ).returningGenerated(_.id) )
+    )
 
   def updatePool(pool: Pool): Task[Long] =
-    run( query[Pool].filter(_.id == lift(pool.id) ).updateValue( lift(pool) ) )
+    transaction (
+      run( query[Pool].filter(_.id == lift(pool.id) ).updateValue( lift(pool) ) )
+    )
 
   def listCleanings: Task[List[Cleaning]] = run( query[Cleaning] )
 
