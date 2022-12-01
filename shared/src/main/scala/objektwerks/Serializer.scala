@@ -78,6 +78,12 @@ object Serializer:
   given JsonDecoder[LoggedIn] = DeriveJsonDecoder.gen[LoggedIn]
   given JsonEncoder[LoggedIn] = DeriveJsonEncoder.gen[LoggedIn]
 
+  given JsonDecoder[Deactivated] = DeriveJsonDecoder.gen[Deactivated]
+  given JsonEncoder[Deactivated] = DeriveJsonEncoder.gen[Deactivated]
+
+  given JsonDecoder[Reactivated] = DeriveJsonDecoder.gen[Reactivated]
+  given JsonEncoder[Reactivated] = DeriveJsonEncoder.gen[Reactivated]
+
   given JsonDecoder[PoolsListed] = DeriveJsonDecoder.gen[PoolsListed]
   given JsonEncoder[PoolsListed] = DeriveJsonEncoder.gen[PoolsListed]
 
