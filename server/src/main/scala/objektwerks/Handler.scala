@@ -13,8 +13,8 @@ final case class Handler(authorizer: Authorizer,
       command match  // TODO! Handler > Authorizer > Validator > Handler > Store
         case c @ ListPools()                  => listPools(c)
         case c @ SavePool(pool)               => savePool(c)
-        case c @ ListCleanings()              => CleaningsListed(Nil)
-        case c @ SaveCleaning(cleaning)       => CleaningSaved(0L)
+        case c @ ListCleanings()              => listCleanings(c)
+        case c @ SaveCleaning(cleaning)       => saveCleaning(c)
         case c @ ListMeasurements()           => MeasurementsListed(Nil)
         case c @ SaveMeasurement(measurement) => MeasurementSaved(0L)
         case c @ ListChemicals()              => ChemicalsListed(Nil)
@@ -24,6 +24,10 @@ final case class Handler(authorizer: Authorizer,
   def listPools(command: ListPools): PoolsListed = PoolsListed(Nil)
 
   def savePool(command: SavePool): PoolSaved = PoolSaved(0L)
+
+  def listCleanings(command: ListChemicals): CleaningsListed = CleaningsListed(Nil)
+
+  def saveCleaning(command: SaveCleaning): CleaningSaved = CleaningSaved(0L)
 
 object Handler:
   val layer: ZLayer[Authorizer & Validator & Store, Nothing, Handler] =
