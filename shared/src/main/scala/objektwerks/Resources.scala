@@ -7,6 +7,12 @@ import java.io.IOException
 import zio.ZIO
 
 object Resources:
+  def loadConfig(path: String): ZIO[Any, IOException, Config] =
+    ZIO.attemptBlockingIO(
+      ConfigFactory
+        .load(path)
+    )
+
   def loadConfig(path: String, section: String): ZIO[Any, IOException, Config] =
     ZIO.attemptBlockingIO(
       ConfigFactory
