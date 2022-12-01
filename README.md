@@ -7,6 +7,10 @@ Warning
 1. ZIO effect integration with a ZIO Http router is not really workable at this time.
 2. In VSCode, successfull Quill code will generage what looks like errors. Check to see if said errors are actually infos! :)
 
+Install
+-------
+1. brew install postgresql
+
 Build
 -----
 1. sbt clean compile
