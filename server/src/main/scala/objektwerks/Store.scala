@@ -9,6 +9,14 @@ import zio.{Task, ZLayer}
 final case class Store(quill: Quill.Postgres[SnakeCase]):
   import quill.*
 
+  inline def addAccount(account: Account): Task[Long] =
+    run( query[Account].insertValue( lift(account) ).returningGenerated(_.id) )
+
+  inline def updateAcount(account: Account): Task[Long] =
+    run( query[Account].filter(_.id == lift(account.id) ).updateValue( lift(account) ) )
+
+  inline def listAccounts: Task[List[Account]] = run( query[Account] )
+
   inline def addPool(pool: Pool): Task[Long] =
     run( query[Pool].insertValue( lift(pool) ).returningGenerated(_.id) )
 
