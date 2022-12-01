@@ -54,15 +54,6 @@ CREATE TABLE chemical (
   added VARCHAR NOT NULL
 );
 
-CREATE TABLE email (
-  id BIGSERIAL PRIMARY KEY,
-  license VARCHAR(36) REFERENCES account(license),
-  address VARCHAR NOT NULL,
-  sent VARCHAR NOT NULL,
-  processed BOOL NOT NULL,
-  valid BOOL NOT NULL
-);
-
 CREATE TABLE fault (
   cause VARCHAR NOT NULL,
   ocurred VARCHAR NOT NULL,
