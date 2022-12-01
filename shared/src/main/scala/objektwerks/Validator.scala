@@ -58,7 +58,7 @@ object Validator:
     def isValid: Boolean = saveChemical.chemical.isValid
 
   extension  (license: License)
-    def isValid: Boolean = license.license.isLicense
+    def isLicense: Boolean = license.license.isLicense
 
   extension (account: Account)
     def isActivated: Boolean =

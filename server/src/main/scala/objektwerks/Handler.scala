@@ -12,7 +12,7 @@ final case class Handler(store: Store):
       isAuthorized <- authorize(command)
       isValid      <- validate(command)
       event        <- if isAuthorized && isValid then command match
-                      case Register()                        => register
+                      case Register()                      => register
                       case Login(pin)                      => login(pin)
                       case Deactivate(license)             => deactivate(license)
                       case Reactivate(license)             => reactivate(license)
@@ -29,7 +29,7 @@ final case class Handler(store: Store):
 
   def authorize(command: Command): Task[Boolean] =
     command match
-      case license: License          => store.authorize(license.license)
+      case license: License      => if license.isLicense then store.authorize(license.license) else ZIO.succeed(false)
       case Register() | Login(_) => ZIO.succeed(true)
 
   def validate(command: Command): Task[Boolean] = ZIO.succeed(command.isValid)
