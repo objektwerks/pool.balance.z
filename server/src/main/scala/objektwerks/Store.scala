@@ -13,6 +13,9 @@ import zio.{Task, ZLayer}
 final case class Store(quill: Quill.Postgres[SnakeCase]):
   import quill.*
 
+  def authorize(license: String): Task[Boolean] =
+    run( query[Account].filter(_.license == lift(license)).nonEmpty )
+
   def listAccounts: Task[List[Account]] = run( query[Account] )
 
   def addAccount(account: Account): Task[Long] =

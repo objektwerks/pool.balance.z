@@ -7,19 +7,28 @@ import Serializer.given
 
 final case class Handler(store: Store):
   def handle[E <: Event](command: Command): Task[Event] =
+    authorize(command).flatMap { isAuthorized =>
+      if isAuthorized then
+        command match
+          case Register(emailAddress)          => register(emailAddress)
+          case Login(emailAddress, pin)        => login(emailAddress, pin)
+          case Deactivate(license)             => deactivate(license)
+          case Reactivate(license)             => reactivate(license)
+          case ListPools(_)                    => listPools
+          case SavePool(_, pool)               => savePool(pool)
+          case ListCleanings(_)                => listCleanings
+          case SaveCleaning(_, cleaning)       => saveCleaning(cleaning)
+          case ListMeasurements(_)             => listMeasurements
+          case SaveMeasurement(_, measurement) => saveMeasurement(measurement)
+          case ListChemicals(_)                => listChemicals
+          case SaveChemical(_, chemical)       => saveChemical(chemical)
+       else ZIO.succeed( Fault(s"Invalid command: $command") )
+    }
+
+  def authorize(command: Command): Task[Boolean] =
     command match
-      case Register(emailAddress)                => register(emailAddress)
-      case Login(emailAddress, pin)              => login(emailAddress, pin)
-      case Deactivate(license)                   => deactivate(license)
-      case Reactivate(license)                   => reactivate(license)
-      case ListPools(license)                    => listPools
-      case SavePool(license, pool)               => savePool(pool)
-      case ListCleanings(license)                => listCleanings
-      case SaveCleaning(license, cleaning)       => saveCleaning(cleaning)
-      case ListMeasurements(license)             => listMeasurements
-      case SaveMeasurement(license, measurement) => saveMeasurement(measurement)
-      case ListChemicals(license)                => listChemicals
-      case SaveChemical(license, chemical)       => saveChemical(chemical)
+      case license: License          => store.authorize(license.license)
+      case Register(_) | Login(_, _) => ZIO.succeed(true)
 
   def register(emailAddress: String): Task[Registered] = ???
 
