@@ -18,6 +18,10 @@ import zio.logging.{LogFormat, file}
 import Serializer.given
 
 object Server extends ZIOAppDefault:
+  val conf = ConfigFactory.load("server.conf")
+  val host = conf.getString("host")
+  val port = conf.getInt("port")
+
   override val bootstrap: ZLayer[ZIOAppArgs, Any, Environment] =
     Runtime.removeDefaultLoggers >>> file(Path.of("~/.poolbalance.z/server.log"))
 
@@ -37,10 +41,8 @@ object Server extends ZIOAppDefault:
 
   override def run: ZIO[Environment & (ZIOAppArgs & Scope ), Any, Any] =
     for
-      args   <- getArgs
-      port   =  args.headOption.getOrElse("7272").toInt
+      _      <- ZIO.log(s"Server running at http://$host:$port")
       config =  ServerConfig.default.port(port)
-      _      <- ZIO.log(s"Server running at http://localhost:$port")
       server <- HttpServer
                   .serve(router)
                   .provide(
@@ -52,7 +54,7 @@ object Server extends ZIOAppDefault:
                     Store.layer,
                     Quill.Postgres.fromNamingStrategy(SnakeCase),
                     Quill.DataSource.fromConfig(
-                      ConfigFactory.load("server.conf").getConfig("db")
+                      conf.getConfig("db")
                     )
-                  )
+                  ).debug
     yield server
