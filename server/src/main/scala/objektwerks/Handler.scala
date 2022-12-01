@@ -11,6 +11,7 @@ final case class Handler(authorizer: Authorizer,
   def handle[E <: Event](command: Command): Task[Event] =
     command match  // TODO! Handler > Authorizer > Validator > Handler > Store
       case Register(emailAddress)       => register(emailAddress)
+      case Login(emailAddress, pin)     => login(emailAddress, pin)
       case ListPools()                  => listPools
       case SavePool(pool)               => savePool(pool)
       case ListCleanings()              => listCleanings
@@ -21,6 +22,8 @@ final case class Handler(authorizer: Authorizer,
       case SaveChemical(chemical)       => saveChemical(chemical)
 
   def register(emailAddress: String): Task[Registered] = ???
+
+  def login(emailAddress: String, pin: String): LoggedIn = ???
 
   def listPools: Task[PoolsListed] =
     for
