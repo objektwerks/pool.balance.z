@@ -1,5 +1,9 @@
 package objektwerks
 
+import com.typesafe.config.Config
+
+import javax.sql.DataSource
+
 import io.getquill.*
 import io.getquill.jdbczio.Quill
 import io.getquill.jdbczio.Quill.Postgres
@@ -60,4 +64,10 @@ final case class Store(quill: Quill.Postgres[SnakeCase]):
   inline def listFaults: Task[List[Fault]] = run( query[Fault] )
 
 object Store:
-  val layer: ZLayer[Postgres[SnakeCase], Nothing, Store] = ZLayer.fromFunction(apply(_))
+  def namingStrategy: ZLayer[DataSource, Nothing, Postgres[SnakeCase.type]] =
+    Quill.Postgres.fromNamingStrategy(SnakeCase)
+
+  def datasource(config: Config, section: String): ZLayer[Any, Throwable, DataSource] =
+    Quill.DataSource.fromConfig(config.getConfig(section))
+
+  def layer: ZLayer[Postgres[SnakeCase], Nothing, Store] = ZLayer.fromFunction(apply(_))
