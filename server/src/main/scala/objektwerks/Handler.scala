@@ -8,18 +8,18 @@ import Serializer.given
 final case class Handler(store: Store):
   def handle[E <: Event](command: Command): Task[Event] =
     command match
-      case Register(emailAddress)       => register(emailAddress)
-      case Login(emailAddress, pin)     => login(emailAddress, pin)
-      case Deactivate(license)          => deactivate(license)
-      case Reactivate(license)          => reactivate(license)
-      case ListPools()                  => listPools
-      case SavePool(pool)               => savePool(pool)
-      case ListCleanings()              => listCleanings
-      case SaveCleaning(cleaning)       => saveCleaning(cleaning)
-      case ListMeasurements()           => listMeasurements
-      case SaveMeasurement(measurement) => saveMeasurement(measurement)
-      case ListChemicals()              => listChemicals
-      case SaveChemical(chemical)       => saveChemical(chemical)
+      case Register(emailAddress)                => register(emailAddress)
+      case Login(emailAddress, pin)              => login(emailAddress, pin)
+      case Deactivate(license)                   => deactivate(license)
+      case Reactivate(license)                   => reactivate(license)
+      case ListPools(license)                    => listPools
+      case SavePool(license, pool)               => savePool(pool)
+      case ListCleanings(license)                => listCleanings
+      case SaveCleaning(license, cleaning)       => saveCleaning(cleaning)
+      case ListMeasurements(license)             => listMeasurements
+      case SaveMeasurement(license, measurement) => saveMeasurement(measurement)
+      case ListChemicals(license)                => listChemicals
+      case SaveChemical(license, chemical)       => saveChemical(chemical)
 
   def register(emailAddress: String): Task[Registered] = ???
 
