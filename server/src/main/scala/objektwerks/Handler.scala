@@ -13,12 +13,12 @@ final case class Handler(authorizer: Authorizer,
       command match  // TODO! Handler > Authorizer > Validator > Handler > Store
         case c @ ListPools()                  => listPools(c)
         case c @ SavePool(pool)               => savePool(c)
-        case ListCleanings()              => CleaningsListed(Nil)
-        case SaveCleaning(cleaning)       => CleaningSaved(0L)
-        case ListMeasurements()           => MeasurementsListed(Nil)
-        case SaveMeasurement(measurement) => MeasurementSaved(0L)
-        case ListChemicals()              => ChemicalsListed(Nil)
-        case SaveChemical(chemical)       => ChemicalSaved(0L)
+        case c @ ListCleanings()              => CleaningsListed(Nil)
+        case c @ SaveCleaning(cleaning)       => CleaningSaved(0L)
+        case c @ ListMeasurements()           => MeasurementsListed(Nil)
+        case c @ SaveMeasurement(measurement) => MeasurementSaved(0L)
+        case c @ ListChemicals()              => ChemicalsListed(Nil)
+        case c @ SaveChemical(chemical)       => ChemicalSaved(0L)
     )
 
   def listPools(command: ListPools): PoolsListed = PoolsListed(Nil)
