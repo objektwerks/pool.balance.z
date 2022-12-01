@@ -21,10 +21,14 @@ final case class Store(quill: Quill.Postgres[SnakeCase]):
   def listAccounts: Task[List[Account]] = run( query[Account] )
 
   def addAccount(account: Account): Task[Long] =
-    run( query[Account].insertValue( lift(account) ).returningGenerated(_.id) )
+    transaction (
+      run( query[Account].insertValue( lift(account) ).returningGenerated(_.id) )
+    )
 
   def updateAcount(account: Account): Task[Long] =
-    run( query[Account].filter(_.id == lift(account.id) ).updateValue( lift(account) ) )
+    transaction (
+      run( query[Account].filter(_.id == lift(account.id) ).updateValue( lift(account) ) )
+    )
 
   def listPools: Task[List[Pool]] = run( query[Pool] )
 
