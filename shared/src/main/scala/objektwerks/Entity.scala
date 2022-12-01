@@ -20,7 +20,6 @@ object Entity:
 
 final case class Account(id: Long = 0,
                          license: String = newLicense,
-                         emailAddress: String,
                          pin: String = newPin,
                          activated: String = Entity.instant,
                          deactivated: String) extends Entity
@@ -49,7 +48,6 @@ object Account:
 
   val empty = Account(
     license = "",
-    emailAddress = "",
     pin = "",
     activated = "",
     deactivated = ""
