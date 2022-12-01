@@ -6,6 +6,13 @@ object Validator:
     def isEmailAddress: Boolean = value.nonEmpty && value.length >= 3 && value.contains("@")
     def isPin: Boolean = value.length == 7
 
+  /* 
+    case SavePool(_, pool)               => savePool(pool)
+    case SaveCleaning(_, cleaning)       => saveCleaning(cleaning)
+    case SaveMeasurement(_, measurement) => saveMeasurement(measurement)
+    case SaveChemical(_, chemical)       => saveChemical(chemical)
+  */
+
   extension (register: Register)
     def isValid: Boolean = register.emailAddress.isEmailAddress
 
@@ -17,6 +24,30 @@ object Validator:
 
   extension (reactivate: Reactivate)
     def isValid: Boolean = reactivate.license.isLicense
+
+  extension (listPools: ListPools)
+    def isValid: Boolean = true
+
+  extension (savePool: SavePool)
+    def isValid: Boolean = savePool.pool.isValid
+
+  extension (listCleanings: ListCleanings)
+    def isValid: Boolean = true
+
+  extension (saveCleaning: SaveCleaning)
+    def isValid: Boolean = saveCleaning.cleaning.isValid
+
+  extension (listMeasurements: ListMeasurements)
+    def isValid: Boolean = true
+
+  extension (saveMeasurement: SaveMeasurement)
+    def isValid: Boolean = saveMeasurement.measurement.isValid
+
+  extension (listChemicals: ListChemicals)
+    def isValid: Boolean = true
+
+  extension (saveChemical: SaveChemical)
+    def isValid: Boolean = saveChemical.chemical.isValid
 
   extension (account: Account)
     def isActivated: Boolean =
