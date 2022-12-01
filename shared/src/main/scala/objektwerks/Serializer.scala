@@ -7,6 +7,9 @@ object Serializer:
   given JsonDecoder[Entity] = DeriveJsonDecoder.gen[Entity]
   given JsonEncoder[Entity] = DeriveJsonEncoder.gen[Entity]
 
+  given JsonDecoder[Account] = DeriveJsonDecoder.gen[Account]
+  given JsonEncoder[Account] = DeriveJsonEncoder.gen[Account]
+
   given JsonDecoder[Pool] = DeriveJsonDecoder.gen[Pool]
   given JsonEncoder[Pool] = DeriveJsonEncoder.gen[Pool]
 
