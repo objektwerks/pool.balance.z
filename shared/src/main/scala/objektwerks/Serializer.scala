@@ -29,6 +29,9 @@ object Serializer:
   given JsonDecoder[Command] = DeriveJsonDecoder.gen[Command]
   given JsonEncoder[Command] = DeriveJsonEncoder.gen[Command]
 
+  given JsonDecoder[Register] = DeriveJsonDecoder.gen[Register]
+  given JsonEncoder[Register] = DeriveJsonEncoder.gen[Register]
+
   given JsonDecoder[ListPools] = DeriveJsonDecoder.gen[ListPools]
   given JsonEncoder[ListPools] = DeriveJsonEncoder.gen[ListPools]
 
