@@ -45,7 +45,10 @@ final case class Handler(authorizer: Authorizer,
       measurements <- store.listMeasurements
     yield MeasurementsListed(measurements)
 
-  def saveMeasurement(measurement: Measurement): Task[Event] = MeasurementSaved(0L)
+  def saveMeasurement(measurement: Measurement): Task[Event] =
+    for
+      id <- if measurement.id == 0 then store.addMeasurement(measurement) else store.updateMeasurement(measurement)
+    yield MeasurementSaved(id)
 
   def listChemicals: Task[Event] =
     for
