@@ -22,7 +22,7 @@ final case class Account(id: Long = 0,
                          license: String = newLicense,
                          pin: String = newPin,
                          activated: String = Entity.instant,
-                         deactivated: String) extends Entity
+                         deactivated: String = "") extends Entity
 
 object Account:
   private val specialChars = "~!@#$%^&*-+=<>?/:;".toList
