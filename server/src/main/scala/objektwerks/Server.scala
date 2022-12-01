@@ -45,8 +45,6 @@ object Server extends ZIOAppDefault:
                     ServerConfig.live( ServerConfig.default.port(port) ),
                     HttpServer.live,
                     Handler.layer,
-                    Authorizer.layer,
-                    Validator.layer,
                     Store.layer,
                     Store.namingStrategy,
                     Store.datasource( config.getConfig("db") )
