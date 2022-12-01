@@ -100,9 +100,9 @@ Charts
 
 Postgresql
 ----------
-1. conf:
-    1. on osx intel: /usr/local/var/postgres/postgresql.conf : listen_addresses = ‘localhost’, port = 5432
-    2. on osx m1: /opt/homebrew/var/postgres/postgresql.conf : listen_addresses = ‘localhost’, port = 5432
+1. config:
+    1. on osx intel: /usr/local/var/postgres/postgresql.config : listen_addresses = ‘localhost’, port = 5432
+    2. on osx m1: /opt/homebrew/var/postgres/postgresql.config : listen_addresses = ‘localhost’, port = 5432
 2. build.sbt:
     1. IntegrationTest / javaOptions += "-Dquill.binds.log=true"
 3. run:
