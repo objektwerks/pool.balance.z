@@ -2,9 +2,9 @@ package objektwerks
 
 sealed trait Command
 
-final case class Register(emailAddress: String)
+final case class Register(emailAddress: String) extends Command
 
-final case class Login(emailAddress: String, pin: String)
+final case class Login(emailAddress: String, pin: String) extends Command
 
 final case class ListPools() extends Command
 final case class SavePool(pool: Pool) extends Command
