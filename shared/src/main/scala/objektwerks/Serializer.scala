@@ -32,6 +32,9 @@ object Serializer:
   given JsonDecoder[Register] = DeriveJsonDecoder.gen[Register]
   given JsonEncoder[Register] = DeriveJsonEncoder.gen[Register]
 
+  given JsonDecoder[Login] = DeriveJsonDecoder.gen[Login]
+  given JsonEncoder[Login] = DeriveJsonEncoder.gen[Login]
+
   given JsonDecoder[ListPools] = DeriveJsonDecoder.gen[ListPools]
   given JsonEncoder[ListPools] = DeriveJsonEncoder.gen[ListPools]
 
@@ -62,6 +65,9 @@ object Serializer:
 
   given JsonDecoder[Registered] = DeriveJsonDecoder.gen[Registered]
   given JsonEncoder[Registered] = DeriveJsonEncoder.gen[Registered]
+
+  given JsonDecoder[LoggedIn] = DeriveJsonDecoder.gen[LoggedIn]
+  given JsonEncoder[LoggedIn] = DeriveJsonEncoder.gen[LoggedIn]
 
   given JsonDecoder[PoolsListed] = DeriveJsonDecoder.gen[PoolsListed]
   given JsonEncoder[PoolsListed] = DeriveJsonEncoder.gen[PoolsListed]
