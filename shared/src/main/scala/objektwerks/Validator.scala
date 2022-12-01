@@ -3,14 +3,13 @@ package objektwerks
 object Validator:
   extension (value: String)
     def isLicense: Boolean = if value.nonEmpty then value.length == 36 else false
-    def isEmailAddress: Boolean = value.nonEmpty && value.length >= 3 && value.contains("@")
     def isPin: Boolean = value.length == 7
 
   extension (command: Command)
     def isValid: Boolean =
       command match
-        case register @ Register(_)                  => register.isValid
-        case login @ Login(_, _)                     => login.isValid
+        case register @ Register()                 => register.isValid
+        case login @ Login(_)                     => login.isValid
         case deactivate @ Deactivate(_)              => deactivate.isValid
         case reactivate @ Reactivate(_)              => reactivate.isValid
         case listPools @ ListPools(_)                => listPools.isValid
@@ -23,10 +22,10 @@ object Validator:
         case saveChemical @ SaveChemical(_, _)       => saveChemical.isValid
 
   extension (register: Register)
-    def isValid: Boolean = register.emailAddress.isEmailAddress
+    def isValid: Boolean = true
 
   extension (login: Login)
-    def isValid: Boolean = login.emailAddress.isEmailAddress && login.pin.isPin
+    def isValid: Boolean = login.pin.isPin
 
   extension (deactivate: Deactivate)
     def isValid: Boolean = deactivate.license.isLicense
@@ -62,13 +61,11 @@ object Validator:
     def isActivated: Boolean =
       account.id >= 0 &&
       account.license.isLicense &&
-      account.emailAddress.isEmailAddress &&
       account.pin.isPin &&
       account.activated.nonEmpty &&
       account.deactivated.isEmpty
     def isDeactivated: Boolean =
       account.license.isLicense &&
-      account.emailAddress.isEmailAddress &&
       account.pin.isPin &&
       account.activated.isEmpty &&
       account.deactivated.nonEmpty
