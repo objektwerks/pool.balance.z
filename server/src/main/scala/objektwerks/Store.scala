@@ -57,10 +57,14 @@ final case class Store(quill: Quill.Postgres[SnakeCase]):
   def listMeasurements: Task[List[Measurement]] = run( query[Measurement] )
 
   def addMeasurement(measurement: Measurement): Task[Long] =
-    run( query[Measurement].insertValue( lift(measurement) ).returningGenerated(_.id) )
+    transaction (
+      run( query[Measurement].insertValue( lift(measurement) ).returningGenerated(_.id) )
+    )
 
   def updateMeasurement(measurement: Measurement): Task[Long] =
-    run( query[Measurement].filter(_.id == lift(measurement.id) ).updateValue( lift(measurement) ) )
+    transaction (
+      run( query[Measurement].filter(_.id == lift(measurement.id) ).updateValue( lift(measurement) ) )
+    )
 
   def listChemicals: Task[List[Chemical]] = run( query[Chemical] )
 
