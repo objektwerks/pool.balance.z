@@ -8,23 +8,25 @@ import Validator.*
 
 final case class Handler(store: Store):
   def handle[E <: Event](command: Command): Task[Event] =
-    authorize(command).flatMap { isAuthorized =>
-      if isAuthorized then
-        command match
-          case Register(emailAddress)          => register(emailAddress)
-          case Login(emailAddress, pin)        => login(emailAddress, pin)
-          case Deactivate(license)             => deactivate(license)
-          case Reactivate(license)             => reactivate(license)
-          case ListPools(_)                    => listPools
-          case SavePool(_, pool)               => savePool(pool)
-          case ListCleanings(_)                => listCleanings
-          case SaveCleaning(_, cleaning)       => saveCleaning(cleaning)
-          case ListMeasurements(_)             => listMeasurements
-          case SaveMeasurement(_, measurement) => saveMeasurement(measurement)
-          case ListChemicals(_)                => listChemicals
-          case SaveChemical(_, chemical)       => saveChemical(chemical)
-       else ZIO.succeed( Fault(s"Invalid command: $command") )
-    }
+    for
+      isAuthorized <- authorize(command)
+      isValid      <- validate(command)
+      handle       = isAuthorized && isValid
+      event        <- if handle then command match
+                      case Register(emailAddress)          => register(emailAddress)
+                      case Login(emailAddress, pin)        => login(emailAddress, pin)
+                      case Deactivate(license)             => deactivate(license)
+                      case Reactivate(license)             => reactivate(license)
+                      case ListPools(_)                    => listPools
+                      case SavePool(_, pool)               => savePool(pool)
+                      case ListCleanings(_)                => listCleanings
+                      case SaveCleaning(_, cleaning)       => saveCleaning(cleaning)
+                      case ListMeasurements(_)             => listMeasurements
+                      case SaveMeasurement(_, measurement) => saveMeasurement(measurement)
+                      case ListChemicals(_)                => listChemicals
+                      case SaveChemical(_, chemical)       => saveChemical(chemical)
+                      else ZIO.succeed( Fault(s"Invalid command: $command") )
+    yield event
 
   def authorize(command: Command): Task[Boolean] =
     command match
