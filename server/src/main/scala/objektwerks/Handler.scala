@@ -4,39 +4,43 @@ import zio.{Task, ZIO, ZLayer}
 import zio.json.{DecoderOps, EncoderOps}
 
 import Serializer.given
+import scala.tools.nsc.transform.patmat.Logic.PropositionalLogic.AnalysisBudget.formulaSizeExceeded
 
 final case class Handler(authorizer: Authorizer,
                          validator: Validator,
                          store: Store):
   def handle(command: Command): Task[Event] =
     command match  // TODO! Handler > Authorizer > Validator > Handler > Store
-      case c @ ListPools()                  => listPools(c)
-      case c @ SavePool(pool)               => savePool(c)
-      case c @ ListCleanings()              => listCleanings(c)
-      case c @ SaveCleaning(cleaning)       => saveCleaning(c)
-      case c @ ListMeasurements()           => listMeasurements(c)
-      case c @ SaveMeasurement(measurement) => saveMeasurement(c)
-      case c @ ListChemicals()              => listChemicals(c)
-      case c @ SaveChemical(chemical)       => saveChemical(c)
+      case ListPools()                  => listPools()
+      case SavePool(pool)               => savePool(pool)
+      case ListCleanings()              => listCleanings()
+      case SaveCleaning(cleaning)       => saveCleaning(cleaning)
+      case ListMeasurements()           => listMeasurements()
+      case SaveMeasurement(measurement) => saveMeasurement(measurement)
+      case ListChemicals()              => listChemicals()
+      case SaveChemical(chemical)       => saveChemical(chemical)
 
-  def listPools(command: ListPools): Task[Event] =
+  def listPools(): Task[Event] =
     for
       pools <- store.listPools
     yield PoolsListed(pools)
 
-  def savePool(command: SavePool): Task[Event] = PoolSaved(0L)
+  def savePool(pool: Pool): Task[Event] =
+    for
+      id <- if pool.id == 0 then store.addPool(pool) else store.updatePool(pool)
+    yield PoolSaved(id)
 
-  def listCleanings(command: ListCleanings): Task[Event] = CleaningsListed(Nil)
+  def listCleanings(): Task[Event] = CleaningsListed(Nil)
 
-  def saveCleaning(command: SaveCleaning): Task[Event] = CleaningSaved(0L)
+  def saveCleaning(cleaning: Cleaning): Task[Event] = CleaningSaved(0L)
 
-  def listMeasurements(command: ListMeasurements): Task[Event] = MeasurementsListed(Nil)
+  def listMeasurements(): Task[Event] = MeasurementsListed(Nil)
 
-  def saveMeasurement(command: SaveMeasurement): Task[Event] = MeasurementSaved(0L)
+  def saveMeasurement(measurement: Measurement): Task[Event] = MeasurementSaved(0L)
 
-  def listChemicals(command: ListChemicals): Task[Event] = ChemicalsListed(Nil)
+  def listChemicals(): Task[Event] = ChemicalsListed(Nil)
 
-  def saveChemical(command: SaveChemical): Task[Event] = ChemicalSaved(0L)
+  def saveChemical(chemical: Chemical): Task[Event] = ChemicalSaved(0L)
 
 object Handler:
   val layer: ZLayer[Authorizer & Validator & Store, Nothing, Handler] =
