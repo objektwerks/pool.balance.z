@@ -60,6 +60,9 @@ object Serializer:
   given JsonDecoder[Event] = DeriveJsonDecoder.gen[Event]
   given JsonEncoder[Event] = DeriveJsonEncoder.gen[Event]
 
+  given JsonDecoder[Registered] = DeriveJsonDecoder.gen[Registered]
+  given JsonEncoder[Registered] = DeriveJsonEncoder.gen[Registered]
+
   given JsonDecoder[PoolsListed] = DeriveJsonDecoder.gen[PoolsListed]
   given JsonEncoder[PoolsListed] = DeriveJsonEncoder.gen[PoolsListed]
 
