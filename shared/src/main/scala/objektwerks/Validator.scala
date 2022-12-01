@@ -8,8 +8,8 @@ object Validator:
   extension (command: Command)
     def isValid: Boolean =
       command match
-        case register @ Register()                 => register.isValid
-        case login @ Login(_)                     => login.isValid
+        case register @ Register()                   => register.isValid
+        case login @ Login(_)                        => login.isValid
         case deactivate @ Deactivate(_)              => deactivate.isValid
         case reactivate @ Reactivate(_)              => reactivate.isValid
         case listPools @ ListPools(_)                => listPools.isValid
