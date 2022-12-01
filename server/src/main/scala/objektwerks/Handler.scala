@@ -12,8 +12,8 @@ final case class Handler(store: Store):
       isAuthorized <- authorize(command)
       isValid      <- validate(command)
       event        <- if isAuthorized && isValid then command match
-                      case Register(emailAddress)          => register(emailAddress)
-                      case Login(emailAddress, pin)        => login(emailAddress, pin)
+                      case Register()                      => register()
+                      case Login(pin)                      => login(pin)
                       case Deactivate(license)             => deactivate(license)
                       case Reactivate(license)             => reactivate(license)
                       case ListPools(_)                    => listPools
@@ -34,9 +34,9 @@ final case class Handler(store: Store):
 
   def validate(command: Command): Task[Boolean] = ZIO.succeed(command.isValid)
 
-  def register(emailAddress: String): Task[Registered] = ???
+  def register: Task[Registered] = ???
 
-  def login(emailAddress: String, pin: String): Task[LoggedIn] = ???
+  def login(pin: String): Task[LoggedIn] = ???
 
   def deactivate(license: String): Task[Deactivated] = ???
 
