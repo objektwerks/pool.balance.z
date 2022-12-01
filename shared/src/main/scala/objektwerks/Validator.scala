@@ -12,6 +12,12 @@ object Validator:
   extension (login: Login)
     def isValid: Boolean = login.emailAddress.isEmailAddress && login.pin.isPin
 
+  extension (deactivate: Deactivate)
+    def isValid: Boolean = deactivate.license.isLicense
+
+  extension (reactivate: Reactivate)
+    def isValid: Boolean = reactivate.license.isLicense
+
   extension (account: Account)
     def isActivated: Boolean =
       account.id >= 0 &&
