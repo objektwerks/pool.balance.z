@@ -23,7 +23,7 @@ final case class Handler(authorizer: Authorizer,
 
   def register(emailAddress: String): Task[Registered] = ???
 
-  def login(emailAddress: String, pin: String): LoggedIn = ???
+  def login(emailAddress: String, pin: String): Task[LoggedIn] = ???
 
   def listPools: Task[PoolsListed] =
     for
