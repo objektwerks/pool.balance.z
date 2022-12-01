@@ -2,7 +2,7 @@ package objektwerks
 
 object Validator:
   extension (value: String)
-    def isLicense: Boolean = if value.nonEmpty then value.length == 36 else false
+    def isLicense: Boolean = if value.nonEmpty && value.length == 36 then true else false
     def isPin: Boolean = value.length == 7
 
   extension (command: Command)
@@ -56,6 +56,9 @@ object Validator:
 
   extension (saveChemical: SaveChemical)
     def isValid: Boolean = saveChemical.chemical.isValid
+
+  extension  (license: License)
+    def isValid: Boolean = license.license.isLicense
 
   extension (account: Account)
     def isActivated: Boolean =
