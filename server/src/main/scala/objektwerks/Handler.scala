@@ -11,16 +11,16 @@ final case class Handler(authorizer: Authorizer,
                          store: Store):
   def handle(command: Command): Task[Event] =
     command match  // TODO! Handler > Authorizer > Validator > Handler > Store
-      case ListPools()                  => listPools()
+      case ListPools()                  => listPools
       case SavePool(pool)               => savePool(pool)
-      case ListCleanings()              => listCleanings()
+      case ListCleanings()              => listCleanings
       case SaveCleaning(cleaning)       => saveCleaning(cleaning)
-      case ListMeasurements()           => listMeasurements()
+      case ListMeasurements()           => listMeasurements
       case SaveMeasurement(measurement) => saveMeasurement(measurement)
-      case ListChemicals()              => listChemicals()
+      case ListChemicals()              => listChemicals
       case SaveChemical(chemical)       => saveChemical(chemical)
 
-  def listPools(): Task[Event] =
+  def listPools: Task[Event] =
     for
       pools <- store.listPools
     yield PoolsListed(pools)
@@ -30,15 +30,21 @@ final case class Handler(authorizer: Authorizer,
       id <- if pool.id == 0 then store.addPool(pool) else store.updatePool(pool)
     yield PoolSaved(id)
 
-  def listCleanings(): Task[Event] = CleaningsListed(Nil)
+  def listCleanings: Task[Event] =
+    for
+      cleanings <- store.listCleanings
+    yield CleaningsListed(cleanings)
 
-  def saveCleaning(cleaning: Cleaning): Task[Event] = CleaningSaved(0L)
+  def saveCleaning(cleaning: Cleaning): Task[Event] =
+    for
+      id <- if cleaning.id == 0 then store.addCleaning(cleaning) else store.updateCleaning(cleaning)
+    yield CleaningSaved(id)
 
-  def listMeasurements(): Task[Event] = MeasurementsListed(Nil)
+  def listMeasurements: Task[Event] = MeasurementsListed(Nil)
 
   def saveMeasurement(measurement: Measurement): Task[Event] = MeasurementSaved(0L)
 
-  def listChemicals(): Task[Event] = ChemicalsListed(Nil)
+  def listChemicals: Task[Event] = ChemicalsListed(Nil)
 
   def saveChemical(chemical: Chemical): Task[Event] = ChemicalSaved(0L)
 
