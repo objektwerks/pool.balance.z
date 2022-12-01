@@ -11,3 +11,25 @@ object Validator:
 
   extension (login: Login)
     def isValid: Boolean = login.emailAddress.isEmailAddress && login.pin.isPin
+
+  extension (account: Account)
+    def isActivated: Boolean =
+      account.id >= 0 &&
+      account.license.isLicense &&
+      account.emailAddress.isEmailAddress &&
+      account.pin.isPin &&
+      account.activated.nonEmpty &&
+      account.deactivated.isEmpty
+    def isDeactivated: Boolean =
+      account.license.isLicense &&
+      account.emailAddress.isEmailAddress &&
+      account.pin.isPin &&
+      account.activated.isEmpty &&
+      account.deactivated.nonEmpty
+
+  extension (pool: Pool)
+    def isValid =
+      pool.id >= 0 &&
+      pool.name.nonEmpty &&
+      pool.volume > 1000 &&
+      pool.unit.nonEmpty
