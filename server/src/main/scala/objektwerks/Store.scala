@@ -81,7 +81,9 @@ final case class Store(quill: Quill.Postgres[SnakeCase]):
   def listFaults: Task[List[Fault]] = run( query[Fault] )
 
   def addFault(fault: Fault): Task[Long] =
-    run( query[Fault].insertValue( lift(fault) ) )
+    transaction (
+      run( query[Fault].insertValue( lift(fault) ) )
+    )
 
 object Store:
   def namingStrategy: ZLayer[DataSource, Nothing, Postgres[SnakeCase]] = Quill.Postgres.fromNamingStrategy(SnakeCase)
