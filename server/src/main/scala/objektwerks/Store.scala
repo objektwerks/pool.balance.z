@@ -64,10 +64,8 @@ final case class Store(quill: Quill.Postgres[SnakeCase]):
   inline def listFaults: Task[List[Fault]] = run( query[Fault] )
 
 object Store:
-  def namingStrategy: ZLayer[DataSource, Nothing, Postgres[SnakeCase.type]] =
-    Quill.Postgres.fromNamingStrategy(SnakeCase)
+  def namingStrategy: ZLayer[DataSource, Nothing, Postgres[SnakeCase]] = Quill.Postgres.fromNamingStrategy(SnakeCase)
 
-  def datasource(config: Config, section: String): ZLayer[Any, Throwable, DataSource] =
-    Quill.DataSource.fromConfig(config.getConfig(section))
+  def datasource(config: Config): ZLayer[Any, Throwable, DataSource] = Quill.DataSource.fromConfig(config)
 
   def layer: ZLayer[Postgres[SnakeCase], Nothing, Store] = ZLayer.fromFunction(apply(_))
