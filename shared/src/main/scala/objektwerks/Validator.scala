@@ -33,3 +33,36 @@ object Validator:
       pool.name.nonEmpty &&
       pool.volume > 1000 &&
       pool.unit.nonEmpty
+
+  extension (cleaning: Cleaning)
+    def isValid: Boolean =
+      cleaning.id >= 0 &&
+      cleaning.poolId > 0 &&
+      cleaning.cleaned.nonEmpty
+
+  extension (measurement: Measurement)
+    def isValid: Boolean =
+      import Measurement.*
+
+      measurement.id >= 0 &&
+      measurement.poolId > 0 &&
+      totalChlorineRange.contains(measurement.totalChlorine) &&
+      freeChlorineRange.contains(measurement.freeChlorine) &&
+      combinedChlorineRange.contains(measurement.combinedChlorine) &&
+      (measurement.ph >= 6.2 && measurement.ph <= 8.4) &&
+      calciumHardnessRange.contains(measurement.calciumHardness) &&
+      totalAlkalinityRange.contains(measurement.totalAlkalinity) &&
+      cyanuricAcidRange.contains(measurement.cyanuricAcid) &&
+      totalBromineRange.contains(measurement.totalBromine) &&
+      saltRange.contains(measurement.salt) &&
+      temperatureRange.contains(measurement.temperature) &&
+      measurement.measured.nonEmpty
+
+  extension (chemical: Chemical)
+    def isValid: Boolean =
+      chemical.id >= 0 &&
+      chemical.poolId > 0 &&
+      chemical.typeof.nonEmpty &&
+      chemical.amount > 0.00 &&
+      chemical.unit.nonEmpty
+      chemical.added.nonEmpty
