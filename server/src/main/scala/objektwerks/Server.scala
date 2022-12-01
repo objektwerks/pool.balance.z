@@ -35,9 +35,9 @@ object Server extends ZIOAppDefault:
 
   override def run: ZIO[Any, Throwable, Nothing] =
     for
-      conf   <- Resources.loadConfig("server.conf")
-      host   =  conf.getString("host")
-      port   =  conf.getInt("port")
+      config <- Resources.loadConfig("server.conf")
+      host   =  config.getString("host")
+      port   =  config.getInt("port")
       _      <- ZIO.log(s"Server running at http://$host:$port")
       server <- HttpServer
                   .serve(router)
@@ -48,8 +48,8 @@ object Server extends ZIOAppDefault:
                     Authorizer.layer,
                     Validator.layer,
                     Store.layer,
-                    Quill.Postgres.fromNamingStrategy(SnakeCase),
-                    Quill.DataSource.fromConfig( conf.getConfig("db") )
+                    Store.namingStrategy,
+                    Store.datasource( config.getConfig("db") )
                   )
                   .debug
     yield server
