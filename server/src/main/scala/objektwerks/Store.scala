@@ -49,5 +49,10 @@ final case class Store(quill: Quill.Postgres[SnakeCase]):
 
   inline def listChemicals: Task[List[Chemical]] = run( query[Chemical] )
 
+  inline def addFault(fault: Fault): Task[Long] =
+    run( query[Fault].insertValue( lift(fault) ) )
+
+  inline def listFaults: Task[List[Fault]] = run( query[Fault] )
+
 object Store:
   val layer: ZLayer[Postgres[SnakeCase], Nothing, Store] = ZLayer.fromFunction(apply(_))
