@@ -4,6 +4,7 @@ import zio.{Task, ZIO, ZLayer}
 import zio.json.{DecoderOps, EncoderOps}
 
 import Serializer.given
+import Validator.*
 
 final case class Handler(store: Store):
   def handle[E <: Event](command: Command): Task[Event] =
@@ -29,6 +30,8 @@ final case class Handler(store: Store):
     command match
       case license: License          => store.authorize(license.license)
       case Register(_) | Login(_, _) => ZIO.succeed(true)
+
+  def validate(command: Command): Task[Boolean] = ZIO.succeed(command.isValid)
 
   def register(emailAddress: String): Task[Registered] = ???
 
