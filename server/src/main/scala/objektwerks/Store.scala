@@ -13,55 +13,55 @@ import zio.{Task, ZLayer}
 final case class Store(quill: Quill.Postgres[SnakeCase]):
   import quill.*
 
-  inline def addAccount(account: Account): Task[Long] =
+  def addAccount(account: Account): Task[Long] =
     run( query[Account].insertValue( lift(account) ).returningGenerated(_.id) )
 
-  inline def updateAcount(account: Account): Task[Long] =
+  def updateAcount(account: Account): Task[Long] =
     run( query[Account].filter(_.id == lift(account.id) ).updateValue( lift(account) ) )
 
-  inline def listAccounts: Task[List[Account]] = run( query[Account] )
+  def listAccounts: Task[List[Account]] = run( query[Account] )
 
-  inline def addPool(pool: Pool): Task[Long] =
+  def addPool(pool: Pool): Task[Long] =
     run( query[Pool].insertValue( lift(pool) ).returningGenerated(_.id) )
 
-  inline def updatePool(pool: Pool): Task[Long] =
+  def updatePool(pool: Pool): Task[Long] =
     run( query[Pool].filter(_.id == lift(pool.id) ).updateValue( lift(pool) ) )
 
-  inline def listPools: Task[List[Pool]] = run( query[Pool] )
+  def listPools: Task[List[Pool]] = run( query[Pool] )
 
-  inline def addCleaning(cleaning: Cleaning): Task[Long] =
+  def addCleaning(cleaning: Cleaning): Task[Long] =
     run( query[Cleaning].insertValue( lift(cleaning) ).returningGenerated(_.id) )
 
-  inline def updateCleaning(cleaning: Cleaning): Task[Long] =
+  def updateCleaning(cleaning: Cleaning): Task[Long] =
     run( query[Cleaning].filter(_.id == lift(cleaning.id) ).updateValue( lift(cleaning) ) )
 
-  inline def listCleanings: Task[List[Cleaning]] = run( query[Cleaning] )
+  def listCleanings: Task[List[Cleaning]] = run( query[Cleaning] )
 
-  inline def addMeasurement(measurement: Measurement): Task[Long] =
+  def addMeasurement(measurement: Measurement): Task[Long] =
     run( query[Measurement].insertValue( lift(measurement) ).returningGenerated(_.id) )
 
-  inline def updateMeasurement(measurement: Measurement): Task[Long] =
+  def updateMeasurement(measurement: Measurement): Task[Long] =
     run( query[Measurement].filter(_.id == lift(measurement.id) ).updateValue( lift(measurement) ) )
 
-  inline def listMeasurements: Task[List[Measurement]] = run( query[Measurement] )
+  def listMeasurements: Task[List[Measurement]] = run( query[Measurement] )
 
-  inline def addChemical(chemical: Chemical): Task[Long] =
+  def addChemical(chemical: Chemical): Task[Long] =
     run( query[Chemical].insertValue( lift(chemical) ).returningGenerated(_.id) )
 
-  inline def updateChemical(chemical: Chemical): Task[Long] =
+  def updateChemical(chemical: Chemical): Task[Long] =
     run( query[Chemical].filter(_.id == lift(chemical.id) ).updateValue( lift(chemical) ) )
 
-  inline def listChemicals: Task[List[Chemical]] = run( query[Chemical] )
+  def listChemicals: Task[List[Chemical]] = run( query[Chemical] )
 
-  inline def addEmail(email: Email): Task[Long] =
+  def addEmail(email: Email): Task[Long] =
     run( query[Email].insertValue( lift(email) ).returningGenerated(_.id) )
 
-  inline def listEmails: Task[List[Email]] = run( query[Email] )
+  def listEmails: Task[List[Email]] = run( query[Email] )
 
-  inline def addFault(fault: Fault): Task[Long] =
+  def addFault(fault: Fault): Task[Long] =
     run( query[Fault].insertValue( lift(fault) ) )
 
-  inline def listFaults: Task[List[Fault]] = run( query[Fault] )
+  def listFaults: Task[List[Fault]] = run( query[Fault] )
 
 object Store:
   def namingStrategy: ZLayer[DataSource, Nothing, Postgres[SnakeCase]] = Quill.Postgres.fromNamingStrategy(SnakeCase)
