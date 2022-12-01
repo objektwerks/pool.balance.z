@@ -5,4 +5,3 @@ object Validator:
     def isLicense: Boolean = if value.nonEmpty then value.length == 36 else false
     def isEmailAddress: Boolean = value.nonEmpty && value.length >= 3 && value.contains("@")
     def isPin: Boolean = value.length == 7
-    def isName: Boolean = value.length >= 2
