@@ -7,9 +7,11 @@ import Serializer.given
 
 final case class Handler(store: Store):
   def handle[E <: Event](command: Command): Task[Event] =
-    command match  // TODO! Handler > Authorizer > Validator > Handler > Store
+    command match
       case Register(emailAddress)       => register(emailAddress)
       case Login(emailAddress, pin)     => login(emailAddress, pin)
+      case Deactivate(license)          => deactivate(license)
+      case Reactivate(license)          => reactivate(license)
       case ListPools()                  => listPools
       case SavePool(pool)               => savePool(pool)
       case ListCleanings()              => listCleanings
@@ -22,6 +24,10 @@ final case class Handler(store: Store):
   def register(emailAddress: String): Task[Registered] = ???
 
   def login(emailAddress: String, pin: String): Task[LoggedIn] = ???
+
+  def deactivate(license: String): Task[Deactivated] = ???
+
+  def reactivate(license: String): Task[Reactivated] = ???
 
   def listPools: Task[PoolsListed] =
     for
