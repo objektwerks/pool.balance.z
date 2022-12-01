@@ -78,11 +78,6 @@ final case class Store(quill: Quill.Postgres[SnakeCase]):
       run( query[Chemical].filter(_.id == lift(chemical.id) ).updateValue( lift(chemical) ) )
     )
 
-  def listEmails: Task[List[Email]] = run( query[Email] )
-
-  def addEmail(email: Email): Task[Long] =
-    run( query[Email].insertValue( lift(email) ).returningGenerated(_.id) )
-
   def listFaults: Task[List[Fault]] = run( query[Fault] )
 
   def addFault(fault: Fault): Task[Long] =
