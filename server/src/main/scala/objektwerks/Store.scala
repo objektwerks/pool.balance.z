@@ -69,10 +69,14 @@ final case class Store(quill: Quill.Postgres[SnakeCase]):
   def listChemicals: Task[List[Chemical]] = run( query[Chemical] )
 
   def addChemical(chemical: Chemical): Task[Long] =
-    run( query[Chemical].insertValue( lift(chemical) ).returningGenerated(_.id) )
+    transaction (
+      run( query[Chemical].insertValue( lift(chemical) ).returningGenerated(_.id) )
+    )
 
   def updateChemical(chemical: Chemical): Task[Long] =
-    run( query[Chemical].filter(_.id == lift(chemical.id) ).updateValue( lift(chemical) ) )
+    transaction (
+      run( query[Chemical].filter(_.id == lift(chemical.id) ).updateValue( lift(chemical) ) )
+    )
 
   def listEmails: Task[List[Email]] = run( query[Email] )
 
