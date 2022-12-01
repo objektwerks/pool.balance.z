@@ -33,7 +33,7 @@ object Server extends ZIOAppDefault:
     }
   }
 
-  override def run: ZIO[Environment & (ZIOAppArgs & Scope ), Any, Any] =
+  override def run: ZIO[Any, Throwable, Nothing] =
     for
       conf   <- Resources.loadConfig("server.conf")
       host   =  conf.getString("host")
