@@ -1,6 +1,6 @@
 package objektwerks
 
-import zio.{ZIO, ZLayer}
+import zio.{UIO, ZIO, ZLayer}
 import zio.json.{DecoderOps, EncoderOps}
 
 import Serializer.given
@@ -8,7 +8,7 @@ import Serializer.given
 final case class Handler(authorizer: Authorizer,
                          validator: Validator,
                          store: Store):
-  def handle(command: Command): ZIO[Any, Nothing, Event] =
+  def handle(command: Command): UIO[Event] =
     ZIO.succeed(
       command match  // TODO! Handler > Authorizer > Validator > Handler > Store
         case ListPools()                  => PoolsListed(Nil)
