@@ -40,11 +40,17 @@ final case class Handler(authorizer: Authorizer,
       id <- if cleaning.id == 0 then store.addCleaning(cleaning) else store.updateCleaning(cleaning)
     yield CleaningSaved(id)
 
-  def listMeasurements: Task[Event] = MeasurementsListed(Nil)
+  def listMeasurements: Task[Event] =
+    for
+      measurements <- store.listMeasurements
+    yield MeasurementsListed(measurements)
 
   def saveMeasurement(measurement: Measurement): Task[Event] = MeasurementSaved(0L)
 
-  def listChemicals: Task[Event] = ChemicalsListed(Nil)
+  def listChemicals: Task[Event] =
+    for
+      chemicals <- store.listChemicals
+    yield ChemicalsListed(chemicals)
 
   def saveChemical(chemical: Chemical): Task[Event] = ChemicalSaved(0L)
 
