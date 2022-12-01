@@ -11,7 +11,7 @@ final case class Handler(store: Store):
     for
       isAuthorized <- authorize(command)
       isValid      <- validate(command)
-      handle       = isAuthorized && isValid
+      handle       =  isAuthorized && isValid
       event        <- if handle then command match
                       case Register(emailAddress)          => register(emailAddress)
                       case Login(emailAddress, pin)        => login(emailAddress, pin)
