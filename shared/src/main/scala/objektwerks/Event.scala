@@ -5,6 +5,10 @@ import java.time.format.DateTimeFormatter
 
 sealed trait Event
 
+final case class Registered(account: Account) extends Event
+
+final case class LoggedIn(account: Account) extends Event
+
 final case class PoolsListed(pools: List[Pool]) extends Event
 final case class PoolSaved(id: Long) extends Event
 
