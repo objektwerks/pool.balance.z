@@ -1,5 +1,10 @@
 package objektwerks
 
+import com.typesafe.config.ConfigFactory
+
+import io.getquill.jdbczio.Quill
+import io.getquill.SnakeCase
+
 import java.nio.file.Path
 import java.time.Instant
 
@@ -36,5 +41,18 @@ object Server extends ZIOAppDefault:
       port   =  args.headOption.getOrElse("7272").toInt
       config =  ServerConfig.default.port(port)
       _      <- ZIO.log(s"Server running at http://localhost:$port")
-      server <- HttpServer.serve(router).provide(ServerConfig.live(config), HttpServer.live, Handler.layer)
+      server <- HttpServer
+                  .serve(router)
+                  .provide(
+                    ServerConfig.live(config),
+                    HttpServer.live,
+                    Handler.layer,
+                    Authorizer.layer,
+                    Validator.layer,
+                    Store.layer,
+                    Quill.Postgres.fromNamingStrategy(SnakeCase),
+                    Quill.DataSource.fromConfig(
+                      ConfigFactory.load("server.conf").getConfig("db")
+                    )
+                  )
     yield server
