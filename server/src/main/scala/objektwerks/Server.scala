@@ -39,19 +39,17 @@ object Server extends ZIOAppDefault:
       host   =  conf.getString("host")
       port   =  conf.getInt("port")
       _      <- ZIO.log(s"Server running at http://$host:$port")
-      config =  ServerConfig.default.port(port)
       server <- HttpServer
                   .serve(router)
                   .provide(
-                    ServerConfig.live(config),
+                    ServerConfig.live( ServerConfig.default.port(port) ),
                     HttpServer.live,
                     Handler.layer,
                     Authorizer.layer,
                     Validator.layer,
                     Store.layer,
                     Quill.Postgres.fromNamingStrategy(SnakeCase),
-                    Quill.DataSource.fromConfig(
-                      conf.getConfig("db")
-                    )
-                  ).debug
+                    Quill.DataSource.fromConfig( conf.getConfig("db") )
+                  )
+                  .debug
     yield server
