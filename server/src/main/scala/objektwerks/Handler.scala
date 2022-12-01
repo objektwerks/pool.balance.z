@@ -73,6 +73,6 @@ object Handler:
   val layer: ZLayer[Store, Nothing, Handler] =
     ZLayer {
       for
-        store      <- ZIO.service[Store]
+        store <- ZIO.service[Store]
       yield Handler(store)
     }
