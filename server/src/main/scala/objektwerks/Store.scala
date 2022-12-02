@@ -30,6 +30,15 @@ final case class Store(quill: Quill.Postgres[SnakeCase]):
       )
     )
 
+  def reactivate(license: String): Task[Long] =
+    transaction(
+      run(
+        query[Account]
+          .filter(_.license == lift(license))
+          .update(_.activated -> lift(Entity.instant), _.deactivated -> lift(""))
+      )
+    )    
+
   def listAccounts: Task[List[Account]] = run( query[Account] )
 
   def addAccount(account: Account): Task[Long] =
