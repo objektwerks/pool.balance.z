@@ -45,7 +45,10 @@ final case class Handler(store: Store):
       option <- store.login(pin)
     yield if option.isDefined then LoggedIn(option.get) else Fault(s"Invalid pin: $pin")
 
-  def deactivate(license: String): Task[Deactivated] = ???
+  def deactivate(license: String): Task[Deactivated] =
+    for
+      _ <- store.deactivate(license)
+    yield Deactivated(license)
 
   def reactivate(license: String): Task[Reactivated] = ???
 
