@@ -1,6 +1,5 @@
 package objektwerks
 
-import com.stuart.zcaffeine.ZCaffeine
 import com.typesafe.config.Config
 
 import javax.sql.DataSource
