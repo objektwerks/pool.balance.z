@@ -30,7 +30,7 @@ object Server extends ZIOAppDefault:
                          .catchAll(throwable =>
                             val message = s"Error: ${throwable.getMessage}; processing: $command"
                             ZIO.log(message) zip ZIO.succeed(Fault(message))
-                         )
+                          )
           yield
             Response.json( event.toJson )
         case Left(error) =>
