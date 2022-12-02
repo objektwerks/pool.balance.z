@@ -14,8 +14,8 @@ final case class Handler(store: Store):
       event        <- if isAuthorized && isValid then command match
                       case Register()                      => register
                       case Login(pin)                      => login(pin)
-                      case Deactivate(license)             => deactivate(license)
-                      case Reactivate(license)             => reactivate(license)
+                      case Deactivate(license)             => deactivateAccount(license)
+                      case Reactivate(license)             => reactivateAccount(license)
                       case ListPools(_)                    => listPools
                       case SavePool(_, pool)               => savePool(pool)
                       case ListCleanings(_)                => listCleanings
@@ -45,12 +45,12 @@ final case class Handler(store: Store):
       option <- store.login(pin)
     yield if option.isDefined then LoggedIn(option.get) else Fault(s"Invalid pin: $pin")
 
-  def deactivate(license: String): Task[Deactivated] =
+  def deactivateAccount(license: String): Task[Deactivated] =
     for
       _ <- store.deactivate(license)
     yield Deactivated(license)
 
-  def reactivate(license: String): Task[Reactivated] =
+  def reactivateAccount(license: String): Task[Reactivated] =
     for
       _ <- store.reactivate(license)
     yield Reactivated(license)    
