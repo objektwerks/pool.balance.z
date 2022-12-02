@@ -1,5 +1,6 @@
 package objektwerks
 
+import com.stuart.zcaffeine.ZCaffeine
 import com.typesafe.config.Config
 
 import javax.sql.DataSource
@@ -107,6 +108,8 @@ final case class Store(quill: Quill.Postgres[SnakeCase]):
     )
 
 object Store:
+  val cache = ZCaffeine[Any, String, String]()
+
   def namingStrategy: ZLayer[DataSource, Nothing, Postgres[SnakeCase]] = Quill.Postgres.fromNamingStrategy(SnakeCase)
 
   def datasource(config: Config): ZLayer[Any, Throwable, DataSource] = Quill.DataSource.fromConfig(config)
