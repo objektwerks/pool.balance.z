@@ -40,7 +40,10 @@ final case class Handler(store: Store):
       id <- store.register(account)
     yield Registered( account.copy(id = id) )
 
-  def login(pin: String): Task[LoggedIn] = ???
+  def login(pin: String): Task[LoggedIn | Fault] =
+    for
+      option <- store.login(pin)
+    yield if option.isDefined then LoggedIn(option.get) else Fault(s"Invalid pin: $pin")
 
   def deactivate(license: String): Task[Deactivated] = ???
 
