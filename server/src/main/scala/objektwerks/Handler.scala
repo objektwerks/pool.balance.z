@@ -50,7 +50,10 @@ final case class Handler(store: Store):
       _ <- store.deactivate(license)
     yield Deactivated(license)
 
-  def reactivate(license: String): Task[Reactivated] = ???
+  def reactivate(license: String): Task[Reactivated] =
+    for
+      _ <- store.reactivate(license)
+    yield Reactivated(license)    
 
   def listPools: Task[PoolsListed] =
     for
