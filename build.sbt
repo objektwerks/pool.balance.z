@@ -50,6 +50,7 @@ lazy val server = project
   .dependsOn(shared)
   .settings(common)
   .settings(
+    mainClass in Compile := Some("objektwerks.Server"),
     libraryDependencies ++= {
       Seq(
         "dev.zio" %% "zio" % zioVersion,
