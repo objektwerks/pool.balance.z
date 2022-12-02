@@ -7,6 +7,7 @@ lazy val common = Defaults.coreDefaultSettings ++ Seq(
   libraryDependencies ++= {
     Seq(
       "dev.zio" %% "zio" % zioVersion,
+      "dev.zio" %% "zio-json" % "0.3.0"
     )
   }
 )
@@ -27,7 +28,6 @@ lazy val client = project
     mainClass in Compile := Some("objektwerks.Client"),
     libraryDependencies ++= {
       Seq(
-        "dev.zio" %% "zio-json" % "0.3.0",
         "org.jfree" % "jfreechart" % "1.5.3",
         "com.miglayout" % "miglayout-swing" % "11.0",
       )
@@ -40,7 +40,6 @@ lazy val shared = project
     libraryDependencies ++= {
       val zioConfigVersion = "3.0.1"
       Seq(
-        "dev.zio" %% "zio-json" % "0.3.0",
         "dev.zio" %% "zio-config" % zioConfigVersion,
         "dev.zio" %% "zio-config-typesafe" % zioConfigVersion,
         "dev.zio" %% "zio-config-magnolia" % zioConfigVersion
@@ -57,7 +56,6 @@ lazy val server = project
     libraryDependencies ++= {
       Seq(
         "dev.zio" %% "zio-http" % "0.0.3",
-        "dev.zio" %% "zio-json" % "0.3.0",
         "dev.zio" %% "zio-logging" % "2.1.5",
         "io.getquill" %% "quill-jdbc-zio" % "4.6.0",
         compilerPlugin("com.github.ghik" % "zerowaste" % "0.2.1" cross CrossVersion.full),
