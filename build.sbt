@@ -3,7 +3,12 @@ val zioVersion = "2.0.4"
 lazy val common = Defaults.coreDefaultSettings ++ Seq(
   organization := "objektwerks",
   version := "0.1-SNAPSHOT",
-  scalaVersion := "3.2.1"
+  scalaVersion := "3.2.1",
+  libraryDependencies ++= {
+    Seq(
+      "dev.zio" %% "zio" % zioVersion,
+    )
+  }
 )
 
 lazy val poolbalance = (project in file("."))
@@ -22,7 +27,6 @@ lazy val client = project
     mainClass in Compile := Some("objektwerks.Client"),
     libraryDependencies ++= {
       Seq(
-        "dev.zio" %% "zio" % zioVersion,
         "dev.zio" %% "zio-json" % "0.3.0",
         "org.jfree" % "jfreechart" % "1.5.3",
         "com.miglayout" % "miglayout-swing" % "11.0",
@@ -36,7 +40,6 @@ lazy val shared = project
     libraryDependencies ++= {
       val zioConfigVersion = "3.0.1"
       Seq(
-        "dev.zio" %% "zio" % zioVersion,
         "dev.zio" %% "zio-json" % "0.3.0",
         "dev.zio" %% "zio-config" % zioConfigVersion,
         "dev.zio" %% "zio-config-typesafe" % zioConfigVersion,
@@ -53,7 +56,6 @@ lazy val server = project
     mainClass in Compile := Some("objektwerks.Server"),
     libraryDependencies ++= {
       Seq(
-        "dev.zio" %% "zio" % zioVersion,
         "dev.zio" %% "zio-http" % "0.0.3",
         "dev.zio" %% "zio-json" % "0.3.0",
         "dev.zio" %% "zio-logging" % "2.1.5",
