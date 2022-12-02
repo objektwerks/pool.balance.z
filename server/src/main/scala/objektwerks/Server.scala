@@ -25,7 +25,12 @@ object Server extends ZIOAppDefault:
         case Right(command) =>
           for
             handler <- ZIO.service[Handler]
-            event   <- handler.handle(command).catchAll(throwable => ZIO.succeed( Fault(throwable.getMessage) ))
+            event   <- handler
+                         .handle(command)
+                         .catchAll(throwable =>
+                            val message = s"Error: ${throwable.getMessage}; processing: $command"
+                            ZIO.log(message) zip ZIO.succeed(Fault(message))
+                         )
           yield
             Response.json( event.toJson )
         case Left(error) =>
