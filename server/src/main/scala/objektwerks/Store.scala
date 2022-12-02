@@ -14,9 +14,12 @@ final case class Store(quill: Quill.Postgres[SnakeCase]):
   import quill.*
 
   def authorize(license: String): Task[Boolean] =
-    run( query[Account].filter(_.license == lift(license)).nonEmpty )
+    run( query[Account].filter( _.license == lift(license) ).nonEmpty )
 
   def register(account: Account): Task[Long] = addAccount(account)
+
+  def login(pin: String): Task[Option[Account]] =
+    run( query[Account].filter( _.pin == lift(pin) ) ).map(result => result.headOption)
 
   def listAccounts: Task[List[Account]] = run( query[Account] )
 
@@ -27,7 +30,7 @@ final case class Store(quill: Quill.Postgres[SnakeCase]):
 
   def updateAcount(account: Account): Task[Long] =
     transaction (
-      run( query[Account].filter(_.id == lift(account.id) ).updateValue( lift(account) ) )
+      run( query[Account].filter( _.id == lift(account.id) ).updateValue( lift(account) ) )
     )
 
   def listPools: Task[List[Pool]] = run( query[Pool] )
@@ -39,7 +42,7 @@ final case class Store(quill: Quill.Postgres[SnakeCase]):
 
   def updatePool(pool: Pool): Task[Long] =
     transaction (
-      run( query[Pool].filter(_.id == lift(pool.id) ).updateValue( lift(pool) ) )
+      run( query[Pool].filter( _.id == lift(pool.id) ).updateValue( lift(pool) ) )
     )
 
   def listCleanings: Task[List[Cleaning]] = run( query[Cleaning] )
@@ -51,7 +54,7 @@ final case class Store(quill: Quill.Postgres[SnakeCase]):
 
   def updateCleaning(cleaning: Cleaning): Task[Long] =
     transaction (
-      run( query[Cleaning].filter(_.id == lift(cleaning.id) ).updateValue( lift(cleaning) ) )
+      run( query[Cleaning].filter( _.id == lift(cleaning.id) ).updateValue( lift(cleaning) ) )
     )
 
   def listMeasurements: Task[List[Measurement]] = run( query[Measurement] )
@@ -63,7 +66,7 @@ final case class Store(quill: Quill.Postgres[SnakeCase]):
 
   def updateMeasurement(measurement: Measurement): Task[Long] =
     transaction (
-      run( query[Measurement].filter(_.id == lift(measurement.id) ).updateValue( lift(measurement) ) )
+      run( query[Measurement].filter( _.id == lift(measurement.id) ).updateValue( lift(measurement) ) )
     )
 
   def listChemicals: Task[List[Chemical]] = run( query[Chemical] )
@@ -75,7 +78,7 @@ final case class Store(quill: Quill.Postgres[SnakeCase]):
 
   def updateChemical(chemical: Chemical): Task[Long] =
     transaction (
-      run( query[Chemical].filter(_.id == lift(chemical.id) ).updateValue( lift(chemical) ) )
+      run( query[Chemical].filter( _.id == lift(chemical.id) ).updateValue( lift(chemical) ) )
     )
 
   def listFaults: Task[List[Fault]] = run( query[Fault] )
