@@ -25,7 +25,6 @@ lazy val client = project
   .dependsOn(shared)
   .settings(common)
   .settings(
-    mainClass := Some("objektwerks.Client"),
     libraryDependencies ++= {
       Seq(
         "org.jfree" % "jfreechart" % "1.5.3",
@@ -52,7 +51,6 @@ lazy val server = project
   .dependsOn(shared)
   .settings(common)
   .settings(
-    mainClass := Some("objektwerks.Server"),
     libraryDependencies ++= {
       Seq(
         "dev.zio" %% "zio-http" % "0.0.3",
