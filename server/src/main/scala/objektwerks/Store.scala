@@ -23,10 +23,10 @@ final case class Store(quill: Quill.Postgres[SnakeCase]):
 
   def deactivate(license: String): Task[Long] =
     transaction(
-      run(
+      run( 
         query[Account]
-          .filter(_.license == lift(license))
-          .update(_.deactivated -> lift(Entity.instant), _.activated -> lift(""))
+          .filter( _.license == lift(license) )
+          .update( _.deactivated -> lift(Entity.instant), _.activated -> lift("") )
       )
     )
 
@@ -34,8 +34,8 @@ final case class Store(quill: Quill.Postgres[SnakeCase]):
     transaction(
       run(
         query[Account]
-          .filter(_.license == lift(license))
-          .update(_.activated -> lift(Entity.instant), _.deactivated -> lift(""))
+          .filter( _.license == lift(license) )
+          .update( _.activated -> lift(Entity.instant), _.deactivated -> lift("") )
       )
     )    
 
