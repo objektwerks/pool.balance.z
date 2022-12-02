@@ -52,9 +52,3 @@ CREATE TABLE chemical (
   unit VARCHAR NOT NULL,
   added VARCHAR NOT NULL
 );
-
-CREATE TABLE fault (
-  cause VARCHAR NOT NULL,
-  ocurred VARCHAR NOT NULL,
-  PRIMARY KEY (ocurred)
-);
