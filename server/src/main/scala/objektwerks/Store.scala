@@ -21,6 +21,15 @@ final case class Store(quill: Quill.Postgres[SnakeCase]):
   def login(pin: String): Task[Option[Account]] =
     run( query[Account].filter( _.pin == lift(pin) ) ).map(result => result.headOption)
 
+  def deactivate(license: String): Task[Long] =
+    transaction(
+      run(
+        query[Account]
+          .filter(_.license == lift(license))
+          .update(_.deactivated -> lift(Entity.instant), _.activated -> lift(""))
+      )
+    )
+
   def listAccounts: Task[List[Account]] = run( query[Account] )
 
   def addAccount(account: Account): Task[Long] =
