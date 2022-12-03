@@ -111,4 +111,10 @@ object Store:
 
   def datasource(config: Config): ZLayer[Any, Throwable, DataSource] = Quill.DataSource.fromConfig(config)
 
+  // Make a cache in the layer that constructs your service.
+  /*
+  Cache.make(capacity = 10,
+             timeToLive = Duration.Infinity,
+             lookup = Lookup( (n: Int) => ZIO.debug(s"lookup cached => $n").as(n) ) )
+  */
   def layer: ZLayer[Postgres[SnakeCase], Nothing, Store] = ZLayer.fromFunction(apply(_))
