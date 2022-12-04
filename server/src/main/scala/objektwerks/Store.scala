@@ -114,7 +114,7 @@ object Store:
   def namingStrategy: ZLayer[DataSource, Nothing, Postgres[SnakeCase]] = Quill.Postgres.fromNamingStrategy(SnakeCase)
 
   def licenseCache: ZLayer[Any, Nothing, Cache[String, Nothing, String]] = ZLayer.fromZIO{
-    Cache.make(capacity = 10,
+    Cache.make(capacity = 100,
                timeToLive = Duration.Infinity,
                lookup = Lookup( (license: String) => ZIO.debug(s"lookup cached => $license").as(license) ) )
   }
