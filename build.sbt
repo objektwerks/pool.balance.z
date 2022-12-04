@@ -7,7 +7,8 @@ lazy val common = Defaults.coreDefaultSettings ++ Seq(
   libraryDependencies ++= {
     Seq(
       "dev.zio" %% "zio" % zioVersion,
-      "dev.zio" %% "zio-json" % "0.3.0"
+      "dev.zio" %% "zio-json" % "0.3.0",
+      "com.typesafe" % "config" % "1.4.2"
     )
   }
 )
@@ -36,16 +37,6 @@ lazy val client = project
 
 lazy val shared = project
   .settings(common)
-  .settings(
-    libraryDependencies ++= {
-      val zioConfigVersion = "3.0.1"
-      Seq(
-        "dev.zio" %% "zio-config" % zioConfigVersion,
-        "dev.zio" %% "zio-config-typesafe" % zioConfigVersion,
-        "dev.zio" %% "zio-config-magnolia" % zioConfigVersion
-      )
-    }
-  )
 
 lazy val server = project
   .enablePlugins(JavaServerAppPackaging)
