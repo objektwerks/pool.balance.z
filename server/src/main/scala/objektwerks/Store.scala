@@ -109,7 +109,7 @@ final case class Store(quill: Quill.Postgres[SnakeCase],
     )
 
 object Store:
-  def datasource(config: Config): ZLayer[Any, Throwable, DataSource] = Quill.DataSource.fromConfig(config)
+  def dataSource(config: Config): ZLayer[Any, Throwable, DataSource] = Quill.DataSource.fromConfig(config)
 
   def namingStrategy: ZLayer[DataSource, Nothing, Postgres[SnakeCase]] = Quill.Postgres.fromNamingStrategy(SnakeCase)
 
