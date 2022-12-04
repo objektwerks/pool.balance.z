@@ -8,9 +8,11 @@ import io.getquill.*
 import io.getquill.jdbczio.Quill
 import io.getquill.jdbczio.Quill.Postgres
 
-import zio.{Task, ZLayer}
+import zio.{Duration, Task, ZIO, ZLayer}
+import zio.cache.{Cache, Lookup}
 
-final case class Store(quill: Quill.Postgres[SnakeCase]):
+final case class Store(quill: Quill.Postgres[SnakeCase],
+                       cache: Cache[String, Nothing, String]):
   import quill.*
 
   def authorize(license: String): Task[Boolean] =
@@ -107,14 +109,14 @@ final case class Store(quill: Quill.Postgres[SnakeCase]):
     )
 
 object Store:
-  def namingStrategy: ZLayer[DataSource, Nothing, Postgres[SnakeCase]] = Quill.Postgres.fromNamingStrategy(SnakeCase)
-
   def datasource(config: Config): ZLayer[Any, Throwable, DataSource] = Quill.DataSource.fromConfig(config)
 
-  // Make a cache in the layer that constructs your service.
-  /*
-  Cache.make(capacity = 10,
-             timeToLive = Duration.Infinity,
-             lookup = Lookup( (n: Int) => ZIO.debug(s"lookup cached => $n").as(n) ) )
-  */
-  def layer: ZLayer[Postgres[SnakeCase], Nothing, Store] = ZLayer.fromFunction(apply(_))
+  def namingStrategy: ZLayer[DataSource, Nothing, Postgres[SnakeCase]] = Quill.Postgres.fromNamingStrategy(SnakeCase)
+
+  def licenseCache: ZLayer[Any, Nothing, Cache[String, Nothing, String]] = ZLayer.fromZIO{
+    Cache.make(capacity = 10,
+               timeToLive = Duration.Infinity,
+               lookup = Lookup( (license: String) => ZIO.debug(s"lookup cached => $license").as(license) ) )
+  }
+
+  def layer: ZLayer[Postgres[SnakeCase] & Cache[String, Nothing, String], Nothing, Store] = ZLayer.fromFunction(apply(_, _))
