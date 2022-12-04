@@ -3,6 +3,7 @@ package objektwerks
 import com.typesafe.config.Config
 
 import javax.sql.DataSource
+import java.util.concurrent.TimeUnit
 
 import io.getquill.*
 import io.getquill.jdbczio.Quill
@@ -115,7 +116,7 @@ object Store:
 
   def licenseCache: ZLayer[Any, Nothing, Cache[String, Nothing, String]] = ZLayer.fromZIO{
     Cache.make(capacity = 100,
-               timeToLive = Duration.Infinity,
+               timeToLive = Duration(12, TimeUnit.HOURS),
                lookup = Lookup( (license: String) => ZIO.debug(s"lookup cached => $license").as(license) ) )
   }
 
