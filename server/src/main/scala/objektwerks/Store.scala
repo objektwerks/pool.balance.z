@@ -26,7 +26,7 @@ final case class Store(quill: Quill.Postgres[SnakeCase],
     run( query[Account].filter( _.license == lift(license) ).nonEmpty )
 
   def authorize(license: String): Task[Boolean] =
-    ZIO.ifZIO(isCached(license))(
+    ZIO.ifZIO( isCached(license) )(
       onTrue = ZIO.succeed(true),
       onFalse = ZIO.ifZIO( isStored(license) )(
         onTrue = cache(license).map(l => l.isLicense),
@@ -38,6 +38,11 @@ final case class Store(quill: Quill.Postgres[SnakeCase],
 
   def login(pin: String): Task[Option[Account]] =
     run( query[Account].filter( _.pin == lift(pin) ) ).map(result => result.headOption)
+
+  def addAccount(account: Account): Task[Long] =
+    transaction(
+      run(query[Account].insertValue(lift(account)).returningGenerated(_.id))
+    )
 
   def deactivateAccount(license: String): Task[Long] =
     transaction(
@@ -55,18 +60,6 @@ final case class Store(quill: Quill.Postgres[SnakeCase],
           .filter( _.license == lift(license) )
           .update( _.activated -> lift(Entity.instant), _.deactivated -> lift("") )
       )
-    )    
-
-  def listAccounts: Task[List[Account]] = run( query[Account] )
-
-  def addAccount(account: Account): Task[Long] =
-    transaction (
-      run( query[Account].insertValue( lift(account) ).returningGenerated(_.id) )
-    )
-
-  def updateAcount(account: Account): Task[Long] =
-    transaction (
-      run( query[Account].filter( _.id == lift(account.id) ).updateValue( lift(account) ) )
     )
 
   def listPools: Task[List[Pool]] = run( query[Pool] )
@@ -117,13 +110,6 @@ final case class Store(quill: Quill.Postgres[SnakeCase],
       run( query[Chemical].filter( _.id == lift(chemical.id) ).updateValue( lift(chemical) ) )
     )
 
-  def listFaults: Task[List[Fault]] = run( query[Fault] )
-
-  def addFault(fault: Fault): Task[Long] =
-    transaction (
-      run( query[Fault].insertValue( lift(fault) ) )
-    )
-
 object Store:
   def dataSource(config: Config): ZLayer[Any, Throwable, DataSource] = Quill.DataSource.fromConfig(config)
 
@@ -133,7 +119,8 @@ object Store:
     Cache.make(capacity = 100,
                timeToLive = Duration(12, TimeUnit.HOURS),
                lookup = Lookup( (license: String) =>
-                 ZIO.log(s"lookup license: $license") zipRight ZIO.succeed( if license.isLicense then license else "" ) ) 
+                 ZIO.log(s"lookup license: $license") zipRight
+                 ZIO.succeed( if license.isLicense then license else "" ) )
                )
   }
 
