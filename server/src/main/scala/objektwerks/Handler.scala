@@ -27,70 +27,70 @@ final case class Handler(store: Store):
                       else ZIO.succeed( Fault(s"Invalid command: $command") )
     yield event
 
-  def authorize(command: Command): Task[Boolean] =
+  private def authorize(command: Command): Task[Boolean] =
     command match
       case license: License      => if license.isLicense then store.authorize(license.license) else ZIO.succeed(false)
       case Register() | Login(_) => ZIO.succeed(true)
 
-  def validate(command: Command): Task[Boolean] = ZIO.succeed(command.isValid)
+  private def validate(command: Command): Task[Boolean] = ZIO.succeed(command.isValid)
 
-  def register: Task[Registered] =
+  private def register: Task[Registered] =
     val account = Account()
     for
       id <- store.register(account)
     yield Registered( account.copy(id = id) )
 
-  def login(pin: String): Task[LoggedIn | Fault] =
+  private def login(pin: String): Task[LoggedIn | Fault] =
     for
       option <- store.login(pin)
     yield if option.isDefined then LoggedIn(option.get) else Fault(s"Invalid pin: $pin")
 
-  def deactivateAccount(license: String): Task[Deactivated] =
+  private def deactivateAccount(license: String): Task[Deactivated] =
     for
       _ <- store.deactivateAccount(license)
     yield Deactivated(license)
 
-  def reactivateAccount(license: String): Task[Reactivated] =
+  private def reactivateAccount(license: String): Task[Reactivated] =
     for
       _ <- store.reactivateAccount(license)
-    yield Reactivated(license)    
+    yield Reactivated(license)
 
-  def listPools: Task[PoolsListed] =
+  private def listPools: Task[PoolsListed] =
     for
       pools <- store.listPools
     yield PoolsListed(pools)
 
-  def savePool(pool: Pool): Task[PoolSaved] =
+  private def savePool(pool: Pool): Task[PoolSaved] =
     for
       id <- if pool.id == 0 then store.addPool(pool) else store.updatePool(pool)
     yield PoolSaved(id)
 
-  def listCleanings: Task[CleaningsListed] =
+  private def listCleanings: Task[CleaningsListed] =
     for
       cleanings <- store.listCleanings
     yield CleaningsListed(cleanings)
 
-  def saveCleaning(cleaning: Cleaning): Task[CleaningSaved] =
+  private def saveCleaning(cleaning: Cleaning): Task[CleaningSaved] =
     for
       id <- if cleaning.id == 0 then store.addCleaning(cleaning) else store.updateCleaning(cleaning)
     yield CleaningSaved(id)
 
-  def listMeasurements: Task[MeasurementsListed] =
+  private def listMeasurements: Task[MeasurementsListed] =
     for
       measurements <- store.listMeasurements
     yield MeasurementsListed(measurements)
 
-  def saveMeasurement(measurement: Measurement): Task[MeasurementSaved] =
+  private def saveMeasurement(measurement: Measurement): Task[MeasurementSaved] =
     for
       id <- if measurement.id == 0 then store.addMeasurement(measurement) else store.updateMeasurement(measurement)
     yield MeasurementSaved(id)
 
-  def listChemicals: Task[ChemicalsListed] =
+  private def listChemicals: Task[ChemicalsListed] =
     for
       chemicals <- store.listChemicals
     yield ChemicalsListed(chemicals)
 
-  def saveChemical(chemical: Chemical): Task[ChemicalSaved] =
+  private def saveChemical(chemical: Chemical): Task[ChemicalSaved] =
     for
       id <- if chemical.id == 0 then store.addChemical(chemical) else store.updateChemical(chemical)
     yield ChemicalSaved(id)
