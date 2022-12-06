@@ -119,7 +119,7 @@ object Store:
     Cache.make(capacity = 100,
                timeToLive = Duration(12, TimeUnit.HOURS),
                lookup = Lookup( (license: String) =>
-                 ZIO.log(s"lookup license: $license") zipRight
+                 ZIO.log(s"*** License cache lookup: $license") zipRight
                  ZIO.succeed( if license.isLicense then license else "" ) )
                )
   }
