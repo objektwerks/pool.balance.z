@@ -12,6 +12,8 @@ import io.getquill.jdbczio.Quill.Postgres
 import zio.{Duration, Task, UIO, ZIO, ZLayer}
 import zio.cache.{Cache, Lookup}
 
+import Validator.*
+
 final case class Store(quill: Quill.Postgres[SnakeCase],
                        cache: Cache[String, Nothing, String]):
   import quill.*
@@ -24,7 +26,13 @@ final case class Store(quill: Quill.Postgres[SnakeCase],
     run( query[Account].filter( _.license == lift(license) ).nonEmpty )
 
   def authorize(license: String): Task[Boolean] =
-    run( query[Account].filter( _.license == lift(license) ).nonEmpty )
+    ZIO.ifZIO(isCached(license))(
+      onTrue = ZIO.succeed(true),
+      onFalse = ZIO.ifZIO( isStored(license) )(
+        onTrue = cache(license).map(l => l.isLicense),
+        onFalse = ZIO.succeed(false)
+      )
+    )
 
   def register(account: Account): Task[Long] = addAccount(account)
 
