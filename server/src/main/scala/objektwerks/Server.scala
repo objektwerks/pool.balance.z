@@ -16,7 +16,7 @@ object Server extends ZIOAppDefault:
   override val bootstrap: ZLayer[ZIOAppArgs, Any, Environment] =
     Runtime.removeDefaultLoggers >>> file( Path.of("~/.poolbalance.z/server.log") )
 
-  val router: Http[Handler, Throwable, Request, Response] = Http.collectZIO[Request] {
+  private val router: Http[Handler, Throwable, Request, Response] = Http.collectZIO[Request] {
     case request @ Method.POST -> !! / "command" => request.body.asString.flatMap { json =>
       json.fromJson[Command] match
         case Right(command) =>
@@ -26,7 +26,7 @@ object Server extends ZIOAppDefault:
                          .handle(command)
                          .catchAll(throwable =>
                             val message = s"Error: ${throwable.getMessage}; processing: $command"
-                            ZIO.log(message) zip ZIO.succeed(Fault(message))
+                            ZIO.log(message) zipRight ZIO.succeed(Fault(message))
                           )
           yield
             Response.json( event.toJson )
