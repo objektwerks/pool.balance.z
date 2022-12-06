@@ -16,7 +16,7 @@ object Server extends ZIOAppDefault:
   override val bootstrap: ZLayer[ZIOAppArgs, Any, Environment] =
     Runtime.removeDefaultLoggers >>> file( Path.of("~/.poolbalance.z/server.log") )
 
-  private val router: Http[Handler, Throwable, Request, Response] = Http.collectZIO[Request] {
+  val router: Http[Handler, Throwable, Request, Response] = Http.collectZIO[Request] {
     case request @ Method.POST -> !! / "command" => request.body.asString.flatMap { json =>
       json.fromJson[Command] match
         case Right(command) =>
