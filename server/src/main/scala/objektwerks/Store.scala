@@ -9,12 +9,19 @@ import io.getquill.*
 import io.getquill.jdbczio.Quill
 import io.getquill.jdbczio.Quill.Postgres
 
-import zio.{Duration, Task, ZIO, ZLayer}
+import zio.{Duration, Task, UIO, ZIO, ZLayer}
 import zio.cache.{Cache, Lookup}
 
 final case class Store(quill: Quill.Postgres[SnakeCase],
                        cache: Cache[String, Nothing, String]):
   import quill.*
+
+  private def isCached(license: String): UIO[Boolean] = cache.contains(license)
+
+  private def cache(license: String): UIO[String] = cache.get(license)
+
+  private def isStored(license: String): Task[Boolean] =
+    run( query[Account].filter( _.license == lift(license) ).nonEmpty )
 
   def authorize(license: String): Task[Boolean] =
     run( query[Account].filter( _.license == lift(license) ).nonEmpty )
