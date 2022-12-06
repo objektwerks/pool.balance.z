@@ -133,7 +133,7 @@ object Store:
     Cache.make(capacity = 100,
                timeToLive = Duration(12, TimeUnit.HOURS),
                lookup = Lookup( (license: String) =>
-                 ZIO.succeed( if license.isLicense then license else "" ) zip ZIO.log(s"lookup: $license") ) 
+                 ZIO.succeed( if license.isLicense then license else "" ) zip ZIO.log(s"lookup license: $license") ) 
                )
   }
 
