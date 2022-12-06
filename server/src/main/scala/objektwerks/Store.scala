@@ -132,7 +132,9 @@ object Store:
   def licenseCache: ZLayer[Any, Nothing, Cache[String, Nothing, String]] = ZLayer.fromZIO {
     Cache.make(capacity = 100,
                timeToLive = Duration(12, TimeUnit.HOURS),
-               lookup = Lookup( (license: String) => ZIO.log(s"lookup cached => $license").as(license) ) )
+               lookup = Lookup( (license: String) =>
+                 ZIO.succeed( if license.isLicense then license else "" ) zip ZIO.log(s"lookup: $license") ) 
+               )
   }
 
   def layer: ZLayer[Postgres[SnakeCase] & Cache[String, Nothing, String], Nothing, Store] = ZLayer.fromFunction(apply(_, _))
