@@ -29,7 +29,8 @@ lazy val client = project
     libraryDependencies ++= {
       Seq(
         "org.jfree" % "jfreechart" % "1.5.3",
-        "com.miglayout" % "miglayout-swing" % "11.0"
+        "com.miglayout" % "miglayout-swing" % "11.0",
+        "dev.zio" %% "zio-http" % "0.0.3"
       )
     }
   )
