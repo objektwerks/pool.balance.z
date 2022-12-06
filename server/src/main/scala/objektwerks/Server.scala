@@ -17,7 +17,7 @@ object Server extends ZIOAppDefault:
       config <- Resources.loadConfig("server.conf")
       host   =  config.getString("host")
       port   =  config.getInt("port")
-      _      <- ZIO.log(s"Server running at http://$host:$port")
+      _      <- ZIO.log(s"*** Server running at http://$host:$port")
       server <- HttpServer
                   .serve(Router.router)
                   .provide(
