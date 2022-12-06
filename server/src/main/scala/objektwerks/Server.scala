@@ -13,9 +13,6 @@ import zio.logging.{LogFormat, file}
 import Serializer.given
 
 object Server extends ZIOAppDefault:
-  override val bootstrap: ZLayer[ZIOAppArgs, Any, Environment] =
-    Runtime.removeDefaultLoggers >>> file( Path.of("~/.poolbalance.z/server.log") )
-
   val router: Http[Handler, Throwable, Request, Response] = Http.collectZIO[Request] {
     case request @ Method.POST -> !! / "command" => request.body.asString.flatMap { json =>
       json.fromJson[Command] match
@@ -34,6 +31,9 @@ object Server extends ZIOAppDefault:
           ZIO.succeed( Response.json( Fault(error).toJson ) )
     }
   }
+  
+  override val bootstrap: ZLayer[ZIOAppArgs, Any, Environment] =
+    Runtime.removeDefaultLoggers >>> file( Path.of("~/.poolbalance.z/server.log") )
 
   override def run: ZIO[Any, Throwable, Nothing] =
     for
