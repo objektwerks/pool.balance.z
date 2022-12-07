@@ -111,17 +111,18 @@ final case class Store(quill: Quill.Postgres[SnakeCase],
     )
 
 object Store:
-  def dataSource(config: Config): ZLayer[Any, Throwable, DataSource] = Quill.DataSource.fromConfig(config)
+  def dataSourceLayer(config: Config): ZLayer[Any, Throwable, DataSource] = Quill.DataSource.fromConfig(config)
 
-  def namingStrategy: ZLayer[DataSource, Nothing, Postgres[SnakeCase]] = Quill.Postgres.fromNamingStrategy(SnakeCase)
+  val namingStrategyLayer: ZLayer[DataSource, Nothing, Postgres[SnakeCase]] = Quill.Postgres.fromNamingStrategy(SnakeCase)
 
-  def licenseCache: ZLayer[Any, Nothing, Cache[String, Nothing, String]] = ZLayer.fromZIO {
-    Cache.make(capacity = 100,
-               timeToLive = Duration(12, TimeUnit.HOURS),
-               lookup = Lookup( (license: String) =>
-                 ZIO.log(s"*** License cache lookup: $license") zipRight
-                 ZIO.succeed( if license.isLicense then license else "" ) )
-               )
-  }
+  val licenseCacheLayer: ZLayer[Any, Nothing, Cache[String, Nothing, String]] =
+    ZLayer.fromZIO {
+      Cache.make(capacity = 100,
+                timeToLive = Duration(12, TimeUnit.HOURS),
+                lookup = Lookup( (license: String) =>
+                  ZIO.log(s"*** License cache lookup: $license") zipRight
+                  ZIO.succeed( if license.isLicense then license else "" ) )
+                )
+    }
 
-  def layer: ZLayer[Postgres[SnakeCase] & Cache[String, Nothing, String], Nothing, Store] = ZLayer.fromFunction(apply(_, _))
+  val layer: ZLayer[Postgres[SnakeCase] & Cache[String, Nothing, String], Nothing, Store] = ZLayer.fromFunction(apply(_, _))
