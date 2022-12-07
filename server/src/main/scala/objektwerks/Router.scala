@@ -20,9 +20,7 @@ object Router:
                             val message = s"*** Router error: ${throwable.getMessage}; processing: $command"
                             ZIO.log(message) zipRight ZIO.succeed(Fault(message))
                           )
-          yield
-            Response.json( event.toJson )
-        case Left(error) =>
-          ZIO.succeed( Response.json( Fault(error).toJson ) )
+          yield Response.json( event.toJson )
+        case Left(error) => ZIO.succeed( Response.json( Fault(error).toJson ) )
     }
   }
