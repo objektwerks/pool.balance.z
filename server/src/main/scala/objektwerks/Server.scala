@@ -14,7 +14,7 @@ object Server extends ZIOAppDefault:
 
   override def run: ZIO[Any, Throwable, Nothing] =
     for
-      config <- Resources.loadConfig("server.conf")
+      config <- Resources.loadZIOConfig("server.conf")
       host   =  config.getString("host")
       port   =  config.getInt("port")
       _      <- ZIO.log(s"*** Server running at http://$host:$port")

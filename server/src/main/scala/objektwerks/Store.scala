@@ -112,7 +112,7 @@ final case class Store(quill: Quill.Postgres[SnakeCase],
 
 object Store:
   val dataSourceLayer: ZLayer[Any, Throwable, DataSource] =
-    Quill.DataSource.fromConfig( Resources.load(path = "server.conf", section = "db") )
+    Quill.DataSource.fromConfig( Resources.loadConfig(path = "server.conf", section = "db") )
 
   val namingStrategyLayer: ZLayer[DataSource, Nothing, Postgres[SnakeCase]] = Quill.Postgres.fromNamingStrategy(SnakeCase)
 
