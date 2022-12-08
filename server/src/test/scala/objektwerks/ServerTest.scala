@@ -34,7 +34,7 @@ object ServerTest extends ZIOSpecDefault:
   ).provide(Client.default, Scope.default)
 
   val register =
-    for {
+    for
       response <- Client.request(url = url, content = Body.fromString(Register().toJson))
       result   <- response.body.asString.flatMap { json =>
                     json.fromJson[Event] match
@@ -47,4 +47,4 @@ object ServerTest extends ZIOSpecDefault:
                       case Left(error) =>
                         Console.printLine(s"Register > Registered failed: $error") *> assertTrue(false)
                     }
-    } yield result
+    yield result
