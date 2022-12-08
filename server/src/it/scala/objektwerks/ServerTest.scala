@@ -6,6 +6,8 @@ import zio.http.model.Method
 import zio.test.{assertTrue, ZIOSpecDefault}
 
 object ServerTest extends ZIOSpecDefault:
+  Process("psql -d poolmate -f ddl.sql").run().exitValue()
+
   def spec = suite("server")(
     test("run") {
       val request = Request.get(URL(!! / "get"))
