@@ -46,3 +46,18 @@ object ServerTest extends ZIOSpecDefault:
                         Console.printLine(s"Register > Registered failed: $error") *> assertTrue(false)
                     }
     yield result
+
+  val login =
+    for
+      response <- Client.request(url = url, content = Body.fromString(Login(account.pin).toJson))
+      result   <- response.body.asString.flatMap { json =>
+                    json.fromJson[Event] match
+                      case Right(event) => event match
+                        case LoggedIn(account) =>
+                          assertTrue(account.isActivated)
+                        case _ =>
+                          Console.printLine("Login > LoggedIn failed!") *> assertTrue(false)
+                      case Left(error) =>
+                        Console.printLine(s"Login > LoggedIn failed: $error") *> assertTrue(false)
+                    }
+    yield result
