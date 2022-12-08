@@ -22,6 +22,8 @@ object ServerTest extends ZIOSpecDefault:
   val port = conf.getInt("port")
   val url = s"http://$host:$port/command"
 
+  var account = Account()
+
   def spec = suite("server")(
     test("run") {
       for
@@ -36,7 +38,9 @@ object ServerTest extends ZIOSpecDefault:
       result   <- response.body.asString.flatMap { json =>
                     json.fromJson[Event] match
                       case Right(event) => event match
-                        case Registered(account) => assertTrue(account.isActivated)
+                        case registered @ Registered(_) =>
+                          this.account = registered.account
+                          assertTrue(account.isActivated)
                         case _ => Console.printLine("Registered failed!") *> assertTrue(false)
                       case Left(error) => Console.printLine(s"Registered failed: $error") *> assertTrue(false)
                     }
