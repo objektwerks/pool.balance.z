@@ -3,7 +3,7 @@ package objektwerks
 import scala.sys.process.Process
 
 import zio.{Console, Scope, ZIO}
-import zio.http.{Client, ClientConfig}
+import zio.http.{Body, Client, ClientConfig}
 import zio.http.netty.client.ConnectionPool
 import zio.json.{DecoderOps, EncoderOps}
 import zio.test.{assertTrue, assertZIO, ZIOSpecDefault}
@@ -32,7 +32,7 @@ object ServerTest extends ZIOSpecDefault:
 
   val register =
     for {
-      response <- Client.request(url)
+      response <- Client.request(url = url, content = Body.fromString(Register().toJson))
       result   <- response.body.asString.flatMap { json =>
                     json.fromJson[Event] match
                       case Right(event) => event match
