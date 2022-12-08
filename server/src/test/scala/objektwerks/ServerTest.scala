@@ -6,7 +6,7 @@ import zio.{Console, Scope, ZIO}
 import zio.http.{Body, Client, ClientConfig}
 import zio.http.netty.client.ConnectionPool
 import zio.json.{DecoderOps, EncoderOps}
-import zio.test.{assertTrue, assertZIO, ZIOSpecDefault}
+import zio.test.{assertTrue, ZIOSpecDefault}
 import zio.test.Assertion.isSuccess
 
 import Serializer.given
