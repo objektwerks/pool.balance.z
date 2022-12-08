@@ -29,3 +29,4 @@ object Server extends ZIOAppDefault:
               Store.namingStrategyLayer,
               Store.licenseCacheLayer
             )
+            .exitCode
