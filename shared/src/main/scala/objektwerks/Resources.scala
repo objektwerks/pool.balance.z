@@ -17,8 +17,7 @@ object Resources:
     ZIO.attemptBlockingIO(
       ConfigFactory
         .load(path)
-        .getObject(section)
-        .toConfig
+        .getConfig(section)
     )
 
   def loadConfig(path: String, section: String): Config = ConfigFactory.load(path).getConfig(section)
