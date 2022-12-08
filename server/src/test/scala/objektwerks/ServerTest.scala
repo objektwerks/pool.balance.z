@@ -26,8 +26,11 @@ object ServerTest extends ZIOSpecDefault:
   def spec = suite("server")(
     test("run") {
       for
-        result <- register
-      yield assertTrue(result.isSuccess)
+        registered <- register
+        loggedIn   <- login
+      yield
+        assertTrue(registered.isSuccess) &&
+        assertTrue(loggedIn.isSuccess)
     }
   ).provide(Client.default, Scope.default)
 
