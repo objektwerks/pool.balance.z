@@ -17,7 +17,10 @@ import Validator.*
 object ServerTest extends ZIOSpecDefault:
   val exitCode = Process("psql -d poolbalance -f ddl.sql").run().exitValue()
   val server = Server.run
-  val url = "http://localhost:7272/command"
+  val conf = Resources.loadConfig("server.conf")
+  val host = conf.getString("host")
+  val port = conf.getInt("port")
+  val url = s"http://$host:$port/command"
 
   def spec = suite("server")(
     test("run") {
@@ -30,10 +33,11 @@ object ServerTest extends ZIOSpecDefault:
   val register =
     for {
       response <- Client.request(url)
-      result   <- response.body.asString.flatMap { json => json.fromJson[Event] match
-                    case Right(event) => event match
-                      case Registered(account) => assertTrue(account.isActivated)
-                      case _ => Console.printLine("Registered failed!") *> assertTrue(false)
-                    case Left(error) => Console.printLine(s"Registered failed: $error") *> assertTrue(false)
-                  }
+      result   <- response.body.asString.flatMap { json =>
+                    json.fromJson[Event] match
+                      case Right(event) => event match
+                        case Registered(account) => assertTrue(account.isActivated)
+                        case _ => Console.printLine("Registered failed!") *> assertTrue(false)
+                      case Left(error) => Console.printLine(s"Registered failed: $error") *> assertTrue(false)
+                    }
     } yield result

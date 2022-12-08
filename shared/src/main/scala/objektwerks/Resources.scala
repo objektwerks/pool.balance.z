@@ -9,15 +9,14 @@ import zio.ZIO
 object Resources:
   def loadZIOConfig(path: String): ZIO[Any, IOException, Config] =
     ZIO.attemptBlockingIO(
-      ConfigFactory
-        .load(path)
+      ConfigFactory.load(path)
     )
 
   def loadZIOConfig(path: String, section: String): ZIO[Any, IOException, Config] =
     ZIO.attemptBlockingIO(
-      ConfigFactory
-        .load(path)
-        .getConfig(section)
+      ConfigFactory.load(path).getConfig(section)
     )
+
+  def loadConfig(path: String): Config = ConfigFactory.load(path)
 
   def loadConfig(path: String, section: String): Config = ConfigFactory.load(path).getConfig(section)
