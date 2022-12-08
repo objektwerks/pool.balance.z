@@ -9,7 +9,6 @@ import zio.test.{assertTrue, ZIOSpecDefault}
 
 object ServerTest extends ZIOSpecDefault:
   val exitCode = Process("psql -d poolmate -f ddl.sql").run().exitValue()
-  val router = Router.router
 
   def spec = suite("server")(
     test("run") {
