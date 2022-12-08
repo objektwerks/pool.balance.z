@@ -5,7 +5,7 @@ import scala.sys.process.Process
 import zio.{Console, Scope, ZIO}
 import zio.http.{Body, Client}
 import zio.json.{DecoderOps, EncoderOps}
-import zio.test.{assertTrue, ZIOSpecDefault}
+import zio.test.{assertTrue, TestAspect, ZIOSpecDefault}
 import zio.test.Assertion.isSuccess
 
 import Serializer.given
@@ -24,15 +24,17 @@ object ServerTest extends ZIOSpecDefault:
   var account = Account()
 
   def spec = suite("server")(
-    test("run") {
+    test("register > registered") {
       for
         registered <- register
+      yield assertTrue(registered.isSuccess)
+    },
+    test("login > loggedIn") {
+      for
         loggedIn   <- login
-      yield
-        assertTrue(registered.isSuccess) &&
-        assertTrue(loggedIn.isSuccess)
+      yield assertTrue(loggedIn.isSuccess)
     }
-  ).provide(Client.default, Scope.default)
+  ).provide(Client.default, Scope.default) @@ TestAspect.sequential
 
   val register =
     for
