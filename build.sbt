@@ -41,10 +41,8 @@ lazy val shared = project
 lazy val server = project
   .enablePlugins(JavaServerAppPackaging)
   .dependsOn(shared)
-  .configs(IntegrationTest)
   .settings(common)
   .settings(
-    Defaults.itSettings,
     libraryDependencies ++= {
       Seq(
         "dev.zio" %% "zio-http" % "0.0.3",
