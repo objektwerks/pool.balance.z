@@ -12,7 +12,7 @@ object Server extends ZIOAppDefault:
   override val bootstrap: ZLayer[ZIOAppArgs, Any, Environment] =
     Runtime.removeDefaultLoggers >>> file( Path.of("~/.poolbalance.z/server.log") )
 
-  override def run: ZIO[Any, Throwable, Nothing] =
+  override def run: ZIO[Any, Throwable, HttpServer] =
     for
       config <- Resources.loadZIOConfig("server.conf")
       host   =  config.getString("host")
@@ -29,5 +29,4 @@ object Server extends ZIOAppDefault:
                     Store.namingStrategyLayer,
                     Store.licenseCacheLayer
                   )
-                  .debug
     yield server
