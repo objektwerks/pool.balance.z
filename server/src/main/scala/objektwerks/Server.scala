@@ -25,7 +25,7 @@ object Server extends ZIOAppDefault:
                     HttpServer.live,
                     Handler.layer,
                     Store.layer,
-                    Store.dataSourceLayer( config.getConfig("db") ),
+                    Store.dataSourceLayer,
                     Store.namingStrategyLayer,
                     Store.licenseCacheLayer
                   )

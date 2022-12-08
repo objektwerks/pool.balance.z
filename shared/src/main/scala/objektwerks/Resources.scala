@@ -20,3 +20,5 @@ object Resources:
         .getObject(section)
         .toConfig
     )
+
+  def load(path: String, section: String): Config = ConfigFactory.load(path).getConfig(section)
