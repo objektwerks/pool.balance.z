@@ -38,16 +38,10 @@ object ServerTest extends ZIOSpecDefault:
     for
       response <- Client.request(url = url, content = Body.fromString(Register().toJson))
       result   <- response.body.asString.flatMap { json =>
-                    json.fromJson[Event] match
-                      case Right(event) => event match
-                        case registered @ Registered(_) =>
-                          this.account = registered.account
-                          assertTrue(account.isActivated)
-                        case _ =>
-                          Console.printLine("Register > Registered failed!") *> assertTrue(false)
-                      case Left(error) =>
-                        Console.printLine(s"Register > Registered failed: $error") *> assertTrue(false)
-                    }
+                    json.fromJson[Registered] match
+                      case Right(registered) => this.account = registered.account; assertTrue(account.isActivated)
+                      case Left(error) => Console.printLine(s"Register > Registered failed: $error") *> assertTrue(false)
+                  }
     yield result
 
   val login =
@@ -57,5 +51,5 @@ object ServerTest extends ZIOSpecDefault:
                     json.fromJson[LoggedIn] match
                       case Right(loggedIn) => assertTrue(loggedIn.account.isActivated)
                       case Left(error) => Console.printLine(s"Login > LoggedIn failed: $error") *> assertTrue(false)
-                    }
+                  }
     yield result
