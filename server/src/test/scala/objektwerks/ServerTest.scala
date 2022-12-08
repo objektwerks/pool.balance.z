@@ -4,7 +4,6 @@ import scala.sys.process.Process
 
 import zio.{Console, Scope, ZIO}
 import zio.http.{Body, Client, ClientConfig}
-import zio.http.netty.client.ConnectionPool
 import zio.json.{DecoderOps, EncoderOps}
 import zio.test.{assertTrue, ZIOSpecDefault}
 import zio.test.Assertion.isSuccess
@@ -12,7 +11,6 @@ import zio.test.Assertion.isSuccess
 import Serializer.given
 import Validator.given
 import Validator.*
-
 
 object ServerTest extends ZIOSpecDefault:
   val exitCode = Process("psql -d poolbalance -f ddl.sql").run().exitValue()
