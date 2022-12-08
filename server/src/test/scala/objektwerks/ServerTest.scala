@@ -17,7 +17,7 @@ import Validator.*
 object ServerTest extends ZIOSpecDefault:
   val exitCode = Process("psql -d poolbalance -f ddl.sql").run().exitValue()
   val server = Server.run
-  
+
   val conf = Resources.loadConfig("server.conf")
   val host = conf.getString("host")
   val port = conf.getInt("port")
@@ -42,7 +42,9 @@ object ServerTest extends ZIOSpecDefault:
                         case registered @ Registered(_) =>
                           this.account = registered.account
                           assertTrue(account.isActivated)
-                        case _ => Console.printLine("Register > Registered failed!") *> assertTrue(false)
-                      case Left(error) => Console.printLine(s"Register > Registered failed: $error") *> assertTrue(false)
+                        case _ =>
+                          Console.printLine("Register > Registered failed!") *> assertTrue(false)
+                      case Left(error) =>
+                        Console.printLine(s"Register > Registered failed: $error") *> assertTrue(false)
                     }
     } yield result
