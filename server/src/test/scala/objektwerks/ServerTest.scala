@@ -41,7 +41,7 @@ object ServerTest extends ZIOSpecDefault:
                         case registered @ Registered(_) =>
                           this.account = registered.account
                           assertTrue(account.isActivated)
-                        case _ => Console.printLine("Registered failed!") *> assertTrue(false)
-                      case Left(error) => Console.printLine(s"Registered failed: $error") *> assertTrue(false)
+                        case _ => Console.printLine("Register > Registered failed!") *> assertTrue(false)
+                      case Left(error) => Console.printLine(s"Register > Registered failed: $error") *> assertTrue(false)
                     }
     } yield result
