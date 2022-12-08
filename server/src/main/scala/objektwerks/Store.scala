@@ -114,7 +114,8 @@ object Store:
   val dataSourceLayer: ZLayer[Any, Throwable, DataSource] =
     Quill.DataSource.fromConfig( Resources.loadConfig(path = "server.conf", section = "db") )
 
-  val namingStrategyLayer: ZLayer[DataSource, Nothing, Postgres[SnakeCase]] = Quill.Postgres.fromNamingStrategy(SnakeCase)
+  val namingStrategyLayer: ZLayer[DataSource, Nothing, Postgres[SnakeCase]] =
+    Quill.Postgres.fromNamingStrategy(SnakeCase)
 
   val licenseCacheLayer: ZLayer[Any, Nothing, Cache[String, Nothing, String]] =
     ZLayer.fromZIO {
@@ -126,4 +127,5 @@ object Store:
                 )
     }
 
-  val layer: ZLayer[Postgres[SnakeCase] & Cache[String, Nothing, String], Nothing, Store] = ZLayer.fromFunction(apply(_, _))
+  val layer: ZLayer[Postgres[SnakeCase] & Cache[String, Nothing, String], Nothing, Store] =
+    ZLayer.fromFunction(apply(_, _))
