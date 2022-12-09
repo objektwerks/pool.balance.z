@@ -29,11 +29,11 @@ object Server extends ZIOAppDefault:
                   .provide(
                     ServerConfig.live(config),
                     zio.http.Server.live,
-                    Handler.layer,
-                    Store.layer,
                     Store.dataSourceLayer,
                     Store.namingStrategyLayer,
-                    Store.licenseCacheLayer
+                    Store.licenseCacheLayer,
+                    Store.layer,
+                    Handler.layer
                   )
                   .exitCode
     yield server
