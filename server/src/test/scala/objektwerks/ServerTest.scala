@@ -40,6 +40,12 @@ object ServerTest extends ZIOSpecDefault:
         poolAdded   <- addPool
       yield assertTrue(poolAdded.isSuccess)
     },
+    test("update pool > pool updated") {
+      pool = pool.copy(volume = 9_000)
+      for
+        poolUpdated   <- updatePool
+      yield assertTrue(poolUpdated.isSuccess)
+    },
     test("list pools > pools listed") {
       for
         poolsListed   <- listPools
@@ -72,8 +78,18 @@ object ServerTest extends ZIOSpecDefault:
       response <- Client.request(url = url, content = Body.fromString(SavePool(account.license, pool).toJson))
       result   <- response.body.asString.flatMap { json =>
                     json.fromJson[PoolSaved] match
-                      case Right(poolSaved) => pool = pool.copy(id = poolSaved.id); assertTrue(poolSaved.id > 0L)
-                      case Left(error) => Console.printLine(s"SavePool > PoolSaved failed: $error") *> assertTrue(false)
+                      case Right(poolSaved) => pool = pool.copy(id = poolSaved.id); assertTrue(poolSaved.id == 1L)
+                      case Left(error) => Console.printLine(s"SavePool > PoolSaved ( add ) failed: $error") *> assertTrue(false)
+                  }
+    yield result
+
+  val updatePool =
+    for
+      response <- Client.request(url = url, content = Body.fromString(SavePool(account.license, pool).toJson))
+      result   <- response.body.asString.flatMap { json =>
+                    json.fromJson[PoolSaved] match
+                      case Right(poolSaved) => assertTrue(poolSaved.id == 1L)
+                      case Left(error) => Console.printLine(s"SavePool > PoolSaved ( update ) failed: $error") *> assertTrue(false)
                   }
     yield result
 
