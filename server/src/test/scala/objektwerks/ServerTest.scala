@@ -35,10 +35,10 @@ object ServerTest extends ZIOSpecDefault:
         loggedIn   <- login
       yield assertTrue(loggedIn.isSuccess)
     },
-    test("save pool > pool saved") {
+    test("add pool > pool added") {
       for
-        poolSaved   <- savePool
-      yield assertTrue(poolSaved.isSuccess)
+        poolAdded   <- addPool
+      yield assertTrue(poolAdded.isSuccess)
     },
     test("list pools > pools listed") {
       for
@@ -67,7 +67,7 @@ object ServerTest extends ZIOSpecDefault:
                   }
     yield result
 
-  val savePool =
+  val addPool =
     for
       response <- Client.request(url = url, content = Body.fromString(SavePool(account.license, pool).toJson))
       result   <- response.body.asString.flatMap { json =>
