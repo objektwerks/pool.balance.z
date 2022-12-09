@@ -2,6 +2,8 @@ package objektwerks
 
 import java.nio.file.Path
 
+import scala.sys
+
 import zio.{Runtime, Scope, ZIO, ZIOAppArgs, ZIOAppDefault, ZLayer}
 import zio.http.ServerConfig
 import zio.logging.{LogFormat, file}
@@ -10,7 +12,7 @@ import Serializer.given
 
 object Server extends ZIOAppDefault: 
   override val bootstrap: ZLayer[ZIOAppArgs, Any, Environment] =
-    Runtime.removeDefaultLoggers >>> file( Path.of("~/.poolbalance.z/server.log") )
+    Runtime.removeDefaultLoggers >>> file( Path.of(s"${sys.props("user.home")}/.poolbalance.z/server.log") )
 
   override def run =
     for
