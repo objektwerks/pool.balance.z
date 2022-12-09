@@ -9,9 +9,13 @@ import zio.http.ServerConfig
 import zio.logging.{LogFormat, file}
 
 import Serializer.given
+import java.nio.file.Files
+import java.nio.file.Paths
 
 object Server extends ZIOAppDefault: 
   override val bootstrap: ZLayer[ZIOAppArgs, Any, Environment] =
+    var serverPath = Paths.get( s"${sys.props("user.home")}/.poolbalance.z" )
+    if !Files.exists(serverPath) then serverPath = Files.createDirectory(serverPath)
     Runtime.removeDefaultLoggers >>> file( Path.of(s"${sys.props("user.home")}/.poolbalance.z/server.log") )
 
   override def run =
