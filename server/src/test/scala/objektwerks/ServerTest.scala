@@ -22,6 +22,7 @@ object ServerTest extends ZIOSpecDefault:
   val url = s"http://$host:$port/command"
 
   var account = Account()
+  var pool = Pool(id = 0, name = "home", volume = 10_000, unit = UnitOfMeasure.gl.toString)
 
   def spec = suite("server")(
     test("register > registered") {
