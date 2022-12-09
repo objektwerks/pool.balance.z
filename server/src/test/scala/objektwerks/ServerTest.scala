@@ -56,3 +56,13 @@ object ServerTest extends ZIOSpecDefault:
                       case Left(error) => Console.printLine(s"Login > LoggedIn failed: $error") *> assertTrue(false)
                   }
     yield result
+
+  val savePool =
+    for
+      response <- Client.request(url = url, content = Body.fromString(SavePool(account.license, pool).toJson))
+      result   <- response.body.asString.flatMap { json =>
+                    json.fromJson[PoolSaved] match
+                      case Right(poolSaved) => pool = pool.copy(id = poolSaved.id); assertTrue(poolSaved.id > 0L)
+                      case Left(error) => Console.printLine(s"SavePool > PoolSaved failed: $error") *> assertTrue(false)
+                  }
+    yield result
