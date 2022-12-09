@@ -39,6 +39,11 @@ object ServerTest extends ZIOSpecDefault:
       for
         poolSaved   <- savePool
       yield assertTrue(poolSaved.isSuccess)
+    },
+    test("list pools > pools listed") {
+      for
+        poolsListed   <- listPools
+      yield assertTrue(poolsListed.isSuccess)
     }
   ).provide(Client.default, Scope.default) @@ TestAspect.sequential
 
