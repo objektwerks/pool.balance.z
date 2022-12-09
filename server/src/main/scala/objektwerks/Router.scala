@@ -41,7 +41,7 @@ object Router extends ZIOAppDefault:
       conf   <- Resources.loadZIOConfig("server.conf")
       host   =  conf.getString("host")
       port   =  conf.getInt("port")
-      ds     =  conf.getConfig("ds")
+      ds     =  conf.getConfig("ctx")
       config =  ServerConfig.default.binding(host, port)
       _      <- ZIO.log(s"*** Server running at http://$host:$port")
       server <- Server
@@ -55,5 +55,6 @@ object Router extends ZIOAppDefault:
                     Store.layer,
                     Handler.layer
                   )
+                  .debug
                   .exitCode
     yield server
