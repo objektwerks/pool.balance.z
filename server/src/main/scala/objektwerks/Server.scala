@@ -1,6 +1,6 @@
 package objektwerks
 
-import java.nio.file.Path
+import java.nio.file.{Files, Path, Paths}
 
 import scala.sys
 
@@ -9,10 +9,8 @@ import zio.http.ServerConfig
 import zio.logging.{LogFormat, file}
 
 import Serializer.given
-import java.nio.file.Files
-import java.nio.file.Paths
 
-object Server extends ZIOAppDefault: 
+object Server extends ZIOAppDefault:
   override val bootstrap: ZLayer[ZIOAppArgs, Any, Environment] =
     val serverDir =  s"${sys.props("user.home")}/.poolbalance.z"
     var serverPath = Paths.get(serverDir)
