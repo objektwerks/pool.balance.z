@@ -55,6 +55,5 @@ object Router extends ZIOAppDefault:
                     Store.layer,
                     Handler.layer
                   )
-                  .debug
                   .exitCode
     yield server
