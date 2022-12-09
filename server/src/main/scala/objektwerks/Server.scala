@@ -14,10 +14,10 @@ import java.nio.file.Paths
 
 object Server extends ZIOAppDefault: 
   override val bootstrap: ZLayer[ZIOAppArgs, Any, Environment] =
-    val path =  s"${sys.props("user.home")}/.poolbalance.z"
-    var serverPath = Paths.get(path)
+    val serverDir =  s"${sys.props("user.home")}/.poolbalance.z"
+    var serverPath = Paths.get(serverDir)
     if !Files.exists(serverPath) then serverPath = Files.createDirectory(serverPath)
-    Runtime.removeDefaultLoggers >>> file( Path.of(s"$path/server.log") )
+    Runtime.removeDefaultLoggers >>> file( Path.of(s"$serverDir/server.log") )
 
   override def run =
     for
