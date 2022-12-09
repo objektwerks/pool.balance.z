@@ -19,14 +19,15 @@ object Server extends ZIOAppDefault:
 
   override def run: ZIO[Environment & (ZIOAppArgs & Scope ), Any, Any] =
     for
-      config <- Resources.loadZIOConfig("server.conf")
-      host   =  config.getString("host")
-      port   =  config.getInt("port")
+      conf   <- Resources.loadZIOConfig("server.conf")
+      host   =  conf.getString("host")
+      port   =  conf.getInt("port")
+      config =  ServerConfig.default.binding(host, port)
       _      <- ZIO.log(s"*** Server running at http://$host:$port")
       server <- zio.http.Server
                   .serve(Router.router)
                   .provide(
-                    ServerConfig.live( ServerConfig.default.binding(host, port) ),
+                    ServerConfig.live(config),
                     zio.http.Server.live,
                     Handler.layer,
                     Store.layer,
