@@ -12,7 +12,7 @@ import zio.logging.{LogFormat, file}
 
 import Serializer.given
 
-object Server extends ZIOAppDefault:
+object Router extends ZIOAppDefault:
   val route: Http[Handler, Throwable, Request, Response] = Http.collectZIO[Request] {
     case request @ Method.POST -> !! / "command" => request.body.asString.flatMap { json =>
       json.fromJson[Command] match
