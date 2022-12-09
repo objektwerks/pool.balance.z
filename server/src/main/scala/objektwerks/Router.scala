@@ -5,7 +5,7 @@ import java.nio.file.{Files, Path, Paths}
 import scala.sys
 
 import zio.{Runtime, Scope, ZIO, ZIOAppArgs, ZIOAppDefault, ZLayer}
-import zio.http.{!!, /, ->, Http, Request, Response, ServerConfig}
+import zio.http.{!!, /, ->, Http, Request, Response, Server, ServerConfig}
 import zio.http.model.Method
 import zio.json.{DecoderOps, EncoderOps}
 import zio.logging.{LogFormat, file}
@@ -43,11 +43,11 @@ object Router extends ZIOAppDefault:
       port   =  conf.getInt("port")
       config =  ServerConfig.default.binding(host, port)
       _      <- ZIO.log(s"*** Server running at http://$host:$port")
-      server <- zio.http.Server
+      server <- Server
                   .serve(route)
                   .provide(
                     ServerConfig.live(config),
-                    zio.http.Server.live,
+                    Server.live,
                     Store.dataSourceLayer,
                     Store.namingStrategyLayer,
                     Store.licenseCacheLayer,
