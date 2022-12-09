@@ -34,6 +34,11 @@ object ServerTest extends ZIOSpecDefault:
       for
         loggedIn   <- login
       yield assertTrue(loggedIn.isSuccess)
+    },
+    test("save pool > pool saved") {
+      for
+        poolSaved   <- savePool
+      yield assertTrue(poolSaved.isSuccess)
     }
   ).provide(Client.default, Scope.default) @@ TestAspect.sequential
 
