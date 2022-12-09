@@ -6,7 +6,6 @@ import java.time.Instant
 import zio.{Runtime, Scope, ZIO, ZIOAppArgs, ZIOAppDefault, ZLayer}
 import zio.http.{!!, /, ->, Http, Request, Response, Server, ServerConfig}
 import zio.http.model.Method
-import zio.json.{DecoderOps, EncoderOps}
 import zio.logging.{LogFormat, file}
 
 object HttpServer extends ZIOAppDefault:
