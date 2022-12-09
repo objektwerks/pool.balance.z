@@ -41,7 +41,7 @@ object Router extends ZIOAppDefault:
       conf   <- Resources.loadZIOConfig("server.conf")
       host   =  conf.getString("host")
       port   =  conf.getInt("port")
-      quill  =  conf.getConfig("quill")
+      quill  =  conf.getConfig("quill.ctx")
       config =  ServerConfig.default.binding(host, port)
       _      <- ZIO.log(s"*** Server running at http://$host:$port")
       server <- Server
