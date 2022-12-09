@@ -41,7 +41,7 @@ object Router extends ZIOAppDefault:
       conf   <- Resources.loadZIOConfig("server.conf")
       host   =  conf.getString("host")
       port   =  conf.getInt("port")
-      ds     =  conf.getConfig("ctx")
+      quill  =  conf.getConfig("ctx")
       config =  ServerConfig.default.binding(host, port)
       _      <- ZIO.log(s"*** Server running at http://$host:$port")
       server <- Server
@@ -49,7 +49,7 @@ object Router extends ZIOAppDefault:
                   .provide(
                     ServerConfig.live(config),
                     Server.live,
-                    Store.dataSourceLayer(ds),
+                    Store.dataSourceLayer(quill),
                     Store.namingStrategyLayer,
                     Store.licenseCacheLayer,
                     Store.layer,
