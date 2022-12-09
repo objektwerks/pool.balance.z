@@ -5,12 +5,31 @@ import java.nio.file.{Files, Path, Paths}
 import scala.sys
 
 import zio.{Runtime, Scope, ZIO, ZIOAppArgs, ZIOAppDefault, ZLayer}
-import zio.http.ServerConfig
+import zio.http.{!!, /, ->, Http, Request, Response, ServerConfig}
+import zio.http.model.Method
+import zio.json.{DecoderOps, EncoderOps}
 import zio.logging.{LogFormat, file}
 
 import Serializer.given
 
 object Server extends ZIOAppDefault:
+  val route: Http[Handler, Throwable, Request, Response] = Http.collectZIO[Request] {
+    case request @ Method.POST -> !! / "command" => request.body.asString.flatMap { json =>
+      json.fromJson[Command] match
+        case Right(command) =>
+          for
+            handler <- ZIO.service[Handler]
+            event   <- handler
+                         .handle(command)
+                         .catchAll(throwable =>
+                            val message = s"*** Handler error: ${throwable.getMessage}; on: $command"
+                            ZIO.log(message) zip ZIO.succeed(Fault(message))
+                          )
+          yield Response.json( event.toJson )
+        case Left(error) => ZIO.succeed( Response.json( Fault(error).toJson ) )
+    }
+  }
+
   override val bootstrap: ZLayer[ZIOAppArgs, Any, Environment] =
     val serverDir =  s"${sys.props("user.home")}/.poolbalance.z"
     var serverPath = Paths.get(serverDir)
@@ -25,7 +44,7 @@ object Server extends ZIOAppDefault:
       config =  ServerConfig.default.binding(host, port)
       _      <- ZIO.log(s"*** Server running at http://$host:$port")
       server <- zio.http.Server
-                  .serve(Router.router)
+                  .serve(route)
                   .provide(
                     ServerConfig.live(config),
                     zio.http.Server.live,
