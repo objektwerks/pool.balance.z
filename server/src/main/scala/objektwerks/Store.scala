@@ -111,8 +111,8 @@ final case class Store(quill: Quill.Postgres[SnakeCase],
     )
 
 object Store:
-  val dataSourceLayer: ZLayer[Any, Throwable, DataSource] =
-    Quill.DataSource.fromConfig( Resources.loadConfig(path = "server.conf", section = "db") )
+  def dataSourceLayer(config: Config): ZLayer[Any, Throwable, DataSource] =
+    Quill.DataSource.fromConfig(config)
 
   val namingStrategyLayer: ZLayer[DataSource, Nothing, Postgres[SnakeCase]] =
     Quill.Postgres.fromNamingStrategy(SnakeCase)
@@ -122,7 +122,7 @@ object Store:
       Cache.make(capacity = 100,
                 timeToLive = Duration(12, TimeUnit.HOURS),
                 lookup = Lookup( (license: String) =>
-                  ZIO.log(s"*** License cache lookup: $license") zipRight
+                  ZIO.log(s"*** License cache lookup: $license") zip
                   ZIO.succeed( if license.isLicense then license else "" ) )
                 )
     }
