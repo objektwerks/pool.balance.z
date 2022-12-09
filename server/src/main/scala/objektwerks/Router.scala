@@ -17,7 +17,7 @@ object Router:
             event   <- handler
                          .handle(command)
                          .catchAll(throwable =>
-                            val message = s"*** Router error: ${throwable.getMessage}; processing: $command"
+                            val message = s"*** Handler error: ${throwable.getMessage}; on: $command"
                             ZIO.log(message) zip ZIO.succeed(Fault(message))
                           )
           yield Response.json( event.toJson )
