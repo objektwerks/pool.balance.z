@@ -12,7 +12,7 @@ import Serializer.given
 import Validator.given
 import Validator.*
 
-object RouterTest extends ZIOSpecDefault:
+object IntegrationTest extends ZIOSpecDefault:
   val exitCode = Process("psql -d poolbalance -f ddl.sql").run().exitValue()
   val router = Router.run
 
