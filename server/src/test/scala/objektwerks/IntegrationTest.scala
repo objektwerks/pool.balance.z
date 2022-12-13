@@ -111,4 +111,6 @@ object IntegrationTest extends ZIOSpecDefault:
   val updateMeasurement = ???
   val listMeasurements = ???
 
-  
+  val addChemical = ???
+  val updateChemical = ???
+  val listChemicals = ???
