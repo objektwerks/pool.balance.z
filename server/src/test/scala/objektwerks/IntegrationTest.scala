@@ -107,4 +107,8 @@ object IntegrationTest extends ZIOSpecDefault:
   val updateCleaning = ???
   val listCleanings = ???
 
+  val addMeasurement = ???
+  val updateMeasurement = ???
+  val listMeasurements = ???
+
   
