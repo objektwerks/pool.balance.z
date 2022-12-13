@@ -47,13 +47,13 @@ object Router extends ZIOAppDefault:
       server <- Server
                   .serve(route)
                   .provide(
-                    ServerConfig.live(config),
-                    Server.live,
                     Store.dataSourceLayer(ds),
                     Store.namingStrategyLayer,
                     Store.licenseCacheLayer,
                     Store.layer,
-                    Handler.layer
+                    Handler.layer,
+                    ServerConfig.live(config),
+                    Server.live
                   )
                   .debug
                   .exitCode
