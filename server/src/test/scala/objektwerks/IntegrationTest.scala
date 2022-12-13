@@ -102,3 +102,9 @@ object IntegrationTest extends ZIOSpecDefault:
                       case Left(error) => Console.printLine(s"SavePool > PoolSaved failed: $error") *> assertTrue(false)
                   }
     yield result
+
+  val addCleaning = ???
+  val updateCleaning = ???
+  val listCleanings = ???
+
+  
