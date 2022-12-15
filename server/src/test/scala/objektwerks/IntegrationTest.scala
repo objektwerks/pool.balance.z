@@ -99,7 +99,7 @@ object IntegrationTest extends ZIOSpecDefault:
       result   <- response.body.asString.flatMap { json =>
                     json.fromJson[PoolsListed] match
                       case Right(list) => assertTrue(list.pools.length == 1)
-                      case Left(error) => Console.printLine(s"SavePool > PoolSaved failed: $error") *> assertTrue(false)
+                      case Left(error) => Console.printLine(s"ListPools > ListPools failed: $error") *> assertTrue(false)
                   }
     yield result
 
