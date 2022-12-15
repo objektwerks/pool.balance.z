@@ -99,7 +99,7 @@ object IntegrationTest extends ZIOSpecDefault:
       result   <- response.body.asString.flatMap { json =>
                     json.fromJson[PoolsListed] match
                       case Right(list) => assertTrue(list.pools.length == 1)
-                      case Left(error) => Console.printLine(s"ListPools > ListPools failed: $error") *> assertTrue(false)
+                      case Left(error) => Console.printLine(s"ListPools > PoolsListed failed: $error") *> assertTrue(false)
                   }
     yield result
 
@@ -111,7 +111,7 @@ object IntegrationTest extends ZIOSpecDefault:
       result   <- response.body.asString.flatMap { json =>
                     json.fromJson[CleaningsListed] match
                       case Right(list) => assertTrue(list.cleanings.length == 1)
-                      case Left(error) => Console.printLine(s"ListCleanings > ListCleanings failed: $error") *> assertTrue(false)
+                      case Left(error) => Console.printLine(s"ListCleanings > CleaningsListed failed: $error") *> assertTrue(false)
                   }
     yield result
 
@@ -123,7 +123,7 @@ object IntegrationTest extends ZIOSpecDefault:
       result   <- response.body.asString.flatMap { json =>
                     json.fromJson[MeasurementsListed] match
                       case Right(list) => assertTrue(list.measurements.length == 1)
-                      case Left(error) => Console.printLine(s"ListMeasurements > ListMeasurements failed: $error") *> assertTrue(false)
+                      case Left(error) => Console.printLine(s"ListMeasurements > MeasurementsListed failed: $error") *> assertTrue(false)
                   }
     yield result
 
@@ -136,6 +136,6 @@ object IntegrationTest extends ZIOSpecDefault:
       result   <- response.body.asString.flatMap { json =>
                     json.fromJson[ChemicalsListed] match
                       case Right(list) => assertTrue(list.chemicals.length == 1)
-                      case Left(error) => Console.printLine(s"ListChemicals > ListChemicals failed: $error") *> assertTrue(false)
+                      case Left(error) => Console.printLine(s"ListChemicals > ChemicalsListed failed: $error") *> assertTrue(false)
                   }
     yield result
