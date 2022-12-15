@@ -60,6 +60,12 @@ object IntegrationTest extends ZIOSpecDefault:
         cleaningAdded   <- addCleaning
       yield assertTrue(cleaningAdded.isSuccess)
     },
+    test("updated cleaning > cleaning updated") {
+      cleaning = cleaning.copy(vacuum = true)
+      for
+        cleaningUpdated   <- updateCleaning
+      yield assertTrue(cleaningUpdated.isSuccess)
+    },
   ).provide(Client.default, Scope.default) @@ TestAspect.sequential
 
   val register =
