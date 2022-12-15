@@ -53,7 +53,13 @@ object IntegrationTest extends ZIOSpecDefault:
       for
         poolsListed   <- listPools
       yield assertTrue(poolsListed.isSuccess)
-    }
+    },
+    test("add cleaning > cleaning added") {
+      cleaning = cleaning.copy(poolId = pool.id)
+      for
+        cleaningAdded   <- addCleaning
+      yield assertTrue(cleaningAdded.isSuccess)
+    },
   ).provide(Client.default, Scope.default) @@ TestAspect.sequential
 
   val register =
