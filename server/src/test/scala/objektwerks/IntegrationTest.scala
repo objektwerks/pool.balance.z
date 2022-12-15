@@ -25,7 +25,7 @@ object IntegrationTest extends ZIOSpecDefault:
   var pool = Pool(id = 0, name = "home", volume = 10_000, unit = UnitOfMeasure.gl.toString)
   var cleaning = Cleaning(poolId = 0)
   var measurement = Measurement(poolId = 0)
-  var chemical = ???
+  var chemical = Chemical(poolId = 0)
 
   def spec = suite("server")(
     test("register > registered") {
