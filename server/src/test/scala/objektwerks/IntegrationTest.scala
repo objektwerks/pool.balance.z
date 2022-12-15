@@ -98,7 +98,7 @@ object IntegrationTest extends ZIOSpecDefault:
       response <- Client.request(url = url, content = Body.fromString(ListPools(account.license).toJson))
       result   <- response.body.asString.flatMap { json =>
                     json.fromJson[PoolsListed] match
-                      case Right(poolsListed) => assertTrue(poolsListed.pools.length == 1)
+                      case Right(list) => assertTrue(list.pools.length == 1)
                       case Left(error) => Console.printLine(s"SavePool > PoolSaved failed: $error") *> assertTrue(false)
                   }
     yield result
@@ -113,4 +113,13 @@ object IntegrationTest extends ZIOSpecDefault:
 
   val addChemical = ???
   val updateChemical = ???
-  val listChemicals = ???
+
+  val listChemicals =
+    for
+      response <- Client.request(url = url, content = Body.fromString(ListChemicals(account.license).toJson))
+      result   <- response.body.asString.flatMap { json =>
+                    json.fromJson[ChemicalsListed] match
+                      case Right(list) => assertTrue(list.chemicals.length == 1)
+                      case Left(error) => Console.printLine(s"SavePool > PoolSaved failed: $error") *> assertTrue(false)
+                  }
+    yield result
