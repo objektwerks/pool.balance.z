@@ -162,7 +162,7 @@ object IntegrationTest extends ZIOSpecDefault:
       response <- Client.request(url = url, content = Body.fromString(SaveCleaning(account.license, cleaning).toJson))
       result   <- response.body.asString.flatMap { json =>
                     json.fromJson[CleaningSaved] match
-                      case Right(added) => pool = pool.copy(id = added.id); assertTrue(added.id == 1L)
+                      case Right(added) => cleaning = cleaning.copy(id = added.id); assertTrue(added.id == 1L)
                       case Left(error) => Console.printLine(s"SaveCleaning > CleaningSaved ( add ) failed: $error") *> assertTrue(false)
                   }
     yield result
