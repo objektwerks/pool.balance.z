@@ -30,7 +30,8 @@ lazy val client = project
       Seq(
         "org.jfree" % "jfreechart" % "1.5.3",
         "com.miglayout" % "miglayout-swing" % "11.0",
-        "dev.zio" %% "zio-http" % "0.0.3"
+        "dev.zio" %% "zio-http" % "0.0.3",
+        "com.typesafe.scala-logging" %% "scala-logging" % "3.9.5"
       )
     }
   )
