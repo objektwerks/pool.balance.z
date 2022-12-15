@@ -81,7 +81,7 @@ object IntegrationTest extends ZIOSpecDefault:
       response <- Client.request(url = url, content = Body.fromString(SavePool(account.license, pool).toJson))
       result   <- response.body.asString.flatMap { json =>
                     json.fromJson[PoolSaved] match
-                      case Right(poolSaved) => pool = pool.copy(id = poolSaved.id); assertTrue(poolSaved.id == 1L)
+                      case Right(added) => pool = pool.copy(id = added.id); assertTrue(added.id == 1L)
                       case Left(error) => Console.printLine(s"SavePool > PoolSaved ( add ) failed: $error") *> assertTrue(false)
                   }
     yield result
@@ -91,7 +91,7 @@ object IntegrationTest extends ZIOSpecDefault:
       response <- Client.request(url = url, content = Body.fromString(SavePool(account.license, pool).toJson))
       result   <- response.body.asString.flatMap { json =>
                     json.fromJson[PoolSaved] match
-                      case Right(poolSaved) => assertTrue(poolSaved.id == 1L)
+                      case Right(updated) => assertTrue(updated.id == 1L)
                       case Left(error) => Console.printLine(s"SavePool > PoolSaved ( update ) failed: $error") *> assertTrue(false)
                   }
     yield result
@@ -130,13 +130,22 @@ object IntegrationTest extends ZIOSpecDefault:
                   }
     yield result
 
-  val addChemical = ???
+  val addChemical =
+    for
+      response <- Client.request(url = url, content = Body.fromString(SaveChemical(account.license, chemical).toJson))
+      result   <- response.body.asString.flatMap { json =>
+                    json.fromJson[ChemicalSaved] match
+                      case Right(added) => pool = pool.copy(id = added.id); assertTrue(added.id == 1L)
+                      case Left(error) => Console.printLine(s"SavePool > PoolSaved ( add ) failed: $error") *> assertTrue(false)
+                  }
+    yield result
+
   val updateChemical =
     for
       response <- Client.request(url = url, content = Body.fromString(SaveChemical(account.license, chemical).toJson))
       result   <- response.body.asString.flatMap { json =>
                     json.fromJson[ChemicalSaved] match
-                      case Right(saved) => assertTrue(saved.id == 1L)
+                      case Right(updated) => assertTrue(updated.id == 1L)
                       case Left(error) => Console.printLine(s"SaveChemical > ChemicalSaved ( update ) failed: $error") *> assertTrue(false)
                   }
     yield result
