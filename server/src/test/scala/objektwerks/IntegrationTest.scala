@@ -109,7 +109,15 @@ object IntegrationTest extends ZIOSpecDefault:
 
   val addMeasurement = ???
   val updateMeasurement = ???
-  val listMeasurements = ???
+  val listMeasurements =
+    for
+      response <- Client.request(url = url, content = Body.fromString(ListMeasurements(account.license).toJson))
+      result   <- response.body.asString.flatMap { json =>
+                    json.fromJson[MeasurementsListed] match
+                      case Right(list) => assertTrue(list.measurements.length == 1)
+                      case Left(error) => Console.printLine(s"SavePool > PoolSaved failed: $error") *> assertTrue(false)
+                  }
+    yield result
 
   val addChemical = ???
   val updateChemical = ???
