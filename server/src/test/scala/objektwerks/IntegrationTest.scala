@@ -105,7 +105,15 @@ object IntegrationTest extends ZIOSpecDefault:
 
   val addCleaning = ???
   val updateCleaning = ???
-  val listCleanings = ???
+  val listCleanings =
+    for
+      response <- Client.request(url = url, content = Body.fromString(ListCleanings(account.license).toJson))
+      result   <- response.body.asString.flatMap { json =>
+                    json.fromJson[CleaningsListed] match
+                      case Right(list) => assertTrue(list.cleanings.length == 1)
+                      case Left(error) => Console.printLine(s"ListCleanings > ListCleanings failed: $error") *> assertTrue(false)
+                  }
+    yield result
 
   val addMeasurement = ???
   val updateMeasurement = ???
