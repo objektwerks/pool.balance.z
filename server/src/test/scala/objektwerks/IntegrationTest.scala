@@ -23,6 +23,9 @@ object IntegrationTest extends ZIOSpecDefault:
 
   var account = Account()
   var pool = Pool(id = 0, name = "home", volume = 10_000, unit = UnitOfMeasure.gl.toString)
+  var cleaning = ???
+  var measurement = ???
+  var chemical = ???
 
   def spec = suite("server")(
     test("register > registered") {
@@ -128,7 +131,15 @@ object IntegrationTest extends ZIOSpecDefault:
     yield result
 
   val addChemical = ???
-  val updateChemical = ???
+  val updateChemical =
+    for
+      response <- Client.request(url = url, content = Body.fromString(SaveChemical(account.license, chemical).toJson))
+      result   <- response.body.asString.flatMap { json =>
+                    json.fromJson[ChemicalSaved] match
+                      case Right(saved) => assertTrue(saved.id == 1L)
+                      case Left(error) => Console.printLine(s"SaveChemical > ChemicalSaved ( update ) failed: $error") *> assertTrue(false)
+                  }
+    yield result
 
   val listChemicals =
     for
