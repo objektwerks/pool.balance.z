@@ -60,7 +60,7 @@ object IntegrationTest extends ZIOSpecDefault:
         cleaningAdded   <- addCleaning
       yield assertTrue(cleaningAdded.isSuccess)
     },
-    test("updated cleaning > cleaning updated") {
+    test("update cleaning > cleaning updated") {
       cleaning = cleaning.copy(vacuum = true)
       for
         cleaningUpdated   <- updateCleaning
@@ -77,7 +77,7 @@ object IntegrationTest extends ZIOSpecDefault:
         measurementAdded   <- addMeasurement
       yield assertTrue(measurementAdded.isSuccess)
     },
-    test("updated measurement > measurement updated") {
+    test("update measurement > measurement updated") {
       measurement = measurement.copy(temperature = 90)
       for
         measurementUpdated   <- updateMeasurement
@@ -94,7 +94,7 @@ object IntegrationTest extends ZIOSpecDefault:
         chemicalAdded   <- addChemical
       yield assertTrue(chemicalAdded.isSuccess)
     },
-    test("updated chemical > chemical updated") {
+    test("update chemical > chemical updated") {
       chemical = chemical.copy(amount = 2.0)
       for
         chemicalUpdated   <- updateChemical
