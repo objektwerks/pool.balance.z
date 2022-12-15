@@ -88,6 +88,23 @@ object IntegrationTest extends ZIOSpecDefault:
         measurementsListed   <- listMeasurements
       yield assertTrue(measurementsListed.isSuccess)
     },
+    test("add chemical > chemical added") {
+      chemical = chemical.copy(poolId = pool.id)
+      for
+        chemicalAdded   <- addChemical
+      yield assertTrue(chemicalAdded.isSuccess)
+    },
+    test("updated chemical > chemical updated") {
+      chemical = chemical.copy(amount = 2.0)
+      for
+        chemicalUpdated   <- updateChemical
+      yield assertTrue(chemicalUpdated.isSuccess)
+    },
+    test("list chemicals > chemicals listed") {
+      for
+        chemicalsListed   <- listChemicals
+      yield assertTrue(chemicalsListed.isSuccess)
+    }
   ).provide(Client.default, Scope.default) @@ TestAspect.sequential
 
   val register =
