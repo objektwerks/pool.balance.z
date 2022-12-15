@@ -115,7 +115,7 @@ object IntegrationTest extends ZIOSpecDefault:
       result   <- response.body.asString.flatMap { json =>
                     json.fromJson[MeasurementsListed] match
                       case Right(list) => assertTrue(list.measurements.length == 1)
-                      case Left(error) => Console.printLine(s"SavePool > PoolSaved failed: $error") *> assertTrue(false)
+                      case Left(error) => Console.printLine(s"ListMeasurements > ListMeasurements failed: $error") *> assertTrue(false)
                   }
     yield result
 
