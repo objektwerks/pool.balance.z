@@ -108,7 +108,7 @@ object IntegrationTest extends ZIOSpecDefault:
 
   val addCleaning =
     for
-      response <- Client.request(url = url, content = Body.fromString(SaveCleaning(account.license, measurement).toJson))
+      response <- Client.request(url = url, content = Body.fromString(SaveCleaning(account.license, cleaning).toJson))
       result   <- response.body.asString.flatMap { json =>
                     json.fromJson[CleaningSaved] match
                       case Right(added) => pool = pool.copy(id = added.id); assertTrue(added.id == 1L)
