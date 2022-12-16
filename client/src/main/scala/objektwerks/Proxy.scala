@@ -5,6 +5,8 @@ import com.typesafe.scalalogging.LazyLogging
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 
+import zio.ZIO
+import zio.http.{Body, Client}
 import zio.json.{DecoderOps, EncoderOps}
 
 import Serializer.given
@@ -16,42 +18,14 @@ object Proxy extends LazyLogging:
   )
 
   def call(command: Command,
-           handler: (either: Either[Fault, Event]) => Unit) =
-    val event = post(command)
-    handle(event, handler)
+           handler: Event => Unit): Unit =
+    logger.info(s"Proxy:call command: $command")
 
-  private def post(command: Command): Future[Event] =
-    logger.info(s"Proxy:post command: $command")
-    Future( Fault("todo") )
-    /*
-    params.body = write[Command](command)
-    logger.info(s"Proxy:post params: $params")
-    (
-      for
-        response <- dom.fetch(Url.command, params)
-        text     <- response.text()
-      yield
-        logger.info(s"Proxy:post text: $text")
-        val event = read[Event](text)
-        logger.info(s"Proxy:post event: $event")
-        event
-    ).recover {
-      case failure: Exception =>
-        logger.info(s"Proxy:post failure: ${failure.getCause}")
-        Fault(failure)
-    }
-    */
-
-  private def handle(future: Future[Event],
-                     handler: (either: Either[Fault, Event]) => Unit): Unit =
-    future map { event =>
-      handler(
-        event match
-          case fault: Fault =>
-            logger.info(s"Proxy:handle fault: $fault")
-            Left(fault)
-          case event: Event =>
-            logger.info(s"Proxy:handle event: $event")
-            Right(event)
-      )
-    }
+    for
+      response <- Client.request(url = "http://localhost:7272/command", content = Body.fromString(command.toJson))
+      _        <- response.body.asString.flatMap { json =>
+                    json.fromJson[Event] match
+                      case Right(event) => ZIO.succeed( handler(event) ).unit
+                      case Left(error) => ZIO.succeed( handler(Fault(error)) ).unit
+                  }
+    yield ()
