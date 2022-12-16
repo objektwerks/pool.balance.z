@@ -21,7 +21,10 @@ object Proxy extends LazyLogging:
            handler: Event => Unit): Unit =
     logger.info(s"Proxy:call command: $command")
     for
-      response <- Client.request(url = "http://localhost:7272/command", content = Body.fromString(command.toJson))
+      response <- Client.request(
+                    url = "http://localhost:7272/command",
+                    content = Body.fromString(command.toJson)
+                  )
       _        <- response.body.asString.flatMap { json =>
                     json.fromJson[Event] match
                       case Right(event) => ZIO.succeed( handler(event) ).unit
