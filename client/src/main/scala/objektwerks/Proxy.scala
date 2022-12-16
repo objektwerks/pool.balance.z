@@ -12,6 +12,11 @@ import zio.json.{DecoderOps, EncoderOps}
 import Serializer.given
 
 object Proxy extends LazyLogging:
+  val conf = Resources.loadConfig("server.conf")
+  val host = conf.getString("host")
+  val port = conf.getInt("port")
+  val url = s"http://$host:$port/command"
+
   val headers = Map (
     "Content-Type" -> "application/json; charset=utf-8",
     "Accept" -> "application/json"
@@ -22,7 +27,7 @@ object Proxy extends LazyLogging:
     logger.info(s"Proxy:call command: $command")
     for
       response <- Client.request(
-                    url = "http://localhost:7272/command",
+                    url = url,
                     content = Body.fromString(command.toJson)
                   )
       _        <- response.body.asString.flatMap { json =>
