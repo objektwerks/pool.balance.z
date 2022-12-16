@@ -20,7 +20,6 @@ object Proxy extends LazyLogging:
   def call(command: Command,
            handler: Event => Unit): Unit =
     logger.info(s"Proxy:call command: $command")
-
     for
       response <- Client.request(url = "http://localhost:7272/command", content = Body.fromString(command.toJson))
       _        <- response.body.asString.flatMap { json =>
