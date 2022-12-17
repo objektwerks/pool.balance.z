@@ -3,7 +3,7 @@ package objektwerks
 import com.typesafe.scalalogging.LazyLogging
 
 import java.awt.EventQueue
-import javax.swing.UIManager._
+import javax.swing.UIManager.*
 
 object Client extends LazyLogging:
   def main(args: Array[String]): Unit =
