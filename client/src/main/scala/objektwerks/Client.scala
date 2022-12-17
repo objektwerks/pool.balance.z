@@ -12,4 +12,4 @@ object Client extends LazyLogging:
       val frame = new Frame("Pool Balance", 600, 600)
       frame.setVisible(true)
       logger.info("Started client!")
-    })
+    } )
