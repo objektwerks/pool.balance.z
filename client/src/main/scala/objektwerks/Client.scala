@@ -11,5 +11,5 @@ object Client extends LazyLogging:
       UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName())
       val frame = new Frame("Pool Balance", 600, 600)
       frame.setVisible(true)
-      logger.info("Started client!")
+      logger.info("Started Pool Balance client!")
     } )
