@@ -13,7 +13,7 @@ import zio.json.{DecoderOps, EncoderOps}
 import Serializer.given
 
 object Proxy extends LazyLogging:
-  val conf = Resources.loadConfig("server.conf")
+  val conf = Resources.loadConfig("client.conf")
   val host = conf.getString("host")
   val port = conf.getInt("port")
   val url = s"http://$host:$port/command"
