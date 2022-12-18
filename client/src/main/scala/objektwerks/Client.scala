@@ -12,10 +12,12 @@ object Client extends LazyLogging:
     val width = conf.getInt("width")
     val height = conf.getInt("height")
 
-    EventQueue.invokeLater( () => {
-      UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName())
-      val frame = new Frame(name, width, height)
-      frame.setVisible(true)
-    } )
+    EventQueue.invokeLater(
+      () => {
+        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName())
+        val frame = new Frame(name, width, height)
+        frame.setVisible(true)
+      }
+    )
 
     logger.info("Client running!")
