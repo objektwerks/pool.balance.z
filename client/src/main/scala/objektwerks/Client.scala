@@ -8,10 +8,14 @@ import javax.swing.UIManager
 object Client extends LazyLogging:
   def main(args: Array[String]): Unit =
     EventQueue.invokeLater( () => {
-      UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName())
       val conf = Resources.loadConfig("client.conf")
       val name = conf.getString("name")
-      val frame = new Frame(name, 600, 600)
+      val width = conf.getInt("width")
+      val height = conf.getInt("height")
+
+      UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName())
+      val frame = new Frame(name, width, height)
       frame.setVisible(true)
+      
       logger.info("Client running!")
     } )
