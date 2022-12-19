@@ -28,20 +28,12 @@ object Proxy extends LazyLogging:
         _        <- response.body.asString.flatMap { json =>
                       json.fromJson[Event] match
                         case Right(event) =>
-                          ZIO.succeed(
-                            logger.info(s"*** Proxy event: $event")
-                          ) *>
-                          ZIO.succeed(
-                            EventQueue.invokeLater( () => handler(event) )
-                          )
+                          ZIO.succeed( logger.info(s"*** Proxy event: $event") ) *>
+                          ZIO.succeed( EventQueue.invokeLater( () => handler(event) ) )
                         case Left(error) =>
                           val fault = Fault(error)
-                          ZIO.succeed(
-                            logger.info(s"*** Proxy fault: $fault")
-                          ) *>
-                          ZIO.succeed(
-                            EventQueue.invokeLater( () => handler(fault) )
-                          )
+                          ZIO.succeed( logger.info(s"*** Proxy fault: $fault") ) *>
+                          ZIO.succeed( EventQueue.invokeLater( () => handler(fault) ) )
                     }
       yield ()
     )
