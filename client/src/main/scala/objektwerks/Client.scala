@@ -17,4 +17,4 @@ object Client extends LazyLogging:
       }
     )
 
-    logger.info("Client running!")
+    logger.info("Client running ...")
