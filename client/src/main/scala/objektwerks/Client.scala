@@ -16,5 +16,4 @@ object Client extends LazyLogging:
         frame.setVisible(true)
       }
     )
-
     logger.info("*** Client running ...")
