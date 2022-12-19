@@ -23,6 +23,11 @@ object Context:
     Header("Accept", "application/json")
   )
 
+  def addImage = loadImageIcon("/image/add.png")
+  def editImage = loadImageIcon("/image/edit.png")
+  def chartImage = loadImageIcon("/image/chart.png")
+  def errorsImage = loadImageIcon("/image/errors.png")
+
   private def loadImageIcon(path: String): ImageIcon =
     new ImageIcon(
       ImageIO.read( Context.getClass.getResourceAsStream(path) )
