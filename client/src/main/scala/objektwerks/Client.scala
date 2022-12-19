@@ -13,6 +13,7 @@ object Client extends LazyLogging:
       () => {
         UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName())
         val frame = new JFrame()
+        frame.setName(title)
         frame.setTitle(title)
         frame.setSize(width, height)
         frame.setIconImage(logoImage)
