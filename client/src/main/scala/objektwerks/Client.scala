@@ -2,7 +2,7 @@ package objektwerks
 
 import com.typesafe.scalalogging.LazyLogging
 
-import java.awt.EventQueue
+import java.awt.{EventQueue, Taskbar}
 import javax.swing.{JFrame, UIManager, WindowConstants}
 
 import Context.*
@@ -12,6 +12,9 @@ object Client extends LazyLogging:
     EventQueue.invokeLater(
       () => {
         UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName())
+
+        Taskbar.getTaskbar().setIconImage(logoImage)
+
         val frame = new JFrame(title)
         frame.setIconImage(logoImage)
         frame.setSize(width, height)
