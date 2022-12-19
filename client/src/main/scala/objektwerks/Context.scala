@@ -1,5 +1,9 @@
 package objektwerks
 
+import java.awt.Image
+import javax.imageio.ImageIO
+import javax.swing.ImageIcon
+
 import zio.http.model.{Header, Headers}
 
 object Context:
@@ -18,3 +22,8 @@ object Context:
     Header("Content-Type", "application/json; charset=utf-8"),
     Header("Accept", "application/json")
   )
+
+  private def loadImageIcon(path: String): ImageIcon =
+    new ImageIcon(
+      ImageIO.read( Context.getClass.getResourceAsStream(path) )
+    )
