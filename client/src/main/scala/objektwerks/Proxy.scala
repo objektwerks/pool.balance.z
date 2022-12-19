@@ -49,5 +49,5 @@ object Proxy extends LazyLogging:
         .default
         .unsafe
         .run( delegate(command, handler) )
-        .getOrThrowFiberFailure()
+        .unit
     }
