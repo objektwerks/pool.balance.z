@@ -18,6 +18,7 @@ object Router extends ZIOAppDefault:
       json.fromJson[Command] match
         case Right(command) =>
           for
+            _       <- ZIO.log(s"*** Router command: $command")
             handler <- ZIO.service[Handler]
             event   <- handler
                          .handle(command)
@@ -25,8 +26,11 @@ object Router extends ZIOAppDefault:
                             val message = s"*** Handler error: ${throwable.getMessage}; on: $command"
                             ZIO.log(message) zip ZIO.succeed(Fault(message))
                           )
-          yield Response.json( event.toJson )
-        case Left(error) => ZIO.succeed( Response.json( Fault(error).toJson ) )
+            _       <- ZIO.log(s"*** Router event: $event")
+          yield Response.json(event.toJson)
+        case Left(error) => 
+          val fault = Fault(error)
+          ZIO.log(s"*** Router fault: $fault") *> ZIO.succeed(Response.json(fault.toJson))
     }
   }
 
