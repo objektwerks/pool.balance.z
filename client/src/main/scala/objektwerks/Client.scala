@@ -3,7 +3,7 @@ package objektwerks
 import com.typesafe.scalalogging.LazyLogging
 
 import java.awt.EventQueue
-import javax.swing.{JFrame, UIManager}
+import javax.swing.{JFrame, UIManager, WindowConstants}
 
 import Context.*
 
@@ -17,6 +17,7 @@ object Client extends LazyLogging:
         frame.setSize(width, height)
         frame.setIconImage(logoImage)
         frame.setLocationRelativeTo(null)
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE)
         frame.setVisible(true)
       }
     )
