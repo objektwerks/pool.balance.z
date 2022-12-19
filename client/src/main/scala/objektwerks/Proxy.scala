@@ -2,6 +2,8 @@ package objektwerks
 
 import com.typesafe.scalalogging.LazyLogging
 
+import java.awt.EventQueue
+
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 
@@ -27,11 +29,15 @@ object Proxy extends LazyLogging:
                       json.fromJson[Event] match
                         case Right(event) =>
                           ZIO.succeed( logger.info(s"*** Proxy event: $event") ) *>
-                          ZIO.succeed( handler(event) ).unit
+                          ZIO.succeed(
+                            EventQueue.invokeLater( () => handler(event) )
+                          ).unit
                         case Left(error) =>
                           val fault = Fault(error)
                           ZIO.succeed( logger.info(s"*** Proxy fault: $fault") ) *>
-                          ZIO.succeed( handler(fault) ).unit
+                          ZIO.succeed(
+                            EventQueue.invokeLater( () => handler(fault) )
+                          ).unit
                     }
       yield ()
     )
