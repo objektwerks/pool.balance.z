@@ -22,13 +22,16 @@ object Context:
     Header("Accept", "application/json")
   )
 
+  def loadImage(path: String): Image =
+    ImageIO.read( Context.getClass.getResourceAsStream(path) )
+
   def loadImageIcon(path: String): ImageIcon =
     new ImageIcon(
       ImageIO.read( Context.getClass.getResourceAsStream(path) )
     )
 
+  def logoImage = loadImage("/image/logo.png")
   def addImageIcon = loadImageIcon("/image/add.png")
   def editImageIcon = loadImageIcon("/image/edit.png")
   def chartImageIcon = loadImageIcon("/image/chart.png")
   def errorsImageIcon = loadImageIcon("/image/errors.png")
-  def logoImageIcon = loadImageIcon("/image/logo.png")
