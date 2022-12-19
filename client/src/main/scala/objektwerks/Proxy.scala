@@ -13,8 +13,8 @@ import Context.*
 import Serializer.given
 
 object Proxy extends LazyLogging:
-  def delegate(command: Command,
-               handler: Event => Unit): ZIO[Any, Nothing, ZIO[Client, Throwable, Unit]] =
+  private def delegate(command: Command,
+                       handler: Event => Unit): ZIO[Any, Nothing, ZIO[Client, Throwable, Unit]] =
     ZIO.succeed(
       for
         _        <- ZIO.succeed( logger.info(s"*** Proxy command: $command") )
@@ -44,4 +44,4 @@ object Proxy extends LazyLogging:
         .unsafe
         .run( delegate(command, handler) )
         .getOrThrowFiberFailure()
-  }
+    }
