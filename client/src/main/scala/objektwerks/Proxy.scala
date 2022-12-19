@@ -7,18 +7,12 @@ import scala.concurrent.Future
 
 import zio.ZIO
 import zio.http.{Body, Client}
-import zio.http.model.{Header, Headers}
 import zio.json.{DecoderOps, EncoderOps}
 
 import Context.*
 import Serializer.given
 
 object Proxy extends LazyLogging:
-  val headers = Headers (
-    Header("Content-Type", "application/json; charset=utf-8"),
-    Header("Accept", "application/json")
-  )
-
   def call(command: Command,
            handler: Event => Unit): Unit =
     logger.info(s"Proxy:call command: $command")
