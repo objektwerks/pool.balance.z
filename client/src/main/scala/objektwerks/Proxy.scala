@@ -15,7 +15,7 @@ import Serializer.given
 object Proxy extends LazyLogging:
   def call(command: Command,
            handler: Event => Unit): Unit =
-    logger.info(s"Proxy:call command: $command")
+    logger.info(s"*** Proxy:call command: $command")
     for
       response <- Client.request(
                     url = url,
