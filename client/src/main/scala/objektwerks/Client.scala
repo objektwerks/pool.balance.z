@@ -12,7 +12,7 @@ object Client extends LazyLogging:
     EventQueue.invokeLater(
       () => {
         UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName())
-        val frame = new Frame(name, width, height)
+        val frame = new Frame(title, width, height)
         frame.setVisible(true)
       }
     )

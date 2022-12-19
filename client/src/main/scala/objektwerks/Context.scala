@@ -9,8 +9,7 @@ import zio.http.model.{Header, Headers}
 object Context:
   val conf = Resources.loadConfig("client.conf")
 
-  val name = conf.getString("name")
-
+  val title = conf.getString("title")
   val width = conf.getInt("width")
   val height = conf.getInt("height")
 
