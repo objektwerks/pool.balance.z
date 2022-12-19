@@ -10,14 +10,10 @@ import zio.http.{Body, Client}
 import zio.http.model.{Header, Headers}
 import zio.json.{DecoderOps, EncoderOps}
 
+import Context.*
 import Serializer.given
 
 object Proxy extends LazyLogging:
-  val conf = Resources.loadConfig("client.conf")
-  val host = conf.getString("host")
-  val port = conf.getInt("port")
-  val url = s"http://$host:$port/command"
-
   val headers = Headers (
     Header("Content-Type", "application/json; charset=utf-8"),
     Header("Accept", "application/json")
