@@ -23,7 +23,7 @@ object Context:
   )
 
   def loadImage(path: String): Image =
-    ImageIO.read( Context.getClass.getResourceAsStream(path) )
+    loadImageIcon(path).getImage()
 
   def loadImageIcon(path: String): ImageIcon =
     new ImageIcon(
