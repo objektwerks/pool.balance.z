@@ -30,7 +30,7 @@ object Context:
       ImageIO.read( Context.getClass.getResourceAsStream(path) )
     )
 
-  def logoImage = loadImage("/image/logo.png")
+  def logo = loadImage("/image/logo.png")
   def addImageIcon = loadImageIcon("/image/add.png")
   def editImageIcon = loadImageIcon("/image/edit.png")
   def chartImageIcon = loadImageIcon("/image/chart.png")

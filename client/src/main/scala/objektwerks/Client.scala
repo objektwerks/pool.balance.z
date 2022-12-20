@@ -13,9 +13,9 @@ object Client extends LazyLogging:
       () => {
         UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName())
 
-        Taskbar.getTaskbar().setIconImage(logoImage)
+        Taskbar.getTaskbar().setIconImage(logo)
 
-        val frame = new Frame(logoImage, title, width, height)
+        val frame = new Frame(logo, title, width, height)
         frame.setVisible(true)
       }
     )
