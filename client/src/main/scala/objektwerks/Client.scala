@@ -12,11 +12,8 @@ object Client extends LazyLogging:
     EventQueue.invokeLater(
       () => {
         UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName())
-
         Taskbar.getTaskbar().setIconImage(logo)
-
-        val frame = new Frame(logo, title, width, height)
-        frame.setVisible(true)
+        Frame(logo, title, width, height).setVisible(true)
       }
     )
     logger.info("*** Client running ...")
