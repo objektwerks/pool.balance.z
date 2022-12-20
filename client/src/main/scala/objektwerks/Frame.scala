@@ -1,10 +1,13 @@
 package objektwerks
 
+import java.awt.Image
 import javax.swing.{JFrame, WindowConstants}
 
-class Frame(title: String,
-            width: Int,
-            height: Int) extends JFrame:
+final class Frame(logo: Image,
+                  title: String,
+                  width: Int,
+                  height: Int) extends JFrame:
+  setIconImage(logo)
   setTitle(title)
   setSize(width, height)
   setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE)
