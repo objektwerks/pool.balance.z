@@ -35,7 +35,10 @@ Package Server
 
 Package Client
 --------------
-1. sbt clean test universal:packageBin
+1. sbt ( interactive session )
+2. project server
+3. test
+4. universal:packageBin
 
 Deploy
 ------
