@@ -1,7 +1,7 @@
 package objektwerks
 
 import java.awt.{GridLayout, Image}
-import javax.swing.{JPanel, JDialog}
+import javax.swing.{JComponent, JDialog, JPanel}
 
 object Dialog:
   val rows = 2
@@ -9,7 +9,7 @@ object Dialog:
   val horizontalGap = 6
   val verticalGap = 6
 
-final class Dialog(frame: Frame,
+final class Dialog(location: JComponent,
                    image: Image,
                    title: String,
                    form: Form,
@@ -24,5 +24,5 @@ final class Dialog(frame: Frame,
   add(actions)
 
   def view(isVisible: Boolean): Unit =
-    setLocationRelativeTo(frame)
+    setLocationRelativeTo(location)
     setVisible(isVisible)
