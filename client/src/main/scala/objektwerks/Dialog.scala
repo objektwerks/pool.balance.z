@@ -9,8 +9,8 @@ object Dialog:
   val horizontalGap = 6
   val verticalGap = 6
 
-final class Dialog(image: Image,
-                   title: String) extends JDialog:
+open class Dialog(image: Image,
+                  title: String) extends JDialog:
   import Dialog.*
 
   setIconImage(image)
