@@ -19,9 +19,10 @@ final class Dialog(frame: Frame,
   setIconImage(image)
   setTitle(title)
   setLayout( new GridLayout(rows, columns, horizontalGap, verticalGap) )
+  setModal(true)
   add(form)
   add(actions)
-  setModal(true)
-  setLocationRelativeTo(frame)
 
-  def view(isVisible: Boolean): Unit = setVisible(isVisible)
+  def view(isVisible: Boolean): Unit =
+    setLocationRelativeTo(frame)
+    setVisible(isVisible)
