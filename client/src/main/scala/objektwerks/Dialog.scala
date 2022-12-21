@@ -23,4 +23,5 @@ final class Dialog(frame: Frame,
   add(actions)
   setModal(true)
   setLocationRelativeTo(frame)
-  setVisible(true)
+
+  def view(isVisible: Boolean): Unit = setVisible(isVisible)
