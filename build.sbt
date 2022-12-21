@@ -29,7 +29,6 @@ lazy val client = project
     libraryDependencies ++= {
       Seq(
         "org.jfree" % "jfreechart" % "1.5.3",
-        "com.miglayout" % "miglayout-swing" % "11.0",
         "dev.zio" %% "zio-http" % "0.0.3",
         "com.typesafe.scala-logging" %% "scala-logging" % "3.9.5",
         "ch.qos.logback" % "logback-classic" % "1.4.5"
