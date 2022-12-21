@@ -1,7 +1,7 @@
 package objektwerks
 
-import java.awt.{GridLayout, Image}
-import javax.swing.{JComponent, JDialog, JPanel}
+import java.awt.{Component, GridLayout, Image}
+import javax.swing.{JDialog, JPanel}
 
 object Dialog:
   val rows = 2
@@ -9,11 +9,11 @@ object Dialog:
   val horizontalGap = 6
   val verticalGap = 6
 
-final class Dialog(location: JComponent,
-                   image: Image,
+final class Dialog(image: Image,
                    title: String,
                    form: Form,
-                   actions: Actions) extends JDialog:
+                   actions: Actions,
+                   location: Component = null) extends JDialog:
   import Dialog.*
 
   setIconImage(image)
