@@ -14,7 +14,7 @@ class Form(fields: List[(String, JComponent)]) extends JPanel:
 
   val rows = fields.length
   setLayout( new GridLayout(rows, columns, horizontalGap, verticalGap) )
-  setBorder(BorderFactory.createEmptyBorder(inset, inset, inset, inset))
+  setBorder( BorderFactory.createEmptyBorder(inset, inset, inset, inset) )
 
   for ((label, component) <- fields)
     add( new JLabel(label) )
