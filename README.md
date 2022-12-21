@@ -88,8 +88,8 @@ Chemicals
 7. MuriaticAcid ( gl/l )
 8. Salt ( lbs/kg )
 
-Entity
-------
+Model
+-----
 * Pool 1 --> * Cleaning | Measurement | Chemical
 
 UI
