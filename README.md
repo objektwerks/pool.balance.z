@@ -78,13 +78,6 @@ Entity
 ------
 * Pool 1 --> * Cleaning | Measurement | Chemical
 
-Model
------
-* App 1 --> 1 Context | Store | Model | View
-* Store 1 --> 1 Context
-* Model 1 --> 1 Context | Store
-* View 1 --> 1 Context | Model
-
 UI
 --
 1. Top: dashboard(total chlorine, free chlorine, ph, calcium hardness, total alkalinity, cyanuric acid, total bromine)
