@@ -9,7 +9,7 @@ object Form:
   val verticalGap = 6
   val inset = 6
 
-class Form(fields: List[(String, JComponent)]) extends JPanel:
+final class Form(fields: List[(String, JComponent)]) extends JPanel:
   import Form.*
 
   val rows = fields.length
