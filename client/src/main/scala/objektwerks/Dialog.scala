@@ -12,7 +12,7 @@ object Dialog:
 open class Dialog(image: Image,
                   title: String,
                   form: Form,
-                  buttons: JButton*) extends JDialog:
+                  commands: JButton*) extends JDialog:
   import Dialog.*
 
   setIconImage(image)
