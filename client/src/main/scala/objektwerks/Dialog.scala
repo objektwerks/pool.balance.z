@@ -1,7 +1,7 @@
 package objektwerks
 
 import java.awt.{GridLayout, Image}
-import javax.swing.{JButton, JDialog}
+import javax.swing.{JPanel, JDialog}
 
 object Dialog:
   val rows = 2
@@ -12,10 +12,12 @@ object Dialog:
 open class Dialog(image: Image,
                   title: String,
                   form: Form,
-                  commands: JButton*) extends JDialog:
+                  commands: JPanel) extends JDialog:
   import Dialog.*
 
   setIconImage(image)
   setTitle(title)
   setLayout( new GridLayout(rows, columns, horizontalGap, verticalGap) )
+  add(form)
+  add(commands)
   setModal(true)
