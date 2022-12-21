@@ -9,7 +9,8 @@ object Dialog:
   val horizontalGap = 6
   val verticalGap = 6
 
-final class Dialog(image: Image,
+final class Dialog(frame: Frame,
+                   image: Image,
                    title: String,
                    form: Form,
                    actions: Actions) extends JDialog:
@@ -21,3 +22,5 @@ final class Dialog(image: Image,
   add(form)
   add(actions)
   setModal(true)
+  setLocationRelativeTo(frame)
+  setVisible(true)
