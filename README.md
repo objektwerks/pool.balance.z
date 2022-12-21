@@ -26,6 +26,13 @@ Client Run
 2. project client
 3. run
 
+Package Server
+--------------
+1. sbt ( interactive session )
+2. project client
+3. test
+4. universal:packageBin
+
 Package Client
 --------------
 1. sbt clean test universal:packageBin
