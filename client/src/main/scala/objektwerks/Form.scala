@@ -16,6 +16,6 @@ final class Form(fields: List[(String, JComponent)]) extends JPanel:
   setLayout( new GridLayout(rows, columns, horizontalGap, verticalGap) )
   setBorder( BorderFactory.createEmptyBorder(inset, inset, inset, inset) )
 
-  for ((label, component) <- fields)
+  for ( (label, component) <- fields )
     add( new JLabel(label) )
     add( component )
