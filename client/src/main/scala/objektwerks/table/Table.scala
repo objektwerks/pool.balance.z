@@ -1,7 +1,7 @@
 package objektwerks
 
 import javax.swing.JTable
-import javax.swing.table.{ DefaultTableModel, DefaultTableColumnModel, TableColumn }
+import javax.swing.table.{DefaultTableModel, DefaultTableColumnModel, TableColumn}
 
 private class TableModel[E](rows: List[E]) extends DefaultTableModel:
   addRow( rows.toArray[Any] )
