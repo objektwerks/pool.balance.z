@@ -3,8 +3,8 @@ package objektwerks
 import javax.swing.JTable
 import javax.swing.table.{ DefaultTableModel, DefaultTableColumnModel, TableColumn }
 
-final class TableModel[E](entities: List[E]) extends DefaultTableModel:
-  addRow( entities.toArray[Any] )
+final class TableModel[E](rows: List[E]) extends DefaultTableModel:
+  addRow( rows.toArray[Any] )
 
 final class ColumnModel(columns: List[String]) extends DefaultTableColumnModel:
   for ((column, index) <- columns.view.zipWithIndex)
@@ -12,6 +12,6 @@ final class ColumnModel(columns: List[String]) extends DefaultTableColumnModel:
     tableColumn.setHeaderValue(column)
     addColumn(tableColumn)
 
-final class Table[E](entities: List[E], columns: List[String]) extends JTable:
-  setModel( TableModel(entities) )
+final class Table[E](rows: List[E], columns: List[String]) extends JTable:
+  setModel( TableModel(rows) )
   setColumnModel( ColumnModel(columns) )
