@@ -12,12 +12,12 @@ object Dialog:
 open class Dialog(image: Image,
                   title: String,
                   form: Form,
-                  commands: JPanel) extends JDialog:
+                  actions: Actions) extends JDialog:
   import Dialog.*
 
   setIconImage(image)
   setTitle(title)
   setLayout( new GridLayout(rows, columns, horizontalGap, verticalGap) )
   add(form)
-  add(commands)
+  add(actions)
   setModal(true)
