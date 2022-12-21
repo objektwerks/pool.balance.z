@@ -26,6 +26,10 @@ Client Run
 2. project client
 3. run
 
+Package Client
+--------------
+1. sbt clean test universal:packageBin
+
 Deploy
 ------
 >Consider these options:
