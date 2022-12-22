@@ -1,12 +1,13 @@
 package objektwerks
 
-import java.awt.BorderLayout
-import javax.swing.JPanel
+import javax.swing.JSplitPane
 
 import objektwerks.dashboard.DashboardPane
 import objektwerks.pane.SplitPane
 
-final class View extends JPanel:
-  setLayout( new BorderLayout() )
-  add( DashboardPane(), BorderLayout.NORTH )
-  add( SplitPane(), BorderLayout.CENTER )
+final class View extends JSplitPane:
+  setTopComponent( DashboardPane() )
+  setBottomComponent( SplitPane() )
+  setOrientation(JSplitPane.VERTICAL_SPLIT)
+  setOneTouchExpandable(false)
+  setDividerLocation(200)
