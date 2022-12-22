@@ -1,9 +1,11 @@
 package objektwerks
 
+import com.typesafe.scalalogging.LazyLogging
+
 import scalafx.collections.ObservableBuffer
 import scalafx.beans.property.ObjectProperty
 
-object Model:
+object Model extends LazyLogging:
   val pools = ObservableBuffer[Pool]()
   val cleanings = ObservableBuffer[Cleaning]()
   val measurements = ObservableBuffer[Measurement]()
