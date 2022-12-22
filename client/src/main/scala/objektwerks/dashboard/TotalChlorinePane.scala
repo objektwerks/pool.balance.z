@@ -14,4 +14,4 @@ final class TotalChlorinePane extends JPanel:
   import TotalChlorinePane.*
 
   setLayout( new GridLayout(rows, columns, horizontalGap, verticalGap) )
-  setBorder(new TitledBorder("<html>Total<br>Chlorine"))
+  setBorder( new TitledBorder("<html>Total<br>Chlorine") )
