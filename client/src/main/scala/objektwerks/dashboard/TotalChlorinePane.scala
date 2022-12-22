@@ -5,8 +5,8 @@ import javax.swing.JPanel
 import javax.swing.border.TitledBorder
 
 object TotalChlorinePane:
-  val rows = 5
-  val columns = 2
+  val rows = 1
+  val columns = 1
   val horizontalGap = 6
   val verticalGap = 6
 
