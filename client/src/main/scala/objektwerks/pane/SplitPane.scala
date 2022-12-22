@@ -5,5 +5,5 @@ import javax.swing.JSplitPane
 final class SplitPane extends JSplitPane:
   setLeftComponent( PoolsTabbedPane() )
   setRightComponent( TabbedPane() )
-  setOneTouchExpandable(true)
+  setOneTouchExpandable(false)
   setDividerLocation(200)
