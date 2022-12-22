@@ -10,6 +10,7 @@ object Model extends LazyLogging:
   val cleanings = ObservableBuffer[Cleaning]()
   val measurements = ObservableBuffer[Measurement]()
   val chemicals = ObservableBuffer[Chemical]()
+  val observableErrors = ObservableBuffer[Error]()
 
   val selectedPoolId = ObjectProperty[Long](0)
   val selectedCleaningId = ObjectProperty[Long](0)
