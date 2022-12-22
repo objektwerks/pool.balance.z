@@ -7,12 +7,10 @@ import java.text.NumberFormat
 
 import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
-import scala.util.Try
 
 import scalafx.collections.ObservableBuffer
 import scalafx.beans.property.ObjectProperty
 
-import Entity.given
 import Measurement.*
 
 object Model extends LazyLogging:
