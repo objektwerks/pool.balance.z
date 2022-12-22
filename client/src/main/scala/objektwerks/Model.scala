@@ -1,12 +1,15 @@
 package objektwerks
 
-object Model:
-  val pools = List.empty[Pool]
-  val cleanings = List.empty[Cleaning]
-  val measurements = List.empty[Measurement]
-  val chemicals = List.empty[Chemical]
+import scalafx.collections.ObservableBuffer
+import scalafx.beans.property.ObjectProperty
 
-  val selectedPoolId = 0
-  val selectedCleaningId = 0
-  val selectedMeasurementId = 0
-  val selectedChemicalId = 0
+object Model:
+  val pools = ObservableBuffer[Pool]()
+  val cleanings = ObservableBuffer[Cleaning]()
+  val measurements = ObservableBuffer[Measurement]()
+  val chemicals = ObservableBuffer[Chemical]()
+
+  val selectedPoolId = ObjectProperty[Long](0)
+  val selectedCleaningId = ObjectProperty[Long](0)
+  val selectedMeasurementId = ObjectProperty[Long](0)
+  val selectedChemicalId = ObjectProperty[Long](0)
