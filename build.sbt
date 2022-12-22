@@ -28,9 +28,16 @@ lazy val client = project
   .settings(
     libraryDependencies ++= {
       Seq(
-        "org.scalafx" %% "scalafx" % "19.0.0-R30",
+        "org.scalafx" %% "scalafx" % "19.0.0-R30"
+         exclude("org.openjfx", "javafx-controls")
+         exclude("org.openjfx", "javafx-fxml")
+         exclude("org.openjfx", "javafx-graphics")
+         exclude("org.openjfx", "javafx-media")
+         exclude("org.openjfx", "javafx-swing")
+         exclude("org.openjfx", "javafx-web"),
         "org.jfree" % "jfreechart" % "1.5.3",
-        "dev.zio" %% "zio-http" % "0.0.3",
+        "dev.zio" %% "zio-http" % "0.0.3"
+        exclude("dev.zio", "zio-streams"),
         "com.typesafe.scala-logging" %% "scala-logging" % "3.9.5",
         "ch.qos.logback" % "logback-classic" % "1.4.5"
       )
