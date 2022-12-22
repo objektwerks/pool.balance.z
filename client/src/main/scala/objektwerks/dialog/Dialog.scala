@@ -9,14 +9,12 @@ object Dialog:
   val horizontalGap = 6
   val verticalGap = 6
 
-final class Dialog(image: Image,
-                   title: String,
+final class Dialog(title: String,
                    form: Form,
                    actions: Actions,
                    location: Component = null) extends JDialog:
   import Dialog.*
 
-  setIconImage(image)
   setTitle(title)
   setLayout( new GridLayout(rows, columns, horizontalGap, verticalGap) )
   setModal(true)
