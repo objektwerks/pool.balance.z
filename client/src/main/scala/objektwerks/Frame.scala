@@ -21,3 +21,4 @@ final class Frame(logo: Image,
   setSize(width, height)
   setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE)
   setLocationRelativeTo(null)
+  setContentPane( View() )
