@@ -44,7 +44,7 @@ object Model extends LazyLogging:
 
   val currentPh = ObjectProperty[Double](0)
   val averagePh = ObjectProperty[Double](0)
-  def phInRange(value: Double): Boolean = phRange.contains(value)
+  def isPhInRange(value: Double): Boolean = phRange.contains(value)
 
   val currentCalciumHardness = ObjectProperty[Int](0)
   val averageCalciumHardness = ObjectProperty[Int](0)
