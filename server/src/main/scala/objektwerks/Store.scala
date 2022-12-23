@@ -62,7 +62,7 @@ final case class Store(quill: Quill.Postgres[SnakeCase],
       )
     )
 
-  def listPools: Task[List[Pool]] = run( query[Pool] )
+  def listPools: Task[List[Pool]] = run( query[Pool].sortBy(_.name)(Ord.asc) )
 
   def addPool(pool: Pool): Task[Long] =
     transaction (
