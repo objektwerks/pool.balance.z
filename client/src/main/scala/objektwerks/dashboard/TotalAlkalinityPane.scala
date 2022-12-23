@@ -13,7 +13,7 @@ final class TotalAlkalinityPane(title: String = "<html>Total<br>Alkalinity") ext
     else currentIsOutOfRange
   }
 
-  averageTotalChlorine.onChange { (_, _, newValue) =>
+  averageTotalAlkalinity.onChange { (_, _, newValue) =>
     average.setText(newValue.toString())
     if isTotalAlkalinityInRange(newValue) then averageIsInRange
     else averageIsOutOfRange
