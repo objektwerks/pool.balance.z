@@ -74,7 +74,7 @@ final case class Store(quill: Quill.Postgres[SnakeCase],
       run( query[Pool].filter( _.id == lift(pool.id) ).updateValue( lift(pool) ) )
     )
 
-  def listCleanings: Task[List[Cleaning]] = run( query[Cleaning] )
+  def listCleanings: Task[List[Cleaning]] = run( query[Cleaning].sortBy(_.cleaned)(Ord.desc) )
 
   def addCleaning(cleaning: Cleaning): Task[Long] =
     transaction (
