@@ -26,15 +26,16 @@ abstract class DashboardTitledPane(title: String) extends JPanel with LazyLoggin
   val current = new JLabel("0")
   val average = new JLabel("0")
 
-  val controls = List[(String, JLabel)](
-    "Range:" -> range,
-    "Good:" -> good,
-    "Ideal:" -> ideal,
-    "Current:" -> current,
-    "Average:" -> average
+  val form = Form(
+    List[(String, JLabel)](
+      "Range:" -> range,
+      "Good:" -> good,
+      "Ideal:" -> ideal,
+      "Current:" -> current,
+      "Average:" -> average
+    )
   )
   
-  val form = Form(controls)
 
   val emptyBorder = new JLabel().getBorder()
   val greenBorder = BorderFactory.createLineBorder(Color.green, 3)
