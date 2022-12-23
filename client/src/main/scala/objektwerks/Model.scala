@@ -48,7 +48,7 @@ object Model extends LazyLogging:
 
   val currentCalciumHardness = ObjectProperty[Int](0)
   val averageCalciumHardness = ObjectProperty[Int](0)
-  def calciumHardnessInRange(value: Int): Boolean = calciumHardnessRange.contains(value)
+  def isCalciumHardnessInRange(value: Int): Boolean = calciumHardnessRange.contains(value)
 
   val currentTotalAlkalinity = ObjectProperty[Int](0)
   val averageTotalAlkalinity = ObjectProperty[Int](0)
