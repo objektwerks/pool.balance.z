@@ -41,11 +41,11 @@ abstract class DashboardTitledPane(title: String) extends JPanel with LazyLoggin
   )
   add(form)
 
-  def inRangeCurrent: Unit =
+  def currentIsInRange: Unit =
     good.setBorder(emptyBorder)
     current.setBorder(emptyBorder)
 
-  def outOfRangeCurrent: Unit =
+  def currentIsOutOfRange: Unit =
     logger.info(s"DashboardTitledPane.outOfRangeCurrent: ${current.getText()}")
     good.setBorder(greenBorder)
     current.setBorder(redBorder)
