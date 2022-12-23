@@ -40,7 +40,7 @@ object Model extends LazyLogging:
 
   val currentCombinedChlorine = ObjectProperty[Double](0)
   val averageCombinedChlorine = ObjectProperty[Double](0)
-  def combinedChlorineInRange(value: Double): Boolean = combinedChlorineRange.contains(value)
+  def isCombinedChlorineInRange(value: Double): Boolean = combinedChlorineRange.contains(value)
 
   val currentPh = ObjectProperty[Double](0)
   val averagePh = ObjectProperty[Double](0)
