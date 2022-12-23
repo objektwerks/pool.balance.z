@@ -46,15 +46,15 @@ abstract class DashboardTitledPane(title: String) extends JPanel with LazyLoggin
     current.setBorder(emptyBorder)
 
   def currentIsOutOfRange: Unit =
-    logger.info(s"DashboardTitledPane.outOfRangeCurrent: ${current.getText()}")
+    logger.info(s"DashboardTitledPane.currentIsOutOfRange: ${current.getText()}")
     good.setBorder(greenBorder)
     current.setBorder(redBorder)
 
-  def inRangeAverage: Unit =
+  def averageIsInRange: Unit =
     good.setBorder(emptyBorder)
     average.setBorder(emptyBorder)
 
-  def outOfRangeAverage: Unit =
-    logger.info(s"DashboardTitledPane.outOfRangeAverage: ${average.getText()}")
+  def averageIsOutOfRange: Unit =
+    logger.info(s"DashboardTitledPane.averageIsOutOfRange: ${average.getText()}")
     good.setBorder(greenBorder)
     average.setBorder(redBorder)
