@@ -60,11 +60,11 @@ object Model extends LazyLogging:
 
   val currentTotalBromine = ObjectProperty[Int](0)
   val averageTotalBromine = ObjectProperty[Int](0)
-  def totalBromineInRange(value: Int): Boolean = totalBromineRange.contains(value)
+  def isTotalBromineInRange(value: Int): Boolean = totalBromineRange.contains(value)
 
   val currentSalt = ObjectProperty[Int](0)
   val averageSalt = ObjectProperty[Int](0)
-  def saltInRange(value: Int): Boolean = saltRange.contains(value)
+  def isSaltInRange(value: Int): Boolean = saltRange.contains(value)
 
   val currentTemperature = ObjectProperty[Int](0)
   val averageTemperature = ObjectProperty[Int](0)
