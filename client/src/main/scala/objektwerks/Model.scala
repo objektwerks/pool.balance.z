@@ -52,11 +52,11 @@ object Model extends LazyLogging:
 
   val currentTotalAlkalinity = ObjectProperty[Int](0)
   val averageTotalAlkalinity = ObjectProperty[Int](0)
-  def totalAlkalinityInRange(value: Int): Boolean = totalAlkalinityRange.contains(value)
+  def isTotalAlkalinityInRange(value: Int): Boolean = totalAlkalinityRange.contains(value)
 
   val currentCyanuricAcid = ObjectProperty[Int](0)
   val averageCyanuricAcid = ObjectProperty[Int](0)
-  def cyanuricAcidInRange(value: Int): Boolean = cyanuricAcidRange.contains(value)
+  def isCyanuricAcidInRange(value: Int): Boolean = cyanuricAcidRange.contains(value)
 
   val currentTotalBromine = ObjectProperty[Int](0)
   val averageTotalBromine = ObjectProperty[Int](0)
