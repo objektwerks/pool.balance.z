@@ -98,7 +98,7 @@ final case class Store(quill: Quill.Postgres[SnakeCase],
       run( query[Measurement].filter( _.id == lift(measurement.id) ).updateValue( lift(measurement) ) )
     )
 
-  def listChemicals: Task[List[Chemical]] = run( query[Chemical] )
+  def listChemicals: Task[List[Chemical]] = run( query[Chemical].sortBy(_.added)(Ord.desc) )
 
   def addChemical(chemical: Chemical): Task[Long] =
     transaction (
