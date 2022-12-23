@@ -9,10 +9,10 @@ final class TotalChlorinePane(title: String = "<html>Total<br>Chlorine") extends
 
   currentTotalChlorine.onChange { (_, _, newValue) =>
     current.setText(newValue.toString())
-    if totalChlorineInRange(newValue) then currentIsInRange else currentIsOutOfRange
+    if isTotalChlorineInRange(newValue) then currentIsInRange else currentIsOutOfRange
   }
 
   averageTotalChlorine.onChange { (_, _, newValue) =>
     average.setText(newValue.toString())
-    if totalChlorineInRange(newValue) then averageIsInRange else averageIsOutOfRange
+    if isTotalChlorineInRange(newValue) then averageIsInRange else averageIsOutOfRange
   }
