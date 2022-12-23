@@ -5,9 +5,6 @@ import com.typesafe.scalalogging.LazyLogging
 import java.awt.EventQueue
 import java.text.NumberFormat
 
-import scala.concurrent.Future
-import scala.concurrent.ExecutionContext.Implicits.global
-
 import scalafx.collections.ObservableBuffer
 import scalafx.beans.property.ObjectProperty
 
@@ -73,95 +70,72 @@ object Model extends LazyLogging:
   pools()
 
   def pools(): Unit =
-    Future {
-      // todo observablePools ++= store.pools()
-    }.recover { case error: Throwable => onError(error, s"Loading pools data failed: ${error.getMessage}") }
+    // todo observablePools ++= store.pools()
+    ()
 
   def cleanings(poolId: Long): Unit =
-    Future {
-      observableCleanings.clear()
-      // todo observableCleanings ++= store.cleanings(poolId)
-    }.recover { case error: Throwable => onError(error, s"Loading cleanings data failed: ${error.getMessage}") }
+    observableCleanings.clear()
+    // todo observableCleanings ++= store.cleanings(poolId)
 
   def measurements(poolId: Long): Unit =
-    Future {
-      observableMeasurements.clear()
-      // todo observableMeasurements ++= store.measurements(poolId) 
-    }.recover { case error: Throwable => onError(error, s"Loading measurements data failed: ${error.getMessage}") }
+    observableMeasurements.clear()
+    // todo observableMeasurements ++= store.measurements(poolId) 
 
   def chemicals(poolId: Long): Unit =
-    Future {
-      observableChemicals.clear()
-      // todo observableChemicals ++= store.chemicals(poolId) 
-    }.recover { case error: Throwable => onError(error, s"Loading chemicals data failed: ${error.getMessage}") }
+    observableChemicals.clear()
+    // todo observableChemicals ++= store.chemicals(poolId) 
 
-  def add(pool: Pool): Future[Pool] =
-    Future {
-      val newPool = ??? // todo store.add(pool)
-      observablePools += newPool
-      observablePools.sort()
-      // todo selectedPoolId.value = newPool.id
-      newPool
-    }
+  def add(pool: Pool): Pool =
+    val newPool = ??? // todo store.add(pool)
+    observablePools += newPool
+    observablePools.sort()
+    // todo selectedPoolId.value = newPool.id
+    newPool
 
-  def update(selectedIndex: Int, pool: Pool): Future[Unit] =
-    Future {
-      // todo store.update(pool)
-      observablePools.update(selectedIndex, pool)
-      observablePools.sort()
-      selectedPoolId.value = pool.id
-    }
+  def update(selectedIndex: Int, pool: Pool): Unit =
+    // todo store.update(pool)
+    observablePools.update(selectedIndex, pool)
+    observablePools.sort()
+    selectedPoolId.value = pool.id
 
-  def add(cleaning: Cleaning): Future[Cleaning] =
-    Future {
-      val newCleaning = ??? // todo store.add(cleaning)
-      observableCleanings += newCleaning
-      observableCleanings.sort()
-      // todo selectedCleaningId.value = newCleaning.id
-      newCleaning
-    }
+  def add(cleaning: Cleaning): Cleaning =
+    val newCleaning = ??? // todo store.add(cleaning)
+    observableCleanings += newCleaning
+    observableCleanings.sort()
+    // todo selectedCleaningId.value = newCleaning.id
+    newCleaning
 
-  def update(selectedIndex: Int, cleaning: Cleaning): Future[Unit] =
-    Future {
-      // todo store.update(cleaning)
-      observableCleanings.update(selectedIndex, cleaning)
-      observableCleanings.sort()
-      selectedCleaningId.value = cleaning.id
-    }
+  def update(selectedIndex: Int, cleaning: Cleaning): Unit =
+    // todo store.update(cleaning)
+    observableCleanings.update(selectedIndex, cleaning)
+    observableCleanings.sort()
+    selectedCleaningId.value = cleaning.id
   
-  def add(measurement: Measurement): Future[Measurement] =
-    Future {
-      val newMeasurement = ??? // todo store.add(measurement)
-      observableMeasurements += newMeasurement
-      observableMeasurements.sort()
-      // todo selectedMeasurementId.value = newMeasurement.id
-      newMeasurement
-    }
+  def add(measurement: Measurement): Measurement =
+    val newMeasurement = ??? // todo store.add(measurement)
+    observableMeasurements += newMeasurement
+    observableMeasurements.sort()
+    // todo selectedMeasurementId.value = newMeasurement.id
+    newMeasurement
 
-  def update(selectedIndex: Int, measurement: Measurement): Future[Unit] =
-    Future {
-      // todo store.update(measurement)
-      observableMeasurements.update(selectedIndex, measurement)
-      observableMeasurements.sort()
-      selectedMeasurementId.value = measurement.id
-    }
+  def update(selectedIndex: Int, measurement: Measurement): Unit =
+    // todo store.update(measurement)
+    observableMeasurements.update(selectedIndex, measurement)
+    observableMeasurements.sort()
+    selectedMeasurementId.value = measurement.id
   
-  def add(chemical: Chemical): Future[Chemical] =
-    Future {
-      val newChemical = ??? // todo  store.add(chemical)
-      observableChemicals += newChemical
-      observableChemicals.sort()
-      // todo selectedChemicalId.value = newChemical.id      
-      newChemical
-    }
+  def add(chemical: Chemical): Chemical =
+    val newChemical = ??? // todo  store.add(chemical)
+    observableChemicals += newChemical
+    observableChemicals.sort()
+    // todo selectedChemicalId.value = newChemical.id      
+    newChemical
 
-  def update(selectedIndex: Int, chemical: Chemical): Future[Unit] =
-    Future {
-      // todo store.update(chemical)
-      observableChemicals.update(selectedIndex, chemical)
-      observableChemicals.sort()
-      selectedChemicalId.value = chemical.id
-    }
+  def update(selectedIndex: Int, chemical: Chemical): Unit =
+    // todo store.update(chemical)
+    observableChemicals.update(selectedIndex, chemical)
+    observableChemicals.sort()
+    selectedChemicalId.value = chemical.id
 
   def onError(message: String): Unit =
     observableErrors += Error(message)
