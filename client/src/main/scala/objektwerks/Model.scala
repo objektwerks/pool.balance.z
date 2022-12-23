@@ -68,7 +68,7 @@ object Model extends LazyLogging:
 
   val currentTemperature = ObjectProperty[Int](0)
   val averageTemperature = ObjectProperty[Int](0)
-  def temperatureInRange(value: Int): Boolean = temperatureRange.contains(value)
+  def isTemperatureInRange(value: Int): Boolean = temperatureRange.contains(value)
 
   pools()
 
