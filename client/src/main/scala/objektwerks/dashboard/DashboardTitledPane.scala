@@ -8,11 +8,14 @@ import javax.swing.border.TitledBorder
 
 import objektwerks.Form
 
+object DashboardTitledPane:
+  val rows = 1
+  val columns = 1
+  val horizontalGap = 6
+  val verticalGap = 6
+
 abstract class DashboardTitledPane(title: String) extends JPanel with LazyLogging:
-  private val rows = 1
-  private val columns = 1
-  private val horizontalGap = 6
-  private val verticalGap = 6
+  import DashboardTitledPane.*
 
   setLayout( new GridLayout(rows, columns, horizontalGap, verticalGap) )
   setBorder( new TitledBorder(title) )
