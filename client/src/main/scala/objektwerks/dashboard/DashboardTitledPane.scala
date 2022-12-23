@@ -35,8 +35,8 @@ abstract class DashboardTitledPane(title: String) extends JPanel with LazyLoggin
       "Average:" -> average
     )
   )
+  add(form)
   
-
   val emptyBorder = new JLabel().getBorder()
   val greenBorder = BorderFactory.createLineBorder(Color.green, 3)
   val redBorder = BorderFactory.createLineBorder(Color.red, 3)
