@@ -3,9 +3,9 @@ package objektwerks.dashboard
 import objektwerks.Model.*
 
 final class TotalAlkalinityPane(title: String = "<html>Total<br>Alkalinity") extends DashboardTitledPane(title):
-  range.setText("0 - 10")
-  good.setText("1 - 5")
-  ideal.setText(("3"))
+  range.setText("0 - 240")
+  good.setText("80 - 120")
+  ideal.setText(("100"))
 
   currentTotalAlkalinity.onChange { (_, _, newValue) =>
     current.setText(newValue.toString())
