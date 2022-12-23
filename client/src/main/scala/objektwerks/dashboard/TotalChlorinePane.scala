@@ -1,4 +1,5 @@
 package objektwerks.dashboard
 
-final class TotalChlorinePane extends DashboardTitledPane:
+final class TotalChlorinePane(title: String = "<html>Total<br>Chlorine")
+  extends DashboardTitledPane(title):
   
