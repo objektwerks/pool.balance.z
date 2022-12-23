@@ -13,7 +13,7 @@ final class PhPane(title: String = "<html>Ph") extends DashboardTitledPane(title
     else currentIsOutOfRange
   }
 
-  averageTotalChlorine.onChange { (_, _, newValue) =>
+  averagePh.onChange { (_, _, newValue) =>
     average.setText(newValue.toString())
     if isPhInRange(newValue) then averageIsInRange
     else averageIsOutOfRange
