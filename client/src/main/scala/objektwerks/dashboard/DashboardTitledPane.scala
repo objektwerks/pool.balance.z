@@ -34,9 +34,8 @@ abstract class DashboardTitledPane(title: String) extends JPanel with LazyLoggin
   val form = Form(controls)
 
   val emptyBorder = new JLabel().getBorder()
-  val greenBorder = BorderFactory.createLineBorder(Color.green)
-  val redBorder = BorderFactory.createLineBorder(Color.red)
-
+  val greenBorder = BorderFactory.createLineBorder(Color.green, 3)
+  val redBorder = BorderFactory.createLineBorder(Color.red, 3)
 
   def inRangeCurrent: Unit =
     good.setBorder(emptyBorder)
