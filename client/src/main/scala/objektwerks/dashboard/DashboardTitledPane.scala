@@ -35,8 +35,8 @@ abstract class DashboardTitledPane(title: String) extends JPanel with LazyLoggin
       "Range:" -> range,
       "Good:" -> good,
       "Ideal:" -> ideal,
-      "Current:" -> current,
-      "Average:" -> average
+      "Last:" -> current,
+      "Avg:" -> average
     )
   )
   add(form)

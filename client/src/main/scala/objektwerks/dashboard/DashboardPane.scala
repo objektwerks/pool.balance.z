@@ -1,7 +1,7 @@
 package objektwerks.dashboard
 
 import java.awt.GridLayout
-import javax.swing.JPanel
+import javax.swing.{BoxLayout, JPanel}
 
 object DashboardPane:
   val rows = 1
@@ -12,7 +12,7 @@ object DashboardPane:
 final class DashboardPane extends JPanel:
   import DashboardPane.*
 
-  setLayout( new GridLayout(rows, columns, horizontalGap, verticalGap) )
+  setLayout( new BoxLayout(this, BoxLayout.LINE_AXIS) )
 
   add( TotalChlorinePane() )
   add( FreeChlorinePane() )
