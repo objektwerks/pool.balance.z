@@ -6,4 +6,4 @@ final class SplitPane extends JSplitPane:
   setLeftComponent( PoolsTabbedPane() )
   setRightComponent( TabbedPane() )
   setOneTouchExpandable(false)
-  setDividerLocation(200)
+  setDividerLocation(300)
