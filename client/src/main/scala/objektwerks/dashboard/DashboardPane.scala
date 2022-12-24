@@ -15,3 +15,4 @@ final class DashboardPane extends JPanel:
   setLayout( new GridLayout(rows, columns, horizontalGap, verticalGap) )
 
   add( TotalChlorinePane() )
+  add( FreeChlorinePane() )
