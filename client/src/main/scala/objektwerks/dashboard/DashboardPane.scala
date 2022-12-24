@@ -21,3 +21,4 @@ final class DashboardPane extends JPanel:
   add( CalciumHardnessPane() )
   add( TotalAlkalinityPane() )
   add( CyanuricAcidPane() )
+  add( TotalBrominePane() )
