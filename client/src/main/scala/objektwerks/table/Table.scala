@@ -1,4 +1,4 @@
-package objektwerks
+package objektwerks.table
 
 import javax.swing.JTable
 import javax.swing.table.{DefaultTableModel, DefaultTableColumnModel, TableColumn}
