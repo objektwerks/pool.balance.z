@@ -6,18 +6,18 @@ import javax.swing.event.ListSelectionEvent
 
 import objektwerks.Entity
 
-private class TableModel(entities: List[Entity]) extends DefaultTableModel:
-  entities.foreach { entity => addRow( entity.toArray ) }
-
 private class ColumnModel(columns: List[String]) extends DefaultTableColumnModel:
   for ((column, index) <- columns.view.zipWithIndex)
     val tableColumn = new TableColumn(index)
     tableColumn.setHeaderValue(column)
     addColumn(tableColumn)
 
-final class Table(entities: List[Entity], columns: List[String]) extends JTable:
-  setModel( TableModel(entities) )
+private class TableModel(entities: List[Entity]) extends DefaultTableModel:
+  entities.foreach { entity => addRow( entity.toArray ) }
+
+final class Table(columns: List[String], entities: List[Entity]) extends JTable:
   setColumnModel( ColumnModel(columns) )
+  setModel( TableModel(entities) )
   setSelectionMode(ListSelectionModel.SINGLE_SELECTION)
 
   def getId(event: ListSelectionEvent): Option[Long] =
