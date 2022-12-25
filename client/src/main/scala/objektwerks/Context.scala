@@ -17,6 +17,11 @@ object Context:
   val port = conf.getInt("port")
   val url = s"http://$host:$port/command"
 
+  val add = conf.getString("add")
+  val edit = conf.getString("edit")
+  val chart = conf.getString("chart")
+  val errors = conf.getString("errors")
+
   val headers = Headers (
     Header("Content-Type", "application/json; charset=utf-8"),
     Header("Accept", "application/json")
