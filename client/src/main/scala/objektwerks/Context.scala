@@ -28,15 +28,8 @@ object Context:
   )
 
   def loadImage(path: String): Image =
-    loadImageIcon(path).getImage()
-
-  def loadImageIcon(path: String): ImageIcon =
     new ImageIcon(
       ImageIO.read( Context.getClass.getResourceAsStream(path) )
-    )
+    ).getImage()
 
-  def logo = loadImage("/image/logo.png")
-  def addImageIcon = loadImageIcon("/image/add.png")
-  def editImageIcon = loadImageIcon("/image/edit.png")
-  def chartImageIcon = loadImageIcon("/image/chart.png")
-  def errorsImageIcon = loadImageIcon("/image/errors.png")
+  def logo = loadImage("/logo.png")
