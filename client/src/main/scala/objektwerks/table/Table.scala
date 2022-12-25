@@ -1,7 +1,7 @@
 package objektwerks.table
 
 import javax.swing.{JTable, ListSelectionModel}
-import javax.swing.table.{DefaultTableModel, DefaultTableColumnModel, TableColumn}
+import javax.swing.table.{DefaultTableModel, DefaultTableColumnModel, TableColumn, TableColumnModel}
 import javax.swing.event.ListSelectionEvent
 
 import objektwerks.Entity
@@ -15,7 +15,7 @@ final class ColumnModel(columns: List[String]) extends DefaultTableColumnModel:
     tableColumn.setHeaderValue(column)
     addColumn(tableColumn)
 
-final class Table(tableModel: TableModel, columnsModel: ColumnModel) extends JTable(tableModel, columnsModel):
+final class Table(tableModel: TableModel, columnModel: TableColumnModel) extends JTable(tableModel, columnModel):
   setSelectionMode(ListSelectionModel.SINGLE_SELECTION)
 
   def getId(event: ListSelectionEvent): Option[Long] =
