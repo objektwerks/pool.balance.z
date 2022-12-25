@@ -1,6 +1,7 @@
 package objektwerks.pane
 
 import java.awt.BorderLayout
+import java.awt.event.{ActionEvent, MouseAdapter, MouseEvent}
 import javax.swing.{JPanel, JScrollPane}
 import javax.swing.event.{ListSelectionEvent, ListSelectionListener}
 
@@ -17,7 +18,18 @@ final class PoolsPane extends JPanel:
   table.getSelectionModel().addListSelectionListener(
     new ListSelectionListener {
       override def valueChanged(event: ListSelectionEvent): Unit =
-        table.getId(event).fold(())(id => Model.selectedPoolId.value = id)
+        table
+          .getId(event)
+          .fold(())(id => Model.selectedPoolId.value = id)
+    }
+  )
+
+  table.addMouseListener(
+    new MouseAdapter {
+      override def mouseClicked(event: MouseEvent): Unit =
+        table
+          .getId(event)
+          .fold(())(id => editAction.actionPerformed( new ActionEvent(table, ActionEvent.ACTION_PERFORMED, id.toString) ))
     }
   )
 

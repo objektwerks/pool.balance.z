@@ -1,5 +1,6 @@
 package objektwerks.table
 
+import java.awt.event.MouseEvent
 import javax.swing.{JTable, ListSelectionModel}
 import javax.swing.table.{DefaultTableModel, DefaultTableColumnModel, TableColumn, TableColumnModel}
 import javax.swing.event.ListSelectionEvent
@@ -20,8 +21,18 @@ final class Table(tableModel: TableModel, columnModel: TableColumnModel) extends
 
   def getId(event: ListSelectionEvent): Option[Long] =
     if !event.getValueIsAdjusting() && getSelectedRow() != -1 then
-      val row = convertRowIndexToModel(getSelectedRow())
-      val column = 0
-      val id = getModel().getValueAt(row, column).toString().toLong
-      Some(id)
+      Some( toId( getSelectedRow() ) )
     else None
+
+  def getId(event: MouseEvent): Option[Long] =
+    if event.getClickCount == 2 && !getSelectionModel().getValueIsAdjusting() && getSelectedRow() != -1 then
+      Some( toId( getSelectedRow() ) )
+    else None
+
+  def toId(selectedRow: Int): Long =
+    val row = convertRowIndexToModel(selectedRow)
+    val column = 0
+    getModel()
+      .getValueAt(row, column)
+      .toString()
+      .toLong
