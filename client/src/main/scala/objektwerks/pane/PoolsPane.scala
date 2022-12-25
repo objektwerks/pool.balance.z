@@ -9,13 +9,14 @@ import objektwerks.table.Table
 import javax.swing.event.{ListSelectionEvent, ListSelectionListener}
 
 object PoolsPane:
-  val columns = List("name", "volume", "unit")
+  val columns = List("id", "name", "volume", "unit")
   val pools = Model.observablePools
   val table = Table[Pool](pools.toList, columns)
 
   table.getSelectionModel().addListSelectionListener(
     new ListSelectionListener {
-      override def valueChanged(event: ListSelectionEvent): Unit = ???
+      override def valueChanged(event: ListSelectionEvent): Unit =
+        if !event.getValueIsAdjusting() then Model.selectedPoolId.value = event.getSource().asInstanceOf[Pool].id
     }
   )
 
