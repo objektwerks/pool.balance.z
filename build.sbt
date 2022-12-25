@@ -36,7 +36,7 @@ lazy val client = project
          exclude("org.openjfx", "javafx-swing")
          exclude("org.openjfx", "javafx-web"),
         "org.jfree" % "jfreechart" % "1.5.3",
-        "com.formdev" % "flatlaf" % "3.0" % "runtime",
+        "com.formdev" % "flatlaf" % "3.0",
         "dev.zio" %% "zio-http" % "0.0.3"
         exclude("dev.zio", "zio-streams"),
         "com.typesafe.scala-logging" %% "scala-logging" % "3.9.5",

@@ -1,5 +1,6 @@
 package objektwerks
 
+import com.formdev.flatlaf.FlatDarculaLaf
 import com.typesafe.scalalogging.LazyLogging
 
 import java.awt.{EventQueue, Taskbar}
@@ -11,7 +12,7 @@ object Client extends LazyLogging:
   def main(args: Array[String]): Unit =
     EventQueue.invokeLater(
       () => {
-        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName())
+        UIManager.setLookAndFeel( new FlatDarculaLaf() )
         Taskbar.getTaskbar().setIconImage(logo)
         Frame(logo, title, width, height).setVisible(true)
       }
