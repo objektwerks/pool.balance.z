@@ -17,10 +17,9 @@ final class Dialog(title: String,
 
   setTitle(title)
   setLayout( new GridLayout(rows, columns, horizontalGap, verticalGap) )
+  setLocationRelativeTo(location)
   setModal(true)
   add(form)
   add(actions)
 
-  def view(isVisible: Boolean): Unit =
-    setLocationRelativeTo(location)
-    setVisible(isVisible)
+  def view(isVisible: Boolean): Unit = setVisible(isVisible)
