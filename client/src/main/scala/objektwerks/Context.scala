@@ -19,6 +19,8 @@ object Context:
 
   val add = conf.getString("add")
   val edit = conf.getString("edit")
+  val save = conf.getString("save")
+  val cancel = conf.getString("cancel")
   val chart = conf.getString("chart")
   val errors = conf.getString("errors")
 
