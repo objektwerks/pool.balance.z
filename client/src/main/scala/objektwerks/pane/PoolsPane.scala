@@ -6,11 +6,18 @@ import javax.swing.JPanel
 import objektwerks.{Context, Model, Pool}
 import objektwerks.action.{Actions, AddPoolAction, EditPoolAction}
 import objektwerks.table.Table
+import javax.swing.event.{ListSelectionEvent, ListSelectionListener}
 
 object PoolsPane:
   val columns = List("name", "volume", "unit")
   val pools = Model.observablePools
   val table = Table[Pool](pools.toList, columns)
+
+  table.getSelectionModel().addListSelectionListener(
+    new ListSelectionListener {
+      override def valueChanged(event: ListSelectionEvent): Unit = ???
+    }
+  )
 
   val addAction = AddPoolAction(Context.add, Context.addImageIcon)
   val editAction = EditPoolAction(Context.edit, Context.editImageIcon)
