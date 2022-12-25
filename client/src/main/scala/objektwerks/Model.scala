@@ -22,6 +22,13 @@ object Model extends LazyLogging:
   val selectedMeasurementId = ObjectProperty[Long](0)
   val selectedChemicalId = ObjectProperty[Long](0)
 
+  selectedPoolId.onChange { (_, oldPoolId, newPoolId) =>
+    logger.info(s"selected oool id onchange event: $oldPoolId -> $newPoolId")
+    cleanings(newPoolId)
+    measurements(newPoolId)
+    chemicals(newPoolId)
+  }
+
   observableMeasurements.onChange { (_, _) =>
     logger.info(s"observable measurements onchange event.")
     EventQueue.invokeLater( () => dashboard() )
@@ -66,8 +73,6 @@ object Model extends LazyLogging:
   val currentTemperature = ObjectProperty[Int](0)
   val averageTemperature = ObjectProperty[Int](0)
   def isTemperatureInRange(value: Int): Boolean = temperatureRange.contains(value)
-
-  pools()
 
   def pools(): Unit =
     // todo observablePools ++= store.pools()
