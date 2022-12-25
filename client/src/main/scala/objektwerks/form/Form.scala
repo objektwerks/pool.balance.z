@@ -5,9 +5,9 @@ import javax.swing.{BorderFactory, JComponent, JLabel, JPanel}
 
 object Form:
   val columns = 2
-  val horizontalGap = 6
-  val verticalGap = 6
-  val inset = 6
+  val horizontalGap = 3
+  val verticalGap = 3
+  val inset = 3
 
 final class Form(fields: List[(String, JComponent)]) extends JPanel:
   import Form.*
