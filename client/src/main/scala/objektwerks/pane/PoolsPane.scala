@@ -8,7 +8,7 @@ import objektwerks.action.{Actions, AddPoolAction, EditPoolAction}
 import objektwerks.table.Table
 import javax.swing.event.{ListSelectionEvent, ListSelectionListener}
 
-object PoolsPane:
+final class PoolsPane extends JPanel:
   val columns = List("id", "name", "volume", "unit")
   val pools = Model.observablePools
   val table = Table[Pool](pools.toList, columns)
@@ -23,10 +23,7 @@ object PoolsPane:
   val addAction = AddPoolAction(Context.add, Context.addImageIcon)
   val editAction = EditPoolAction(Context.edit, Context.editImageIcon)
   val actions = Actions(addAction, editAction)
-
-final class PoolsPane extends JPanel:
-  import PoolsPane.*
-
+  
   setLayout( new BorderLayout() )
 
   add(table, BorderLayout.CENTER)
