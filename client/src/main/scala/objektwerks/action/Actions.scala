@@ -1,4 +1,4 @@
-package objektwerks
+package objektwerks.action
 
 import java.awt.GridLayout
 import javax.swing.{Action, JButton, JPanel}

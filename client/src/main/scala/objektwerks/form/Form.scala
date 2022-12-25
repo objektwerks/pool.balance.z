@@ -1,4 +1,4 @@
-package objektwerks
+package objektwerks.form
 
 import java.awt.GridLayout
 import javax.swing.{BorderFactory, JComponent, JLabel, JPanel}
