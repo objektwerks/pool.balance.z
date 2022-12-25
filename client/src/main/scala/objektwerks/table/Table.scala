@@ -5,19 +5,18 @@ import javax.swing.table.{DefaultTableModel, DefaultTableColumnModel, TableColum
 import javax.swing.event.ListSelectionEvent
 
 import objektwerks.Entity
+import javax.swing.table.TableColumnModel
 
-private class ColumnModel(columns: List[String]) extends DefaultTableColumnModel:
+class ColumnModel(columns: List[String]) extends DefaultTableColumnModel:
   for ((column, index) <- columns.view.zipWithIndex)
     val tableColumn = new TableColumn(index)
     tableColumn.setHeaderValue(column)
     addColumn(tableColumn)
 
-private class TableModel(entities: List[Entity]) extends DefaultTableModel:
+class TableModel(entities: List[Entity]) extends DefaultTableModel:
   entities.foreach { entity => addRow( entity.toArray ) }
 
-final class Table(columns: List[String], entities: List[Entity]) extends JTable:
-  setColumnModel( ColumnModel(columns) )
-  setModel( TableModel(entities) )
+final class Table(tableModel: TableModel, columnsModel: TableColumnModel) extends JTable(tableModel, columnsModel):
   setSelectionMode(ListSelectionModel.SINGLE_SELECTION)
 
   def getId(event: ListSelectionEvent): Option[Long] =

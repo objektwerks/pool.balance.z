@@ -1,17 +1,18 @@
 package objektwerks.pane
 
 import java.awt.BorderLayout
-import javax.swing.JPanel
+import javax.swing.{JPanel, JScrollPane}
 import javax.swing.event.{ListSelectionEvent, ListSelectionListener}
 
 import objektwerks.{Context, Model, Pool}
 import objektwerks.action.{Actions, AddPoolAction, EditPoolAction}
-import objektwerks.table.Table
+import objektwerks.table.{ColumnModel, Table, TableModel}
 
 final class PoolsPane extends JPanel:
+  val pools = Model.observablePools.toList
   val columns = List("id", "name", "volume", "unit")
-  val pools = Model.observablePools
-  val table = Table(columns, pools.toList)
+  val table = Table( TableModel(pools), ColumnModel(columns) )
+  val scrollPane = new JScrollPane( table )
 
   table.getSelectionModel().addListSelectionListener(
     new ListSelectionListener {
@@ -26,5 +27,5 @@ final class PoolsPane extends JPanel:
   
   setLayout( new BorderLayout() )
 
-  add(table, BorderLayout.CENTER)
+  add(scrollPane, BorderLayout.CENTER)
   add(actions, BorderLayout.SOUTH)
