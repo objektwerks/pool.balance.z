@@ -2,11 +2,11 @@ package objektwerks.pane
 
 import java.awt.BorderLayout
 import javax.swing.JPanel
+import javax.swing.event.{ListSelectionEvent, ListSelectionListener}
 
 import objektwerks.{Context, Model, Pool}
 import objektwerks.action.{Actions, AddPoolAction, EditPoolAction}
 import objektwerks.table.Table
-import javax.swing.event.{ListSelectionEvent, ListSelectionListener}
 
 final class PoolsPane extends JPanel:
   val columns = List("id", "name", "volume", "unit")
@@ -20,8 +20,8 @@ final class PoolsPane extends JPanel:
     }
   )
 
-  val addAction = AddPoolAction(Context.add, Context.addImageIcon)
-  val editAction = EditPoolAction(Context.edit, Context.editImageIcon)
+  val addAction = AddPoolAction(Context.add)
+  val editAction = EditPoolAction(Context.edit)
   val actions = Actions(addAction, editAction)
   
   setLayout( new BorderLayout() )
