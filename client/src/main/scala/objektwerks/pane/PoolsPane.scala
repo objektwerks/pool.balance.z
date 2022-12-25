@@ -11,7 +11,7 @@ import javax.swing.event.{ListSelectionEvent, ListSelectionListener}
 final class PoolsPane extends JPanel:
   val columns = List("id", "name", "volume", "unit")
   val pools = Model.observablePools
-  val table = Table[Pool](pools.toList, columns)
+  val table = Table(pools.toList, columns)
 
   table.getSelectionModel().addListSelectionListener(
     new ListSelectionListener {

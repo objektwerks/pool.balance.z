@@ -4,8 +4,10 @@ import javax.swing.{JTable, ListSelectionModel}
 import javax.swing.table.{DefaultTableModel, DefaultTableColumnModel, TableColumn}
 import javax.swing.event.ListSelectionEvent
 
-private class TableModel[E](rows: List[E]) extends DefaultTableModel:
-  addRow( rows.toArray[Any] )
+import objektwerks.Entity
+
+private class TableModel(entities: List[Entity]) extends DefaultTableModel:
+  entities.foreach { entity => addRow( entity.toArray ) }
 
 private class ColumnModel(columns: List[String]) extends DefaultTableColumnModel:
   for ((column, index) <- columns.view.zipWithIndex)
@@ -13,8 +15,8 @@ private class ColumnModel(columns: List[String]) extends DefaultTableColumnModel
     tableColumn.setHeaderValue(column)
     addColumn(tableColumn)
 
-final class Table[E](rows: List[E], columns: List[String]) extends JTable:
-  setModel( TableModel(rows) )
+final class Table(entities: List[Entity], columns: List[String]) extends JTable:
+  setModel( TableModel(entities) )
   setColumnModel( ColumnModel(columns) )
   setSelectionMode(ListSelectionModel.SINGLE_SELECTION)
 
