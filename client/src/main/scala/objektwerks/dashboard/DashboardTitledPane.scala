@@ -6,7 +6,7 @@ import java.awt.{Color, GridLayout}
 import javax.swing.{BorderFactory, JLabel, JPanel}
 import javax.swing.border.TitledBorder
 
-import objektwerks.Form
+import objektwerks.form.Form
 
 object DashboardTitledPane:
   val rows = 1
