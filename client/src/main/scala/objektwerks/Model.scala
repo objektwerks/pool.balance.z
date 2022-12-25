@@ -23,14 +23,14 @@ object Model extends LazyLogging:
   val selectedChemicalId = ObjectProperty[Long](0)
 
   selectedPoolId.onChange { (_, oldPoolId, newPoolId) =>
-    logger.info(s"selected oool id onchange event: $oldPoolId -> $newPoolId")
+    logger.info(s"*** Model: selected pool id onchange event: $oldPoolId -> $newPoolId")
     cleanings(newPoolId)
     measurements(newPoolId)
     chemicals(newPoolId)
   }
 
   observableMeasurements.onChange { (_, _) =>
-    logger.info(s"observable measurements onchange event.")
+    logger.info(s"*** Model: observable measurements onchange event.")
     EventQueue.invokeLater( () => dashboard() )
   }
 
