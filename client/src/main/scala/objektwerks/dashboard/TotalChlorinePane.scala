@@ -2,7 +2,7 @@ package objektwerks.dashboard
 
 import objektwerks.Model.*
 
-final class TotalChlorinePane(title: String = "<html>Total<br>Chlorine") extends DashboardTitledPane(title):
+final class TotalChlorinePane(title: String = "<html>Total Chlorine") extends DashboardTitledPane(title):
   range.setText("0 - 10")
   good.setText("1 - 5")
   ideal.setText(("3"))
