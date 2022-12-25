@@ -22,6 +22,6 @@ final class Table[E](rows: List[E], columns: List[String]) extends JTable:
     if !event.getValueIsAdjusting() && getSelectedRow() != -1 then
       val row = getSelectedRow()
       val column = 0
-      val id = getModel().getValueAt(row, column).asInstanceOf[Long]
+      val id = getModel().getValueAt(row, column).toString().toLong
       Some(id)
     else None
