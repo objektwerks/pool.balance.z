@@ -1,6 +1,6 @@
 package objektwerks.table
 
-import javax.swing.JTable
+import javax.swing.{JTable, ListSelectionModel}
 import javax.swing.table.{DefaultTableModel, DefaultTableColumnModel, TableColumn}
 
 private class TableModel[E](rows: List[E]) extends DefaultTableModel:
@@ -15,3 +15,4 @@ private class ColumnModel(columns: List[String]) extends DefaultTableColumnModel
 final class Table[E](rows: List[E], columns: List[String]) extends JTable:
   setModel( TableModel(rows) )
   setColumnModel( ColumnModel(columns) )
+  setSelectionMode(ListSelectionModel.SINGLE_SELECTION)
