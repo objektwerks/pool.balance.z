@@ -19,7 +19,7 @@ final class Table[E](rows: List[E], columns: List[String]) extends JTable:
   setSelectionMode(ListSelectionModel.SINGLE_SELECTION)
 
   def getId(event: ListSelectionEvent): Option[Long] =
-    if !event.getValueIsAdjusting() then
+    if !event.getValueIsAdjusting() && getSelectedRow() != -1 then
       val row = getSelectedRow()
       val column = 0
       val id = getModel().getValueAt(row, column).asInstanceOf[Long]
