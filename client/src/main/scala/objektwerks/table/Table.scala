@@ -20,7 +20,7 @@ final class Table[E](rows: List[E], columns: List[String]) extends JTable:
 
   def getId(event: ListSelectionEvent): Option[Long] =
     if !event.getValueIsAdjusting() && getSelectedRow() != -1 then
-      val row = getSelectedRow()
+      val row = convertRowIndexToModel(getSelectedRow())
       val column = 0
       val id = getModel().getValueAt(row, column).toString().toLong
       Some(id)
