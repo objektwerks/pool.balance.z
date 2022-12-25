@@ -6,5 +6,6 @@ import javax.swing.JPanel
 final class PoolsPane extends JPanel:
   setLayout( new BorderLayout() )
 
+  val actions = Actions()
   // add table
   // add actions
