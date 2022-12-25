@@ -6,7 +6,8 @@ import javax.swing.JPanel
 import objektwerks.{Context, Model, Pool}
 import objektwerks.action.{Actions, AddPoolAction, EditPoolAction}
 import objektwerks.table.Table
-import javax.swing.event.{ListSelectionEvent, ListSelectionListener}
+import javax.swing.event.{ListSelectionEvent, ListSelectionListener, ListSelectionModel}
+import javax.swing.ListSelectionModel
 
 object PoolsPane:
   val columns = List("id", "name", "volume", "unit")
@@ -16,7 +17,11 @@ object PoolsPane:
   table.getSelectionModel().addListSelectionListener(
     new ListSelectionListener {
       override def valueChanged(event: ListSelectionEvent): Unit =
-        if !event.getValueIsAdjusting() then Model.selectedPoolId.value = event.getSource().asInstanceOf[Pool].id
+        if !event.getValueIsAdjusting() then
+          val row = table.getSelectedRow()
+          val column = 0
+          val id = table.getModel().getValueAt(row, column).asInstanceOf[Long]
+          Model.selectedPoolId.value = id
     }
   )
 
