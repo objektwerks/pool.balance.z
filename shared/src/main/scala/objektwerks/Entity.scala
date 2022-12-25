@@ -8,6 +8,7 @@ import scala.util.Random
 
 sealed trait Entity:
   val id: Long
+  def toArray: Array[Any]
 
 object Entity:
   def instant: String = DateTimeFormatter.ISO_INSTANT.withZone(ZoneId.systemDefault()).format(Instant.now)
@@ -22,7 +23,8 @@ final case class Account(id: Long = 0,
                          license: String = newLicense,
                          pin: String = newPin,
                          activated: String = Entity.instant,
-                         deactivated: String = "") extends Entity
+                         deactivated: String = "") extends Entity:
+  def toArray: Array[Any] = Array(id, license, pin, activated, deactivated)
 
 object Account:
   private val specialChars = "~!@#$%^&*-+=<>?/:;".toList
@@ -56,7 +58,8 @@ object Account:
 final case class Pool(id: Long = 0,
                       name: String = "", 
                       volume: Int = 0,
-                      unit: String = UnitOfMeasure.gl.toString) extends Entity
+                      unit: String = UnitOfMeasure.gl.toString) extends Entity:
+  def toArray: Array[Any] = Array(id, name, volume, unit)
 
 final case class Cleaning(id: Long = 0,
                           poolId: Long,
@@ -66,7 +69,8 @@ final case class Cleaning(id: Long = 0,
                           pumpBasket: Boolean = false,
                           pumpFilter: Boolean = false,
                           vacuum: Boolean = false,
-                          cleaned: String = Entity.instant) extends Entity
+                          cleaned: String = Entity.instant) extends Entity:
+  def toArray: Array[Any] = Array(id, poolId, brush, net, skimmerBasket, pumpBasket, pumpFilter, vacuum, cleaned)
 
 final case class Measurement(id: Long = 0,
                              poolId: Long,
@@ -80,7 +84,8 @@ final case class Measurement(id: Long = 0,
                              totalBromine: Int = 5,
                              salt: Int = 3200,
                              temperature: Int = 85,
-                             measured: String = Entity.instant) extends Entity
+                             measured: String = Entity.instant) extends Entity:
+  def toArray: Array[Any] = Array(id, poolId, totalChlorine, freeChlorine, combinedChlorine, ph, calciumHardness, totalAlkalinity, cyanuricAcid, totalBromine, salt, temperature, measured)
 
 object Measurement:
   val totalChlorineRange = Range(1, 5).inclusive
@@ -99,7 +104,8 @@ final case class Chemical(id: Long = 0,
                           typeof: String = TypeOfChemical.LiquidChlorine.toString,
                           amount: Double = 1.0,
                           unit: String = UnitOfMeasure.gl.toString,
-                          added: String = Entity.instant) extends Entity
+                          added: String = Entity.instant) extends Entity:
+  def toArray: Array[Any] = Array(id, poolId, typeof, amount, unit, added)
 
 enum TypeOfChemical(val display: String):
   case LiquidChlorine extends TypeOfChemical("Liquid Chlorine")
@@ -125,10 +131,3 @@ object UnitOfMeasure:
   def litersToGallons(liters: Double): Double = liters * 0.264
   def poundsToKilograms(pounds: Double): Double = pounds * 0.454
   def kilogramsToPounds(kilograms: Double): Double = kilograms * 2.205
-
-final case class Email(id: Long = 0,
-                       license: String,
-                       address: String,
-                       sent: String = Entity.instant,
-                       processed: Boolean = false,
-                       valid: Boolean = false) extends Entity
