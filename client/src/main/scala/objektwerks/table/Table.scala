@@ -18,19 +18,19 @@ final class ColumnModel(columns: List[String]) extends DefaultTableColumnModel:
 
 final class Table(tableModel: TableModel,
                   columnModel: TableColumnModel,
-                  selectionListener: Long => Unit,
-                  doubleClickListener: Long => Unit) extends JTable(tableModel, columnModel):
+                  setSelectedId: Long => Unit,
+                  fireEditActionById: Long => Unit) extends JTable(tableModel, columnModel):
   setSelectionMode(ListSelectionModel.SINGLE_SELECTION)
 
   getSelectionModel().addListSelectionListener(
     new ListSelectionListener {
-      override def valueChanged(event: ListSelectionEvent): Unit = getId(event).fold(())(id => selectionListener)
+      override def valueChanged(event: ListSelectionEvent): Unit = getId(event).fold(())(id => setSelectedId)
     }
   )
 
   addMouseListener(
     new MouseAdapter {
-      override def mouseClicked(event: MouseEvent): Unit = getId(event).fold(())(id => doubleClickListener )
+      override def mouseClicked(event: MouseEvent): Unit = getId(event).fold(())(id => fireEditActionById )
     }
   )
 
