@@ -80,18 +80,6 @@ object Model extends LazyLogging:
     // todo observablePools ++= store.pools()
     ()
 
-  def cleanings(poolId: Long): Unit =
-    observableCleanings.clear()
-    // todo observableCleanings ++= store.cleanings(poolId)
-
-  def measurements(poolId: Long): Unit =
-    observableMeasurements.clear()
-    // todo observableMeasurements ++= store.measurements(poolId) 
-
-  def chemicals(poolId: Long): Unit =
-    observableChemicals.clear()
-    // todo observableChemicals ++= store.chemicals(poolId) 
-
   def add(pool: Pool): Pool =
     val newPool = ??? // todo store.add(pool)
     observablePools += newPool
@@ -99,11 +87,15 @@ object Model extends LazyLogging:
     // todo selectedPoolId.value = newPool.id
     newPool
 
-  def update(selectedIndex: Int, pool: Pool): Unit =
+  def update(pool: Pool): Unit =
     // todo store.update(pool)
-    observablePools.update(selectedIndex, pool) // bug!!!
+    observablePools.update(1, pool) // bug!!!
     observablePools.sort()
     selectedPoolId.value = pool.id
+
+  def cleanings(poolId: Long): Unit =
+    observableCleanings.clear()
+    // todo observableCleanings ++= store.cleanings(poolId)
 
   def add(cleaning: Cleaning): Cleaning =
     val newCleaning = ??? // todo store.add(cleaning)
@@ -112,12 +104,16 @@ object Model extends LazyLogging:
     // todo selectedCleaningId.value = newCleaning.id
     newCleaning
 
-  def update(selectedIndex: Int, cleaning: Cleaning): Unit =
+  def update(cleaning: Cleaning): Unit =
     // todo store.update(cleaning)
-    observableCleanings.update(selectedIndex, cleaning)
+    observableCleanings.update(1, cleaning) // bug!!!
     observableCleanings.sort()
     selectedCleaningId.value = cleaning.id
-  
+
+  def measurements(poolId: Long): Unit =
+    observableMeasurements.clear()
+    // todo observableMeasurements ++= store.measurements(poolId) 
+
   def add(measurement: Measurement): Measurement =
     val newMeasurement = ??? // todo store.add(measurement)
     observableMeasurements += newMeasurement
@@ -125,11 +121,15 @@ object Model extends LazyLogging:
     // todo selectedMeasurementId.value = newMeasurement.id
     newMeasurement
 
-  def update(selectedIndex: Int, measurement: Measurement): Unit =
+  def update(measurement: Measurement): Unit =
     // todo store.update(measurement)
-    observableMeasurements.update(selectedIndex, measurement)
+    observableMeasurements.update(1, measurement) // bug!!!
     observableMeasurements.sort()
     selectedMeasurementId.value = measurement.id
+
+  def chemicals(poolId: Long): Unit =
+    observableChemicals.clear()
+    // todo observableChemicals ++= store.chemicals(poolId) 
   
   def add(chemical: Chemical): Chemical =
     val newChemical = ??? // todo  store.add(chemical)
@@ -138,9 +138,9 @@ object Model extends LazyLogging:
     // todo selectedChemicalId.value = newChemical.id      
     newChemical
 
-  def update(selectedIndex: Int, chemical: Chemical): Unit =
+  def update(chemical: Chemical): Unit =
     // todo store.update(chemical)
-    observableChemicals.update(selectedIndex, chemical)
+    observableChemicals.update(1, chemical) // bug!!!
     observableChemicals.sort()
     selectedChemicalId.value = chemical.id
 
