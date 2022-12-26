@@ -2,15 +2,17 @@ package objektwerks.dialog
 
 import javax.swing.{JComboBox, JComponent, JFormattedTextField, JTextField}
 
-import objektwerks.{Context, Pool}
+import scala.jdk.CollectionConverters.*
+
+import objektwerks.{Context, Pool, UnitOfMeasure}
 import objektwerks.action.{Actions, CancelAction, SavePoolAction}
 import objektwerks.form.Form
 
 final class PoolDialog(title: String = Context.pool,
                        pool: Pool) extends Dialog(title):
-  val name = new JTextField()
-  val volume = new JFormattedTextField()
-  val unit = new JComboBox()
+  val name = new JTextField( pool.name )
+  val volume = new JFormattedTextField( pool.volume )
+  val unit = new JComboBox( UnitOfMeasure.toList.asJava.toArray() )
 
   val form = Form(
     List[(String, JComponent)](
