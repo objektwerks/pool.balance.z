@@ -29,6 +29,10 @@ object Context:
   val measurement = conf.getString("measurement")
   val chemical = conf.getString("chemical")
 
+  val pools = conf.getString("pools")
+  val cleanings = conf.getString("cleanings")
+  val measurements = conf.getString("measurements")
+  val chemicals = conf.getString("chemicals")
 
   val headers = Headers (
     Header("Content-Type", "application/json; charset=utf-8"),
