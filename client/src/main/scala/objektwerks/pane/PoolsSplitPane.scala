@@ -2,7 +2,7 @@ package objektwerks.pane
 
 import javax.swing.JSplitPane
 
-final class SplitPane extends JSplitPane:
+final class PoolsSplitPane extends JSplitPane:
   setLeftComponent( PoolsTabbedPane() )
   setRightComponent( TabbedPane() )
   setOneTouchExpandable(false)
