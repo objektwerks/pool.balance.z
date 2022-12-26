@@ -1,9 +1,9 @@
 package objektwerks.table
 
-import java.awt.event.MouseEvent
+import java.awt.event.{MouseAdapter, MouseEvent}
 import javax.swing.{JTable, ListSelectionModel}
 import javax.swing.table.{DefaultTableModel, DefaultTableColumnModel, TableColumn, TableColumnModel}
-import javax.swing.event.ListSelectionEvent
+import javax.swing.event.{ListSelectionEvent, ListSelectionListener}
 
 import objektwerks.Entity
 
@@ -17,8 +17,22 @@ final class ColumnModel(columns: List[String]) extends DefaultTableColumnModel:
     addColumn(tableColumn)
 
 final class Table(tableModel: TableModel,
-                  columnModel: TableColumnModel) extends JTable(tableModel, columnModel):
+                  columnModel: TableColumnModel,
+                  selectionListener: Long => Unit,
+                  doubleClickListener: Long => Unit) extends JTable(tableModel, columnModel):
   setSelectionMode(ListSelectionModel.SINGLE_SELECTION)
+
+  getSelectionModel().addListSelectionListener(
+    new ListSelectionListener {
+      override def valueChanged(event: ListSelectionEvent): Unit = getId(event).fold(())(id => selectionListener)
+    }
+  )
+
+  addMouseListener(
+    new MouseAdapter {
+      override def mouseClicked(event: MouseEvent): Unit = getId(event).fold(())(id => doubleClickListener )
+    }
+  )
 
   def getId(event: ListSelectionEvent): Option[Long] =
     if !event.getValueIsAdjusting() && getSelectedRow() != -1 then

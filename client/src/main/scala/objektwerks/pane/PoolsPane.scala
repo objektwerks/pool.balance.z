@@ -14,31 +14,19 @@ final class PoolsPane extends JPanel:
   val columns = List("id", "name", "volume", "unit")
   val table = Table(
     TableModel(pools),
-    ColumnModel(columns)
+    ColumnModel(columns),
+    Long => setSelectedPoolId(Long),
+    Long => fireEditAction(Long)
   )
   val scrollPane = new JScrollPane(table)
-
-  table.getSelectionModel().addListSelectionListener(
-    new ListSelectionListener {
-      override def valueChanged(event: ListSelectionEvent): Unit =
-        table
-          .getId(event)
-          .fold(())(id => Model.selectedPoolId.value = id)
-    }
-  )
-
-  table.addMouseListener(
-    new MouseAdapter {
-      override def mouseClicked(event: MouseEvent): Unit =
-        table
-          .getId(event)
-          .fold(())(id => editAction.actionPerformed( new ActionEvent(table, ActionEvent.ACTION_PERFORMED, id.toString) ))
-    }
-  )
 
   val addAction = AddPoolAction(Context.add)
   val editAction = EditPoolAction(Context.edit)
   val actions = Actions(addAction, editAction)
+
+  def setSelectedPoolId(id: Long): Unit = Model.selectedPoolId.value = id
+
+  def fireEditAction(id: Long): Unit = editAction.actionPerformed( new ActionEvent(table, ActionEvent.ACTION_PERFORMED, id.toString) )
   
   setLayout( new BorderLayout() )
 
