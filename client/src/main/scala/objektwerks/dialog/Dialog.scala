@@ -1,4 +1,4 @@
-package objektwerks
+package objektwerks.dialog
 
 import java.awt.{BorderLayout, Component}
 import javax.swing.JDialog
@@ -6,16 +6,14 @@ import javax.swing.JDialog
 import objektwerks.action.Actions
 import objektwerks.form.Form
 
-final class Dialog(title: String,
-                   form: Form,
-                   actions: Actions,
-                   location: Component = null) extends JDialog:
+open class Dialog(title: String) extends JDialog:
   setTitle(title)
   setLayout( new BorderLayout() )
-  setLocationRelativeTo(location)
+  setLocationRelativeTo(null)
   setModal(true)
 
-  add(form, BorderLayout.CENTER)
-  add(actions, BorderLayout.SOUTH)
+  def add(form: Form, actions: Actions): Unit =
+    add(form, BorderLayout.CENTER)
+    add(actions, BorderLayout.SOUTH)
 
   def view(isVisible: Boolean): Unit = setVisible(isVisible)
