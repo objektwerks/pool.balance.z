@@ -11,7 +11,7 @@ import objektwerks.form.Form
 
 final class PoolDialog(title: String = Context.pool,
                        pool: Pool) extends Dialog(title):
-  val name = new StringField( pool.name )
+  val name = new StringField( pool.name, 24 )
   val volume = IntField( pool.volume )
   val unit = new JComboBox( UnitOfMeasure.toList.asJava.toArray() )
 
