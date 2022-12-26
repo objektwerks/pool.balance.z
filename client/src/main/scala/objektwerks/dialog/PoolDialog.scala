@@ -8,7 +8,7 @@ import objektwerks.field.{IntField, SelectField, StringField}
 import objektwerks.form.Form
 
 final class PoolDialog(pool: Pool) extends Dialog(Context.pool):
-  val name = new StringField( pool.name, 24 )
+  val name = StringField( pool.name, 24 )
   val volume = IntField( pool.volume )
   val unit = SelectField( UnitOfMeasure.toList )
 
