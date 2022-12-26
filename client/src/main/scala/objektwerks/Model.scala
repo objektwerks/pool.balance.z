@@ -8,6 +8,7 @@ import java.text.NumberFormat
 import scalafx.collections.ObservableBuffer
 import scalafx.beans.property.ObjectProperty
 
+import Entity.given
 import Measurement.*
 
 object Model extends LazyLogging:
