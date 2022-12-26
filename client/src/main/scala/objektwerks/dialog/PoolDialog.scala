@@ -6,7 +6,7 @@ import objektwerks.{Context, Pool}
 import objektwerks.action.{Actions, CancelAction, SavePoolAction}
 import objektwerks.form.Form
 
-final class PoolDialog(title: String = "Pool",
+final class PoolDialog(title: String,
                        pool: Pool) extends Dialog(title):
   val name = new JTextField()
   val volume = new JFormattedTextField()
@@ -20,7 +20,7 @@ final class PoolDialog(title: String = "Pool",
     )
   )
 
-  val cancelAction = CancelAction(Context.cancel)
+  val cancelAction = CancelAction(Context.cancel, () => setVisible(false))
   val saveAction = SavePoolAction(Context.edit)
   val actions = Actions(cancelAction, saveAction)
 
