@@ -8,6 +8,6 @@ import objektwerks.pane.SplitPane
 final class View extends JSplitPane:
   setOrientation(JSplitPane.VERTICAL_SPLIT)
   setOneTouchExpandable(false)
-  setDividerLocation(300)
+  setDividerLocation(260)
   setTopComponent( DashboardPane() )
   setBottomComponent( SplitPane() )
