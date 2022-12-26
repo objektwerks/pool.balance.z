@@ -101,7 +101,7 @@ object Model extends LazyLogging:
 
   def update(selectedIndex: Int, pool: Pool): Unit =
     // todo store.update(pool)
-    observablePools.update(selectedIndex, pool)
+    observablePools.update(selectedIndex, pool) // bug!!!
     observablePools.sort()
     selectedPoolId.value = pool.id
 
