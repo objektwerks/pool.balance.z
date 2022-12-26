@@ -7,11 +7,13 @@ import scala.jdk.CollectionConverters.*
 import objektwerks.{Context, Pool, UnitOfMeasure}
 import objektwerks.action.{Actions, CancelAction, SavePoolAction}
 import objektwerks.form.Form
+import javax.swing.text.NumberFormatter
+import java.text.NumberFormat
 
 final class PoolDialog(title: String = Context.pool,
                        pool: Pool) extends Dialog(title):
   val name = new JTextField( pool.name )
-  val volume = new JFormattedTextField( pool.volume )
+  val volume = new JFormattedTextField( NumberFormat.getIntegerInstance() )
   val unit = new JComboBox( UnitOfMeasure.toList.asJava.toArray() )
 
   val form = Form(
