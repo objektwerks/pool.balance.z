@@ -16,7 +16,6 @@ object Model extends LazyLogging:
   val observableCleanings = ObservableBuffer[Cleaning]()
   val observableMeasurements = ObservableBuffer[Measurement]()
   val observableChemicals = ObservableBuffer[Chemical]()
-  val observableErrors = ObservableBuffer[Error]()
 
   val selectedPoolId = ObjectProperty[Long](0)
   val selectedCleaningId = ObjectProperty[Long](0)
@@ -143,14 +142,6 @@ object Model extends LazyLogging:
     observableChemicals.update(1, chemical) // bug!!!
     observableChemicals.sort()
     selectedChemicalId.value = chemical.id
-
-  def onError(message: String): Unit =
-    observableErrors += Error(message)
-    logger.error(message)
-
-  def onError(error: Throwable, message: String): Unit =
-    observableErrors += Error(message)
-    logger.error(message, error)
 
   private def dashboard(): Unit =
     val numberFormat = NumberFormat.getNumberInstance()
