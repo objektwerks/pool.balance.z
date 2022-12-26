@@ -12,8 +12,11 @@ import objektwerks.table.{ColumnModel, Table, TableModel}
 final class PoolsPane extends JPanel:
   val pools = Model.observablePools.toList
   val columns = List("id", "name", "volume", "unit")
-  val table = Table( TableModel(pools), ColumnModel(columns) )
-  val scrollPane = new JScrollPane( table )
+  val table = Table(
+    TableModel(pools),
+    ColumnModel(columns)
+  )
+  val scrollPane = new JScrollPane(table)
 
   table.getSelectionModel().addListSelectionListener(
     new ListSelectionListener {
