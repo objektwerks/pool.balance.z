@@ -3,7 +3,7 @@ package objektwerks.dialog
 import javax.swing.{JComboBox, JComponent, JFormattedTextField, JTextField}
 
 import objektwerks.{Context, Pool}
-import objektwerks.action.{Actions, SavePoolAction}
+import objektwerks.action.{Actions, CancelAction, SavePoolAction}
 import objektwerks.form.Form
 
 final class PoolDialog(title: String = "Pool",
@@ -20,7 +20,8 @@ final class PoolDialog(title: String = "Pool",
     )
   )
 
+  val cancelAction = CancelAction(Context.cancel)
   val saveAction = SavePoolAction(Context.edit)
-  val actions = Actions(saveAction)
+  val actions = Actions(cancelAction, saveAction)
 
   add(form, actions)
