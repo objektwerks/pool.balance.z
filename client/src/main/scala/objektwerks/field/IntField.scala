@@ -1,4 +1,4 @@
-package objektwerks.text
+package objektwerks.field
 
 import javax.swing.JFormattedTextField
 import java.text.NumberFormat
