@@ -16,7 +16,8 @@ final class ColumnModel(columns: List[String]) extends DefaultTableColumnModel:
     tableColumn.setHeaderValue(column)
     addColumn(tableColumn)
 
-final class Table(tableModel: TableModel, columnModel: TableColumnModel) extends JTable(tableModel, columnModel):
+final class Table(tableModel: TableModel,
+                  columnModel: TableColumnModel) extends JTable(tableModel, columnModel):
   setSelectionMode(ListSelectionModel.SINGLE_SELECTION)
 
   def getId(event: ListSelectionEvent): Option[Long] =
