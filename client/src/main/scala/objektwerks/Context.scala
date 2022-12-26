@@ -24,6 +24,12 @@ object Context:
   val chart = conf.getString("chart")
   val errors = conf.getString("errors")
 
+  val pool = conf.getString("pool")
+  val cleaning = conf.getString("cleaning")
+  val measurement = conf.getString("measurement")
+  val chemical = conf.getString("chemical")
+
+
   val headers = Headers (
     Header("Content-Type", "application/json; charset=utf-8"),
     Header("Accept", "application/json")
