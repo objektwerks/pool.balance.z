@@ -18,7 +18,7 @@ final class PoolsPane extends JPanel:
     Long => setSelectedPoolId(Long),
     Long => fireEditAction(Long)
   )
-  val scrollPane = new JScrollPane(table)
+  val tablePane = new JScrollPane(table)
 
   val addAction = AddPoolAction(Context.add)
   val editAction = EditPoolAction(Context.edit)
@@ -30,5 +30,5 @@ final class PoolsPane extends JPanel:
   
   setLayout( new BorderLayout() )
 
-  add(scrollPane, BorderLayout.CENTER)
+  add(tablePane, BorderLayout.CENTER)
   add(actions, BorderLayout.SOUTH)
