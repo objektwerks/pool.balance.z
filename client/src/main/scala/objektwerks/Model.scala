@@ -76,6 +76,7 @@ object Model extends LazyLogging:
   def isTemperatureInRange(value: Int): Boolean = temperatureRange.contains(value)
 
   def pools(): Unit =
+    observablePools.clear()
     // todo observablePools ++= store.pools()
     ()
 
