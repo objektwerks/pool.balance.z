@@ -1,6 +1,6 @@
 package objektwerks
 
-import javax.swing.JSplitPane
+import javax.swing.{BorderFactory, JSplitPane}
 
 import objektwerks.dashboard.DashboardPane
 import objektwerks.pane.SplitPane
@@ -11,3 +11,4 @@ final class View extends JSplitPane:
   setDividerLocation(260)
   setTopComponent( DashboardPane() )
   setBottomComponent( SplitPane() )
+  setBorder( BorderFactory.createEmptyBorder(3, 3, 3, 3) )
