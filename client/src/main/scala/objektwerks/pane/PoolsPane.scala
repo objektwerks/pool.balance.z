@@ -11,7 +11,7 @@ import objektwerks.table.{ColumnModel, Table, TableModel}
 
 final class PoolsPane extends JPanel:
   val pools = Model.observablePools.toList
-  val columns = List("id", "name", "volume", "unit")
+  val columns = List("Id", "Name", "Volume", "Unit")
   val table = Table(
     TableModel(pools),
     ColumnModel(columns),
