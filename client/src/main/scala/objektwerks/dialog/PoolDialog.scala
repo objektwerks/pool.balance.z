@@ -2,7 +2,8 @@ package objektwerks.dialog
 
 import javax.swing.{JComboBox, JComponent, JFormattedTextField, JTextField}
 
-import objektwerks.Pool
+import objektwerks.{Context, Pool}
+import objektwerks.action.{Actions, SavePoolAction}
 import objektwerks.form.Form
 
 final class PoolDialog(title: String = "Pool",
@@ -18,3 +19,8 @@ final class PoolDialog(title: String = "Pool",
       "Unit:" -> unit
     )
   )
+
+  val saveAction = SavePoolAction(Context.edit)
+  val actions = Actions(saveAction)
+
+  add(form, actions)
