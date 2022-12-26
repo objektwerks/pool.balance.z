@@ -21,7 +21,7 @@ final class PoolDialog(title: String = Context.pool,
   )
 
   val cancelAction = CancelAction(Context.cancel, () => view(false))
-  val saveAction = SavePoolAction(Context.edit)
+  val saveAction = SavePoolAction(Context.edit, pool)
   val actions = Actions(cancelAction, saveAction)
 
   add(form, actions)
