@@ -12,6 +12,18 @@ import Entity.given
 import Measurement.*
 
 object Model extends LazyLogging:
+  val selectedPoolId = ObjectProperty[Long](0)
+  val selectedCleaningId = ObjectProperty[Long](0)
+  val selectedMeasurementId = ObjectProperty[Long](0)
+  val selectedChemicalId = ObjectProperty[Long](0)
+
+  selectedPoolId.onChange { (_, oldPoolId, newPoolId) =>
+    logger.info(s"*** Model: selected pool id onchange event: $oldPoolId -> $newPoolId")
+    cleanings(newPoolId)
+    measurements(newPoolId)
+    chemicals(newPoolId)
+  }
+
   val observablePools = ObservableBuffer[Pool]()
   val observableCleanings = ObservableBuffer[Cleaning]()
   val observableMeasurements = ObservableBuffer[Measurement]()
@@ -26,18 +38,6 @@ object Model extends LazyLogging:
   def currentCleaning: Option[Cleaning] = observableCleanings.find( cleaning => cleaning.id == selectedCleaningId.get )
   def currentMeasurement: Option[Measurement] = observableMeasurements.find( measurement => measurement.id == selectedMeasurementId.get )
   def currentChemical: Option[Chemical] = observableChemicals.find( chemical => chemical.id == selectedChemicalId.get )
-
-  val selectedPoolId = ObjectProperty[Long](0)
-  val selectedCleaningId = ObjectProperty[Long](0)
-  val selectedMeasurementId = ObjectProperty[Long](0)
-  val selectedChemicalId = ObjectProperty[Long](0)
-
-  selectedPoolId.onChange { (_, oldPoolId, newPoolId) =>
-    logger.info(s"*** Model: selected pool id onchange event: $oldPoolId -> $newPoolId")
-    cleanings(newPoolId)
-    measurements(newPoolId)
-    chemicals(newPoolId)
-  }
 
   val currentTotalChlorine = ObjectProperty[Int](0)
   val averageTotalChlorine = ObjectProperty[Int](0)
