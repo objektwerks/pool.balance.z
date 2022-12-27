@@ -80,6 +80,8 @@ object Model extends LazyLogging:
 
   def currentMeasurement(): Option[Measurement] = observableMeasurements.find( measurement => measurement.id == selectedMeasurementId.get )
 
+  def currentChemical(): Option[Chemical] = observableChemicals.find( chemical => chemical.id == selectedChemicalId.get )
+
   def pools(): Unit =
     observablePools.clear()
     // todo observablePools ++= store.pools()
