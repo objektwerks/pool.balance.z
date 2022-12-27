@@ -74,6 +74,8 @@ object Model extends LazyLogging:
   val averageTemperature = ObjectProperty[Int](0)
   def isTemperatureInRange(value: Int): Boolean = temperatureRange.contains(value)
 
+  def currentPool(): Option[Pool] = observablePools.find( pool => pool.id == selectedPoolId.get )
+
   def pools(): Unit =
     observablePools.clear()
     // todo observablePools ++= store.pools()
