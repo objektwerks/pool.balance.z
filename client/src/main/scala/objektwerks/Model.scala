@@ -152,11 +152,11 @@ object Model extends LazyLogging:
     val numberFormat = NumberFormat.getNumberInstance()
     numberFormat.setMaximumFractionDigits(1)
     observableMeasurements.headOption.foreach { measurement =>
-      onCurrent(measurement, numberFormat)
-      onAverage(numberFormat)
+      onMeasurementChange(measurement, numberFormat)
+      onAverageMeasurementChange(numberFormat)
     }
 
-  private def onCurrent(measurement: Measurement, numberFormat: NumberFormat): Unit =
+  private def onMeasurementChange(measurement: Measurement, numberFormat: NumberFormat): Unit =
     currentTotalChlorine.value = measurement.totalChlorine
     currentFreeChlorine.value = measurement.freeChlorine
     currentCombinedChlorine.value = numberFormat.format( measurement.combinedChlorine ).toDouble
@@ -168,7 +168,7 @@ object Model extends LazyLogging:
     currentSalt.value = measurement.salt
     currentTemperature.value = measurement.temperature
 
-  private def onAverage(numberFormat: NumberFormat): Unit =
+  private def onAverageMeasurementChange(numberFormat: NumberFormat): Unit =
     val count = observableMeasurements.length
     averageTotalChlorine.value = observableMeasurements.map(_.totalChlorine).sum / count
     averageFreeChlorine.value = observableMeasurements.map(_.freeChlorine).sum / count
