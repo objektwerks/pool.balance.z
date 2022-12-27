@@ -17,6 +17,11 @@ object Model extends LazyLogging:
   val observableMeasurements = ObservableBuffer[Measurement]()
   val observableChemicals = ObservableBuffer[Chemical]()
 
+  observableMeasurements.onChange { (_, _) =>
+    logger.info(s"*** Model: observable measurements onchange event.")
+    EventQueue.invokeLater( () => dashboard() )
+  }
+
   val selectedPoolId = ObjectProperty[Long](0)
   val selectedCleaningId = ObjectProperty[Long](0)
   val selectedMeasurementId = ObjectProperty[Long](0)
@@ -27,11 +32,6 @@ object Model extends LazyLogging:
     cleanings(newPoolId)
     measurements(newPoolId)
     chemicals(newPoolId)
-  }
-
-  observableMeasurements.onChange { (_, _) =>
-    logger.info(s"*** Model: observable measurements onchange event.")
-    EventQueue.invokeLater( () => dashboard() )
   }
 
   val currentTotalChlorine = ObjectProperty[Int](0)
