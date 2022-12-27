@@ -22,7 +22,10 @@ abstract class DashboardTitledPane(title: String) extends JPanel with LazyLoggin
   import DashboardTitledPane.*
 
   setLayout( new GridLayout(rows, columns, horizontalGap, verticalGap) )
-  setBorder( new TitledBorder(title) )
+
+  val titleBorder = new TitledBorder(title)
+  titleBorder.setTitleColor(Color.yellow)
+  setBorder(titleBorder)
 
   val range = new JLabel("")
   val good = new JLabel("")
