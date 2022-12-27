@@ -14,7 +14,7 @@ object DashboardTitledPane:
   val horizontalGap = 6
   val verticalGap = 6
 
-  val emptyBorder = new JLabel().getBorder()
+  val emptyBorder = new JLabel().getBorder
   val greenBorder = BorderFactory.createLineBorder(Color.green, 3)
   val redBorder = BorderFactory.createLineBorder(Color.red, 3)
 
@@ -30,7 +30,7 @@ abstract class DashboardTitledPane(title: String) extends JPanel with LazyLoggin
   val current = new JLabel("0")
   val average = new JLabel("0")
 
-  val form = Form(
+  private val form = Form(
     List[(String, JLabel)](
       "Range:" -> range,
       "Good:" -> good,
@@ -41,20 +41,20 @@ abstract class DashboardTitledPane(title: String) extends JPanel with LazyLoggin
   )
   add(form)
 
-  def currentIsInRange: Unit =
+  def currentIsInRange(): Unit =
     good.setBorder(emptyBorder)
     current.setBorder(emptyBorder)
 
-  def currentIsOutOfRange: Unit =
-    logger.info(s"DashboardTitledPane.currentIsOutOfRange: ${current.getText()}")
+  def currentIsOutOfRange(): Unit =
+    logger.info(s"DashboardTitledPane.currentIsOutOfRange: ${current.getText}")
     good.setBorder(greenBorder)
     current.setBorder(redBorder)
 
-  def averageIsInRange: Unit =
+  def averageIsInRange(): Unit =
     good.setBorder(emptyBorder)
     average.setBorder(emptyBorder)
 
-  def averageIsOutOfRange: Unit =
-    logger.info(s"DashboardTitledPane.averageIsOutOfRange: ${average.getText()}")
+  def averageIsOutOfRange(): Unit =
+    logger.info(s"DashboardTitledPane.averageIsOutOfRange: ${average.getText}")
     good.setBorder(greenBorder)
     average.setBorder(redBorder)
