@@ -8,9 +8,10 @@ import objektwerks.field.{IntField, SelectField, StringField}
 import objektwerks.form.Form
 
 final class PoolDialog(pool: Pool) extends Dialog(Context.pool):
-  val name = StringField( pool.name, 24 )
-  val volume = IntField( pool.volume )
-  val unit = SelectField( UnitOfMeasure.toList )
+  var editedPool = pool.copy()
+  val name = StringField( pool.name, 24, (value: String) => editedPool = pool.copy(name = value) )
+  val volume = IntField( pool.volume, (value: Int) => editedPool = pool.copy(volume = value) )
+  val unit = SelectField( UnitOfMeasure.toList, (value: String) => editedPool = pool.copy(unit = value))
 
   val form = Form(
     List[(String, JComponent)](
@@ -21,7 +22,7 @@ final class PoolDialog(pool: Pool) extends Dialog(Context.pool):
   )
 
   val cancelAction = CancelAction(Context.cancel, () => view(false))
-  val saveAction = SavePoolAction(Context.save, pool)
+  val saveAction = SavePoolAction(Context.save, editedPool)
   val actions = Actions(cancelAction, saveAction)
 
   add(form, actions)
