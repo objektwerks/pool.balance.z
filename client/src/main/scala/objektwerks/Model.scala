@@ -34,51 +34,6 @@ object Model extends LazyLogging:
     EventQueue.invokeLater( () => dashboard() )
   }
 
-  def currentPool: Option[Pool] = observablePools.find( pool => pool.id == selectedPoolId.get )
-  def currentCleaning: Option[Cleaning] = observableCleanings.find( cleaning => cleaning.id == selectedCleaningId.get )
-  def currentMeasurement: Option[Measurement] = observableMeasurements.find( measurement => measurement.id == selectedMeasurementId.get )
-  def currentChemical: Option[Chemical] = observableChemicals.find( chemical => chemical.id == selectedChemicalId.get )
-
-  val currentTotalChlorine = ObjectProperty[Int](0)
-  val averageTotalChlorine = ObjectProperty[Int](0)
-  def isTotalChlorineInRange(value: Int): Boolean = totalChlorineRange.contains(value)
-
-  val currentFreeChlorine = ObjectProperty[Int](0)
-  val averageFreeChlorine = ObjectProperty[Int](0)
-  def isFreeChlorineInRange(value: Int): Boolean = freeChlorineRange.contains(value)
-
-  val currentCombinedChlorine = ObjectProperty[Double](0)
-  val averageCombinedChlorine = ObjectProperty[Double](0)
-  def isCombinedChlorineInRange(value: Double): Boolean = combinedChlorineRange.contains(value)
-
-  val currentPh = ObjectProperty[Double](0)
-  val averagePh = ObjectProperty[Double](0)
-  def isPhInRange(value: Double): Boolean = phRange.contains(value)
-
-  val currentCalciumHardness = ObjectProperty[Int](0)
-  val averageCalciumHardness = ObjectProperty[Int](0)
-  def isCalciumHardnessInRange(value: Int): Boolean = calciumHardnessRange.contains(value)
-
-  val currentTotalAlkalinity = ObjectProperty[Int](0)
-  val averageTotalAlkalinity = ObjectProperty[Int](0)
-  def isTotalAlkalinityInRange(value: Int): Boolean = totalAlkalinityRange.contains(value)
-
-  val currentCyanuricAcid = ObjectProperty[Int](0)
-  val averageCyanuricAcid = ObjectProperty[Int](0)
-  def isCyanuricAcidInRange(value: Int): Boolean = cyanuricAcidRange.contains(value)
-
-  val currentTotalBromine = ObjectProperty[Int](0)
-  val averageTotalBromine = ObjectProperty[Int](0)
-  def isTotalBromineInRange(value: Int): Boolean = totalBromineRange.contains(value)
-
-  val currentSalt = ObjectProperty[Int](0)
-  val averageSalt = ObjectProperty[Int](0)
-  def isSaltInRange(value: Int): Boolean = saltRange.contains(value)
-
-  val currentTemperature = ObjectProperty[Int](0)
-  val averageTemperature = ObjectProperty[Int](0)
-  def isTemperatureInRange(value: Int): Boolean = temperatureRange.contains(value)
-
   def pools(): Unit =
     observablePools.clear()
     // todo observablePools ++= store.pools()
@@ -147,6 +102,51 @@ object Model extends LazyLogging:
     observableChemicals.update(1, chemical) // bug!!!
     observableChemicals.sort()
     selectedChemicalId.value = chemical.id
+
+  def currentPool: Option[Pool] = observablePools.find( pool => pool.id == selectedPoolId.get )
+  def currentCleaning: Option[Cleaning] = observableCleanings.find( cleaning => cleaning.id == selectedCleaningId.get )
+  def currentMeasurement: Option[Measurement] = observableMeasurements.find( measurement => measurement.id == selectedMeasurementId.get )
+  def currentChemical: Option[Chemical] = observableChemicals.find( chemical => chemical.id == selectedChemicalId.get )
+
+  val currentTotalChlorine = ObjectProperty[Int](0)
+  val averageTotalChlorine = ObjectProperty[Int](0)
+  def isTotalChlorineInRange(value: Int): Boolean = totalChlorineRange.contains(value)
+
+  val currentFreeChlorine = ObjectProperty[Int](0)
+  val averageFreeChlorine = ObjectProperty[Int](0)
+  def isFreeChlorineInRange(value: Int): Boolean = freeChlorineRange.contains(value)
+
+  val currentCombinedChlorine = ObjectProperty[Double](0)
+  val averageCombinedChlorine = ObjectProperty[Double](0)
+  def isCombinedChlorineInRange(value: Double): Boolean = combinedChlorineRange.contains(value)
+
+  val currentPh = ObjectProperty[Double](0)
+  val averagePh = ObjectProperty[Double](0)
+  def isPhInRange(value: Double): Boolean = phRange.contains(value)
+
+  val currentCalciumHardness = ObjectProperty[Int](0)
+  val averageCalciumHardness = ObjectProperty[Int](0)
+  def isCalciumHardnessInRange(value: Int): Boolean = calciumHardnessRange.contains(value)
+
+  val currentTotalAlkalinity = ObjectProperty[Int](0)
+  val averageTotalAlkalinity = ObjectProperty[Int](0)
+  def isTotalAlkalinityInRange(value: Int): Boolean = totalAlkalinityRange.contains(value)
+
+  val currentCyanuricAcid = ObjectProperty[Int](0)
+  val averageCyanuricAcid = ObjectProperty[Int](0)
+  def isCyanuricAcidInRange(value: Int): Boolean = cyanuricAcidRange.contains(value)
+
+  val currentTotalBromine = ObjectProperty[Int](0)
+  val averageTotalBromine = ObjectProperty[Int](0)
+  def isTotalBromineInRange(value: Int): Boolean = totalBromineRange.contains(value)
+
+  val currentSalt = ObjectProperty[Int](0)
+  val averageSalt = ObjectProperty[Int](0)
+  def isSaltInRange(value: Int): Boolean = saltRange.contains(value)
+
+  val currentTemperature = ObjectProperty[Int](0)
+  val averageTemperature = ObjectProperty[Int](0)
+  def isTemperatureInRange(value: Int): Boolean = temperatureRange.contains(value)
 
   private def dashboard(): Unit =
     val numberFormat = NumberFormat.getNumberInstance()
