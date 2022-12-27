@@ -8,13 +8,13 @@ final class CyanuricAcidPane(title: String = "<html>Cyanuric Acid") extends Dash
   ideal.setText("50")
 
   currentCyanuricAcid.onChange { (_, _, newValue) =>
-    current.setText(newValue.toString())
-    if isCyanuricAcidInRange(newValue) then currentIsInRange
-    else currentIsOutOfRange
+    current.setText(newValue.toString)
+    if isCyanuricAcidInRange(newValue) then currentIsInRange()
+    else currentIsOutOfRange()
   }
 
   averageCyanuricAcid.onChange { (_, _, newValue) =>
-    average.setText(newValue.toString())
-    if isCyanuricAcidInRange(newValue) then averageIsInRange
-    else averageIsOutOfRange
+    average.setText(newValue.toString)
+    if isCyanuricAcidInRange(newValue) then averageIsInRange()
+    else averageIsOutOfRange()
   }
