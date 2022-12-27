@@ -34,6 +34,11 @@ object Model extends LazyLogging:
     EventQueue.invokeLater( () => dashboard() )
   }
 
+  def currentPool: Option[Pool] = observablePools.find( pool => pool.id == selectedPoolId.get )
+  def currentCleaning: Option[Cleaning] = observableCleanings.find( cleaning => cleaning.id == selectedCleaningId.get )
+  def currentMeasurement: Option[Measurement] = observableMeasurements.find( measurement => measurement.id == selectedMeasurementId.get )
+  def currentChemical: Option[Chemical] = observableChemicals.find( chemical => chemical.id == selectedChemicalId.get )
+
   def pools(): Unit =
     observablePools.clear()
     // todo observablePools ++= store.pools()
@@ -102,11 +107,6 @@ object Model extends LazyLogging:
     observableChemicals.update(1, chemical) // bug!!!
     observableChemicals.sort()
     selectedChemicalId.value = chemical.id
-
-  def currentPool: Option[Pool] = observablePools.find( pool => pool.id == selectedPoolId.get )
-  def currentCleaning: Option[Cleaning] = observableCleanings.find( cleaning => cleaning.id == selectedCleaningId.get )
-  def currentMeasurement: Option[Measurement] = observableMeasurements.find( measurement => measurement.id == selectedMeasurementId.get )
-  def currentChemical: Option[Chemical] = observableChemicals.find( chemical => chemical.id == selectedChemicalId.get )
 
   val currentTotalChlorine = ObjectProperty[Int](0)
   val averageTotalChlorine = ObjectProperty[Int](0)
