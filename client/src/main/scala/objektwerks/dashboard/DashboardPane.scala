@@ -8,14 +8,14 @@ final class DashboardPane extends JPanel:
   topPanel.add( TotalChlorinePane() )
   topPanel.add( FreeChlorinePane() )
   topPanel.add( CombinedChlorinePane() )
+  topPanel.add( PhPane() )
   topPanel.add( CalciumHardnessPane() )
-  topPanel.add( TotalAlkalinityPane() )
 
   val bottomPanel = new JPanel()
   bottomPanel.setLayout( new BoxLayout(bottomPanel, BoxLayout.LINE_AXIS) )
+  bottomPanel.add( TotalAlkalinityPane() )
   bottomPanel.add( CyanuricAcidPane() )
   bottomPanel.add( TotalBrominePane() )
-  bottomPanel.add( PhPane() )
   bottomPanel.add( SaltPane() )
   bottomPanel.add( TemperaturePane() )
 
