@@ -49,7 +49,10 @@ object Model extends LazyLogging:
     if optionalMeasurement.isEmpty then logger.error(s"*** Model: current measurement not found: ${selectedMeasurementId.get}")
     optionalMeasurement
 
-  def currentChemical: Option[Chemical] = observableChemicals.find( chemical => chemical.id == selectedChemicalId.get )
+  def currentChemical: Option[Chemical] =
+    val optionalChemical = observableChemicals.find( chemical => chemical.id == selectedChemicalId.get )
+    if optionalChemical.isEmpty then logger.error(s"*** Model: current chemical not found: ${selectedChemicalId.get}")
+    optionalChemical
 
   def pools(): Unit =
     observablePools.clear()
