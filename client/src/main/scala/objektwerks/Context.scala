@@ -22,7 +22,6 @@ object Context:
   val save = conf.getString("save")
   val cancel = conf.getString("cancel")
   val chart = conf.getString("chart")
-  val errors = conf.getString("errors")
 
   val pool = conf.getString("pool")
   val cleaning = conf.getString("cleaning")
@@ -39,9 +38,9 @@ object Context:
     Header("Accept", "application/json")
   )
 
-  def loadImage(path: String): Image =
+  private def loadImage(path: String): Image =
     new ImageIcon(
       ImageIO.read( Context.getClass.getResourceAsStream(path) )
-    ).getImage()
+    ).getImage
 
   def logo = loadImage("/logo.png")
