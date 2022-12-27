@@ -17,6 +17,11 @@ object Model extends LazyLogging:
   val observableMeasurements = ObservableBuffer[Measurement]()
   val observableChemicals = ObservableBuffer[Chemical]()
 
+  def currentPool: Option[Pool] = observablePools.find( pool => pool.id == selectedPoolId.get )
+  def currentCleaning: Option[Cleaning] = observableCleanings.find( cleaning => cleaning.id == selectedCleaningId.get )
+  def currentMeasurement: Option[Measurement] = observableMeasurements.find( measurement => measurement.id == selectedMeasurementId.get )
+  def currentChemical: Option[Chemical] = observableChemicals.find( chemical => chemical.id == selectedChemicalId.get )
+
   observableMeasurements.onChange { (_, _) =>
     logger.info(s"*** Model: observable measurements onchange event.")
     EventQueue.invokeLater( () => dashboard() )
@@ -73,11 +78,6 @@ object Model extends LazyLogging:
   val currentTemperature = ObjectProperty[Int](0)
   val averageTemperature = ObjectProperty[Int](0)
   def isTemperatureInRange(value: Int): Boolean = temperatureRange.contains(value)
-
-  def currentPool: Option[Pool] = observablePools.find( pool => pool.id == selectedPoolId.get )
-  def currentCleaning: Option[Cleaning] = observableCleanings.find( cleaning => cleaning.id == selectedCleaningId.get )
-  def currentMeasurement: Option[Measurement] = observableMeasurements.find( measurement => measurement.id == selectedMeasurementId.get )
-  def currentChemical: Option[Chemical] = observableChemicals.find( chemical => chemical.id == selectedChemicalId.get )
 
   def pools(): Unit =
     observablePools.clear()
