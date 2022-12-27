@@ -39,7 +39,10 @@ object Model extends LazyLogging:
     if optionalPool.isEmpty then logger.error(s"*** Model: current pool not found: ${selectedPoolId.get}")
     optionalPool
 
-  def currentCleaning: Option[Cleaning] = observableCleanings.find( cleaning => cleaning.id == selectedCleaningId.get )
+  def currentCleaning: Option[Cleaning] =
+    val optionalCleaning = observableCleanings.find( cleaning => cleaning.id == selectedCleaningId.get )
+    if optionalCleaning.isEmpty then logger.error(s"*** Model: current cleaning not found: ${selectedCleaningId.get}")
+    optionalCleaning
 
   def currentMeasurement: Option[Measurement] = observableMeasurements.find( measurement => measurement.id == selectedMeasurementId.get )
 
