@@ -34,7 +34,11 @@ object Model extends LazyLogging:
     EventQueue.invokeLater( () => dashboard() )
   }
 
-  def currentPool: Option[Pool] = observablePools.find( pool => pool.id == selectedPoolId.get )
+  def currentPool: Option[Pool] =
+    val pool = observablePools.find( pool => pool.id == selectedPoolId.get )
+    if pool.isEmpty then logger.info(s"*** Model: current pool not found: ${selectedPoolId.get}")
+    pool
+
   def currentCleaning: Option[Cleaning] = observableCleanings.find( cleaning => cleaning.id == selectedCleaningId.get )
   def currentMeasurement: Option[Measurement] = observableMeasurements.find( measurement => measurement.id == selectedMeasurementId.get )
   def currentChemical: Option[Chemical] = observableChemicals.find( chemical => chemical.id == selectedChemicalId.get )
