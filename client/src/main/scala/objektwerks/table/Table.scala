@@ -22,32 +22,30 @@ final class Table(tableModel: TableModel,
                   fireEditActionById: Long => Unit) extends JTable(tableModel, columnModel):
   setSelectionMode(ListSelectionModel.SINGLE_SELECTION)
 
-  getSelectionModel().addListSelectionListener(
-    new ListSelectionListener {
-      override def valueChanged(event: ListSelectionEvent): Unit = getId(event).fold(())(id => setSelectedId)
-    }
+  getSelectionModel.addListSelectionListener(
+    (event: ListSelectionEvent) => getId(event).fold(())(_ => setSelectedId)
   )
 
   addMouseListener(
     new MouseAdapter {
-      override def mouseClicked(event: MouseEvent): Unit = getId(event).fold(())(id => fireEditActionById )
+      override def mouseClicked(event: MouseEvent): Unit = getId(event).fold(())(_ => fireEditActionById )
     }
   )
 
-  def getId(event: ListSelectionEvent): Option[Long] =
-    if !event.getValueIsAdjusting() && getSelectedRow() != -1 then
-      Some( toId( getSelectedRow() ) )
+  private def getId(event: ListSelectionEvent): Option[Long] =
+    if !event.getValueIsAdjusting && getSelectedRow != -1 then
+      Some( toId( getSelectedRow ) )
     else None
 
-  def getId(event: MouseEvent): Option[Long] =
-    if event.getClickCount == 2 && !getSelectionModel().getValueIsAdjusting() && getSelectedRow() != -1 then
-      Some( toId( getSelectedRow() ) )
+  private def getId(event: MouseEvent): Option[Long] =
+    if event.getClickCount == 2 && !getSelectionModel.getValueIsAdjusting && getSelectedRow != -1 then
+      Some( toId( getSelectedRow ) )
     else None
 
-  def toId(selectedRow: Int): Long =
+  private def toId(selectedRow: Int): Long =
     val row = convertRowIndexToModel(selectedRow)
     val column = 0
-    getModel()
+    getModel
       .getValueAt(row, column)
-      .toString()
+      .toString
       .toLong
