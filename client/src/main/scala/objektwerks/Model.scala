@@ -78,6 +78,8 @@ object Model extends LazyLogging:
 
   def currentCleaning(): Option[Cleaning] = observableCleanings.find( cleaning => cleaning.id == selectedCleaningId.get )
 
+  def currentMeasurement(): Option[Measurement] = observableMeasurements.find( measurement => measurement.id == selectedMeasurementId.get )
+
   def pools(): Unit =
     observablePools.clear()
     // todo observablePools ++= store.pools()
