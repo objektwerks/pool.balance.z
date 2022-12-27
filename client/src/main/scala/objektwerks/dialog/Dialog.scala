@@ -18,4 +18,6 @@ open class Dialog(title: String) extends JDialog:
 
   def open(): Unit = setVisible(true)
 
-  def close(): Unit = setVisible(false)
+  def close(): Unit =
+    setVisible(false)
+    dispose()
