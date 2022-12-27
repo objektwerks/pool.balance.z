@@ -6,13 +6,10 @@ import java.text.NumberFormat
 
 final class DoubleField(value: Double,
                         columns: Int = 10,
-                        fireChangeAction: Double => Unit) extends JFormattedTextField( NumberFormat.getNumberInstance() ):
+                        fireChangeAction: Option[Double] => Unit) extends JFormattedTextField( NumberFormat.getNumberInstance() ):
   setValue(value)
   setColumns(columns)
 
   addPropertyChangeListener(
-    (event: PropertyChangeEvent) => {
-      if event.getSource.isInstanceOf[DoubleField] then
-        fireChangeAction( getValue.asInstanceOf[Number].doubleValue )
-    }
+    (_: PropertyChangeEvent) => fireChangeAction( getText.trim.toDoubleOption )
   )
