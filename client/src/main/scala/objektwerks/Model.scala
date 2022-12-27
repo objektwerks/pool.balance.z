@@ -74,13 +74,13 @@ object Model extends LazyLogging:
   val averageTemperature = ObjectProperty[Int](0)
   def isTemperatureInRange(value: Int): Boolean = temperatureRange.contains(value)
 
-  def currentPool(): Option[Pool] = observablePools.find( pool => pool.id == selectedPoolId.get )
+  def currentPool: Option[Pool] = observablePools.find( pool => pool.id == selectedPoolId.get )
 
-  def currentCleaning(): Option[Cleaning] = observableCleanings.find( cleaning => cleaning.id == selectedCleaningId.get )
+  def currentCleaning: Option[Cleaning] = observableCleanings.find( cleaning => cleaning.id == selectedCleaningId.get )
 
-  def currentMeasurement(): Option[Measurement] = observableMeasurements.find( measurement => measurement.id == selectedMeasurementId.get )
+  def currentMeasurement: Option[Measurement] = observableMeasurements.find( measurement => measurement.id == selectedMeasurementId.get )
 
-  def currentChemical(): Option[Chemical] = observableChemicals.find( chemical => chemical.id == selectedChemicalId.get )
+  def currentChemical: Option[Chemical] = observableChemicals.find( chemical => chemical.id == selectedChemicalId.get )
 
   def pools(): Unit =
     observablePools.clear()

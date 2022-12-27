@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent
 import javax.swing.AbstractAction
 
 import objektwerks.dialog.PoolDialog
-import objektwerks.Pool
+import objektwerks.{Model, Pool}
 
 final class EditPoolAction(name: String) extends AbstractAction(name):
-  override def actionPerformed(event: ActionEvent): Unit = PoolDialog(Pool()).open() // TODO: Need currently selected pool!
+  override def actionPerformed(event: ActionEvent): Unit = Model.currentPool.fold(())(pool => PoolDialog(Pool()).open())
