@@ -8,13 +8,13 @@ final class PhPane(title: String = "<html>Ph") extends DashboardTitledPane(title
   ideal.setText("7.4")
 
   currentPh.onChange { (_, _, newValue) =>
-    current.setText(newValue.toString())
-    if isPhInRange(newValue) then currentIsInRange
-    else currentIsOutOfRange
+    current.setText(newValue.toString)
+    if isPhInRange(newValue) then currentIsInRange()
+    else currentIsOutOfRange()
   }
 
   averagePh.onChange { (_, _, newValue) =>
-    average.setText(newValue.toString())
-    if isPhInRange(newValue) then averageIsInRange
-    else averageIsOutOfRange
+    average.setText(newValue.toString)
+    if isPhInRange(newValue) then averageIsInRange()
+    else averageIsOutOfRange()
   }
