@@ -13,7 +13,7 @@ object Client extends LazyLogging:
     EventQueue.invokeLater(
       () => {
         UIManager.setLookAndFeel( new FlatDarculaLaf() )
-        Taskbar.getTaskbar().setIconImage(logo)
+        Taskbar.getTaskbar.setIconImage(logo)
         Frame(logo, title, width, height).setVisible(true)
       }
     )
