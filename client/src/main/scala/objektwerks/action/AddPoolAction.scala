@@ -7,4 +7,4 @@ import objektwerks.dialog.PoolDialog
 import objektwerks.Pool
 
 final class AddPoolAction(name: String) extends AbstractAction(name):
-  override def actionPerformed(event: ActionEvent): Unit = PoolDialog(Pool()).view(true)
+  override def actionPerformed(event: ActionEvent): Unit = PoolDialog(Pool()).open()

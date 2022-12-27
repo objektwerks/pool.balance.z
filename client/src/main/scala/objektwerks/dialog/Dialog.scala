@@ -16,4 +16,6 @@ open class Dialog(title: String) extends JDialog:
     add(form, BorderLayout.CENTER)
     add(actions, BorderLayout.SOUTH)
 
-  def view(isVisible: Boolean): Unit = setVisible(isVisible)
+  def open(): Unit = setVisible(true)
+
+  def close(): Unit = setVisible(false)
