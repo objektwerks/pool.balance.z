@@ -12,6 +12,7 @@ object Client extends LazyLogging:
   def main(args: Array[String]): Unit =
     EventQueue.invokeLater(
       () => {
+        System.setProperty("apple.awt.application.name", Context.title)
         UIManager.setLookAndFeel( new FlatDarculaLaf() )
         Taskbar.getTaskbar.setIconImage(logo)
         Frame(logo, title, width, height).setVisible(true)
