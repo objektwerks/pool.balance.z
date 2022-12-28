@@ -1,6 +1,6 @@
 package objektwerks.dialog
 
-import objektwerks.Context
+import objektwerks.{Context, Chemical}
 
-final class ChemicalDialog extends Dialog(Context.chemical):
+final class ChemicalDialog(chemical: Chemical) extends Dialog(Context.chemical):
   
