@@ -13,6 +13,7 @@ object Client extends LazyLogging:
     EventQueue.invokeLater(
       () => {
         System.setProperty("apple.awt.application.name", Context.title)
+        System.setProperty("apple.awt.application.appearance", "system")
         UIManager.setLookAndFeel( new FlatDarculaLaf() )
         Taskbar.getTaskbar.setIconImage(logo)
         Frame(logo, title, width, height).setVisible(true)
