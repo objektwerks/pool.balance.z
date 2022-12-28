@@ -1,5 +1,7 @@
 package objektwerks
 
+import com.formdev.flatlaf.util.SystemInfo
+
 import java.awt.Image
 import javax.imageio.ImageIO
 import javax.swing.ImageIcon
@@ -43,4 +45,10 @@ object Context:
       ImageIO.read( Context.getClass.getResourceAsStream(path) )
     ).getImage
 
-  def logo = loadImage("/logo.png")
+  def logo: Image = loadImage("/logo.png")
+
+  def init: Unit =
+    if SystemInfo.isMacOS then
+      System.setProperty( "apple.laf.useScreenMenuBar", "true" )
+      System.setProperty("apple.awt.application.name", title)
+      System.setProperty("apple.awt.application.appearance", "system")
