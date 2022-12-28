@@ -1,6 +1,7 @@
 package objektwerks
 
 import com.formdev.flatlaf.FlatDarculaLaf
+import com.formdev.flatlaf.util.SystemInfo
 import com.typesafe.scalalogging.LazyLogging
 
 import java.awt.{EventQueue, Taskbar}
@@ -12,8 +13,10 @@ object Client extends LazyLogging:
   def main(args: Array[String]): Unit =
     EventQueue.invokeLater(
       () => {
-        System.setProperty("apple.awt.application.name", Context.title)
-        System.setProperty("apple.awt.application.appearance", "system")
+        if SystemInfo.isMacOS then
+          System.setProperty( "apple.laf.useScreenMenuBar", "true" )
+          System.setProperty("apple.awt.application.name", Context.title)
+          System.setProperty("apple.awt.application.appearance", "system")
         UIManager.setLookAndFeel( new FlatDarculaLaf() )
         Taskbar.getTaskbar.setIconImage(logo)
         Frame(logo, title, width, height).setVisible(true)
