@@ -13,10 +13,7 @@ object Client extends LazyLogging:
   def main(args: Array[String]): Unit =
     EventQueue.invokeLater(
       () => {
-        if SystemInfo.isMacOS then
-          System.setProperty( "apple.laf.useScreenMenuBar", "true" )
-          System.setProperty("apple.awt.application.name", Context.title)
-          System.setProperty("apple.awt.application.appearance", "system")
+        Context.init
         UIManager.setLookAndFeel( new FlatDarculaLaf() )
         Taskbar.getTaskbar.setIconImage(logo)
         Frame(logo, title, width, height).setVisible(true)
