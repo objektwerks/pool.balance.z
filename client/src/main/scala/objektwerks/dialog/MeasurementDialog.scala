@@ -1,6 +1,6 @@
 package objektwerks.dialog
 
-import objektwerks.Context
+import objektwerks.{Context, Measurement}
 
-final class MeasurementDialog extends Dialog(Context.measurement):
+final class MeasurementDialog(measurement: Measurement) extends Dialog(Context.measurement):
   
