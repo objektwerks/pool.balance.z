@@ -1,6 +1,6 @@
 package objektwerks.dialog
 
-import objektwerks.Context
+import objektwerks.{Cleaning, Context}
 
-final class CleaningDialog extends Dialog(Context.cleaning):
+final class CleaningDialog(cleaning: Cleaning) extends Dialog(Context.cleaning):
   
