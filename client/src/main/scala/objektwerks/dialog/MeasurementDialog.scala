@@ -19,6 +19,7 @@ final class MeasurementDialog(measurement: Measurement) extends Dialog(Context.m
   val cyanuricAcid = IntField( measurement.cyanuricAcid, (value: Int) => editedMeasurement = measurement.copy(cyanuricAcid = value) )
   val totalBromine = IntField( measurement.totalBromine, (value: Int) => editedMeasurement = measurement.copy(totalBromine = value) )
   val salt = IntField( measurement.salt, (value: Int) => editedMeasurement = measurement.copy(salt = value) )
+  val temperature = IntField( measurement.temperature, (value: Int) => editedMeasurement = measurement.copy(temperature = value) )
 
   val form = Form(
     List[(String, JComponent)](
@@ -30,7 +31,8 @@ final class MeasurementDialog(measurement: Measurement) extends Dialog(Context.m
       "Total Alkalinity:" -> totalAlkalinity,
       "Cyanuric Acid:" -> cyanuricAcid,
       "Total Bromine:" -> totalBromine,
-      "Salt:" -> salt
+      "Salt:" -> salt,
+      "Temperature:" -> temperature
     )
   )
 
