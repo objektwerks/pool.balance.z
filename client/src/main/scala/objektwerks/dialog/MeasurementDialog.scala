@@ -3,6 +3,7 @@ package objektwerks.dialog
 import javax.swing.{JComponent, JLabel}
 
 import objektwerks.{Context, Measurement}
+import objektwerks.Context.asLabel
 import objektwerks.action.{Actions, CancelAction, SaveMeasurementAction}
 import objektwerks.field.{DoubleField, IntField, StringField}
 import objektwerks.form.Form
@@ -23,17 +24,17 @@ final class MeasurementDialog(measurement: Measurement) extends Dialog(Context.m
 
   val form = Form(
     List[(String, JComponent)](
-      "Total Chlorine:" -> totalChlorine,
-      "Free Chlorine:" -> freeChlorine,
-      "Combined Chlorine:" -> combinedChlorine,
-      "Ph:" -> ph,
-      "Calcium Hardness:" -> calciumHardness,
-      "Total Alkalinity:" -> totalAlkalinity,
-      "Cyanuric Acid:" -> cyanuricAcid,
-      "Total Bromine:" -> totalBromine,
-      "Salt:" -> salt,
-      "Temperature:" -> temperature,
-      "Measured:" -> new JLabel(measurement.measured)
+      Context.totalChlorine.asLabel -> totalChlorine,
+      Context.freeChlorine.asLabel -> freeChlorine,
+      Context.combinedChlorine.asLabel -> combinedChlorine,
+      Context.ph.asLabel -> ph,
+      Context.calciumHardness.asLabel -> calciumHardness,
+      Context.totalAlkalinity.asLabel -> totalAlkalinity,
+      Context.cyanuricAcid.asLabel -> cyanuricAcid,
+      Context.totalBromine.asLabel -> totalBromine,
+      Context.salt.asLabel -> salt,
+      Context.temperature.asLabel -> temperature,
+      Context.measured.asLabel -> new JLabel(measurement.measured)
     )
   )
 
