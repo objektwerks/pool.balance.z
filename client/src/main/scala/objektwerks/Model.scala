@@ -41,8 +41,12 @@ object Model extends LazyLogging:
   val observableMeasurements = ObservableBuffer[Measurement]()
   val observableChemicals = ObservableBuffer[Chemical]()
 
-  observableMeasurements.onChange { (_, _) =>
-    logger.info(s"*** Model: observable measurements onchange event.")
+  observablePools.onChange { (_, changes) =>
+    logger.info(s"*** Model: observable measurements onchange event: $changes")
+  }
+
+  observableMeasurements.onChange { (_, changes) =>
+    logger.info(s"*** Model: observable measurements onchange event: $changes")
     EventQueue.invokeLater( () => dashboard() )
   }
 
