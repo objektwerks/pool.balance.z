@@ -11,10 +11,12 @@ final class CleaningDialog(cleaning: Cleaning) extends Dialog(Context.cleaning):
   var editedCleaning = cleaning.copy()
 
   val brush = BooleanField( cleaning.brush, (state: Boolean) => editedCleaning = cleaning.copy(brush = state) )
+  val net = BooleanField( cleaning.net, (state: Boolean) => editedCleaning = cleaning.copy(net = state) )
 
   val form = Form(
     List[(String, JComponent)](
-      "Brush:" -> brush
+      "Brush:" -> brush,
+      "Net:" -> net
     )
   )
 
