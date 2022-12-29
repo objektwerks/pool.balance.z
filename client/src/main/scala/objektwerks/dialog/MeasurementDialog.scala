@@ -32,7 +32,8 @@ final class MeasurementDialog(measurement: Measurement) extends Dialog(Context.m
       "Cyanuric Acid:" -> cyanuricAcid,
       "Total Bromine:" -> totalBromine,
       "Salt:" -> salt,
-      "Temperature:" -> temperature
+      "Temperature:" -> temperature,
+      "Measured:" -> new JLabel(measurement.measured)
     )
   )
 
