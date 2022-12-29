@@ -1,5 +1,7 @@
 package objektwerks.dialog
 
+import javax.swing.{JComponent, JLabel}
+
 import objektwerks.{Context, Measurement}
 import objektwerks.action.{Actions, CancelAction, SaveMeasurementAction}
 import objektwerks.field.{DoubleField, IntField, StringField}
@@ -10,6 +12,11 @@ final class MeasurementDialog(measurement: Measurement) extends Dialog(Context.m
 
   val totalChlorine = IntField( measurement.totalChlorine, (value: Int) => editedMeasurement = measurement.copy(totalChlorine = value) )
 
+  val form = Form(
+    List[(String, JComponent)](
+      "Total Chlorine:" -> totalChlorine
+    )
+  )
 
   val cancelAction = CancelAction(Context.cancel, () => close())
   val saveAction = SaveMeasurementAction(Context.save, editedMeasurement)
