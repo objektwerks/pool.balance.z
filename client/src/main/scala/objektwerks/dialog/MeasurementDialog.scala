@@ -40,3 +40,5 @@ final class MeasurementDialog(measurement: Measurement) extends Dialog(Context.m
   val cancelAction = CancelAction(Context.cancel, () => close())
   val saveAction = SaveMeasurementAction(Context.save, editedMeasurement)
   val actions = Actions(cancelAction, saveAction)
+
+  add(form, actions)
