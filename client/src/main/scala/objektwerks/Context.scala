@@ -72,6 +72,8 @@ object Context:
       ImageIO.read( Context.getClass.getResourceAsStream(path) )
     ).getImage
 
+  def asLabel(value: String): String = s"$value:"
+  
   def logo: Image = loadImage("/logo.png")
 
   def init: Unit =
