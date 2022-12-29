@@ -49,6 +49,6 @@ object Context:
 
   def init: Unit =
     if SystemInfo.isMacOS then
-      System.setProperty( "apple.laf.useScreenMenuBar", "true" )
+      System.setProperty("apple.laf.useScreenMenuBar", "true")
       System.setProperty("apple.awt.application.name", title)
       System.setProperty("apple.awt.application.appearance", "system")
