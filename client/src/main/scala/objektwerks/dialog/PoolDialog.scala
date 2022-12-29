@@ -3,6 +3,7 @@ package objektwerks.dialog
 import javax.swing.JComponent
 
 import objektwerks.{Context, Pool, UnitOfMeasure}
+import objektwerks.Context.asLabel
 import objektwerks.action.{Actions, CancelAction, SavePoolAction}
 import objektwerks.field.{IntField, SelectField, StringField}
 import objektwerks.form.Form
@@ -20,9 +21,9 @@ final class PoolDialog(pool: Pool) extends Dialog(Context.pool):
 
   val form = Form(
     List[(String, JComponent)](
-      "Name:" -> name,
-      "Volume:" -> volume,
-      "Unit:" -> unit
+      Context.name.asLabel -> name,
+      Context.volume.asLabel -> volume,
+      Context.unit.asLabel -> unit
     )
   )
 
