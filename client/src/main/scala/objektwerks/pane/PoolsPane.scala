@@ -6,12 +6,13 @@ import javax.swing.{JPanel, JScrollPane}
 import javax.swing.event.{ListSelectionEvent, ListSelectionListener}
 
 import objektwerks.{Context, Model, Pool}
+import objektwerks.Context.*
 import objektwerks.action.{Actions, AddPoolAction, EditPoolAction}
 import objektwerks.table.{ColumnModel, Table, TableModel}
 
 final class PoolsPane extends JPanel:
   val pools = Model.observablePools.toList
-  val columns = List("Id", "Name", "Volume", "Unit")
+  val columns = List(id, name, volume, unit)
   val table = Table(
     TableModel(pools),
     ColumnModel(columns),
