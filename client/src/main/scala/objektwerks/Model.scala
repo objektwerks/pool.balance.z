@@ -45,6 +45,10 @@ object Model extends LazyLogging:
     logger.info(s"*** Model: observable measurements onchange event: $changes")
   }
 
+  observableCleanings.onChange { (_, changes) =>
+    logger.info(s"*** Model: observable cleanings onchange event: $changes")
+  }
+
   observableMeasurements.onChange { (_, changes) =>
     logger.info(s"*** Model: observable measurements onchange event: $changes")
     EventQueue.invokeLater( () => dashboard() )
