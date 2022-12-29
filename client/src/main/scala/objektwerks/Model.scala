@@ -54,6 +54,10 @@ object Model extends LazyLogging:
     EventQueue.invokeLater( () => dashboard() )
   }
 
+  observableChemicals.onChange { (_, changes) =>
+    logger.info(s"*** Model: observable chemicals onchange event: $changes")
+  }
+
   def currentPool: Option[Pool] =
     val optionalPool = observablePools.find( pool => pool.id == selectedPoolId.get )
     if optionalPool.isEmpty then logger.error(s"*** Model: current pool not found: ${selectedPoolId.get}")
