@@ -35,15 +35,6 @@ object Context:
   val measurements = conf.getString("measurements")
   val chemicals = conf.getString("chemicals")
 
-  val liquidChlorine = conf.getString("liquidChlorine")
-  val trichlor = conf.getString("trichlor")
-  val dichlor = conf.getString("dichlor")
-  val calciumHypochlorite = conf.getString("calciumHypochlorite")
-  val stabilizer = conf.getString("stabilizer")
-  val algaecide = conf.getString("algaecide")
-  val muriaticAcid = conf.getString("muriaticAcid")
-  val salt = conf.getString("salt")
-
   val headers = Headers (
     Header("Content-Type", "application/json; charset=utf-8"),
     Header("Accept", "application/json")
