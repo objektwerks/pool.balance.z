@@ -20,3 +20,6 @@ object Client extends LazyLogging:
       }
     )
     logger.info("*** Client running ...")
+    sys.addShutdownHook {
+      logger.info("*** Client shutdown.")
+    }
