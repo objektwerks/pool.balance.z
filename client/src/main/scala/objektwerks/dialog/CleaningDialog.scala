@@ -32,3 +32,5 @@ final class CleaningDialog(cleaning: Cleaning) extends Dialog(Context.cleaning):
   val cancelAction = CancelAction(Context.cancel, () => close())
   val saveAction = SaveCleaningAction(Context.save, editedCleaning)
   val actions = Actions(cancelAction, saveAction)
+
+  add(form, actions)
