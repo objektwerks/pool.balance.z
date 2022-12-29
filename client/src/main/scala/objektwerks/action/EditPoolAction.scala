@@ -7,4 +7,4 @@ import objektwerks.dialog.PoolDialog
 import objektwerks.{Model, Pool}
 
 final class EditPoolAction(name: String) extends AbstractAction(name):
-  override def actionPerformed(event: ActionEvent): Unit = Model.currentPool.fold(())(pool => PoolDialog(Pool()).open())
+  override def actionPerformed(event: ActionEvent): Unit = Model.currentPool.fold(())(pool => PoolDialog(pool).open())
