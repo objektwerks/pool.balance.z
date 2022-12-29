@@ -3,6 +3,7 @@ package objektwerks.dialog
 import javax.swing.{JComponent, JLabel}
 
 import objektwerks.{Cleaning, Context}
+import objektwerks.Context.asLabel
 import objektwerks.action.{Actions, CancelAction, SaveCleaningAction}
 import objektwerks.field.BooleanField
 import objektwerks.form.Form
@@ -19,13 +20,13 @@ final class CleaningDialog(cleaning: Cleaning) extends Dialog(Context.cleaning):
 
   val form = Form(
     List[(String, JComponent)](
-      "Brush:" -> brush,
-      "Net:" -> net,
-      "Skimmer Basket:" -> skimmerBasket,
-      "Pump Basket:" -> pumpBasket,
-      "Pump Filter:" -> pumpFilter,
-      "Vacuum:" -> vacuum,
-      "Cleaned:" -> new JLabel(cleaning.cleaned)
+      Context.brush.asLabel -> brush,
+      Context.net.asLabel -> net,
+      Context.skimmerBasket.asLabel -> skimmerBasket,
+      Context.pumpBasket.asLabel -> pumpBasket,
+      Context.pumpFilter.asLabel -> pumpFilter,
+      Context.vacuum.asLabel -> vacuum,
+      Context.cleaned.asLabel -> new JLabel(cleaning.cleaned)
     )
   )
 
