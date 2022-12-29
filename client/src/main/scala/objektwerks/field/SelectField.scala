@@ -12,7 +12,7 @@ final class SelectField(values: List[String],
                         selectedIndex: Option[(String, Int)]) extends JComboBox[String]( new util.Vector( values.asJava ) ):
   selectedIndex match
     case Some( (_, index) ) => setSelectedIndex(index)
-    case None =>
+    case None => setSelectedIndex(0)
   
   addPropertyChangeListener(
     (_: PropertyChangeEvent) => fireChangeAction( getSelectedItem.asInstanceOf[String] )
