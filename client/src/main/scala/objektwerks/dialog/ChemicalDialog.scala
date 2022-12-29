@@ -26,3 +26,5 @@ final class ChemicalDialog(chemical: Chemical) extends Dialog(Context.chemical):
   val cancelAction = CancelAction(Context.cancel, () => close())
   val saveAction = SaveChemicalAction(Context.save, editedChemical)
   val actions = Actions(cancelAction, saveAction)
+
+  add(form, actions)
