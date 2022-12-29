@@ -11,10 +11,12 @@ final class MeasurementDialog(measurement: Measurement) extends Dialog(Context.m
   var editedMeasurement = measurement.copy()
 
   val totalChlorine = IntField( measurement.totalChlorine, (value: Int) => editedMeasurement = measurement.copy(totalChlorine = value) )
+  val freeChlorine = IntField( measurement.freeChlorine, (value: Int) => editedMeasurement = measurement.copy(freeChlorine = value) )
 
   val form = Form(
     List[(String, JComponent)](
-      "Total Chlorine:" -> totalChlorine
+      "Total Chlorine:" -> totalChlorine,
+      "Free Chlorine" -> freeChlorine
     )
   )
 
