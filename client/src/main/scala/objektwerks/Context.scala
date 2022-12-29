@@ -62,6 +62,10 @@ object Context:
   val amount = conf.getString("amount")
   val added = conf.getString("added")
 
+  val license = conf.getString("license")
+  val activated = conf.getString("activated")
+  val deactivated = conf.getString("deactivated")
+
   val headers = Headers (
     Header("Content-Type", "application/json; charset=utf-8"),
     Header("Accept", "application/json")
@@ -73,7 +77,7 @@ object Context:
     ).getImage
 
   def asLabel(value: String): String = s"$value:"
-  
+
   def logo: Image = loadImage("/logo.png")
 
   def init: Unit =
