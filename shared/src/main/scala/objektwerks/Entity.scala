@@ -120,6 +120,7 @@ enum TypeOfChemical(val display: String):
 object TypeOfChemical:
   def toEnum(display: String): TypeOfChemical = TypeOfChemical.valueOf(display.filterNot(_.isWhitespace))
   def toList: List[String] = TypeOfChemical.values.map(toc => toc.display).toList
+  def selectedIndex(target: String): Option[(String, Int)] = toList.zipWithIndex.find( (value, index) => value == target )
 
 enum UnitOfMeasure:
   case gl, l, lb, kg, tablet
