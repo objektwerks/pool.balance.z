@@ -14,13 +14,15 @@ final class MeasurementDialog(measurement: Measurement) extends Dialog(Context.m
   val freeChlorine = IntField( measurement.freeChlorine, (value: Int) => editedMeasurement = measurement.copy(freeChlorine = value) )
   val combinedChlorine = DoubleField( measurement.combinedChlorine, (value: Double) => editedMeasurement = measurement.copy(combinedChlorine = value) )
   val ph = DoubleField( measurement.ph, (value: Double) => editedMeasurement = measurement.copy(ph = value) )
+  val calciumHardness = IntField( measurement.calciumHardness, (value: Int) => editedMeasurement = measurement.copy(calciumHardness = value) )
 
   val form = Form(
     List[(String, JComponent)](
       "Total Chlorine:" -> totalChlorine,
       "Free Chlorine:" -> freeChlorine,
       "Combined Chlorine:" -> combinedChlorine,
-      "Ph:" -> ph
+      "Ph:" -> ph,
+      "Calcium Hardness:" -> calciumHardness
     )
   )
 
