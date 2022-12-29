@@ -16,7 +16,10 @@ final class ChemicalDialog(chemical: Chemical) extends Dialog(Context.chemical):
     (value: String) => editedChemical = chemical.copy(typeof = value),
     TypeOfChemical.selectedIndex(chemical.typeof)
   )
-  val amount = DoubleField( chemical.amount, (value: Double) => editedChemical = chemical.copy(amount = value) )
+  val amount = DoubleField(
+    chemical.amount,
+    (value: Double) => editedChemical = chemical.copy(amount = value)
+  )
   val unit = SelectField(
     UnitOfMeasure.toList,
     (value: String) => editedChemical = chemical.copy(unit = value),
