@@ -22,9 +22,9 @@ final class CleaningDialog(cleaning: Cleaning) extends Dialog(Context.cleaning):
       "Brush:" -> brush,
       "Net:" -> net,
       "Skimmer Basket:" -> skimmerBasket,
-      "Pump Basket" -> pumpBasket,
-      "Pump Filter" -> pumpFilter,
-      "Vacuum" -> vacuum,
+      "Pump Basket:" -> pumpBasket,
+      "Pump Filter:" -> pumpFilter,
+      "Vacuum:" -> vacuum,
       "Cleaned:" -> new JLabel(cleaning.cleaned)
     )
   )
