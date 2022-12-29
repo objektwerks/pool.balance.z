@@ -11,9 +11,9 @@ import Context.*
 
 object Client extends LazyLogging:
   def main(args: Array[String]): Unit =
+    Context.init
     EventQueue.invokeLater(
       () => {
-        Context.init
         UIManager.setLookAndFeel( new FlatDarculaLaf() )
         Taskbar.getTaskbar.setIconImage(logo)
         Frame(logo, title, width, height).setVisible(true)
