@@ -16,6 +16,7 @@ final class MeasurementDialog(measurement: Measurement) extends Dialog(Context.m
   val ph = DoubleField( measurement.ph, (value: Double) => editedMeasurement = measurement.copy(ph = value) )
   val calciumHardness = IntField( measurement.calciumHardness, (value: Int) => editedMeasurement = measurement.copy(calciumHardness = value) )
   val totalAlkalinity = IntField( measurement.totalAlkalinity, (value: Int) => editedMeasurement = measurement.copy(totalAlkalinity = value) )
+  val cyanuricAcid = IntField( measurement.cyanuricAcid, (value: Int) => editedMeasurement = measurement.copy(cyanuricAcid = value) )
 
   val form = Form(
     List[(String, JComponent)](
@@ -24,7 +25,8 @@ final class MeasurementDialog(measurement: Measurement) extends Dialog(Context.m
       "Combined Chlorine:" -> combinedChlorine,
       "Ph:" -> ph,
       "Calcium Hardness:" -> calciumHardness,
-      "Total Alkalinity:" -> totalAlkalinity
+      "Total Alkalinity:" -> totalAlkalinity,
+      "Cyanuric Acid:" -> cyanuricAcid
     )
   )
 
