@@ -14,6 +14,14 @@ final class ChemicalDialog(chemical: Chemical) extends Dialog(Context.chemical):
   val amount = DoubleField( chemical.amount, (value: Double) => editedChemical = chemical.copy(amount = value) )
   val unit = SelectField( UnitOfMeasure.toList, (value: String) => editedChemical = chemical.copy(unit = value) )
 
+  val form = Form(
+    List[(String, JComponent)](
+      "Type Of:" -> typeof,
+      "Amount:" -> amount,
+      "Unit:" -> unit,
+      "Added:" -> new JLabel(chemical.added)
+    )
+  )
 
   val cancelAction = CancelAction(Context.cancel, () => close())
   val saveAction = SaveChemicalAction(Context.save, editedChemical)
