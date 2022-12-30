@@ -25,6 +25,7 @@ final class DoubleRangeField(value: Double,
 
   addPropertyChangeListener(
     (_: PropertyChangeEvent) =>
-      val value = getValue.asInstanceOf[Number].doubleValue()
-      if isInRange(value) then fireChangeAction(value)
+      getText.toDoubleOption match
+        case Some(value) => if isInRange(value) then fireChangeAction(value)
+        case None => ()
   )
