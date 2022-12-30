@@ -52,8 +52,9 @@ final class MeasurementDialog(measurement: Measurement) extends Dialog(Context.m
     (value: Int) => totalBromineRange.contains(value),
     (value: Int) => editedMeasurement = measurement.copy(totalBromine = value)
   )
-  val salt = IntField(
+  val salt = IntRangeField(
     measurement.salt,
+    (value: Int) => saltRange.contains(value),
     (value: Int) => editedMeasurement = measurement.copy(salt = value)
   )
   val temperature = IntField(
