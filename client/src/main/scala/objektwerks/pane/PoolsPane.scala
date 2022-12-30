@@ -1,7 +1,7 @@
 package objektwerks.pane
 
 import java.awt.BorderLayout
-import java.awt.event.{ActionEvent, MouseAdapter, MouseEvent}
+import java.awt.event.ActionEvent
 import javax.swing.{JPanel, JScrollPane}
 import javax.swing.event.{ListSelectionEvent, ListSelectionListener}
 
