@@ -73,7 +73,7 @@ Measurements
 | --------------------------------- | ----------- | ----------- | ----- |
 | total chlorine (tc = fc + cc)     | 0 - 10      | 1 - 5       | 3     |
 | free chlorine (fc)                | 0 - 10      | 1 - 5       | 3     |
-| combinded chlorine (cc = tc - fc) | 0 - 0.5     | 0 - 0.2     | 0     |
+| combinded chlorine (cc = tc - fc) | 0.0 - 0.5   | 0.0 - 0.2   | 0.0   |
 | ph                                | 6.2 - 8.4   | 7.2 - 7.6   | 7.4   |
 | calcium hardness                  | 0 - 1000    | 250 - 500   | 375   |
 | total alkalinity                  | 0 - 240     | 80 - 120    | 100   |
