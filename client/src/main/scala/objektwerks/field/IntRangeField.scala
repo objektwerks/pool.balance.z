@@ -24,8 +24,7 @@ final class IntRangeField(value: Int,
   )
 
   addPropertyChangeListener(
-    (_: PropertyChangeEvent) =>
-      getText.toIntOption match
-        case Some(value) => if isInRange(value) then fireChangeAction(value)
-        case None => ()
+    (event: PropertyChangeEvent) =>
+      val value = event.getNewValue.asInstanceOf[Number].intValue
+      if isInRange(value) then fireChangeAction(value)
   )
