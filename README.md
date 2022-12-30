@@ -68,6 +68,7 @@ Model
 Measurements
 ------------
 >Measured in ppm ( parts per million ).
+
 | Measurement                       | Range       | Good       | Ideal |
 | --------------------------------- | ----------- | ---------- | ----- |
 | total chlorine (tc = fc + cc)     | 0 - 10      | 1 - 5      | 3     |
