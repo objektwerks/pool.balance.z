@@ -42,8 +42,9 @@ final class MeasurementDialog(measurement: Measurement) extends Dialog(Context.m
     (value: Int) => totalAlkalinityRange.contains(value),
     (value: Int) => editedMeasurement = measurement.copy(totalAlkalinity = value)
   )
-  val cyanuricAcid = IntField(
+  val cyanuricAcid = IntRangeField(
     measurement.cyanuricAcid,
+    (value: Int) => cyanuricAcidRange.contains(value),
     (value: Int) => editedMeasurement = measurement.copy(cyanuricAcid = value)
   )
   val totalBromine = IntField(
