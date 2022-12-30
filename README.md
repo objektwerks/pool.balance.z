@@ -92,19 +92,6 @@ Model
 -----
 * Pool 1 --> * Cleaning | Measurement | Chemical
 
-UI
---
-1. Top: grid(total chlorine, free chlorine, ph, calcium hardness, total alkalinity, cyanuric acid, total bromine)
-2. Bottom:
-    1. Left: pane(pools)
-    2. Right: tabbedpane(cleanings, measurements, chemicals)
-
-Charts
-------
-* cleanings - line chart ( x = cleaned, y = ? )
-* measurements - line chart ( x = measured, y = measurement )
-* chemicals - bar chart ( x = added, y = amount/typeof )
-
 Postgresql
 ----------
 1. config:
