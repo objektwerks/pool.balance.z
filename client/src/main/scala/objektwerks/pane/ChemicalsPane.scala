@@ -1,10 +1,13 @@
 package objektwerks.pane
 
 import java.awt.BorderLayout
-import javax.swing.JPanel
+import java.awt.event.ActionEvent
+import javax.swing.{JPanel, JScrollPane}
 
-import objektwerks.Model
+import objektwerks.{Context, Model}
 import objektwerks.Context.*
+import objektwerks.action.{Actions, AddChemicalAction, EditChemicalAction}
+import objektwerks.table.{ColumnModel, Table, TableModel}
 
 final class ChemicalsPane extends JPanel:
   val chemicals = Model.observableChemicals.toList
