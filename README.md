@@ -84,8 +84,8 @@ Measurements
 
 Chemicals
 ---------
-* Liquids measured in: gallons ( gl ) and liters ( l ).
-* Granules measured in: pounds ( lbs ) and kilograms ( kg ).
+* Liquids measured in **gallons** ( gl ) and **liters** ( l ).
+* Granules measured in **pounds** ( lbs ) and **kilograms** ( kg ).
 1. LiquidChlorine ( gl/l )
 2. Trichlor ( tablet )
 3. Dichlor ( lbs/kg )
