@@ -61,6 +61,10 @@ Use Cases
 2. measure pool chemical content
 3. add chemicals to pool
 
+Model
+-----
+* Pool 1 --> * Cleaning | Measurement | Chemical
+
 Measurements
 ------------
 >Measured in ppm ( parts per million ).
@@ -87,10 +91,6 @@ Chemicals
 6. Algaecide ( gl/l )
 7. MuriaticAcid ( gl/l )
 8. Salt ( lbs/kg )
-
-Model
------
-* Pool 1 --> * Cleaning | Measurement | Chemical
 
 Postgresql
 ----------
