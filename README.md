@@ -4,7 +4,8 @@ Pool Balance
 
 Install
 -------
-1. brew install postgresql && brew services start postgresql
+1. brew install postgresql
+2. brew services start postgresql
 
 Build
 -----
