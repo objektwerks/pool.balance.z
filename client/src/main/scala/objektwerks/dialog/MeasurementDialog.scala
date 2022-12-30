@@ -17,8 +17,9 @@ final class MeasurementDialog(measurement: Measurement) extends Dialog(Context.m
     (value: Int) => totalChlorineRange.contains(value),
     (value: Int) => editedMeasurement = measurement.copy(totalChlorine = value)
   )
-  val freeChlorine = IntField(
+  val freeChlorine = IntRangeField(
     measurement.freeChlorine,
+    (value: Int) => freeChlorineRange.contains(value),
     (value: Int) => editedMeasurement = measurement.copy(freeChlorine = value)
   )
   val combinedChlorine = DoubleField(
