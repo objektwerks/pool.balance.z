@@ -3,10 +3,10 @@ package objektwerks.dialog
 import javax.swing.{JComponent, JLabel}
 
 import objektwerks.{Context, Measurement}
-import objektwerks.Measurement.*
 import objektwerks.Context.asLabel
+import objektwerks.Measurement.*
 import objektwerks.action.{Actions, CancelAction, SaveMeasurementAction}
-import objektwerks.field.{DoubleField, DoubleRangeField, IntField, IntRangeField, StringField}
+import objektwerks.field.{DoubleRangeField, IntRangeField, StringField}
 import objektwerks.form.Form
 
 final class MeasurementDialog(measurement: Measurement) extends Dialog(Context.measurement):
