@@ -6,7 +6,7 @@ import objektwerks.{Context, Measurement}
 import objektwerks.Measurement.*
 import objektwerks.Context.asLabel
 import objektwerks.action.{Actions, CancelAction, SaveMeasurementAction}
-import objektwerks.field.{DoubleField, IntField, IntRangeField, StringField}
+import objektwerks.field.{DoubleField, DoubleRangeField, IntField, IntRangeField, StringField}
 import objektwerks.form.Form
 
 final class MeasurementDialog(measurement: Measurement) extends Dialog(Context.measurement):
@@ -22,8 +22,9 @@ final class MeasurementDialog(measurement: Measurement) extends Dialog(Context.m
     (value: Int) => freeChlorineRange.contains(value),
     (value: Int) => editedMeasurement = measurement.copy(freeChlorine = value)
   )
-  val combinedChlorine = DoubleField(
+  val combinedChlorine = DoubleRangeField(
     measurement.combinedChlorine,
+    (value: Double) => combinedChlorineRange.contains(value),
     (value: Double) => editedMeasurement = measurement.copy(combinedChlorine = value)
   )
   val ph = DoubleField(
