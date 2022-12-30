@@ -8,6 +8,7 @@ Todo
 1. Register ()
 2. Login (pin)
 3. Model <-> Proxy
+4. Charts ( balance )
 
 Install
 -------
