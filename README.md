@@ -2,6 +2,13 @@ Pool Balance
 ------------
 >Pool cleaning, measurement and chemical balancing app using Swing, ZIO and Scala 3.
 
+Todo
+----
+>Development is nearly beta-complete; pending the resolution of this showstopping bug; https://github.com/zio/zio-protoquill/issues/217
+1. Register
+2. Login
+3. Model <-> Proxy
+
 Install
 -------
 1. brew install postgresql
