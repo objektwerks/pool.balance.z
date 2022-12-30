@@ -27,7 +27,7 @@ final class MeasurementsPane extends JPanel:
   val editAction = EditMeasurementAction(Context.edit)
   val actions = Actions(addAction, editAction)
 
-  def setSelectedId(id: Long): Unit = Model.selectedCleaningId.value = id
+  def setSelectedId(id: Long): Unit = Model.selectedMeasurementId.value = id
 
   def fireEditActionById(id: Long): Unit = editAction.actionPerformed( new ActionEvent(table, ActionEvent.ACTION_PERFORMED, id.toString) )
 
