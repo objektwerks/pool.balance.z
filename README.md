@@ -68,6 +68,14 @@ Model
 Measurements
 ------------
 >Measured in ppm ( parts per million ).
+| Measurement                       | Range       | Good       | Ideal |
+| --------------------------------- | ----------- | ---------- | ----- |
+| total chlorine (tc = fc + cc)     | 0 - 10      | 1 - 5      | 3     |
+| free chlorine (fc)                | 0 - 10      | 1 - 5      | 3     |
+| combinded chlorine (cc = tc - fc) | 0 - 0.5     | 0 - 0.2    | 0     |
+| ph                                | 6.2 - 8.4   | 7.2 - 7.6  | 7.4   |
+
+
 1. total chlorine (tc = fc + cc):    range = 0 - 10,    good = 1 - 5,       ideal = 3
 2. free chlorine (fc):               range = 0 - 10,    good = 1 - 5,       ideal = 3
 3. combined chlorine (cc = tc - fc): range = 0 - 0.5,   good = 0 - 0.2,     ideal = 0
