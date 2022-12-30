@@ -3,16 +3,18 @@ package objektwerks.dialog
 import javax.swing.{JComponent, JLabel}
 
 import objektwerks.{Context, Measurement}
+import objektwerks.Measurement.*
 import objektwerks.Context.asLabel
 import objektwerks.action.{Actions, CancelAction, SaveMeasurementAction}
-import objektwerks.field.{DoubleField, IntField, StringField}
+import objektwerks.field.{DoubleField, IntField, IntRangeField, StringField}
 import objektwerks.form.Form
 
 final class MeasurementDialog(measurement: Measurement) extends Dialog(Context.measurement):
-  var editedMeasurement = measurement.copy()
+  var editedMeasurement = measurement.copy()    
 
-  val totalChlorine = IntField(
+  val totalChlorine = IntRangeField(
     measurement.totalChlorine,
+    (value: Int) => totalChlorineRange.contains(value),
     (value: Int) => editedMeasurement = measurement.copy(totalChlorine = value)
   )
   val freeChlorine = IntField(
