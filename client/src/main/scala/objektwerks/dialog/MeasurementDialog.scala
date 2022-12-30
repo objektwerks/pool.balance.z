@@ -27,8 +27,9 @@ final class MeasurementDialog(measurement: Measurement) extends Dialog(Context.m
     (value: Double) => combinedChlorineRange.contains(value),
     (value: Double) => editedMeasurement = measurement.copy(combinedChlorine = value)
   )
-  val ph = DoubleField(
+  val ph = DoubleRangeField(
     measurement.ph,
+    (value: Double) => phRange.contains(value),
     (value: Double) => editedMeasurement = measurement.copy(ph = value)
   )
   val calciumHardness = IntField(
