@@ -187,6 +187,16 @@ object Model extends LazyLogging:
   val averageTemperature = ObjectProperty[Int](0)
   def isTemperatureInRange(value: Int): Boolean = temperatureRange.contains(value)
 
+  def init: Unit =
+    logger.info(s"*** Model: initializing ...")
+    pools()
+    observablePools.headOption.collect { pool =>
+      cleanings(pool.id)
+      measurements(pool.id)
+      chemicals(pool.id)
+    }
+    logger.info(s"*** Model: initialized.")
+
   private def dashboard(): Unit =
     val numberFormat = NumberFormat.getNumberInstance()
     numberFormat.setMaximumFractionDigits(1)
