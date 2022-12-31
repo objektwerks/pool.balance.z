@@ -4,11 +4,12 @@ Pool Balance
 
 Todo
 ----
->Development is nearly beta-complete; pending the resolution of this showstopping bug; https://github.com/zio/zio-protoquill/issues/217
-1. Register ()
-2. Login (pin)
+>Development is nearly beta-complete; pending the resolution of this showstopping
+>bug; https://github.com/zio/zio-protoquill/issues/217
+1. Register
+2. Login
 3. Model <-> Proxy
-4. Charts ( balance )
+4. Charts
 
 Install
 -------
