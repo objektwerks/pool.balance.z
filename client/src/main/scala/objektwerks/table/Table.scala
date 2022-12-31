@@ -23,7 +23,7 @@ final class Table(tableModel: TableModel,
                   setSelectedId: Long => Unit,
                   fireEditActionById: Long => Unit) extends JTable(tableModel, columnModel):
   setSelectionMode(ListSelectionModel.SINGLE_SELECTION)
-  getTableHeader.setPreferredSize(new Dimension(80, 40))
+  getTableHeader.setPreferredSize( new Dimension(80, 40) )
   
   getSelectionModel.addListSelectionListener(
     (event: ListSelectionEvent) => getId(event).fold(())(_ => setSelectedId)

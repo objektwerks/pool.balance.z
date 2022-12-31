@@ -1,6 +1,6 @@
 package objektwerks.action
 
-import java.awt.GridLayout
+import java.awt.{Dimension, GridLayout}
 import javax.swing.{Action, JButton, JPanel}
 
 object Actions:
@@ -15,4 +15,6 @@ final class Actions(actions: Action*) extends JPanel:
   setLayout( new GridLayout(rows, columns, horizontalGap, verticalGap) )
 
   for (action <- actions)
-    add( new JButton(action) )
+    val button = new JButton(action)
+    button.setPreferredSize( new Dimension(80, 40) )
+    add(button)
