@@ -1,5 +1,6 @@
 package objektwerks.table
 
+import java.awt.Dimension
 import java.awt.event.{MouseAdapter, MouseEvent}
 import javax.swing.{JTable, ListSelectionModel}
 import javax.swing.table.{DefaultTableModel, DefaultTableColumnModel, TableColumn, TableColumnModel}
@@ -14,7 +15,7 @@ final class ColumnModel(columns: List[String]) extends DefaultTableColumnModel:
   for ((column, index) <- columns.view.zipWithIndex)
     val tableColumn = new TableColumn(index)
     tableColumn.setHeaderValue(column)
-    tableColumn.sizeWidthToFit()
+    
     addColumn(tableColumn)
 
 final class Table(tableModel: TableModel,
@@ -22,7 +23,8 @@ final class Table(tableModel: TableModel,
                   setSelectedId: Long => Unit,
                   fireEditActionById: Long => Unit) extends JTable(tableModel, columnModel):
   setSelectionMode(ListSelectionModel.SINGLE_SELECTION)
-
+  getTableHeader.setPreferredSize(new Dimension(80, 40))
+  
   getSelectionModel.addListSelectionListener(
     (event: ListSelectionEvent) => getId(event).fold(())(_ => setSelectedId)
   )
