@@ -11,7 +11,7 @@ import objektwerks.table.{ColumnModel, Table, TableModel}
 
 final class CleaningsPane extends JPanel:
   val cleanings = Model.observableCleanings.toList
-  val columns = List(id, poolId, brush, net, skimmerBasket, pumpBasket, pumpFilter, vacuum, cleaned)
+  val columns = List(id, poolId, brush, net, skimmerBasket.wrap, pumpBasket.wrap, pumpFilter.wrap, vacuum, cleaned)
   val table = Table(
     TableModel(cleanings),
     ColumnModel(columns),
