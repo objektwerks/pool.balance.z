@@ -1,18 +1,12 @@
 package objektwerks.action
 
-import java.awt.{Dimension, GridLayout}
-import javax.swing.{Action, JButton, JPanel}
-
-object Actions:
-  val rows = 1
-  val horizontalGap = 6
-  val verticalGap = 6
+import java.awt.Dimension
+import javax.swing.{Action, BoxLayout, JButton, JPanel}
+import javax.swing.BoxLayout
 
 final class Actions(actions: Action*) extends JPanel:
-  import Actions.*
-
   val columns = actions.length
-  setLayout( new GridLayout(rows, columns, horizontalGap, verticalGap) )
+  setLayout( new BoxLayout(this, BoxLayout.LINE_AXIS) )
 
   for (action <- actions)
     val button = new JButton(action)
