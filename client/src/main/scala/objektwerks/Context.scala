@@ -78,6 +78,7 @@ object Context:
 
   extension (value: String)
     def asLabel: String = s"$value:"
+    def wrap: String = s"<html>${value.replace(" ", "<br>")}"
 
   def logo: Image = loadImage("/logo.png")
 
