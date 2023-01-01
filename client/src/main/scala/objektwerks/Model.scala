@@ -192,12 +192,17 @@ object Model extends LazyLogging:
           case _ => ()
     )
   
-  def add(chemical: Chemical): Chemical =
-    val newChemical = ??? // todo  store.add(chemical)
-    observableChemicals += newChemical
-    observableChemicals.sort()
-    // todo selectedChemicalId.value = newChemical.id      
-    newChemical
+  def add(chemical: Chemical): Unit =
+    Proxy.call(
+      SaveChemical(observableAccount.get.license, chemical),
+      (event: Event) =>
+        event match
+          case Fault(cause, occurred) => logger.error(s"*** Model.add chemical error: $cause at: $occurred")
+          case ChemicalSaved(id) =>
+            observableChemicals += chemical.copy(id = id)
+            selectedChemicalId.set(chemical.id)
+          case _ => ()
+    )
 
   def update(chemical: Chemical): Unit =
     // todo store.update(chemical)
