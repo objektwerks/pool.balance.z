@@ -127,9 +127,7 @@ object Model extends LazyLogging:
       SaveCleaning(observableAccount.get.license, cleaning),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFault("Model.add cleaning", cleaning, fault)
-        case CleaningSaved(id) =>
-          observableCleanings += cleaning.copy(id = id)
-          selectedCleaningId.set(cleaning.id)
+        case CleaningSaved(id) => observableCleanings += cleaning.copy(id = id)
         case _ => ()
     )
 
@@ -138,9 +136,7 @@ object Model extends LazyLogging:
       SaveCleaning(observableAccount.get.license, cleaning),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFault("Model.update cleaning", cleaning, fault)
-        case CleaningSaved(id) =>
-          observableCleanings.update(observableCleanings.indexOf(cleaning), cleaning)
-          selectedCleaningId.set(cleaning.id)
+        case CleaningSaved(id) => observableCleanings.update(observableCleanings.indexOf(cleaning), cleaning)
         case _ => ()
     )
 
