@@ -177,7 +177,7 @@ object Model extends LazyLogging:
       SaveMeasurement(observableAccount.get.license, measurement),
       (event: Event) =>
         event match
-          case Fault(cause, occurred) => logger.error(s"*** Model.update measurement error: $cause at: $occurred")
+          case fault @ Fault(_, _) => onFault("Model.update measurement", fault)
           case MeasurementSaved(id) =>
             observableMeasurements.update(observableMeasurements.indexOf(measurement), measurement)
             selectedMeasurementId.set(measurement.id)
