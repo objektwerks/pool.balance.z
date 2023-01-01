@@ -115,7 +115,7 @@ object Model extends LazyLogging:
       ListCleanings(observableAccount.get.license),
       (event: Event) =>
         event match
-          case Fault(cause, occurred) => logger.error(s"*** Model.cleanings error: $cause at: $occurred")
+          case fault @ Fault(_, _) => onFault("Model.cleanings", fault)
           case CleaningsListed(cleanings) =>
             observableCleanings.clear()
             observableCleanings ++= cleanings
