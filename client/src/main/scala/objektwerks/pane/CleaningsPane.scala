@@ -18,6 +18,9 @@ final class CleaningsPane extends JPanel:
     Long => setSelectedId(Long),
     Long => fireEditActionById(Long)
   )
+  Model.observableCleanings.onChange { (_, _) =>
+    table.setModel( TableModel( Model.observableCleanings.toList ) )
+  }
   val tablePane = new JScrollPane(table)
 
   val addAction = AddCleaningAction(Context.add)
