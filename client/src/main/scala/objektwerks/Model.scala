@@ -61,6 +61,11 @@ object Model extends LazyLogging:
     logger.info(s"*** Model: observable chemicals onchange event: $changes")
   }
 
+  def init: Unit =
+    logger.info(s"*** Model: initializing ...")
+    pools()
+    logger.info(s"*** Model: initialized.")
+
   def onFault(source: String, fault: Fault): Unit =
     observableFaults += fault
     logger.error(s"*** $source - $fault")
@@ -264,11 +269,6 @@ object Model extends LazyLogging:
   val currentTemperature = ObjectProperty[Int](0)
   val averageTemperature = ObjectProperty[Int](0)
   def isTemperatureInRange(value: Int): Boolean = temperatureRange.contains(value)
-
-  def init: Unit =
-    logger.info(s"*** Model: initializing ...")
-    pools()
-    logger.info(s"*** Model: initialized.")
 
   private def dashboard(): Unit =
     val numberFormat = NumberFormat.getNumberInstance()
