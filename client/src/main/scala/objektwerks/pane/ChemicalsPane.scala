@@ -18,6 +18,9 @@ final class ChemicalsPane extends JPanel:
     Long => setSelectedId(Long),
     Long => fireEditActionById(Long)
   )
+  Model.observableChemicals.onChange { (_, _) =>
+    table.setModel( TableModel( Model.observableChemicals.toList ) )
+  }
   val tablePane = new JScrollPane(table)
 
   val addAction = AddChemicalAction(Context.add)
