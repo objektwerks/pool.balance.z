@@ -83,7 +83,6 @@ object Context:
   def logo: Image = loadImage("/logo.png")
 
   def init: Unit =
-    Model.init
     if SystemInfo.isMacOS then
       System.setProperty("apple.laf.useScreenMenuBar", "true")
       System.setProperty("apple.awt.application.name", title)
