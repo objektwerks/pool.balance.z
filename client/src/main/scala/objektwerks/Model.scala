@@ -143,10 +143,16 @@ object Model extends LazyLogging:
     )
 
   def update(cleaning: Cleaning): Unit =
-    // todo store.update(cleaning)
-    observableCleanings.update(1, cleaning) // bug!!!
-    observableCleanings.sort()
-    selectedCleaningId.value = cleaning.id
+    Proxy.call(
+      SaveCleaning(observableAccount.get.license, cleaning),
+      (event: Event) =>
+        event match
+          case Fault(cause, occurred) => logger.error(s"*** Model.update cleaning error: $cause at: $occurred")
+          case CleaningSaved(id) =>
+            observableCleanings.update(observableCleanings.indexOf(cleaning), cleaning)
+            selectedCleaningId.set(cleaning.id)
+          case _ => ()
+    )
 
   def measurements(poolId: Long): Unit =
     Proxy.call(
