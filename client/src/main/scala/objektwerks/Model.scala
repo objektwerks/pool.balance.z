@@ -214,7 +214,7 @@ object Model extends LazyLogging:
       SaveChemical(observableAccount.get.license, chemical),
       (event: Event) =>
         event match
-          case Fault(cause, occurred) => logger.error(s"*** Model.update chemical error: $cause at: $occurred")
+          case fault @ Fault(_, _) => onFault("Model.update chemical", fault)
           case ChemicalSaved(id) =>
             observableChemicals.update(observableChemicals.indexOf(chemical), chemical)
             selectedChemicalId.set(chemical.id)
