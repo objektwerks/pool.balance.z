@@ -65,6 +65,10 @@ object Model extends LazyLogging:
     observableFaults += fault
     logger.error(s"*** $source - $fault")
 
+  def onFault(source: String, entity: Entity, fault: Fault): Unit =
+    observableFaults += fault
+    logger.error(s"*** $source - $entity - $fault")
+
   def currentPool: Option[Pool] = observablePools.find( pool => pool.id == selectedPoolId.get )
 
   def currentCleaning: Option[Cleaning] = observableCleanings.find( cleaning => cleaning.id == selectedCleaningId.get )
@@ -91,7 +95,7 @@ object Model extends LazyLogging:
       SavePool(observableAccount.get.license, pool),
       (event: Event) =>
         event match
-          case fault @ Fault(_, _) => onFault("Model.add pool", fault)
+          case fault @ Fault(_, _) => onFault("Model.add pool", pool, fault)
           case PoolSaved(id) =>
             observablePools += pool.copy(id = id)
             selectedPoolId.set(pool.id)
@@ -103,7 +107,7 @@ object Model extends LazyLogging:
       SavePool(observableAccount.get.license, pool),
       (event: Event) =>
         event match
-          case fault @ Fault(_, _) => onFault("Model.update pool", fault)
+          case fault @ Fault(_, _) => onFault("Model.update pool", pool, fault)
           case PoolSaved(id) =>
             observablePools.update(observablePools.indexOf(pool), pool)
             selectedPoolId.set(pool.id)
