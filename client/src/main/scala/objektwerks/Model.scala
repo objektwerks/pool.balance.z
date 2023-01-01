@@ -151,37 +151,34 @@ object Model extends LazyLogging:
   def measurements(poolId: Long): Unit =
     Proxy.call(
       ListMeasurements(observableAccount.get.license),
-      (event: Event) =>
-        event match
-          case fault @ Fault(_, _) => onFault("Model.measurements", fault)
-          case MeasurementsListed(measurements) =>
-            observableMeasurements.clear()
-            observableMeasurements ++= measurements
-          case _ => ()
+      (event: Event) => event match
+        case fault @ Fault(_, _) => onFault("Model.measurements", fault)
+        case MeasurementsListed(measurements) =>
+          observableMeasurements.clear()
+          observableMeasurements ++= measurements
+        case _ => ()
     )
 
   def add(measurement: Measurement): Unit =
     Proxy.call(
       SaveMeasurement(observableAccount.get.license, measurement),
-      (event: Event) =>
-        event match
-          case fault @ Fault(_, _) => onFault("Model.add measurement", measurement, fault)
-          case MeasurementSaved(id) =>
-            observableMeasurements += measurement.copy(id = id)
-            selectedMeasurementId.set(measurement.id)
-          case _ => ()
+      (event: Event) => event match
+        case fault @ Fault(_, _) => onFault("Model.add measurement", measurement, fault)
+        case MeasurementSaved(id) =>
+          observableMeasurements += measurement.copy(id = id)
+          selectedMeasurementId.set(measurement.id)
+        case _ => ()
     )
 
   def update(measurement: Measurement): Unit =
     Proxy.call(
       SaveMeasurement(observableAccount.get.license, measurement),
-      (event: Event) =>
-        event match
-          case fault @ Fault(_, _) => onFault("Model.update measurement", measurement, fault)
-          case MeasurementSaved(id) =>
-            observableMeasurements.update(observableMeasurements.indexOf(measurement), measurement)
-            selectedMeasurementId.set(measurement.id)
-          case _ => ()
+      (event: Event) => event match
+        case fault @ Fault(_, _) => onFault("Model.update measurement", measurement, fault)
+        case MeasurementSaved(id) =>
+          observableMeasurements.update(observableMeasurements.indexOf(measurement), measurement)
+          selectedMeasurementId.set(measurement.id)
+        case _ => ()
     )
 
   def chemicals(poolId: Long): Unit =
