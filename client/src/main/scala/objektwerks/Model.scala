@@ -61,9 +61,9 @@ object Model extends LazyLogging:
     logger.info(s"*** Model: observable chemicals onchange event: $changes")
   }
 
-  def onFault(fault: Fault): Unit =
+  def onFault(source: String, fault: Fault): Unit =
     observableFaults += fault
-    logger.error(s"*** Fault: $fault")
+    logger.error(s"*** $source - $fault")
 
   def currentPool: Option[Pool] = observablePools.find( pool => pool.id == selectedPoolId.get )
 
@@ -78,7 +78,7 @@ object Model extends LazyLogging:
       ListPools(observableAccount.get.license),
       (event: Event) =>
         event match
-          case Fault(cause, occurred) => logger.error(s"*** Model.pools error: $cause at: $occurred")
+          case fault @ Fault(_, _) => onFault("Model.pools", fault)
           case PoolsListed(pools) =>
             observablePools.clear()
             observablePools ++= pools
