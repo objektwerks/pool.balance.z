@@ -130,12 +130,17 @@ object Model extends LazyLogging:
           case _ => ()
     )
 
-  def add(cleaning: Cleaning): Cleaning =
-    val newCleaning = ??? // todo store.add(cleaning)
-    observableCleanings += newCleaning
-    observableCleanings.sort()
-    // todo selectedCleaningId.value = newCleaning.id
-    newCleaning
+  def add(cleaning: Cleaning): Unit =
+    Proxy.call(
+      SaveCleaning(observableAccount.get.license, cleaning),
+      (event: Event) =>
+        event match
+          case Fault(cause, occurred) => logger.error(s"*** Model.add cleaning error: $cause at: $occurred")
+          case CleaningSaved(id) =>
+            observableCleanings += cleaning.copy(id = id)
+            selectedCleaningId.set(cleaning.id)
+          case _ => ()
+    )
 
   def update(cleaning: Cleaning): Unit =
     // todo store.update(cleaning)
