@@ -63,6 +63,7 @@ object Model extends LazyLogging:
 
   def onFault(fault: Fault): Unit =
     observableFaults += fault
+    logger.error(s"*** Fault: $fault")
 
   def currentPool: Option[Pool] = observablePools.find( pool => pool.id == selectedPoolId.get )
 
