@@ -42,6 +42,7 @@ object Model extends LazyLogging:
   val observableCleanings = ObservableBuffer[Cleaning]()
   val observableMeasurements = ObservableBuffer[Measurement]()
   val observableChemicals = ObservableBuffer[Chemical]()
+  val observableFaults = ObservableBuffer[Fault]()
 
   observablePools.onChange { (_, changes) =>
     logger.info(s"*** Model: observable pools onchange event: $changes")
@@ -59,6 +60,9 @@ object Model extends LazyLogging:
   observableChemicals.onChange { (_, changes) =>
     logger.info(s"*** Model: observable chemicals onchange event: $changes")
   }
+
+  def onFault(fault: Fault): Unit =
+    observableFaults += fault
 
   def currentPool: Option[Pool] =
     val optionalPool = observablePools.find( pool => pool.id == selectedPoolId.get )
