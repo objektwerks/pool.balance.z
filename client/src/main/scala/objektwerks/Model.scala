@@ -118,37 +118,34 @@ object Model extends LazyLogging:
   def cleanings(poolId: Long): Unit =
     Proxy.call(
       ListCleanings(observableAccount.get.license),
-      (event: Event) =>
-        event match
-          case fault @ Fault(_, _) => onFault("Model.cleanings", fault)
-          case CleaningsListed(cleanings) =>
-            observableCleanings.clear()
-            observableCleanings ++= cleanings
-          case _ => ()
+      (event: Event) => event match
+        case fault @ Fault(_, _) => onFault("Model.cleanings", fault)
+        case CleaningsListed(cleanings) =>
+          observableCleanings.clear()
+          observableCleanings ++= cleanings
+        case _ => ()
     )
 
   def add(cleaning: Cleaning): Unit =
     Proxy.call(
       SaveCleaning(observableAccount.get.license, cleaning),
-      (event: Event) =>
-        event match
-          case fault @ Fault(_, _) => onFault("Model.add cleaning", cleaning, fault)
-          case CleaningSaved(id) =>
-            observableCleanings += cleaning.copy(id = id)
-            selectedCleaningId.set(cleaning.id)
-          case _ => ()
+      (event: Event) => event match
+        case fault @ Fault(_, _) => onFault("Model.add cleaning", cleaning, fault)
+        case CleaningSaved(id) =>
+          observableCleanings += cleaning.copy(id = id)
+          selectedCleaningId.set(cleaning.id)
+        case _ => ()
     )
 
   def update(cleaning: Cleaning): Unit =
     Proxy.call(
       SaveCleaning(observableAccount.get.license, cleaning),
-      (event: Event) =>
-        event match
-          case fault @ Fault(_, _) => onFault("Model.update cleaning", cleaning, fault)
-          case CleaningSaved(id) =>
-            observableCleanings.update(observableCleanings.indexOf(cleaning), cleaning)
-            selectedCleaningId.set(cleaning.id)
-          case _ => ()
+      (event: Event) => event match
+        case fault @ Fault(_, _) => onFault("Model.update cleaning", cleaning, fault)
+        case CleaningSaved(id) =>
+          observableCleanings.update(observableCleanings.indexOf(cleaning), cleaning)
+          selectedCleaningId.set(cleaning.id)
+        case _ => ()
     )
 
   def measurements(poolId: Long): Unit =
