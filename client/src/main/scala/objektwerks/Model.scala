@@ -35,7 +35,7 @@ object Model extends LazyLogging:
   selectedChemicalId.onChange { (_, oldId, newId) =>
     logger.info(s"*** Model: selected chemical id onchange event: $oldId -> $newId")
   }
-  
+
   val observableAccount = ObjectProperty[Account](Account.empty)
 
   val observablePools = ObservableBuffer[Pool]()
@@ -93,12 +93,17 @@ object Model extends LazyLogging:
           case _ => ()
     )
 
-  def add(pool: Pool): Pool =
-    val newPool = ??? // todo store.add(pool)
-    observablePools += newPool
-    observablePools.sort()
-    // todo selectedPoolId.value = newPool.id
-    newPool
+  def add(pool: Pool): Unit =
+    Proxy.call(
+      SavePool(observableAccount.get.license, pool),
+      (event: Event) =>
+        event match
+          case Fault(cause, occurred) => logger.error(s"*** Model.add pool error: $cause at: $occurred")
+          case PoolSaved(id) =>
+            observablePools += pool.copy(id = id)
+            selectedPoolId.set(pool.id)
+          case _ => ()
+    )
 
   def update(pool: Pool): Unit =
     // todo store.update(pool)
