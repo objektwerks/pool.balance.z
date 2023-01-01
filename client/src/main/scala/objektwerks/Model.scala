@@ -85,37 +85,34 @@ object Model extends LazyLogging:
   def pools(): Unit =
     Proxy.call(
       ListPools(observableAccount.get.license),
-      (event: Event) =>
-        event match
-          case fault @ Fault(_, _) => onFault("Model.pools", fault)
-          case PoolsListed(pools) =>
-            observablePools.clear()
-            observablePools ++= pools
-          case _ => ()
+      (event: Event) => event match
+        case fault @ Fault(_, _) => onFault("Model.pools", fault)
+        case PoolsListed(pools) =>
+          observablePools.clear()
+          observablePools ++= pools
+        case _ => ()
     )
 
   def add(pool: Pool): Unit =
     Proxy.call(
       SavePool(observableAccount.get.license, pool),
-      (event: Event) =>
-        event match
-          case fault @ Fault(_, _) => onFault("Model.add pool", pool, fault)
-          case PoolSaved(id) =>
-            observablePools += pool.copy(id = id)
-            selectedPoolId.set(pool.id)
-          case _ => ()
+      (event: Event) => event match
+        case fault @ Fault(_, _) => onFault("Model.add pool", pool, fault)
+        case PoolSaved(id) =>
+          observablePools += pool.copy(id = id)
+          selectedPoolId.set(pool.id)
+        case _ => ()
     )
 
   def update(pool: Pool): Unit =
     Proxy.call(
       SavePool(observableAccount.get.license, pool),
-      (event: Event) =>
-        event match
-          case fault @ Fault(_, _) => onFault("Model.update pool", pool, fault)
-          case PoolSaved(id) =>
-            observablePools.update(observablePools.indexOf(pool), pool)
-            selectedPoolId.set(pool.id)
-          case _ => ()
+      (event: Event) => event match
+        case fault @ Fault(_, _) => onFault("Model.update pool", pool, fault)
+        case PoolSaved(id) =>
+          observablePools.update(observablePools.indexOf(pool), pool)
+          selectedPoolId.set(pool.id)
+        case _ => ()
     )
 
   def cleanings(poolId: Long): Unit =
