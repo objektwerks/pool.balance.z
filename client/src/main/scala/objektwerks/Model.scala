@@ -217,10 +217,16 @@ object Model extends LazyLogging:
     )
 
   def update(chemical: Chemical): Unit =
-    // todo store.update(chemical)
-    observableChemicals.update(1, chemical) // bug!!!
-    observableChemicals.sort()
-    selectedChemicalId.value = chemical.id
+    Proxy.call(
+      SaveChemical(observableAccount.get.license, chemical),
+      (event: Event) =>
+        event match
+          case Fault(cause, occurred) => logger.error(s"*** Model.update chemical error: $cause at: $occurred")
+          case ChemicalSaved(id) =>
+            observableChemicals.update(observableChemicals.indexOf(chemical), chemical)
+            selectedChemicalId.set(chemical.id)
+          case _ => ()
+    )
 
   val currentTotalChlorine = ObjectProperty[Int](0)
   val averageTotalChlorine = ObjectProperty[Int](0)
