@@ -189,7 +189,7 @@ object Model extends LazyLogging:
       ListChemicals(observableAccount.get.license),
       (event: Event) =>
         event match
-          case Fault(cause, occurred) => logger.error(s"*** Model.chemicals error: $cause at: $occurred")
+          case fault @ Fault(_, _) => onFault("Model.chemicals", fault)
           case ChemicalsListed(chemicals) =>
             observableChemicals.clear()
             observableChemicals ++= chemicals
