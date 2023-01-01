@@ -133,8 +133,17 @@ object Model extends LazyLogging:
     selectedCleaningId.value = cleaning.id
 
   def measurements(poolId: Long): Unit =
-    observableMeasurements.clear()
-    // todo observableMeasurements ++= store.measurements(poolId) 
+    Proxy.call(
+      ListMeasurements(observableAccount.get.license),
+      (event: Event) =>
+        event match
+          case Fault(cause, occurred) => logger.error(s"*** Model.measurements error: $cause at: $occurred")
+          case MeasurementsListed(measurements) =>
+            observableMeasurements.clear()
+            observableMeasurements ++= measurements
+            observableMeasurements.headOption.collect { measurement => selectedMeasurementId.set(measurement.id) }
+          case _ => ()
+    )
 
   def add(measurement: Measurement): Measurement =
     val newMeasurement = ??? // todo store.add(measurement)
