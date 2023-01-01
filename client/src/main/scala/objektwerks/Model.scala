@@ -161,12 +161,17 @@ object Model extends LazyLogging:
           case _ => ()
     )
 
-  def add(measurement: Measurement): Measurement =
-    val newMeasurement = ??? // todo store.add(measurement)
-    observableMeasurements += newMeasurement
-    observableMeasurements.sort()
-    // todo selectedMeasurementId.value = newMeasurement.id
-    newMeasurement
+  def add(measurement: Measurement): Unit =
+    Proxy.call(
+      SaveMeasurement(observableAccount.get.license, measurement),
+      (event: Event) =>
+        event match
+          case Fault(cause, occurred) => logger.error(s"*** Model.add measurement error: $cause at: $occurred")
+          case MeasurementSaved(id) =>
+            observableMeasurements += measurement.copy(id = id)
+            selectedMeasurementId.set(measurement.id)
+          case _ => ()
+    )
 
   def update(measurement: Measurement): Unit =
     // todo store.update(measurement)
