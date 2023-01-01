@@ -10,6 +10,10 @@ Todo
 4. Account
 5. Faults
 
+Issues
+------
+1. See: https://github.com/zio/zio-protoquill/issues/217
+
 Install
 -------
 1. brew install postgresql
