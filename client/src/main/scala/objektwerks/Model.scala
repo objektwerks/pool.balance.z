@@ -156,9 +156,7 @@ object Model extends LazyLogging:
       SaveMeasurement(observableAccount.get.license, measurement),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFault("Model.add measurement", measurement, fault)
-        case MeasurementSaved(id) =>
-          observableMeasurements += measurement.copy(id = id)
-          selectedMeasurementId.set(measurement.id)
+        case MeasurementSaved(id) => observableMeasurements += measurement.copy(id = id)
         case _ => ()
     )
 
@@ -167,9 +165,7 @@ object Model extends LazyLogging:
       SaveMeasurement(observableAccount.get.license, measurement),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFault("Model.update measurement", measurement, fault)
-        case MeasurementSaved(id) =>
-          observableMeasurements.update(observableMeasurements.indexOf(measurement), measurement)
-          selectedMeasurementId.set(measurement.id)
+        case MeasurementSaved(id) => observableMeasurements.update(observableMeasurements.indexOf(measurement), measurement)
         case _ => ()
     )
 
