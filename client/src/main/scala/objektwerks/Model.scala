@@ -12,8 +12,6 @@ import Entity.given
 import Measurement.*
 
 object Model extends LazyLogging:
-  val observableAccount = ObjectProperty[Account](Account.empty)
-
   val selectedPoolId = ObjectProperty[Long](0)
   val selectedCleaningId = ObjectProperty[Long](0)
   val selectedMeasurementId = ObjectProperty[Long](0)
@@ -37,6 +35,8 @@ object Model extends LazyLogging:
   selectedChemicalId.onChange { (_, oldId, newId) =>
     logger.info(s"*** Model: selected chemical id onchange event: $oldId -> $newId")
   }
+  
+  val observableAccount = ObjectProperty[Account](Account.empty)
 
   val observablePools = ObservableBuffer[Pool]()
   val observableCleanings = ObservableBuffer[Cleaning]()
