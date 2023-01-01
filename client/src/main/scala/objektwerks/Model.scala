@@ -191,9 +191,7 @@ object Model extends LazyLogging:
     logger.info(s"*** Model: initializing ...")
     pools()
     observablePools.headOption.collect { pool =>
-      cleanings(pool.id)
-      measurements(pool.id)
-      chemicals(pool.id)
+      selectedPoolId.set(pool.id)
     }
     logger.info(s"*** Model: initialized.")
 
