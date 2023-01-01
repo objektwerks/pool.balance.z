@@ -128,7 +128,7 @@ object Model extends LazyLogging:
       SaveCleaning(observableAccount.get.license, cleaning),
       (event: Event) =>
         event match
-          case Fault(cause, occurred) => logger.error(s"*** Model.add cleaning error: $cause at: $occurred")
+          case fault @ Fault(_, _) => onFault("Model.add cleaning", fault)
           case CleaningSaved(id) =>
             observableCleanings += cleaning.copy(id = id)
             selectedCleaningId.set(cleaning.id)
