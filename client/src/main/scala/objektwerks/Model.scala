@@ -152,7 +152,7 @@ object Model extends LazyLogging:
       ListMeasurements(observableAccount.get.license),
       (event: Event) =>
         event match
-          case Fault(cause, occurred) => logger.error(s"*** Model.measurements error: $cause at: $occurred")
+          case fault @ Fault(_, _) => onFault("Model.measurements", fault)
           case MeasurementsListed(measurements) =>
             observableMeasurements.clear()
             observableMeasurements ++= measurements
