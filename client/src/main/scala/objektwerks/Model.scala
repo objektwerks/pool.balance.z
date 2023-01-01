@@ -81,8 +81,17 @@ object Model extends LazyLogging:
     optionalChemical
 
   def pools(): Unit =
-    observablePools.clear()
-    Proxy.call( ListPools(observableAccount.get.license), (event: PoolsListed) => observablePools ++= event.pools)
+    Proxy.call(
+      ListPools(observableAccount.get.license),
+      (event: Event) =>
+        event match
+          case Fault(cause, occurred) => logger.error(s"*** Model.pools error: $cause at: $occurred")
+          case PoolsListed(pools) =>
+            observablePools.clear()
+            observablePools ++= pools
+            observablePools.headOption.collect { pool => selectedPoolId.set(pool.id) }
+          case _ => ()
+    )
 
   def add(pool: Pool): Pool =
     val newPool = ??? // todo store.add(pool)
@@ -191,9 +200,6 @@ object Model extends LazyLogging:
   def init: Unit =
     logger.info(s"*** Model: initializing ...")
     pools()
-    observablePools.headOption.collect { pool =>
-      selectedPoolId.set(pool.id)
-    }
     logger.info(s"*** Model: initialized.")
 
   private def dashboard(): Unit =

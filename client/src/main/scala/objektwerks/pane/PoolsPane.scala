@@ -19,6 +19,9 @@ final class PoolsPane extends JPanel:
     Long => setSelectedId(Long),
     Long => fireEditActionById(Long)
   )
+  Model.observablePools.onChange { (_, _) =>
+    table.setModel( TableModel( Model.observablePools.toList ) )
+  }
   val tablePane = new JScrollPane(table)
 
   val addAction = AddPoolAction(Context.add)
