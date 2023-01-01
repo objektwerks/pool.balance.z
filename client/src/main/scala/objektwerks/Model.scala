@@ -12,6 +12,8 @@ import Entity.given
 import Measurement.*
 
 object Model extends LazyLogging:
+  val observableAccount = ObjectProperty[Account](Account.empty)
+
   val selectedPoolId = ObjectProperty[Long](0)
   val selectedCleaningId = ObjectProperty[Long](0)
   val selectedMeasurementId = ObjectProperty[Long](0)
@@ -80,8 +82,7 @@ object Model extends LazyLogging:
 
   def pools(): Unit =
     observablePools.clear()
-    // todo observablePools ++= store.pools()
-    ()
+    Proxy.call( ListPools(observableAccount.get.license), (event: PoolsListed) => observablePools ++= event.pools)
 
   def add(pool: Pool): Pool =
     val newPool = ??? // todo store.add(pool)
