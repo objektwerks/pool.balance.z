@@ -91,7 +91,6 @@ object Model extends LazyLogging:
           case PoolsListed(pools) =>
             observablePools.clear()
             observablePools ++= pools
-            observablePools.headOption.collect { pool => selectedPoolId.set(pool.id) }
           case _ => ()
     )
 
@@ -128,7 +127,6 @@ object Model extends LazyLogging:
           case CleaningsListed(cleanings) =>
             observableCleanings.clear()
             observableCleanings ++= cleanings
-            observableCleanings.headOption.collect { cleaning => selectedCleaningId.set(cleaning.id) }
           case _ => ()
     )
 
@@ -165,7 +163,6 @@ object Model extends LazyLogging:
           case MeasurementsListed(measurements) =>
             observableMeasurements.clear()
             observableMeasurements ++= measurements
-            observableMeasurements.headOption.collect { measurement => selectedMeasurementId.set(measurement.id) }
           case _ => ()
     )
 
@@ -202,7 +199,6 @@ object Model extends LazyLogging:
           case ChemicalsListed(chemicals) =>
             observableChemicals.clear()
             observableChemicals ++= chemicals
-            observableChemicals.headOption.collect { chemical => selectedChemicalId.set(chemical.id) }
           case _ => ()
     )
   
