@@ -180,10 +180,16 @@ object Model extends LazyLogging:
     )
 
   def update(measurement: Measurement): Unit =
-    // todo store.update(measurement)
-    observableMeasurements.update(1, measurement) // bug!!!
-    observableMeasurements.sort()
-    selectedMeasurementId.value = measurement.id
+    Proxy.call(
+      SaveMeasurement(observableAccount.get.license, measurement),
+      (event: Event) =>
+        event match
+          case Fault(cause, occurred) => logger.error(s"*** Model.update measurement error: $cause at: $occurred")
+          case MeasurementSaved(id) =>
+            observableMeasurements.update(observableMeasurements.indexOf(measurement), measurement)
+            selectedMeasurementId.set(measurement.id)
+          case _ => ()
+    )
 
   def chemicals(poolId: Long): Unit =
     Proxy.call(
