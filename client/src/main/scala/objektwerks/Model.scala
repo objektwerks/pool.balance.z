@@ -98,9 +98,7 @@ object Model extends LazyLogging:
       SavePool(observableAccount.get.license, pool),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFault("Model.add pool", pool, fault)
-        case PoolSaved(id) =>
-          observablePools += pool.copy(id = id)
-          selectedPoolId.set(pool.id)
+        case PoolSaved(id) => observablePools += pool.copy(id = id)
         case _ => ()
     )
 
@@ -109,9 +107,7 @@ object Model extends LazyLogging:
       SavePool(observableAccount.get.license, pool),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFault("Model.update pool", pool, fault)
-        case PoolSaved(id) =>
-          observablePools.update(observablePools.indexOf(pool), pool)
-          selectedPoolId.set(pool.id)
+        case PoolSaved(id) => observablePools.update(observablePools.indexOf(pool), pool)
         case _ => ()
     )
 
