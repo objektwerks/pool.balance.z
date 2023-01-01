@@ -159,8 +159,17 @@ object Model extends LazyLogging:
     selectedMeasurementId.value = measurement.id
 
   def chemicals(poolId: Long): Unit =
-    observableChemicals.clear()
-    // todo observableChemicals ++= store.chemicals(poolId) 
+    Proxy.call(
+      ListChemicals(observableAccount.get.license),
+      (event: Event) =>
+        event match
+          case Fault(cause, occurred) => logger.error(s"*** Model.chemicals error: $cause at: $occurred")
+          case ChemicalsListed(chemicals) =>
+            observableChemicals.clear()
+            observableChemicals ++= chemicals
+            observableChemicals.headOption.collect { chemical => selectedChemicalId.set(chemical.id) }
+          case _ => ()
+    )
   
   def add(chemical: Chemical): Chemical =
     val newChemical = ??? // todo  store.add(chemical)
