@@ -91,7 +91,7 @@ object Model extends LazyLogging:
       SavePool(observableAccount.get.license, pool),
       (event: Event) =>
         event match
-          case Fault(cause, occurred) => logger.error(s"*** Model.add pool error: $cause at: $occurred")
+          case fault @ Fault(_, _) => onFault("Model.addPool", fault)
           case PoolSaved(id) =>
             observablePools += pool.copy(id = id)
             selectedPoolId.set(pool.id)
