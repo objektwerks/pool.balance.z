@@ -64,25 +64,13 @@ object Model extends LazyLogging:
   def onFault(fault: Fault): Unit =
     observableFaults += fault
 
-  def currentPool: Option[Pool] =
-    val optionalPool = observablePools.find( pool => pool.id == selectedPoolId.get )
-    if optionalPool.isEmpty then logger.error(s"*** Model: current pool not found: ${selectedPoolId.get}")
-    optionalPool
+  def currentPool: Option[Pool] = observablePools.find( pool => pool.id == selectedPoolId.get )
 
-  def currentCleaning: Option[Cleaning] =
-    val optionalCleaning = observableCleanings.find( cleaning => cleaning.id == selectedCleaningId.get )
-    if optionalCleaning.isEmpty then logger.error(s"*** Model: current cleaning not found: ${selectedCleaningId.get}")
-    optionalCleaning
+  def currentCleaning: Option[Cleaning] = observableCleanings.find( cleaning => cleaning.id == selectedCleaningId.get )
 
-  def currentMeasurement: Option[Measurement] =
-    val optionalMeasurement = observableMeasurements.find( measurement => measurement.id == selectedMeasurementId.get )
-    if optionalMeasurement.isEmpty then logger.error(s"*** Model: current measurement not found: ${selectedMeasurementId.get}")
-    optionalMeasurement
+  def currentMeasurement: Option[Measurement] = observableMeasurements.find( measurement => measurement.id == selectedMeasurementId.get )
 
-  def currentChemical: Option[Chemical] =
-    val optionalChemical = observableChemicals.find( chemical => chemical.id == selectedChemicalId.get )
-    if optionalChemical.isEmpty then logger.error(s"*** Model: current chemical not found: ${selectedChemicalId.get}")
-    optionalChemical
+  def currentChemical: Option[Chemical] = observableChemicals.find( chemical => chemical.id == selectedChemicalId.get )
 
   def pools(): Unit =
     Proxy.call(
