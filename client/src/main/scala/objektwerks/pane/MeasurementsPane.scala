@@ -21,6 +21,9 @@ final class MeasurementsPane extends JPanel:
     Long => setSelectedId(Long),
     Long => fireEditActionById(Long)
   )
+  Model.observableMeasurements.onChange { (_, _) =>
+    table.setModel( TableModel( Model.observableMeasurements.toList ) )
+  }
   val tablePane = new JScrollPane(table)
 
   val addAction = AddMeasurementAction(Context.add)
