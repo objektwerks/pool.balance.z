@@ -1,9 +1,11 @@
 package objektwerks.chart
 
+import java.awt.Color
 import java.text.{DecimalFormat, SimpleDateFormat}
 import java.util.Date
+import javax.swing.BorderFactory
 
-import org.jfree.chart.JFreeChart
+import org.jfree.chart.{ChartPanel, JFreeChart}
 import org.jfree.chart.labels.{StandardXYItemLabelGenerator, XYItemLabelGenerator}
 import org.jfree.chart.axis.{DateAxis, NumberAxis}
 import org.jfree.chart.labels.StandardXYToolTipGenerator
@@ -18,7 +20,7 @@ import objektwerks.{Context, Entity, Measurement}
 
 object Chart:
   def build(measurements: List[(Date, Double)],
-            title: String): JFreeChart =
+            title: String): ChartPanel =
     val xyPlot = new XYPlot()
     xyPlot.setDataset( buildDataset(measurements, title) )
     xyPlot.setRenderer( buildRenderer(title) )
@@ -30,7 +32,17 @@ object Chart:
     val yAxis = new NumberAxis(title)
     xyPlot.setRangeAxis(yAxis)
 
-    new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
+    val chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
+    buildChartPanel(chart)
+
+  private def buildChartPanel(chart: JFreeChart): ChartPanel =
+    chart.getPlot.setBackgroundPaint(Color.LIGHT_GRAY)
+    val chartPanel = new ChartPanel(chart)
+    chartPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15))
+    chartPanel.setInitialDelay(100)
+    chartPanel.setReshowDelay(100)
+    chartPanel.setDismissDelay(10000)
+    chartPanel
 
   private def buildDataset(measurements: List[(Date, Double)],
                            title: String): XYDataset =
