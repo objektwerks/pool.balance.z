@@ -8,5 +8,5 @@ import org.jfree.chart.ChartPanel
 import objektwerks.dialog.ChartDialog
 
 final class ChartAction(name: String,
-                        panel: => ChartPanel) extends AbstractAction(name):
-  override def actionPerformed(event: ActionEvent): Unit = ChartDialog(name, panel).open()
+                        builder: => ChartPanel) extends AbstractAction(name):
+  override def actionPerformed(event: ActionEvent): Unit = ChartDialog(name, builder).open()
