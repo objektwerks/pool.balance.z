@@ -14,29 +14,28 @@ import org.jfree.data.xy.XYDataset
 import objektwerks.{Context, Entity, Measurement}
 
 object TotalChlorineChart extends Chart:
-  def build(measurements: List[(Date, Double)]): JFreeChart =
+  def build(measurements: List[(Date, Double)], title: String): JFreeChart =
     val xyPlot = new XYPlot()
-    xyPlot.setDataset( buildDataset(measurements) )
-    xyPlot.setRenderer( buildRenderer() )
+    xyPlot.setDataset( buildDataset(measurements, title) )
+    xyPlot.setRenderer( buildRenderer(title) )
 
     val xAxis = new DateAxis(Context.date)
     xAxis.setDateFormatOverride( new SimpleDateFormat("d,H") )
     xyPlot.setDomainAxis(xAxis)
 
-    val yAxis = new NumberAxis(Context.totalChlorine)
+    val yAxis = new NumberAxis(title)
     xyPlot.setRangeAxis(yAxis)
 
-    val title = Context.totalChlorine
     new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
 
-  def buildDataset(measurements: List[(Date, Double)]): XYDataset =
-    val timeSeries = new TimeSeries(Context.totalChlorine)
+  def buildDataset(measurements: List[(Date, Double)], title: String): XYDataset =
+    val timeSeries = new TimeSeries(title)
     measurements.foreach { (measured, measurement) =>
       timeSeries.add( new Day(measured), measurement )
     }
     new TimeSeriesCollection(timeSeries)
 
-  def buildRenderer(): XYItemRenderer =
+  def buildRenderer(title: String): XYItemRenderer =
     val renderer = new XYLineAndShapeRenderer()
     val tooltipGenerator = new StandardXYToolTipGenerator() {
       override def generateToolTip(dataset: XYDataset, series: Int, item: Int): String =
@@ -45,7 +44,7 @@ object TotalChlorineChart extends Chart:
         val dayHourMinute = new SimpleDateFormat("d,H:m").format( new Date( xValue.toLong ) )
         val beatsPerMinute = new DecimalFormat("0").format( yValue )
         val delta = calculateDeltaAsPercentage(dataset, series, item)
-        s"${Context.totalChlorine}: ($dayHourMinute, $beatsPerMinute, $delta%)"
+        s"${title}: ($dayHourMinute, $beatsPerMinute, $delta%)"
       override def clone() = this
     }
     renderer.setDefaultToolTipGenerator(tooltipGenerator)
