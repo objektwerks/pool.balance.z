@@ -2,18 +2,13 @@ package objektwerks.dashboard
 
 import com.typesafe.scalalogging.LazyLogging
 
-import java.awt.{Color, GridLayout}
+import java.awt.{Color, BorderLayout}
 import javax.swing.{BorderFactory, JLabel, JPanel}
 import javax.swing.border.TitledBorder
 
 import objektwerks.form.Form
 
 object DashboardTitledPane:
-  val rows = 1
-  val columns = 1
-  val horizontalGap = 6
-  val verticalGap = 6
-
   val fuchsia = Color(255, 0, 255)
   val emptyBorder = new JLabel().getBorder
   val greenBorder = BorderFactory.createLineBorder(Color.green, 3)
@@ -22,7 +17,7 @@ object DashboardTitledPane:
 abstract class DashboardTitledPane(title: String) extends JPanel with LazyLogging:
   import DashboardTitledPane.*
 
-  setLayout( new GridLayout(rows, columns, horizontalGap, verticalGap) )
+  setLayout( new BorderLayout() )
 
   val titleBorder = new TitledBorder(title)
   titleBorder.setTitleColor(fuchsia)
@@ -43,7 +38,7 @@ abstract class DashboardTitledPane(title: String) extends JPanel with LazyLoggin
       "Avg:" -> average
     )
   )
-  add(form)
+  add(form, BorderLayout.CENTER)
 
   def currentIsInRange(): Unit =
     good.setBorder(emptyBorder)
