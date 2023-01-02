@@ -12,8 +12,8 @@ import objektwerks.table.{ColumnModel, Table, TableModel}
 final class MeasurementsPane extends JPanel:
   val measurements = Model.observableMeasurements.toList
   val columns = List(
-    id, poolId, totalChlorine.wrap, freeChlorine.wrap, combinedChlorine.wrap, ph, calciumHardness.wrap,
-    totalAlkalinity.wrap, cyanuricAcid.wrap, totalBromine.wrap, salt, temperature, measured
+    id, poolId, totalChlorine.asHtmlWrap, freeChlorine.asHtmlWrap, combinedChlorine.asHtmlWrap, ph, calciumHardness.asHtmlWrap,
+    totalAlkalinity.asHtmlWrap, cyanuricAcid.asHtmlWrap, totalBromine.asHtmlWrap, salt, temperature, measured
   )
   val table = Table(
     TableModel(measurements),
