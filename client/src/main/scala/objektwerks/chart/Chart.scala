@@ -25,9 +25,9 @@ object Chart:
     build(data, title)
 
   def buildFreeChlorineChart: ChartPanel = 
-    val freeChlorineData = Model.observableMeasurements.map(m => ( Entity.date(m.measured), m.freeChlorine.toDouble ) ).toList
-    val freeChlorineTitle = Context.freeChlorine
-    build(freeChlorineData, freeChlorineTitle)
+    val data = Model.observableMeasurements.map(m => ( Entity.date(m.measured), m.freeChlorine.toDouble ) ).toList
+    val title = Context.freeChlorine
+    build(data, title)
 
   def buildCombinedChlorineChart: ChartPanel = 
     val combinedChlorineData = Model.observableMeasurements.map(m => ( Entity.date(m.measured), m.combinedChlorine ) ).toList
