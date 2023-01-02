@@ -19,32 +19,37 @@ import scala.math.abs
 import objektwerks.{Context, Entity, Measurement, Model}
 
 object Chart:
-  val totalChlorineDate = Model.observableMeasurements.map(m => ( Entity.date(m.measured), m.totalChlorine.toDouble ) )
-  val totalChlorineTitle = Context.totalChlorine
+  def buildTotalChlorineChart: ChartPanel =
+    val totalChlorineData = Model.observableMeasurements.map(m => ( Entity.date(m.measured), m.totalChlorine.toDouble ) ).toList
+    val totalChlorineTitle = Context.totalChlorine
+    build(totalChlorineData, totalChlorineTitle)
 
-  val freeChlorineDate = Model.observableMeasurements.map(m => ( Entity.date(m.measured), m.freeChlorine.toDouble ) )
+  val freeChlorineData = Model.observableMeasurements.map(m => ( Entity.date(m.measured), m.freeChlorine.toDouble ) ).toList
   val freeChlorineTitle = Context.freeChlorine
 
-  val combinedChlorineDate = Model.observableMeasurements.map(m => ( Entity.date(m.measured), m.combinedChlorine ) )
+  val combinedChlorineData = Model.observableMeasurements.map(m => ( Entity.date(m.measured), m.combinedChlorine ) ).toList
   val combinedChlorineTitle = Context.combinedChlorine
 
-  val phDate = Model.observableMeasurements.map(m => ( Entity.date(m.measured), m.ph ) )
+  val phData = Model.observableMeasurements.map(m => ( Entity.date(m.measured), m.ph ) )
   val phTitle = Context.ph
 
-  val calciumHardnessDate = Model.observableMeasurements.map(m => ( Entity.date(m.measured), m.calciumHardness.toDouble ) )
+  val calciumHardnessData = Model.observableMeasurements.map(m => ( Entity.date(m.measured), m.calciumHardness.toDouble ) ).toList
   val calciumHardnessTitle = Context.calciumHardness
 
-  val totalAlkalinityDate = Model.observableMeasurements.map(m => ( Entity.date(m.measured), m.totalAlkalinity.toDouble ) )
+  val totalAlkalinityData = Model.observableMeasurements.map(m => ( Entity.date(m.measured), m.totalAlkalinity.toDouble ) ).toList
   val totalAlkalinityTitle = Context.totalAlkalinity
 
-  val cyanuricAcidDate = Model.observableMeasurements.map(m => ( Entity.date(m.measured), m.cyanuricAcid.toDouble ) )
+  val cyanuricAcidData = Model.observableMeasurements.map(m => ( Entity.date(m.measured), m.cyanuricAcid.toDouble ) ).toList
   val cyanuricAcidTitle = Context.cyanuricAcid
 
-  val totalBromineDate = Model.observableMeasurements.map(m => ( Entity.date(m.measured), m.totalBromine.toDouble ) )
+  val totalBromineData = Model.observableMeasurements.map(m => ( Entity.date(m.measured), m.totalBromine.toDouble ) ).toList
   val totalBromineTitle = Context.totalBromine
 
-  val saltDate = Model.observableMeasurements.map(m => ( Entity.date(m.measured), m.salt.toDouble ) )
+  val saltData = Model.observableMeasurements.map(m => ( Entity.date(m.measured), m.salt.toDouble ) ).toList
   val saltTitle = Context.salt
+
+  val temperatureData = Model.observableMeasurements.map(m => ( Entity.date(m.measured), m.temperature.toDouble ) ).toList
+  val temperatureTitle = Context.temperature
 
   def build(measurements: List[(Date, Double)],
             title: String): ChartPanel =
