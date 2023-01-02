@@ -66,6 +66,8 @@ object Context:
   val activated = conf.getString("activated")
   val deactivated = conf.getString("deactivated")
 
+  val date = conf.getString("date")
+
   val headers = Headers (
     Header("Content-Type", "application/json; charset=utf-8"),
     Header("Accept", "application/json")
