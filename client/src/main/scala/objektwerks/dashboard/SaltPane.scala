@@ -1,8 +1,9 @@
 package objektwerks.dashboard
 
+import objektwerks.Context.*
 import objektwerks.Model.*
 
-final class SaltPane(title: String = "<html>Salt") extends DashboardTitledPane(title):
+final class SaltPane(title: String = salt.asHtml) extends DashboardTitledPane(title):
   range.setText("0 - 3600")
   good.setText("2700 - 3400")
   ideal.setText("3200")
