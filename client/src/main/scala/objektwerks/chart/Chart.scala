@@ -37,6 +37,9 @@ object Chart:
   val totalAlkalinityDate = Model.observableMeasurements.map(m => ( Entity.date(m.measured), m.totalAlkalinity.toDouble ) )
   val totalAlkalinityTitle = Context.totalAlkalinity
 
+  val cyanuricAcidDate = Model.observableMeasurements.map(m => ( Entity.date(m.measured), m.cyanuricAcid.toDouble ) )
+  val cyanuricAcidTitle = Context.cyanuricAcid
+
   def build(measurements: List[(Date, Double)],
             title: String): ChartPanel =
     val xyPlot = new XYPlot()
