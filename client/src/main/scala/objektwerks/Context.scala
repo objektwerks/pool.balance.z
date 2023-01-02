@@ -23,7 +23,9 @@ object Context:
   val edit = conf.getString("edit")
   val save = conf.getString("save")
   val cancel = conf.getString("cancel")
+  val close = conf.getString("close")
   val chart = conf.getString("chart")
+  val date = conf.getString("date")
 
   val pool = conf.getString("pool")
   val cleaning = conf.getString("cleaning")
@@ -65,8 +67,6 @@ object Context:
   val license = conf.getString("license")
   val activated = conf.getString("activated")
   val deactivated = conf.getString("deactivated")
-
-  val date = conf.getString("date")
 
   val headers = Headers (
     Header("Content-Type", "application/json; charset=utf-8"),
