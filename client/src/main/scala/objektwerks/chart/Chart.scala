@@ -49,8 +49,10 @@ object Chart:
     val totalAlkalinityTitle = Context.totalAlkalinity
     build(totalAlkalinityData, totalAlkalinityTitle)
 
-  val cyanuricAcidData = Model.observableMeasurements.map(m => ( Entity.date(m.measured), m.cyanuricAcid.toDouble ) ).toList
-  val cyanuricAcidTitle = Context.cyanuricAcid
+  def buildCyanuricAcidChart: ChartPanel =
+    val cyanuricAcidData = Model.observableMeasurements.map(m => ( Entity.date(m.measured), m.cyanuricAcid.toDouble ) ).toList
+    val cyanuricAcidTitle = Context.cyanuricAcid
+    build(cyanuricAcidData, cyanuricAcidTitle)
 
   val totalBromineData = Model.observableMeasurements.map(m => ( Entity.date(m.measured), m.totalBromine.toDouble ) ).toList
   val totalBromineTitle = Context.totalBromine
