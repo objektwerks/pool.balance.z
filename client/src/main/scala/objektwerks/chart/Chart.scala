@@ -34,8 +34,10 @@ object Chart:
     val combinedChlorineTitle = Context.combinedChlorine
     build(combinedChlorineData, combinedChlorineTitle)
 
-  val phData = Model.observableMeasurements.map(m => ( Entity.date(m.measured), m.ph ) )
-  val phTitle = Context.ph
+  def buildPhChart: ChartPanel =
+    val phData = Model.observableMeasurements.map(m => ( Entity.date(m.measured), m.ph ) ).toList
+    val phTitle = Context.ph
+    build(phData, phTitle)
 
   val calciumHardnessData = Model.observableMeasurements.map(m => ( Entity.date(m.measured), m.calciumHardness.toDouble ) ).toList
   val calciumHardnessTitle = Context.calciumHardness
