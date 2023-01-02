@@ -4,10 +4,9 @@ Pool Balance
 
 Todo
 ----
-1. Register
-2. Login
-3. Account
-4. Faults
+1. Register-Login Dialog
+2. Account Dialog
+3. Faults Dialog
 
 Issues
 ------
