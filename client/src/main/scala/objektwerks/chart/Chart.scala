@@ -20,9 +20,9 @@ import objektwerks.{Context, Entity, Measurement, Model}
 
 object Chart:
   def buildTotalChlorineChart: ChartPanel =
-    val totalChlorineData = Model.observableMeasurements.map(m => ( Entity.date(m.measured), m.totalChlorine.toDouble ) ).toList
-    val totalChlorineTitle = Context.totalChlorine
-    build(totalChlorineData, totalChlorineTitle)
+    val data = Model.observableMeasurements.map(m => ( Entity.date(m.measured), m.totalChlorine.toDouble ) ).toList
+    val title = Context.totalChlorine
+    build(data, title)
 
   def buildFreeChlorineChart: ChartPanel = 
     val freeChlorineData = Model.observableMeasurements.map(m => ( Entity.date(m.measured), m.freeChlorine.toDouble ) ).toList
