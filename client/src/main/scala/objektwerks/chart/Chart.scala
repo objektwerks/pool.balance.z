@@ -39,8 +39,10 @@ object Chart:
     val phTitle = Context.ph
     build(phData, phTitle)
 
-  val calciumHardnessData = Model.observableMeasurements.map(m => ( Entity.date(m.measured), m.calciumHardness.toDouble ) ).toList
-  val calciumHardnessTitle = Context.calciumHardness
+  def buildCalciumHardnessChart: ChartPanel =
+    val calciumHardnessData = Model.observableMeasurements.map(m => ( Entity.date(m.measured), m.calciumHardness.toDouble ) ).toList
+    val calciumHardnessTitle = Context.calciumHardness
+    build(calciumHardnessData, calciumHardnessTitle)
 
   val totalAlkalinityData = Model.observableMeasurements.map(m => ( Entity.date(m.measured), m.totalAlkalinity.toDouble ) ).toList
   val totalAlkalinityTitle = Context.totalAlkalinity
