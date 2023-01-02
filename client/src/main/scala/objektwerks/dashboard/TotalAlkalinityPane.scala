@@ -3,7 +3,7 @@ package objektwerks.dashboard
 import objektwerks.Context.*
 import objektwerks.Model.*
 
-final class TotalAlkalinityPane(title: String = totalAlkalinity.asHtml) extends DashboardTitledPane(title):
+final class TotalAlkalinityPane(title: String = totalAlkalinity) extends DashboardTitledPane(title):
   range.setText("0 - 240")
   good.setText("80 - 120")
   ideal.setText("100")

@@ -3,7 +3,7 @@ package objektwerks.dashboard
 import objektwerks.Context.*
 import objektwerks.Model.*
 
-final class TotalBrominePane(title: String = totalBromine.asHtml) extends DashboardTitledPane(title):
+final class TotalBrominePane(title: String = totalBromine) extends DashboardTitledPane(title):
   range.setText("0 - 20")
   good.setText("2 - 10")
   ideal.setText("5")

@@ -3,7 +3,7 @@ package objektwerks.dashboard
 import objektwerks.Context.*
 import objektwerks.Model.*
 
-final class CyanuricAcidPane(title: String = cyanuricAcid.asHtml) extends DashboardTitledPane(title):
+final class CyanuricAcidPane(title: String = cyanuricAcid) extends DashboardTitledPane(title):
   range.setText("0 - 300")
   good.setText("30 - 100")
   ideal.setText("50")

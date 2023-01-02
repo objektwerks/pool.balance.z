@@ -3,7 +3,7 @@ package objektwerks.dashboard
 import objektwerks.Context.*
 import objektwerks.Model.*
 
-final class CalciumHardnessPane(title: String = calciumHardness.asHtml) extends DashboardTitledPane(title):
+final class CalciumHardnessPane(title: String = calciumHardness) extends DashboardTitledPane(title):
   range.setText("0 - 1000")
   good.setText("200 - 500")
   ideal.setText("375")

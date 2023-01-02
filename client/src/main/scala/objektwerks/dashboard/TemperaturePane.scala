@@ -3,7 +3,7 @@ package objektwerks.dashboard
 import objektwerks.Context.*
 import objektwerks.Model.*
 
-final class TemperaturePane(title: String = temperature.asHtml) extends DashboardTitledPane(title):
+final class TemperaturePane(title: String = temperature) extends DashboardTitledPane(title):
   range.setText("50 - 110")
   good.setText("75 - 85")
   ideal.setText("82")
