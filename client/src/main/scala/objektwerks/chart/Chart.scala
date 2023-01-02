@@ -50,9 +50,9 @@ object Chart:
     build(data, title)
 
   def buildCyanuricAcidChart: ChartPanel =
-    val cyanuricAcidData = Model.observableMeasurements.map(m => ( Entity.date(m.measured), m.cyanuricAcid.toDouble ) ).toList
-    val cyanuricAcidTitle = Context.cyanuricAcid
-    build(cyanuricAcidData, cyanuricAcidTitle)
+    val data = Model.observableMeasurements.map(m => ( Entity.date(m.measured), m.cyanuricAcid.toDouble ) ).toList
+    val title = Context.cyanuricAcid
+    build(data, title)
 
   def buildTotalBromineChart: ChartPanel =
     val totalBromineData = Model.observableMeasurements.map(m => ( Entity.date(m.measured), m.totalBromine.toDouble ) ).toList
