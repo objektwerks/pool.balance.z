@@ -17,11 +17,10 @@ object DashboardTitledPane:
 abstract class DashboardTitledPane(title: String) extends JPanel with LazyLogging:
   import DashboardTitledPane.*
 
-  setLayout( new BorderLayout() )
-
   val titleBorder = new TitledBorder(title)
   titleBorder.setTitleColor(fuchsia)
   setBorder(titleBorder)
+  setLayout( new BorderLayout() )
 
   val range = new JLabel("")
   val good = new JLabel("")
