@@ -69,8 +69,8 @@ object Chart:
     val title = Context.temperature
     build(data, title)
 
-  def build(measurements: List[(Date, Double)],
-            title: String): ChartPanel =
+  private def build(measurements: List[(Date, Double)],
+                    title: String): ChartPanel =
     val xyPlot = new XYPlot()
     xyPlot.setDataset( buildDataset(measurements, title) )
     xyPlot.setRenderer( buildRenderer(title) )
