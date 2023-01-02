@@ -17,7 +17,8 @@ import scala.math.abs
 import objektwerks.{Context, Entity, Measurement}
 
 object Chart:
-  def build(measurements: List[(Date, Double)], title: String): JFreeChart =
+  def build(measurements: List[(Date, Double)],
+            title: String): JFreeChart =
     val xyPlot = new XYPlot()
     xyPlot.setDataset( buildDataset(measurements, title) )
     xyPlot.setRenderer( buildRenderer(title) )
@@ -31,14 +32,15 @@ object Chart:
 
     new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, xyPlot, true)
 
-  def buildDataset(measurements: List[(Date, Double)], title: String): XYDataset =
+  private def buildDataset(measurements: List[(Date, Double)],
+                           title: String): XYDataset =
     val timeSeries = new TimeSeries(title)
     measurements.foreach { (measured, measurement) =>
       timeSeries.add( new Day(measured), measurement )
     }
     new TimeSeriesCollection(timeSeries)
 
-  def buildRenderer(title: String): XYItemRenderer =
+  private def buildRenderer(title: String): XYItemRenderer =
     val renderer = new XYLineAndShapeRenderer()
     val tooltipGenerator = new StandardXYToolTipGenerator() {
       override def generateToolTip(dataset: XYDataset, series: Int, item: Int): String =
@@ -56,7 +58,7 @@ object Chart:
     renderer.setDefaultItemLabelsVisible(true)
     renderer
 
-  def buildItemLabelGenerator(decimalFormat: String): XYItemLabelGenerator =
+  private def buildItemLabelGenerator(decimalFormat: String): XYItemLabelGenerator =
     new StandardXYItemLabelGenerator() {
       override def generateLabel(dataset: XYDataset, series: Int, item: Int): String =
         val yValue = dataset.getYValue(series, item)
@@ -64,9 +66,9 @@ object Chart:
       override def clone() = this
     }
 
-  def calculateDeltaAsPercentage(dataset: XYDataset,
-                                 series: Int,
-                                 item: Int): Long =
+  private def calculateDeltaAsPercentage(dataset: XYDataset,
+                                         series: Int,
+                                         item: Int): Long =
     val datasetLastIndex = dataset.getItemCount(series) - 1
     val previousItemIndex = item - 1
     val datasetIndexRange = Range.inclusive(0, datasetLastIndex)
