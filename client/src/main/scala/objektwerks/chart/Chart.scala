@@ -21,7 +21,10 @@ import objektwerks.{Context, Entity, Measurement, Model}
 object Chart:
   val totalChlorineDate = Model.observableMeasurements.map(m => ( Entity.date(m.measured), m.totalChlorine.toDouble ) )
   val totalChlorineTitle = Context.totalChlorine
-  
+
+  val freeChlorineDate = Model.observableMeasurements.map(m => ( Entity.date(m.measured), m.freeChlorine.toDouble ) )
+  val freeChlorineTitle = Context.freeChlorine
+
   def build(measurements: List[(Date, Double)],
             title: String): ChartPanel =
     val xyPlot = new XYPlot()
