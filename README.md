@@ -6,9 +6,8 @@ Todo
 ----
 1. Register
 2. Login
-3. Charts
-4. Account
-5. Faults
+3. Account
+4. Faults
 
 Issues
 ------
