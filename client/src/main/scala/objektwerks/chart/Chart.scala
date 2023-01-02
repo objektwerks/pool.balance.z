@@ -65,9 +65,9 @@ object Chart:
     build(data, title)
 
   def buildTemperatureChart: ChartPanel =
-    val temperatureData = Model.observableMeasurements.map(m => ( Entity.date(m.measured), m.temperature.toDouble ) ).toList
-    val temperatureTitle = Context.temperature
-    build(temperatureData, temperatureTitle)
+    val data = Model.observableMeasurements.map(m => ( Entity.date(m.measured), m.temperature.toDouble ) ).toList
+    val title = Context.temperature
+    build(data, title)
 
   def build(measurements: List[(Date, Double)],
             title: String): ChartPanel =
