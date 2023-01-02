@@ -25,6 +25,9 @@ object Chart:
   val freeChlorineDate = Model.observableMeasurements.map(m => ( Entity.date(m.measured), m.freeChlorine.toDouble ) )
   val freeChlorineTitle = Context.freeChlorine
 
+  val combinedChlorineDate = Model.observableMeasurements.map(m => ( Entity.date(m.measured), m.combinedChlorine.toDouble ) )
+  val combinedChlorineTitle = Context.combinedChlorine
+
   def build(measurements: List[(Date, Double)],
             title: String): ChartPanel =
     val xyPlot = new XYPlot()
