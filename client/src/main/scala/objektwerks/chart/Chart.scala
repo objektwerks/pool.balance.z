@@ -30,9 +30,9 @@ object Chart:
     build(data, title)
 
   def buildCombinedChlorineChart: ChartPanel = 
-    val combinedChlorineData = Model.observableMeasurements.map(m => ( Entity.date(m.measured), m.combinedChlorine ) ).toList
-    val combinedChlorineTitle = Context.combinedChlorine
-    build(combinedChlorineData, combinedChlorineTitle)
+    val data = Model.observableMeasurements.map(m => ( Entity.date(m.measured), m.combinedChlorine ) ).toList
+    val title = Context.combinedChlorine
+    build(data, title)
 
   def buildPhChart: ChartPanel =
     val phData = Model.observableMeasurements.map(m => ( Entity.date(m.measured), m.ph ) ).toList
