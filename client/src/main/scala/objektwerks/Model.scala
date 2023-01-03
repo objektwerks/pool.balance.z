@@ -90,6 +90,15 @@ object Model extends LazyLogging:
         case _ => ()
     )
 
+  def login(pin: String): Unit =
+    Proxy.call(
+      Login(pin),
+      (event: Event) => event match
+        case fault @ Fault(_, _) => onFault("Model.login", fault)
+        case LoggedIn(account) => observableAccount.set(account)
+        case _ => ()
+    )
+
   def pools(): Unit =
     Proxy.call(
       ListPools(observableAccount.get.license),
