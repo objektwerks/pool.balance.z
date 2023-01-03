@@ -27,6 +27,7 @@ object Context:
   val chart = conf.getString("chart")
   val date = conf.getString("date")
 
+  val account = conf.getString("account")
   val pool = conf.getString("pool")
   val cleaning = conf.getString("cleaning")
   val measurement = conf.getString("measurement")
