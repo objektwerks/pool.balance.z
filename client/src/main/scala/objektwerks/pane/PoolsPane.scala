@@ -26,7 +26,8 @@ final class PoolsPane extends JPanel:
 
   val addAction = AddPoolAction(Context.add)
   val editAction = EditPoolAction(Context.edit)
-  val actions = Actions(addAction, editAction)
+  val viewAction = ViewAccountAction(Context.account)
+  val actions = Actions(addAction, editAction, viewAction)
 
   def setSelectedId(id: Long): Unit = Model.selectedPoolId.value = id
 
