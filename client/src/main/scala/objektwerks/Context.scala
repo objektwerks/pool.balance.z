@@ -32,6 +32,7 @@ object Context:
   val cleaning = conf.getString("cleaning")
   val measurement = conf.getString("measurement")
   val chemical = conf.getString("chemical")
+  val faults = conf.getString("faults")
 
   val pools = conf.getString("pools")
   val cleanings = conf.getString("cleanings")
