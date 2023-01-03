@@ -43,6 +43,10 @@ object Model extends LazyLogging:
   val observableChemicals = ObservableBuffer[Chemical]()
   val observableFaults = ObservableBuffer[Fault]()
 
+  observableAccount.onChange { (_, oldAccount, newAccount) =>
+    logger.info(s"*** Model: selected account onchange event: $oldAccount -> $newAccount")
+  }
+
   observablePools.onChange { (_, changes) =>
     logger.info(s"*** Model: observable pools onchange event: $changes")
   }
