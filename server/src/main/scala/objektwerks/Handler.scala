@@ -12,7 +12,7 @@ final case class Handler(store: Store):
       isAuthorized <- authorize(command)
       isValid      <- validate(command)
       event        <- if isAuthorized && isValid then command match
-                      case Register()                      => register
+                      case Register(emailAddress)          => register(emailAddress)
                       case Login(pin)                      => login(pin)
                       case Deactivate(license)             => deactivateAccount(license)
                       case Reactivate(license)             => reactivateAccount(license)
@@ -29,12 +29,12 @@ final case class Handler(store: Store):
 
   private def authorize(command: Command): Task[Boolean] =
     command match
-      case license: License      => if license.isLicense then store.authorize(license.license) else ZIO.succeed(false)
-      case Register() | Login(_) => ZIO.succeed(true)
+      case license: License       => if license.isLicense then store.authorize(license.license) else ZIO.succeed(false)
+      case Register(_) | Login(_) => ZIO.succeed(true)
 
   private def validate(command: Command): Task[Boolean] = ZIO.succeed(command.isValid)
 
-  private def register: Task[Registered] =
+  private def register(emailAddress: String): Task[Registered] =
     val account = Account()
     for
       id <- store.register(account)

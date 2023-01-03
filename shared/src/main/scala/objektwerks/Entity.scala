@@ -21,7 +21,7 @@ object Entity:
   given chemicalOrdering: Ordering[Chemical] = Ordering.by[Chemical, Long](c => parse(c.added).toEpochMilli).reverse
 
 final case class Account(id: Long = 0,
-                         emailAddress: String,
+                         emailAddress: String = "",
                          license: String = newLicense,
                          pin: String = newPin,
                          activated: String = Entity.instant,
