@@ -11,4 +11,4 @@ final class View extends JSplitPane:
   setDividerLocation(130)
   setTopComponent( DashboardPane() )
   setBottomComponent( PoolsSplitPane() )
-  setBorder( BorderFactory.createEmptyBorder(3, 3, 3, 3) )
+  setBorder( BorderFactory.createEmptyBorder(3, 3, 0, 3) )
