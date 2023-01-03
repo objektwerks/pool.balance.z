@@ -15,7 +15,6 @@ final class ColumnModel(columns: List[String]) extends DefaultTableColumnModel:
   for ((column, index) <- columns.view.zipWithIndex)
     val tableColumn = new TableColumn(index)
     tableColumn.setHeaderValue(column)
-    
     addColumn(tableColumn)
 
 final class Table(tableModel: TableModel,
