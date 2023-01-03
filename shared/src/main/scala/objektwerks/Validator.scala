@@ -10,7 +10,7 @@ object Validator:
     def isValid: Boolean =
       command match
         case register @ Register(emailAddress)       => register.isValid
-        case login @ Login(_)                        => login.isValid
+        case login @ Login(_, _)                      => login.isValid
         case deactivate @ Deactivate(_)              => deactivate.isValid
         case reactivate @ Reactivate(_)              => reactivate.isValid
         case listPools @ ListPools(_)                => listPools.isValid
@@ -26,7 +26,7 @@ object Validator:
     def isValid: Boolean = register.emailAddress.isEmailAddress
 
   extension (login: Login)
-    def isValid: Boolean = login.pin.isPin
+    def isValid: Boolean = login.emailAddress.isEmailAddress && login.pin.isPin
 
   extension (deactivate: Deactivate)
     def isValid: Boolean = deactivate.license.isLicense
