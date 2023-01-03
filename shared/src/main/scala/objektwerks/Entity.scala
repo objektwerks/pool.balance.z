@@ -21,6 +21,7 @@ object Entity:
   given chemicalOrdering: Ordering[Chemical] = Ordering.by[Chemical, Long](c => parse(c.added).toEpochMilli).reverse
 
 final case class Account(id: Long = 0,
+                         emailAddress: String,
                          license: String = newLicense,
                          pin: String = newPin,
                          activated: String = Entity.instant,
@@ -50,6 +51,7 @@ object Account:
   private def newLicense: String = UUID.randomUUID.toString
 
   val empty = Account(
+    emailAddress = "",
     license = "",
     pin = "",
     activated = "",
