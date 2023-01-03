@@ -36,8 +36,12 @@ final case class Store(quill: Quill.Postgres[SnakeCase],
 
   def register(account: Account): Task[Long] = addAccount(account)
 
-  def login(pin: String): Task[Option[Account]] =
-    run( query[Account].filter( _.pin == lift(pin) ) ).map(result => result.headOption)
+  def login(emailAddress: String, pin: String): Task[Option[Account]] =
+    run(
+      query[Account]
+        .filter(_.emailAddress == lift(emailAddress))
+        .filter(_.pin == lift(pin))
+    ).map(result => result.headOption)
 
   def addAccount(account: Account): Task[Long] =
     transaction(

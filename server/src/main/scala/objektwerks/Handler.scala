@@ -13,7 +13,7 @@ final case class Handler(store: Store):
       isValid      <- validate(command)
       event        <- if isAuthorized && isValid then command match
                       case Register(emailAddress)          => register(emailAddress)
-                      case Login(pin)                      => login(pin)
+                      case Login(emailAddress, pin)        => login(emailAddress, pin)
                       case Deactivate(license)             => deactivateAccount(license)
                       case Reactivate(license)             => reactivateAccount(license)
                       case ListPools(_)                    => listPools
@@ -29,8 +29,8 @@ final case class Handler(store: Store):
 
   private def authorize(command: Command): Task[Boolean] =
     command match
-      case license: License       => if license.isLicense then store.authorize(license.license) else ZIO.succeed(false)
-      case Register(_) | Login(_) => ZIO.succeed(true)
+      case license: License          => if license.isLicense then store.authorize(license.license) else ZIO.succeed(false)
+      case Register(_) | Login(_, _) => ZIO.succeed(true)
 
   private def validate(command: Command): Task[Boolean] = ZIO.succeed(command.isValid)
 
@@ -40,9 +40,9 @@ final case class Handler(store: Store):
       id <- store.register(account)
     yield Registered( account.copy(id = id) )
 
-  private def login(pin: String): Task[LoggedIn | Fault] =
+  private def login(emailAddress: String, pin: String): Task[LoggedIn | Fault] =
     for
-      option <- store.login(pin)
+      option <- store.login(emailAddress, pin)
     yield if option.isDefined then LoggedIn(option.get) else Fault(s"Invalid pin: $pin")
 
   private def deactivateAccount(license: String): Task[Deactivated] =
