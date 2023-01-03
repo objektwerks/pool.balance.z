@@ -81,9 +81,9 @@ object Model extends LazyLogging:
 
   def currentChemical: Option[Chemical] = observableChemicals.find( chemical => chemical.id == selectedChemicalId.get )
 
-  def register: Unit =
+  def register(emailAddress: String): Unit =
     Proxy.call(
-      Register(),
+      Register(emailAddress),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFault("Model.register", fault)
         case Registered(account) => observableAccount.set(account)
