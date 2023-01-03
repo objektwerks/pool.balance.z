@@ -20,7 +20,7 @@ final class ColumnModel(columns: List[String]) extends DefaultTableColumnModel:
 
 final class FaultsDialog extends Dialog(Context.faults):
   val faults = Model.observableFaults.toList
-  val columns = List("occurred", "cause")
+  val columns = List(Context.occurred, Context.cause)
   val table = new JTable(
     TableModel(faults),
     ColumnModel(columns)
