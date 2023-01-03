@@ -71,6 +71,9 @@ object Context:
   val amount = conf.getString("amount")
   val added = conf.getString("added")
 
+  val occurred = conf.getString("occurred")
+  val cause = conf.getString("cause")
+
   val headers = Headers (
     Header("Content-Type", "application/json; charset=utf-8"),
     Header("Accept", "application/json")
