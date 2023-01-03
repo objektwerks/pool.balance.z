@@ -18,7 +18,7 @@ final class ColumnModel(columns: List[String]) extends DefaultTableColumnModel:
     tableColumn.setHeaderValue(column)
     addColumn(tableColumn)
 
-final class FaultsDialog extends Dialog(Context.faults):
+final class FaultsDialog() extends Dialog(Context.faults):
   val faults = Model.observableFaults.toList
   val columns = List(Context.occurred, Context.cause)
   val table = new JTable(
