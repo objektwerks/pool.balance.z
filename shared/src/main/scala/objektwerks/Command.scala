@@ -5,7 +5,7 @@ sealed trait Command
 sealed trait License:
   val license: String
 
-final case class Register() extends Command
+final case class Register(emailAddress: String) extends Command
 final case class Login(pin: String) extends Command
 
 final case class Deactivate(license: String) extends Command with License

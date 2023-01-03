@@ -4,11 +4,12 @@ object Validator:
   extension (value: String)
     def isLicense: Boolean = if value.nonEmpty && value.length == 36 then true else false
     def isPin: Boolean = value.length == 7
+    def isEmailAddress: Boolean = value.nonEmpty && value.length >= 3 && value.contains("@")
 
   extension (command: Command)
     def isValid: Boolean =
       command match
-        case register @ Register()                   => register.isValid
+        case register @ Register(emailAddress)       => register.isValid
         case login @ Login(_)                        => login.isValid
         case deactivate @ Deactivate(_)              => deactivate.isValid
         case reactivate @ Reactivate(_)              => reactivate.isValid
@@ -22,7 +23,7 @@ object Validator:
         case saveChemical @ SaveChemical(_, _)       => saveChemical.isValid
 
   extension (register: Register)
-    def isValid: Boolean = true
+    def isValid: Boolean = register.emailAddress.isEmailAddress
 
   extension (login: Login)
     def isValid: Boolean = login.pin.isPin
