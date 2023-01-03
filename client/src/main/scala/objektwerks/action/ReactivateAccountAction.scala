@@ -5,5 +5,5 @@ import javax.swing.AbstractAction
 
 import objektwerks.Model
 
-final class ActivateAccountAction(name: String) extends AbstractAction(name):
+final class ReactivateAccountAction(name: String) extends AbstractAction(name):
   override def actionPerformed(event: ActionEvent): Unit = ???
