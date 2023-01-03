@@ -1,31 +1,40 @@
 package objektwerks.dialog
 
-import javax.swing.JScrollPane
+import java.awt.Dimension
 
-import objektwerks.{Context, Model}
+import javax.swing.{JScrollPane, JTable}
+import javax.swing.{JTable, ListSelectionModel}
+import javax.swing.table.{DefaultTableModel, DefaultTableColumnModel, TableColumn, TableColumnModel}
+
+import objektwerks.{Context, Fault, Model}
 import objektwerks.action.{Actions, CloseAction}
-import objektwerks.table.{ColumnModel, Table, TableModel}
+
+final class TableModel(faults: List[Fault]) extends DefaultTableModel:
+  faults.foreach { fault => addRow( Array(fault.occurred, fault.cause).toArray[Any] ) }
+
+final class ColumnModel(columns: List[String]) extends DefaultTableColumnModel:
+  for ((column, index) <- columns.view.zipWithIndex)
+    val tableColumn = new TableColumn(index)
+    tableColumn.setHeaderValue(column)
+    addColumn(tableColumn)
 
 final class FaultsDialog extends Dialog(Context.faults):
   val faults = Model.observableFaults.toList
-  val columns = List(occurred, cause)
-  val table = Table(
+  val columns = List("occurred", "cause")
+  val table = new JTable(
     TableModel(faults),
-    ColumnModel(columns),
-    Long => setSelectedId(Long),
-    Long => fireEditActionById(Long)
+    ColumnModel(columns)
   )
-  Model.observablePools.onChange { (_, _) =>
-    table.setModel( TableModel( Model.observablePools.toList ) )
+
+  table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION)
+  table.getTableHeader.setPreferredSize( new Dimension(80, 40) )
+
+  Model.observableFaults.onChange { (_, _) =>
+    table.setModel( TableModel( Model.observableFaults.toList ) )
   }
-  val tablePane = new JScrollPane(table)
-
-  def setSelectedId(id: Long): Unit = Model.selectedPoolId.value = id
-
-  def fireEditActionById(id: Long): Unit = ()
   
-  setLayout( new BorderLayout() )
-
+  val tablePane = new JScrollPane(table)
+  
   val closeAction = CloseAction(Context.close, () => close())
   val actions = Actions(closeAction)
 
