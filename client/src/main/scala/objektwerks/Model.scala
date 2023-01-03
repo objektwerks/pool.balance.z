@@ -37,7 +37,6 @@ object Model extends LazyLogging:
   }
 
   val observableAccount = ObjectProperty[Account](Account.empty)
-
   val observablePools = ObservableBuffer[Pool]()
   val observableCleanings = ObservableBuffer[Cleaning]()
   val observableMeasurements = ObservableBuffer[Measurement]()
@@ -81,6 +80,15 @@ object Model extends LazyLogging:
   def currentMeasurement: Option[Measurement] = observableMeasurements.find( measurement => measurement.id == selectedMeasurementId.get )
 
   def currentChemical: Option[Chemical] = observableChemicals.find( chemical => chemical.id == selectedChemicalId.get )
+
+  def register: Unit =
+    Proxy.call(
+      Register(),
+      (event: Event) => event match
+        case fault @ Fault(_, _) => onFault("Model.register", fault)
+        case Registered(account) => observableAccount.set(account)
+        case _ => ()
+    )
 
   def pools(): Unit =
     Proxy.call(
