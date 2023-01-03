@@ -3,7 +3,7 @@ package objektwerks.dialog
 import javax.swing.JLabel
 
 import objektwerks.{Account, Context}
-import objektwerks.action.{Actions, CloseAction}
+import objektwerks.action.{Actions, ActivateAccountAction, CloseAction}
 import objektwerks.form.Form
 
 final class AccountDialog(account: Account) extends Dialog(Context.account):
@@ -16,6 +16,7 @@ final class AccountDialog(account: Account) extends Dialog(Context.account):
     )
   )
 
+  val activateAction = ActivateAccountAction(Context.activated)
   val closeAction = CloseAction(Context.close, () => close())
   val actions = Actions(closeAction)
 
