@@ -5,8 +5,6 @@ Pool Balance
 Todo
 ----
 1. Register-Login Dialog
-2. Account Dialog
-3. Faults Dialog
 
 Issues
 ------
