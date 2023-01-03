@@ -10,7 +10,7 @@ object Validator:
     def isValid: Boolean =
       command match
         case register @ Register(emailAddress)       => register.isValid
-        case login @ Login(_, _)                      => login.isValid
+        case login @ Login(_, _)                     => login.isValid
         case deactivate @ Deactivate(_)              => deactivate.isValid
         case reactivate @ Reactivate(_)              => reactivate.isValid
         case listPools @ ListPools(_)                => listPools.isValid
