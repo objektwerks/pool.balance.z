@@ -6,4 +6,4 @@ import javax.swing.AbstractAction
 import objektwerks.Model
 
 final class ReactivateAccountAction(name: String) extends AbstractAction(name):
-  override def actionPerformed(event: ActionEvent): Unit = ???
+  override def actionPerformed(event: ActionEvent): Unit = Model.reactivate( Model.observableAccount.get.license )
