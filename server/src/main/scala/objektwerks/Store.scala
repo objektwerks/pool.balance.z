@@ -44,21 +44,23 @@ final case class Store(quill: Quill.Postgres[SnakeCase],
       run(query[Account].insertValue(lift(account)).returningGenerated(_.id))
     )
 
-  def deactivateAccount(license: String): Task[Long] =
+  def deactivateAccount(license: String): Task[Account] =
     transaction(
       run( 
         query[Account]
           .filter( _.license == lift(license) )
           .update( _.deactivated -> lift(Entity.instant), _.activated -> lift("") )
+          .returning(account => account)
       )
     )
 
-  def reactivateAccount(license: String): Task[Long] =
+  def reactivateAccount(license: String): Task[Account] =
     transaction(
       run(
         query[Account]
           .filter( _.license == lift(license) )
           .update( _.activated -> lift(Entity.instant), _.deactivated -> lift("") )
+          .returning(account => account)
       )
     )
 

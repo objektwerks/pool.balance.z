@@ -8,8 +8,8 @@ sealed trait Event
 final case class Registered(account: Account) extends Event
 final case class LoggedIn(account: Account) extends Event
 
-final case class Deactivated(license: String) extends Event
-final case class Reactivated(license: String) extends Event
+final case class Deactivated(account: Account) extends Event
+final case class Reactivated(account: Account) extends Event
 
 final case class PoolsListed(pools: List[Pool]) extends Event
 final case class PoolSaved(id: Long) extends Event

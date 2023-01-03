@@ -47,13 +47,13 @@ final case class Handler(store: Store):
 
   private def deactivateAccount(license: String): Task[Deactivated] =
     for
-      _ <- store.deactivateAccount(license)
-    yield Deactivated(license)
+      account <- store.deactivateAccount(license)
+    yield Deactivated(account)
 
   private def reactivateAccount(license: String): Task[Reactivated] =
     for
-      _ <- store.reactivateAccount(license)
-    yield Reactivated(license)
+      account <- store.reactivateAccount(license)
+    yield Reactivated(account)
 
   private def listPools: Task[PoolsListed] =
     for

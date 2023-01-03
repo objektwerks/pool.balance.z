@@ -99,6 +99,24 @@ object Model extends LazyLogging:
         case _ => ()
     )
 
+  def deactivate(license: String): Unit =
+    Proxy.call(
+      Deactivate(license),
+      (event: Event) => event match
+        case fault @ Fault(_, _) => onFault("Model.deactivate", fault)
+        case Deactivated(account) => observableAccount.set(account)
+        case _ => ()
+    )
+
+  def reactivate(license: String): Unit =
+    Proxy.call(
+      Reactivate(license),
+      (event: Event) => event match
+        case fault @ Fault(_, _) => onFault("Model.reactivate", fault)
+        case Reactivated(account) => observableAccount.set(account)
+        case _ => ()
+    )
+
   def pools(): Unit =
     Proxy.call(
       ListPools(observableAccount.get.license),
