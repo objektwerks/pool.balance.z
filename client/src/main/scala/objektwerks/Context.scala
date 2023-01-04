@@ -34,6 +34,7 @@ object Context:
   val chemical = conf.getString("chemical")
   val faults = conf.getString("faults")
 
+  val emailAddress = conf.getString("emailAddress")
   val license = conf.getString("license")
   val pin = conf.getString("pin")
   val activated = conf.getString("activated")
