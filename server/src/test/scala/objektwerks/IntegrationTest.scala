@@ -21,6 +21,7 @@ object IntegrationTest extends ZIOSpecDefault:
   val port = conf.getInt("port")
   val url = s"http://$host:$port/command"
 
+  val emailAddress = "funkwerks@runbox.com"
   var account = Account()
   var pool = Pool(id = 0, name = "home", volume = 10_000, unit = UnitOfMeasure.gl.toString)
   var cleaning = Cleaning(poolId = 0)
@@ -109,7 +110,7 @@ object IntegrationTest extends ZIOSpecDefault:
 
   val register =
     for
-      response <- Client.request(url = url, content = Body.fromString(Register().toJson))
+      response <- Client.request(url = url, content = Body.fromString(Register(emailAddress).toJson))
       result   <- response.body.asString.flatMap { json =>
                     json.fromJson[Registered] match
                       case Right(registered) => this.account = registered.account; assertTrue(account.isActivated)
@@ -119,7 +120,7 @@ object IntegrationTest extends ZIOSpecDefault:
 
   val login =
     for
-      response <- Client.request(url = url, content = Body.fromString(Login(account.pin).toJson))
+      response <- Client.request(url = url, content = Body.fromString(Login(account.emailAddress, account.pin).toJson))
       result   <- response.body.asString.flatMap { json =>
                     json.fromJson[LoggedIn] match
                       case Right(loggedIn) => assertTrue(loggedIn.account.isActivated)
