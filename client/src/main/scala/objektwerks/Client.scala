@@ -15,7 +15,7 @@ object Client extends LazyLogging:
     Context.init
     EventQueue.invokeLater(
       () => {
-        UIManager.setLookAndFeel( new FlatDarculaLaf() )
+        UIManager.setLookAndFeel( FlatDarculaLaf() )
         Taskbar.getTaskbar.setIconImage(logo)
         LoginRegisterDialog().open()
         Frame(logo, title, width, height).setVisible(true)
