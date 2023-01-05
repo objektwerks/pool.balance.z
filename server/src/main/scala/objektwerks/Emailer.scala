@@ -11,9 +11,13 @@ import scala.concurrent.duration.*
 import scala.language.postfixOps
 import scala.util.{Failure, Success, Using, Try}
 
-final case class Emailer(host: String,
-                         sender: String,
-                         password: String) extends LazyLogging:
+import zio.{ZIO, ZLayer}
+
+final case class Emailer(config: Config) extends LazyLogging:
+  private val host = config.getString("host")
+  private val sender = config.getString("sender")
+  private val password = config.getString("password")
+
   private val smtpServer: SmtpServer = MailServer.create()
     .host(host)
     .ssl(true)
@@ -49,3 +53,9 @@ final case class Emailer(host: String,
   def send(recipients: List[String],
            subject: String,
            message: String): Try[String] = retry(1)(sendEmail(recipients, subject, message))
+
+object Emailer:
+  def layer(config: Config): ZLayer[Any, Nothing, Emailer] =
+    ZLayer {
+      ZIO.succeed( Emailer(config) )
+    }

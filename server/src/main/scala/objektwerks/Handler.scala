@@ -6,7 +6,7 @@ import zio.json.{DecoderOps, EncoderOps}
 import Serializer.given
 import Validator.*
 
-final case class Handler(store: Store):
+final case class Handler(store: Store, emailer: Emailer):
   def handle[E <: Event](command: Command): Task[Event] =
     for
       isAuthorized <- authorize(command)
@@ -96,9 +96,10 @@ final case class Handler(store: Store):
     yield ChemicalSaved(id)
 
 object Handler:
-  val layer: ZLayer[Store, Nothing, Handler] =
+  val layer: ZLayer[Store & Emailer, Nothing, Handler] =
     ZLayer {
       for
-        store <- ZIO.service[Store]
-      yield Handler(store)
+        store   <- ZIO.service[Store]
+        emailer <- ZIO.service[Emailer]
+      yield Handler(store, emailer)
     }
