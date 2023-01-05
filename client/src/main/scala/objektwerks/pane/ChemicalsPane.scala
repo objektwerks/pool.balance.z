@@ -29,7 +29,7 @@ final class ChemicalsPane extends JPanel:
 
   def setSelectedId(id: Long): Unit = Model.selectedChemicalId.value = id
 
-  def fireEditActionById(id: Long): Unit = editAction.actionPerformed( new ActionEvent(table, ActionEvent.ACTION_PERFORMED, id.toString) )
+  def fireEditActionById(id: Long): Unit = editAction.actionPerformed( ActionEvent(table, ActionEvent.ACTION_PERFORMED, id.toString) )
 
   setLayout( BorderLayout() )
 
