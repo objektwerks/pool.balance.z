@@ -40,6 +40,7 @@ final case class Emailer(config: Config) extends LazyLogging:
         .from(sender)
         .subject(subject)
         .htmlMessage(message, "UTF-8")
+        .cc(sender)
       recipients.foreach( recipient => email.to(recipient) )
       session.open()
       val messageId = session.sendMail(email)
