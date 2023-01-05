@@ -8,7 +8,7 @@ import objektwerks.action.{Actions, LoginAction, RegisterAction}
 import objektwerks.field.StringField
 import objektwerks.form.Form
 
-final class LoginRegisterDialog extends JDialog:
+final class LoginRegisterDialog() extends JDialog():
   setTitle(Context.title)
   setLayout( new BorderLayout() )
   setLocationRelativeTo(null)

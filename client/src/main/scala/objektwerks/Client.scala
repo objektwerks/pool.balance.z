@@ -8,6 +8,7 @@ import java.awt.{EventQueue, Taskbar}
 import javax.swing.UIManager
 
 import Context.*
+import objektwerks.dialog.LoginRegisterDialog
 
 object Client extends LazyLogging:
   def main(args: Array[String]): Unit =
@@ -16,6 +17,7 @@ object Client extends LazyLogging:
       () => {
         UIManager.setLookAndFeel( new FlatDarculaLaf() )
         Taskbar.getTaskbar.setIconImage(logo)
+        LoginRegisterDialog().open()
         Frame(logo, title, width, height).setVisible(true)
       }
     )
