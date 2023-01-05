@@ -36,14 +36,14 @@ final case class Handler(store: Store, emailer: Emailer):
 
   private def validate(command: Command): Task[Boolean] = ZIO.succeed(command.isValid)
 
-  private def register(emailAddress: String): Task[Registered] =
+  private def register(emailAddress: String): Task[Registered | Fault] =
     val account = Account(emailAddress = emailAddress)
     val recipients = List(account.emailAddress)
     val message = s"Save this pin: ${account.pin} Then delete this email!"
     for
-      _  <- ZIO.succeedBlocking( emailer.send(recipients, subject, message) )
-      id <- store.register(account)
-    yield Registered( account.copy(id = id) )
+      sent  <- ZIO.succeedBlocking( emailer.send(recipients, subject, message) )
+      id    <- store.register(account)
+    yield if sent then Registered( account.copy(id = id) ) else Fault(s"Email failed: $emailAddress")
 
   private def login(emailAddress: String, pin: String): Task[LoggedIn | Fault] =
     for
