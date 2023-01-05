@@ -11,10 +11,9 @@ import scala.concurrent.duration.*
 import scala.language.postfixOps
 import scala.util.{Failure, Success, Using, Try}
 
-final class Emailer(conf: Config) extends LazyLogging:
-  private val host = conf.getString("email.host")
-  private val sender = conf.getString("email.sender")
-  private val password = conf.getString("email.password")
+final class Emailer(host: String,
+                    sender: String,
+                    password: String) extends LazyLogging:
   private val smtpServer: SmtpServer = MailServer.create()
     .host(host)
     .ssl(true)
