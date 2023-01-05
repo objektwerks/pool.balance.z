@@ -60,3 +60,7 @@ final class LoginRegisterDialog extends JDialog:
 
   val registerAction = RegisterAction(Context.register, register)
   val registerActions = Actions(loginAction)
+
+  val registerPane = JPanel( new BorderLayout() )
+  registerPane.add(registerForm, BorderLayout.CENTER)
+  registerPane.add(registerActions, BorderLayout.SOUTH)
