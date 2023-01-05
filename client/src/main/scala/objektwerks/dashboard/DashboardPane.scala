@@ -3,7 +3,7 @@ package objektwerks.dashboard
 import javax.swing.{BoxLayout, JPanel}
 
 final class DashboardPane extends JPanel:
-  setLayout( new BoxLayout(this, BoxLayout.LINE_AXIS) )
+  setLayout( BoxLayout(this, BoxLayout.LINE_AXIS) )
   add( TotalChlorinePane() )
   add( FreeChlorinePane() )
   add( CombinedChlorinePane() )
