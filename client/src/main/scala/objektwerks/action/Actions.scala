@@ -6,9 +6,9 @@ import javax.swing.BoxLayout
 
 final class Actions(actions: Action*) extends JPanel:
   val columns = actions.length
-  setLayout( new BoxLayout(this, BoxLayout.LINE_AXIS) )
+  setLayout( BoxLayout(this, BoxLayout.LINE_AXIS) )
 
   for (action <- actions)
-    val button = new JButton(action)
-    button.setPreferredSize( new Dimension(80, 40) )
+    val button = JButton(action)
+    button.setPreferredSize( Dimension(80, 40) )
     add(button)
