@@ -22,7 +22,7 @@ final class PoolsPane extends JPanel:
   Model.observablePools.onChange { (_, _) =>
     table.setModel( TableModel( Model.observablePools.toList ) )
   }
-  val tablePane = new JScrollPane(table)
+  val tablePane = JScrollPane(table)
 
   val addPoolAction = AddPoolAction(Context.add)
   val editPoolAction = EditPoolAction(Context.edit)
@@ -32,9 +32,9 @@ final class PoolsPane extends JPanel:
 
   def setSelectedId(id: Long): Unit = Model.selectedPoolId.value = id
 
-  def fireEditActionById(id: Long): Unit = editPoolAction.actionPerformed( new ActionEvent(table, ActionEvent.ACTION_PERFORMED, id.toString) )
+  def fireEditActionById(id: Long): Unit = editPoolAction.actionPerformed( ActionEvent(table, ActionEvent.ACTION_PERFORMED, id.toString) )
   
-  setLayout( new BorderLayout() )
+  setLayout( BorderLayout() )
 
   add(tablePane, BorderLayout.CENTER)
   add(actions, BorderLayout.SOUTH)
