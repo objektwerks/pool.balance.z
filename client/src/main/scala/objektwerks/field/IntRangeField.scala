@@ -1,5 +1,6 @@
 package objektwerks.field
 
+import java.awt.Dimension
 import java.beans.PropertyChangeEvent
 import java.text.NumberFormat
 import javax.swing.{InputVerifier, JComponent, JFormattedTextField}
@@ -8,6 +9,7 @@ import javax.swing.text.JTextComponent
 final class IntRangeField(value: Int,
                      isInRange: Int => Boolean,
                      fireChangeAction: Int => Unit) extends JFormattedTextField( NumberFormat.getIntegerInstance() ):
+  setPreferredSize( Dimension( 100, 40) )
   setValue(value)
   setColumns(10)
   setInputVerifier(
