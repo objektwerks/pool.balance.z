@@ -19,6 +19,8 @@ object Context:
   val port = conf.getInt("port")
   val url = s"http://$host:$port/command"
 
+  val login = conf.getString("login")
+  val register = conf.getString("register")
   val add = conf.getString("add")
   val edit = conf.getString("edit")
   val save = conf.getString("save")
