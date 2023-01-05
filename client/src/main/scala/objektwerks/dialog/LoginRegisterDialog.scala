@@ -1,7 +1,7 @@
 package objektwerks.dialog
 
 import java.awt.BorderLayout
-import javax.swing.{BoxLayout, JDialog, JPanel, JSeparator, JTabbedPane, JTextField, SwingConstants}
+import javax.swing.{BoxLayout, JDialog, JPanel, JTextField}
 import javax.swing.border.TitledBorder
 
 import objektwerks.{Context, Login, Register}
@@ -36,7 +36,7 @@ final class LoginRegisterDialog() extends JDialog():
     )
   )
 
-  val registerPane = JPanel( new BorderLayout() )
+  val registerPane = JPanel()
   val registerTitleBorder = TitledBorder(Context.register)
   registerTitleBorder.setTitleColor(Context.fuchsia)
   registerPane.setBorder(registerTitleBorder)
@@ -76,6 +76,5 @@ final class LoginRegisterDialog() extends JDialog():
   val actions = Actions(registerAction, loginAction)
 
   add(registerPane)
-  // add( JSeparator(SwingConstants.HORIZONTAL) )
   add(loginPane)
   add(actions)
