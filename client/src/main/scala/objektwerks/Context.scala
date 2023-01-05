@@ -86,7 +86,7 @@ object Context:
   )
 
   private def loadImage(path: String): Image =
-    new ImageIcon(
+    ImageIcon(
       ImageIO.read( Context.getClass.getResourceAsStream(path) )
     ).getImage
 
