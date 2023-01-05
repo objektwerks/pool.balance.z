@@ -1,7 +1,7 @@
 package objektwerks.dialog
 
 import java.awt.BorderLayout
-import javax.swing.{JDialog, JPanel, JTextField}
+import javax.swing.{JDialog, JPanel, JTabbedPane, JTextField}
 
 import objektwerks.{Context, Login}
 import objektwerks.action.{Actions, LoginAction, RegisterAction}
@@ -64,3 +64,7 @@ final class LoginRegisterDialog extends JDialog:
   val registerPane = JPanel( new BorderLayout() )
   registerPane.add(registerForm, BorderLayout.CENTER)
   registerPane.add(registerActions, BorderLayout.SOUTH)
+
+  val tabbedPane = JTabbedPane()
+  tabbedPane.addTab(Context.login, loginPane)
+  tabbedPane.addTab(Context.register, registerPane)
