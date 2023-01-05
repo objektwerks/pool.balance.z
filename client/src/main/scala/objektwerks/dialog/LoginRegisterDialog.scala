@@ -1,7 +1,7 @@
 package objektwerks.dialog
 
 import java.awt.BorderLayout
-import javax.swing.{JDialog, JPanel, JTabbedPane, JTextField}
+import javax.swing.{BoxLayout, JDialog, JPanel, JTabbedPane, JTextField}
 
 import objektwerks.{Context, Login, Register}
 import objektwerks.action.{Actions, LoginAction, RegisterAction}
@@ -10,7 +10,8 @@ import objektwerks.form.Form
 
 final class LoginRegisterDialog() extends JDialog():
   setTitle(Context.title)
-  setLayout( new BorderLayout() )
+  setLayout( BorderLayout() )
+  setSize(200, 100)
   setLocationRelativeTo(null)
   setModal(true)
 
@@ -44,9 +45,10 @@ final class LoginRegisterDialog() extends JDialog():
   val loginAction = LoginAction(Context.login, login)
   val loginActions = Actions(loginAction)
 
-  val loginPane = JPanel( new BorderLayout() )
-  loginPane.add(loginForm, BorderLayout.CENTER)
-  loginPane.add(loginActions, BorderLayout.SOUTH)
+  val loginPane = JPanel()
+  loginPane.setLayout( BoxLayout(loginPane, BoxLayout.PAGE_AXIS) )
+  loginPane.add(loginForm)
+  loginPane.add(loginActions)
 
   var register = Register("")
 
@@ -63,11 +65,12 @@ final class LoginRegisterDialog() extends JDialog():
   )
 
   val registerAction = RegisterAction(Context.register, register)
-  val registerActions = Actions(loginAction)
+  val registerActions = Actions(registerAction)
 
   val registerPane = JPanel( new BorderLayout() )
-  registerPane.add(registerForm, BorderLayout.CENTER)
-  registerPane.add(registerActions, BorderLayout.SOUTH)
+  registerPane.setLayout( BoxLayout(registerPane, BoxLayout.PAGE_AXIS) )
+  registerPane.add(registerForm)
+  registerPane.add(registerActions)
 
   val tabbedPane = JTabbedPane()
   tabbedPane.addTab(Context.login, loginPane)
