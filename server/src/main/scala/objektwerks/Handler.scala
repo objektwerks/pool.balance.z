@@ -37,7 +37,7 @@ final case class Handler(store: Store, emailer: Emailer):
   private def register(emailAddress: String): Task[Registered] =
     val account = Account(emailAddress = emailAddress)
     emailer.send(
-      List(account.emailAddress), "Register", "Save pin; then destroy this email!"
+      List(account.emailAddress), "Register", s"Save this pin: ${account.pin} Then delete this email!"
     )
     for
       id <- store.register(account)
