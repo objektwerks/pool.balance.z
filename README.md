@@ -5,6 +5,7 @@ Pool Balance
 Todo
 ----
 1. Register-Login Dialog
+2. See Handler comment on Emailer
 
 Issues
 ------
