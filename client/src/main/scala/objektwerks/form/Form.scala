@@ -12,9 +12,9 @@ final class Form(fields: List[(String, JComponent)]) extends JPanel:
   import Form.*
 
   private val rows = fields.length
-  setLayout( new GridLayout(rows, columns, horizontalGap, verticalGap) )
+  setLayout( GridLayout(rows, columns, horizontalGap, verticalGap) )
   setBorder( BorderFactory.createEmptyBorder(3, 3, 3, 3) )
 
   for ( (label, component) <- fields )
-    add( new JLabel(label) )
+    add( JLabel(label) )
     add( component )
