@@ -37,6 +37,7 @@ final case class Handler(store: Store, emailer: Emailer):
   private def register(emailAddress: String): Task[Registered] =
     val account = Account(emailAddress = emailAddress)
     for
+      // TODO Call Emailer with message!
       id <- store.register(account)
     yield Registered( account.copy(id = id) )
 
