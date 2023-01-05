@@ -31,7 +31,7 @@ final class ChemicalDialog(chemical: Chemical) extends Dialog(Context.chemical):
       Context.typeof.asLabel -> typeof,
       Context.amount.asLabel -> amount,
       Context.unit.asLabel -> unit,
-      Context.added.asLabel -> new JLabel(chemical.added)
+      Context.added.asLabel -> JLabel(chemical.added)
     )
   )
 
