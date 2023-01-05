@@ -21,7 +21,7 @@ final class ChemicalsPane extends JPanel:
   Model.observableChemicals.onChange { (_, _) =>
     table.setModel( TableModel( Model.observableChemicals.toList ) )
   }
-  val tablePane = new JScrollPane(table)
+  val tablePane = JScrollPane(table)
 
   val addAction = AddChemicalAction(Context.add)
   val editAction = EditChemicalAction(Context.edit)
@@ -31,7 +31,7 @@ final class ChemicalsPane extends JPanel:
 
   def fireEditActionById(id: Long): Unit = editAction.actionPerformed( new ActionEvent(table, ActionEvent.ACTION_PERFORMED, id.toString) )
 
-  setLayout( new BorderLayout() )
+  setLayout( BorderLayout() )
 
   add(tablePane, BorderLayout.CENTER)
   add(actions, BorderLayout.SOUTH)
