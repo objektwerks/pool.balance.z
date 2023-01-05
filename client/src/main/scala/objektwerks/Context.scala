@@ -35,6 +35,7 @@ object Context:
   val faults = conf.getString("faults")
 
   val emailAddress = conf.getString("emailAddress")
+  val password = conf.getString(("password"))
   val license = conf.getString("license")
   val pin = conf.getString("pin")
   val activated = conf.getString("activated")
