@@ -44,7 +44,7 @@ final class CleaningDialog(cleaning: Cleaning) extends Dialog(Context.cleaning):
       Context.pumpBasket.asLabel -> pumpBasket,
       Context.pumpFilter.asLabel -> pumpFilter,
       Context.vacuum.asLabel -> vacuum,
-      Context.cleaned.asLabel -> new JLabel(cleaning.cleaned)
+      Context.cleaned.asLabel -> JLabel(cleaning.cleaned)
     )
   )
 
