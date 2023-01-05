@@ -11,7 +11,7 @@ import objektwerks.form.Form
 final class LoginRegisterDialog() extends JDialog():
   setTitle(Context.title)
   setLayout( BorderLayout() )
-  setSize(200, 100)
+  setSize(380, 180)
   setLocationRelativeTo(null)
   setModal(true)
 
