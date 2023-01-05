@@ -9,7 +9,6 @@ import objektwerks.field.StringField
 import objektwerks.form.Form
 import objektwerks.Register
 
-// build a login and register tab
 final class LoginRegisterDialog extends JDialog:
   setTitle(Context.title)
   setLayout( new BorderLayout() )
