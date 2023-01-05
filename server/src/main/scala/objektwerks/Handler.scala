@@ -27,6 +27,8 @@ final case class Handler(store: Store, emailer: Emailer):
                       else ZIO.succeed( Fault(s"Invalid command: $command") )
     yield event
 
+  private val subject = "Account Registration"
+
   private def authorize(command: Command): Task[Boolean] =
     command match
       case license: License          => if license.isLicense then store.authorize(license.license) else ZIO.succeed(false)
@@ -36,10 +38,10 @@ final case class Handler(store: Store, emailer: Emailer):
 
   private def register(emailAddress: String): Task[Registered] =
     val account = Account(emailAddress = emailAddress)
-    emailer.send(
-      List(account.emailAddress), "Register", s"Save this pin: ${account.pin} Then delete this email!"
-    )
+    val recipients = List(account.emailAddress)
+    val message = s"Save this pin: ${account.pin} Then delete this email!"
     for
+      _  <- ZIO.succeedBlocking( emailer.send(recipients, subject, message) )
       id <- store.register(account)
     yield Registered( account.copy(id = id) )
 
