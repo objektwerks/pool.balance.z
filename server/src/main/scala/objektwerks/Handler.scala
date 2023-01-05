@@ -38,12 +38,17 @@ final case class Handler(store: Store, emailer: Emailer):
 
   private def register(emailAddress: String): Task[Registered | Fault] =
     val account = Account(emailAddress = emailAddress)
-    val recipients = List(account.emailAddress)
-    val message = s"Save this pin: ${account.pin} Then delete this email!"
-    for
-      sent  <- ZIO.succeedBlocking( emailer.send(recipients, subject, message) )
-      id    <- store.register(account)
-    yield if sent then Registered( account.copy(id = id) ) else Fault(s"Email failed: $emailAddress")
+    val sent = email(account.emailAddress, account.pin)
+    if sent then
+      for
+        id    <- store.register(account)
+      yield Registered( account.copy(id = id) )
+    else ZIO.succeed( Fault(s"Registration failed for: $emailAddress") )
+
+  private def email(emailAddress: String, pin: String): Boolean =
+    val recipients = List(emailAddress)
+    val message = s"Save this pin: ${pin} Then delete this email!"
+    emailer.send(recipients, subject, message)
 
   private def login(emailAddress: String, pin: String): Task[LoggedIn | Fault] =
     for
