@@ -53,3 +53,6 @@ final class LoginRegisterDialog extends JDialog:
       Context.emailAddress -> registerEmailAddress
     )
   )
+
+  val registerAction = RegisterAction(Context.register, register)
+  val registerActions = Actions(loginAction)
