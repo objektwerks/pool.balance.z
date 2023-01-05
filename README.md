@@ -4,8 +4,8 @@ Pool Balance
 
 Todo
 ----
-1. Register-Login Dialog
-2. See Handler comment on Emailer
+1. Once this showstopper bug ( https://github.com/zio/zio-protoquill/issues/217 ) is fixed,
+a) run integration test and b) test client.
 
 Issues
 ------
