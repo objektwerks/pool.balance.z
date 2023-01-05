@@ -75,7 +75,7 @@ final class MeasurementDialog(measurement: Measurement) extends Dialog(Context.m
       Context.totalBromine.asLabel -> totalBromine,
       Context.salt.asLabel -> salt,
       Context.temperature.asLabel -> temperature,
-      Context.measured.asLabel -> new JLabel(measurement.measured)
+      Context.measured.asLabel -> JLabel(measurement.measured)
     )
   )
 

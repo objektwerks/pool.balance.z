@@ -14,26 +14,26 @@ final class TableModel(faults: List[Fault]) extends DefaultTableModel:
 
 final class ColumnModel(columns: List[String]) extends DefaultTableColumnModel:
   for ((column, index) <- columns.view.zipWithIndex)
-    val tableColumn = new TableColumn(index)
+    val tableColumn = TableColumn(index)
     tableColumn.setHeaderValue(column)
     addColumn(tableColumn)
 
 final class FaultsDialog() extends Dialog(Context.faults):
   val faults = Model.observableFaults.toList
   val columns = List(Context.occurred, Context.cause)
-  val table = new JTable(
+  val table = JTable(
     TableModel(faults),
     ColumnModel(columns)
   )
 
   table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION)
-  table.getTableHeader.setPreferredSize( new Dimension(80, 40) )
+  table.getTableHeader.setPreferredSize( Dimension(80, 40) )
 
   Model.observableFaults.onChange { (_, _) =>
     table.setModel( TableModel( Model.observableFaults.toList ) )
   }
   
-  val tablePane = new JScrollPane(table)
+  val tablePane = JScrollPane(table)
   
   val closeAction = CloseAction(Context.close, () => close())
   val actions = Actions(closeAction)
