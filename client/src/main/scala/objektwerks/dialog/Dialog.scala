@@ -8,7 +8,7 @@ import objektwerks.form.Form
 
 open class Dialog(title: String) extends JDialog:
   setTitle(title)
-  setLayout( new BorderLayout() )
+  setLayout( BorderLayout() )
   setLocationRelativeTo(null)
   setModal(true)
 
