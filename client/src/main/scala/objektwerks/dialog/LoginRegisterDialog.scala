@@ -1,6 +1,6 @@
 package objektwerks.dialog
 
-import java.awt.{BorderLayout, Dimension}
+import java.awt.BorderLayout
 import javax.swing.{BoxLayout, JDialog, JPanel, JTabbedPane, JTextField}
 
 import objektwerks.{Context, Login, Register}
@@ -28,14 +28,12 @@ final class LoginRegisterDialog() extends JDialog():
     36,
     (value: String) => login = login.copy(emailAddress = value)
   )
-  loginEmailAddress.setPreferredSize( Dimension( 100, 40) )
 
   val pin = StringField(
     "",
     7,
     (value: String) => login = login.copy(pin = value)
   )
-  pin.setPreferredSize( Dimension( 100, 40) )
 
   val loginForm = Form(
     List[(String, JTextField)](
@@ -59,7 +57,6 @@ final class LoginRegisterDialog() extends JDialog():
     36,
     (value: String) => register = register.copy(emailAddress = value)
   )
-  registerEmailAddress.setPreferredSize( Dimension( 100, 40) )
 
   val registerForm = Form(
     List[(String, JTextField)](
