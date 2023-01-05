@@ -3,11 +3,10 @@ package objektwerks.dialog
 import java.awt.BorderLayout
 import javax.swing.{JDialog, JPanel, JTabbedPane, JTextField}
 
-import objektwerks.{Context, Login}
+import objektwerks.{Context, Login, Register}
 import objektwerks.action.{Actions, LoginAction, RegisterAction}
 import objektwerks.field.StringField
 import objektwerks.form.Form
-import objektwerks.Register
 
 final class LoginRegisterDialog extends JDialog:
   setTitle(Context.title)
