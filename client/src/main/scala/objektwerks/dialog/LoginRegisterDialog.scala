@@ -14,6 +14,12 @@ final class LoginRegisterDialog extends JDialog:
   setLocationRelativeTo(null)
   setModal(true)
 
+  def open(): Unit = setVisible(true)
+
+  def close(): Unit =
+    setVisible(false)
+    dispose()
+
   var login = Login("", "")
 
   val loginEmailAddress = StringField(
