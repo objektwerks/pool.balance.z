@@ -68,3 +68,5 @@ final class LoginRegisterDialog extends JDialog:
   val tabbedPane = JTabbedPane()
   tabbedPane.addTab(Context.login, loginPane)
   tabbedPane.addTab(Context.register, registerPane)
+
+  add(tabbedPane, BorderLayout.CENTER)
