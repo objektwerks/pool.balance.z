@@ -2,7 +2,7 @@ package objektwerks
 
 import com.formdev.flatlaf.util.SystemInfo
 
-import java.awt.Image
+import java.awt.{Color, Image}
 import javax.imageio.ImageIO
 import javax.swing.ImageIcon
 
@@ -77,6 +77,8 @@ object Context:
 
   val occurred = conf.getString("occurred")
   val cause = conf.getString("cause")
+
+  val fuchsia = Color(255, 0, 255)
 
   val headers = Headers (
     Header("Content-Type", "application/json; charset=utf-8"),
