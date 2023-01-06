@@ -8,6 +8,7 @@ import objektwerks.{Context, Login, Register}
 import objektwerks.action.{Actions, LoginAction, RegisterAction}
 import objektwerks.field.StringField
 import objektwerks.form.Form
+import objektwerks.Validator.*
 
 final class LoginRegisterDialog() extends JDialog():
   setTitle(Context.title)
@@ -27,7 +28,7 @@ final class LoginRegisterDialog() extends JDialog():
   val registerEmailAddress = StringField(
     "",
     36,
-    (value: String) => register = register.copy(emailAddress = value)
+    (value: String) => if value.isEmailAddress then register = register.copy(emailAddress = value)
   )
 
   val registerForm = Form(
