@@ -55,7 +55,7 @@ final class LoginRegisterDialog() extends JDialog():
   val pin = StringField(
     "",
     7,
-    (value: String) => login = login.copy(pin = value)
+    (value: String) => if value.isPin then login = login.copy(pin = value)
   )
 
   val loginForm = Form(
