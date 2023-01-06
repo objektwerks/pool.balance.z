@@ -5,8 +5,8 @@ Pool Balance
 Todo
 ----
 >Once this showstopper bug ( github.com/zio/zio-protoquill/issues/217 ) is fixed:
-1. run integration test
-2. test client
+1. run and pass integration test
+2. test and refactor client as required
 
 Install
 -------
