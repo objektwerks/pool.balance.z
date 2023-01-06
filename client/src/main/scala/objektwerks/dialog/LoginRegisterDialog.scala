@@ -49,7 +49,7 @@ final class LoginRegisterDialog() extends JDialog():
   val loginEmailAddress = StringField(
     "",
     36,
-    (value: String) => login = login.copy(emailAddress = value)
+    (value: String) => if value.isEmailAddress then login = login.copy(emailAddress = value)
   )
 
   val pin = StringField(
