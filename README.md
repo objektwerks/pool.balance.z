@@ -7,10 +7,6 @@ Todo
 1. Once this showstopper bug ( https://github.com/zio/zio-protoquill/issues/217 ) is fixed,
 a) run integration test and b) test client.
 
-Issues
-------
-1. See: https://github.com/zio/zio-protoquill/issues/217
-
 Install
 -------
 1. brew install postgresql
