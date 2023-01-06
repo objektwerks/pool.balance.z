@@ -14,7 +14,7 @@ final class PoolDialog(pool: Pool) extends Dialog(Context.pool):
   val name = StringField(
     pool.name,
     24,
-    (value: String) => editedPool = pool.copy(name = value)
+    (value: String) => if value.nonEmpty then editedPool = pool.copy(name = value)
   )
   val volume = IntField(
     pool.volume,
