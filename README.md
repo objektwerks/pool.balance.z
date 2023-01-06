@@ -147,7 +147,7 @@ Environment
 * export POOL_BALANCE_PORT=7272
 
 * export POOL_BALANCE_POSTGRESQL_URL="jdbc:postgresql://localhost:5432/poolbalance"
-* export POOL_BALANCE_POSTGRESQL_USER="tripletail"
+* export POOL_BALANCE_POSTGRESQL_USER="yourusername"
 * export POOL_BALANCE_POSTGRESQL_PASSWORD="poolbalance"
 * export POOL_BALANCE_POSTGRESQL_DRIVER="org.postgresql.ds.PGSimpleDataSource"
 * export POOL_BALANCE_POSTGRESQL_DB_NAME="poolbalance"
