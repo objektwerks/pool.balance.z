@@ -64,7 +64,7 @@ object Model extends LazyLogging:
     logger.info(s"*** Model: observable chemicals onchange event: $changes")
   }
 
-  def init: Unit =
+  def init: Unit = // TODO Enable once showstopper bug fixed!!!
     logger.info(s"*** Model: initializing ...")
     pools()
     logger.info(s"*** Model: initialized.")
