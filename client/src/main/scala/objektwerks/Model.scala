@@ -152,7 +152,7 @@ object Model extends LazyLogging:
 
   def cleanings(poolId: Long): Unit =
     Proxy.call(
-      ListCleanings(observableAccount.get.license),
+      ListCleanings(observableAccount.get.license, poolId),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFault("Model.cleanings", fault)
         case CleaningsListed(cleanings) =>
@@ -181,7 +181,7 @@ object Model extends LazyLogging:
 
   def measurements(poolId: Long): Unit =
     Proxy.call(
-      ListMeasurements(observableAccount.get.license),
+      ListMeasurements(observableAccount.get.license, poolId),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFault("Model.measurements", fault)
         case MeasurementsListed(measurements) =>
@@ -210,7 +210,7 @@ object Model extends LazyLogging:
 
   def chemicals(poolId: Long): Unit =
     Proxy.call(
-      ListChemicals(observableAccount.get.license),
+      ListChemicals(observableAccount.get.license, poolId),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFault("Model.chemicals", fault)
         case ChemicalsListed(chemicals) =>
