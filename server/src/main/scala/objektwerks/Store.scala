@@ -80,7 +80,8 @@ final case class Store(quill: Quill.Postgres[SnakeCase],
       run( query[Pool].filter( _.id == lift(pool.id) ).updateValue( lift(pool) ) )
     )
 
-  def listCleanings: Task[List[Cleaning]] = run( query[Cleaning].sortBy(_.cleaned)(Ord.desc) )
+  def listCleanings(poolId: Long): Task[List[Cleaning]] =
+    run( query[Cleaning].filter( _.poolId == lift(poolId) ).sortBy(_.cleaned)(Ord.desc) )
 
   def addCleaning(cleaning: Cleaning): Task[Long] =
     transaction (
@@ -92,7 +93,8 @@ final case class Store(quill: Quill.Postgres[SnakeCase],
       run( query[Cleaning].filter( _.id == lift(cleaning.id) ).updateValue( lift(cleaning) ) )
     )
 
-  def listMeasurements: Task[List[Measurement]] = run( query[Measurement].sortBy(_.measured)(Ord.desc) )
+  def listMeasurements(poolId: Long): Task[List[Measurement]] =
+    run( query[Measurement].filter( _.poolId == lift(poolId) ).sortBy(_.measured)(Ord.desc) )
 
   def addMeasurement(measurement: Measurement): Task[Long] =
     transaction (
@@ -104,7 +106,8 @@ final case class Store(quill: Quill.Postgres[SnakeCase],
       run( query[Measurement].filter( _.id == lift(measurement.id) ).updateValue( lift(measurement) ) )
     )
 
-  def listChemicals: Task[List[Chemical]] = run( query[Chemical].sortBy(_.added)(Ord.desc) )
+  def listChemicals(poolId: Long): Task[List[Chemical]] =
+    run( query[Chemical].filter( _.poolId == lift(poolId) ).sortBy(_.added)(Ord.desc) )
 
   def addChemical(chemical: Chemical): Task[Long] =
     transaction (
