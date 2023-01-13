@@ -18,11 +18,11 @@ final case class Handler(store: Store, emailer: Emailer):
                       case Reactivate(license)             => reactivateAccount(license)
                       case ListPools(_)                    => listPools
                       case SavePool(_, pool)               => savePool(pool)
-                      case ListCleanings(_)                => listCleanings
+                      case ListCleanings(_, poolId)        => listCleanings(poolId)
                       case SaveCleaning(_, cleaning)       => saveCleaning(cleaning)
-                      case ListMeasurements(_)             => listMeasurements
+                      case ListMeasurements(_, poolId)     => listMeasurements(poolId)
                       case SaveMeasurement(_, measurement) => saveMeasurement(measurement)
-                      case ListChemicals(_)                => listChemicals
+                      case ListChemicals(_, poolId)        => listChemicals(poolId)
                       case SaveChemical(_, chemical)       => saveChemical(chemical)
                       else ZIO.succeed( Fault(s"Invalid command: $command") )
     yield event
@@ -75,9 +75,9 @@ final case class Handler(store: Store, emailer: Emailer):
       id <- if pool.id == 0 then store.addPool(pool) else store.updatePool(pool)
     yield PoolSaved(id)
 
-  private def listCleanings: Task[CleaningsListed] =
+  private def listCleanings(poolId: Long): Task[CleaningsListed] =
     for
-      cleanings <- store.listCleanings
+      cleanings <- store.listCleanings(poolId)
     yield CleaningsListed(cleanings)
 
   private def saveCleaning(cleaning: Cleaning): Task[CleaningSaved] =
@@ -85,9 +85,9 @@ final case class Handler(store: Store, emailer: Emailer):
       id <- if cleaning.id == 0 then store.addCleaning(cleaning) else store.updateCleaning(cleaning)
     yield CleaningSaved(id)
 
-  private def listMeasurements: Task[MeasurementsListed] =
+  private def listMeasurements(poolId: Long): Task[MeasurementsListed] =
     for
-      measurements <- store.listMeasurements
+      measurements <- store.listMeasurements(poolId)
     yield MeasurementsListed(measurements)
 
   private def saveMeasurement(measurement: Measurement): Task[MeasurementSaved] =
@@ -95,9 +95,9 @@ final case class Handler(store: Store, emailer: Emailer):
       id <- if measurement.id == 0 then store.addMeasurement(measurement) else store.updateMeasurement(measurement)
     yield MeasurementSaved(id)
 
-  private def listChemicals: Task[ChemicalsListed] =
+  private def listChemicals(poolId: Long): Task[ChemicalsListed] =
     for
-      chemicals <- store.listChemicals
+      chemicals <- store.listChemicals(poolId)
     yield ChemicalsListed(chemicals)
 
   private def saveChemical(chemical: Chemical): Task[ChemicalSaved] =
