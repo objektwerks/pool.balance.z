@@ -6,7 +6,6 @@ import zio.{Unsafe, Runtime, ZIO}
 import zio.http.{Body, Client}
 import zio.json.{DecoderOps, EncoderOps}
 
-import Context.*
 import Serializer.given
 
 object Proxy extends LazyLogging:
@@ -16,8 +15,8 @@ object Proxy extends LazyLogging:
       for
         _        <- ZIO.succeed( logger.info(s"*** Proxy command: $command") )
         response <- Client.request(
-                      url = url,
-                      headers = headers,
+                      url = Context.url,
+                      headers = Context.headers,
                       content = Body.fromString(command.toJson)
                     )
         _        <- response.body.asString.flatMap { json =>
