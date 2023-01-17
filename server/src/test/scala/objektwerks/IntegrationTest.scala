@@ -180,7 +180,7 @@ object IntegrationTest extends ZIOSpecDefault:
 
   val listCleanings =
     for
-      response <- Client.request(url = url, content = Body.fromString(ListCleanings(account.license).toJson))
+      response <- Client.request(url = url, content = Body.fromString(ListCleanings(account.license, pool.id).toJson))
       result   <- response.body.asString.flatMap { json =>
                     json.fromJson[CleaningsListed] match
                       case Right(list) => assertTrue(list.cleanings.length == 1)
@@ -210,7 +210,7 @@ object IntegrationTest extends ZIOSpecDefault:
 
   val listMeasurements =
     for
-      response <- Client.request(url = url, content = Body.fromString(ListMeasurements(account.license).toJson))
+      response <- Client.request(url = url, content = Body.fromString(ListMeasurements(account.license, pool.id).toJson))
       result   <- response.body.asString.flatMap { json =>
                     json.fromJson[MeasurementsListed] match
                       case Right(list) => assertTrue(list.measurements.length == 1)
@@ -240,7 +240,7 @@ object IntegrationTest extends ZIOSpecDefault:
 
   val listChemicals =
     for
-      response <- Client.request(url = url, content = Body.fromString(ListChemicals(account.license).toJson))
+      response <- Client.request(url = url, content = Body.fromString(ListChemicals(account.license, pool.id).toJson))
       result   <- response.body.asString.flatMap { json =>
                     json.fromJson[ChemicalsListed] match
                       case Right(list) => assertTrue(list.chemicals.length == 1)
