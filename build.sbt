@@ -1,4 +1,4 @@
-val zioVersion = "2.0.5"
+val zioVersion = "2.0.6"
 
 lazy val common = Defaults.coreDefaultSettings ++ Seq(
   organization := "objektwerks",
