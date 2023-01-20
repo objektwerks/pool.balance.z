@@ -23,7 +23,7 @@ object Router extends ZIOAppDefault:
             event   <- handler
                          .handle(command)
                          .catchAll(throwable =>
-                            val message = s"*** Handler error: ${throwable.getMessage}; on: $command"
+                            val message = s"*** Failed to process command: $command due to this error: ${throwable.getMessage}"
                             ZIO.log(message) zip ZIO.succeed(Fault(message))
                           )
             _       <- ZIO.log(s"*** Router event: $event")
