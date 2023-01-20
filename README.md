@@ -4,10 +4,10 @@ Pool Balance
 
 WARNING
 -------
->Quill is **most** likely **NOT** production ready. You must decide for yourself.
->For concrete details, view these Quill issues: https://github.com/zio/zio-quill/issues
->The current steward of this project is admittedly a 1-person team, whose priorities are
->publicly **NOT** aligned with those of the Quill community.
+>Is Quill **production** ready? Ultimately you must decide for yourself.
+>These Quill issues: https://github.com/zio/zio-quill/issues suggest otherwise.
+>The current steward of this project is admittedly a 1-person team, whose priorities
+>are publicly **not** aligned with those of the Quill community, going back a few years.
 
 Todo
 ----
