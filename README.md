@@ -10,7 +10,7 @@ WARNING
 >The current steward of this project is admittedly a 1-person team, whose priorities
 >are publicly ***not*** aligned with those of the Quill community, going back a few years.
 
->Said Quill policy has forced several Quill users to transition to other persistence libraries
+>Consequently several Quill users had little choice but to transition to other persistence libraries
 >as a basic function of risk managment.
 
 >As an example, this current showstopper bug ( github.com/zio/zio-protoquill/issues/217 ) has yet
