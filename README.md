@@ -12,7 +12,7 @@ WARNING
 >are publicly ***not*** aligned with those of the Quill community, going back a few years.
 
 >Consequently several Quill users had little choice but to transition to other persistence libraries
->as a basic function of risk managment.
+>as a function of basic risk managment.
 
 >As an example, this current showstopper bug ( github.com/zio/zio-protoquill/issues/217 ) has yet
 >to be addressed - going back to mid-November of 2022. Why is that?
