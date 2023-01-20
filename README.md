@@ -17,7 +17,7 @@ WARNING
 >As an example, this current showstopper bug ( github.com/zio/zio-protoquill/issues/217 ) has yet
 >to be addressed - going back to mid-November of 2022. Why is that?
 
->Again, is ( any version of ) Quill ***production ready***?
+>Again, is Quill ***production ready***?
 
 Todo
 ----
