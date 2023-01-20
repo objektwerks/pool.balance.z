@@ -5,13 +5,16 @@ Pool Balance
 WARNING
 -------
 >Is Quill **production** ready? Ultimately you must decide for yourself.
->These Quill issues: https://github.com/zio/zio-quill/issues suggest otherwise.
+>These Quill issues: https://github.com/zio/zio-quill/issues cast doubt on an affirmative answer.
 
 >The current steward of this project is admittedly a 1-person team, whose priorities
->are publicly **not** aligned with those of the Quill community, going back a few years.
+>are publicly ***not*** aligned with those of the Quill community, going back a few years.
 
->As an example, this current bug ( github.com/zio/zio-protoquill/issues/217 ) has to
->be addressed going 2 months. Why is that?
+>Said Quill policy forced several Quill users to transition to other persistence libraries as a
+>simple function of basic risk managment.
+
+>As an example, this current bug ( github.com/zio/zio-protoquill/issues/217 ) has yet to
+>be addressed going back to mid-November of last year. Why is that?
 
 Todo
 ----
