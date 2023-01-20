@@ -2,6 +2,11 @@ Pool Balance
 ------------
 >Pool cleaning, measurement and chemical balancing app using Swing, ZIO and Scala 3.
 
+WARNING
+-------
+>Quill SHOULD NEVER BE USED IN PRODUCTION. PERIOD!
+>For why, see these issues: https://github.com/zio/zio-quill/issues
+
 Todo
 ----
 >Once this showstopper bug ( github.com/zio/zio-protoquill/issues/217 ) is fixed:
