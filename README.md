@@ -6,7 +6,7 @@ WARNING
 -------
 >Is Quill **production** ready? Ultimately you must decide for yourself.
 
->These Quill issues: https://github.com/zio/zio-quill/issues may test you.
+>These Quill issues: https://github.com/zio/zio-quill/issues may help you decide.
 
 >The current steward of this project is admittedly a 1-person team, whose priorities
 >are publicly ***not*** aligned with those of the Quill community, going back a few years.
