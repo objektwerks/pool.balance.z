@@ -4,7 +4,7 @@ Pool Balance
 
 WARNING
 -------
->Is Quill ***production ready***? Ultimately you must decide for yourself.
+>Is Quill ***production ready***? You decide.
 
 >These Quill issues: https://github.com/zio/zio-quill/issues may help.
 
@@ -17,7 +17,7 @@ WARNING
 >As an example, this current showstopper bug ( github.com/zio/zio-protoquill/issues/217 ) has yet
 >to be resolved - going back to mid-November of 2022. Why is that?
 
->Again, is Quill ***production ready***?
+>Again, is Quill ***production ready***? You decide.
 
 Todo
 ----
