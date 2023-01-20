@@ -4,8 +4,11 @@ Pool Balance
 
 WARNING
 -------
->Quill SHOULD NEVER BE USED IN PRODUCTION. PERIOD!
->For why, see these issues: https://github.com/zio/zio-quill/issues
+>Quill is **most** likely **NOT** production ready.
+>It doesn't even load in a ZIO context ( github.com/zio/zio-protoquill/issues/217 )
+>For concrete details, view these Quill issues: https://github.com/zio/zio-quill/issues
+>The steward of this project is admittedly a 1-person team, whose priorities are **NOT**
+>aligned with those of the Quill community.
 
 Todo
 ----
