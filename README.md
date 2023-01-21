@@ -4,7 +4,7 @@ Pool Balance
 
 WARNING
 -------
->Is Quill ***production ready***? You decide.e
+>Is Quill ***production ready***? You decide.
 
 >These Quill issues: https://github.com/zio/zio-quill/issues may help.
 
