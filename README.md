@@ -9,13 +9,13 @@ WARNING
 >These Quill issues: https://github.com/zio/zio-quill/issues may help.
 
 >The current steward of this project is admittedly a 1-person team, whose priorities
->are publicly ***not*** aligned with those of the Quill community, going back a few years.
+>are typically ***not*** aligned with those of the Quill community, going back a few years.
 
->Consequently several Quill users had little choice but to transition to other persistence libraries
->as a function of basic risk managment.
+>Consequently several Quill users had little choice but to transition to other persistence
+>libraries as a function of basic risk managment.
 
 >As an example, this current showstopper bug ( github.com/zio/zio-protoquill/issues/217 ) has yet
->to be resolved - going back to mid-November of 2022. Why is that?
+>to be resolved - going back to mid-November of 2022.
 
 >Again, is Quill ***production ready***? You decide.
 
