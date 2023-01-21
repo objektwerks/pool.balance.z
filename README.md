@@ -2,22 +2,22 @@ Pool Balance
 ------------
 >Pool cleaning, measurement and chemical balancing app using Swing, ZIO and Scala 3.
 
-WARNING
--------
->Is Quill ***production ready***? You decide.
+Note
+----
+>Is Quill ***production ready***?
 
->These Quill issues: https://github.com/zio/zio-quill/issues may help.
+>See these Quill issues: https://github.com/zio/zio-quill/issues
 
->The current steward of Quill is admittedly a 1-person team, whose priorities
->are typically ***not*** aligned with those of the Quill community.
+>The current steward of Quill is a 1-person team, whose priorities
+>are ***not always*** aligned with those of the Quill community.
 
->Consequently several Quill users have had little choice but to transition to
->other persistence libraries as a function of basic risk managment.
+>Consequently Quill users have had to considering transitioning
+>to other persistence libraries as a risk mitigation strategy.
 
 Todo
 ----
 >Once this showstopper bug ( github.com/zio/zio-protoquill/issues/217 ) is fixed:
-1. run and pass integration test
+1. run and pass server integration test
 2. test and refactor client as required
 >Frankly, ZIO technology is not worth the effort. Period.
 
