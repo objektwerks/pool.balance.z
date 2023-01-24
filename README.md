@@ -1,6 +1,6 @@
 Pool Balance
 ------------
->Pool cleaning, measurement and chemical balancing app using Swing, ZIO and Scala 3.
+>Pool cleaning, measurement and chemical balancing distributed app using Swing, ZIO, Postgresql and Scala 3.
 
 Note
 ----
