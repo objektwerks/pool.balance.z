@@ -6,6 +6,33 @@ import java.util.{Date, UUID}
 
 import scala.util.Random
 
+enum UnitOfMeasure:
+  case gl, l, lb, kg, tablet
+
+object UnitOfMeasure:
+  def toList: List[String] = UnitOfMeasure.values.map(uom => uom.toString).toList
+  def toPoolList: List[String] = List( UnitOfMeasure.gl.toString, UnitOfMeasure.l.toString )
+  def selectedIndex(list: List[String], target: String): Option[(String, Int)] = list.zipWithIndex.find( (value, index) => value == target )
+  def gallonsToLiters(gallons: Double): Double = gallons * 3.785
+  def litersToGallons(liters: Double): Double = liters * 0.264
+  def poundsToKilograms(pounds: Double): Double = pounds * 0.454
+  def kilogramsToPounds(kilograms: Double): Double = kilograms * 2.205
+
+enum TypeOfChemical(val display: String):
+  case LiquidChlorine extends TypeOfChemical("Liquid Chlorine")
+  case Trichlor extends TypeOfChemical("Trichlor")
+  case Dichlor extends TypeOfChemical("Dichlor")
+  case CalciumHypochlorite extends TypeOfChemical("Calcium Hypochlorite")
+  case Stabilizer extends TypeOfChemical("Stabilizer")
+  case Algaecide extends TypeOfChemical("Algaecide")
+  case MuriaticAcid extends TypeOfChemical("Muriatic Acid")
+  case Salt extends TypeOfChemical("Salt")
+
+object TypeOfChemical:
+  def toEnum(display: String): TypeOfChemical = TypeOfChemical.valueOf(display.filterNot(_.isWhitespace))
+  def toList: List[String] = TypeOfChemical.values.map(toc => toc.display).toList
+  def selectedIndex(target: String): Option[(String, Int)] = toList.zipWithIndex.find( (value, index) => value == target )
+
 sealed trait Entity:
   val id: Long
   def toArray: Array[Any]
@@ -112,30 +139,3 @@ final case class Chemical(id: Long = 0,
                           unit: String = UnitOfMeasure.gl.toString,
                           added: Long = LocalDate.now.toEpochDay) extends Entity:
   def toArray: Array[Any] = Array(id, poolId, typeof, amount, unit, added)
-
-enum TypeOfChemical(val display: String):
-  case LiquidChlorine extends TypeOfChemical("Liquid Chlorine")
-  case Trichlor extends TypeOfChemical("Trichlor")
-  case Dichlor extends TypeOfChemical("Dichlor")
-  case CalciumHypochlorite extends TypeOfChemical("Calcium Hypochlorite")
-  case Stabilizer extends TypeOfChemical("Stabilizer")
-  case Algaecide extends TypeOfChemical("Algaecide")
-  case MuriaticAcid extends TypeOfChemical("Muriatic Acid")
-  case Salt extends TypeOfChemical("Salt")
-
-object TypeOfChemical:
-  def toEnum(display: String): TypeOfChemical = TypeOfChemical.valueOf(display.filterNot(_.isWhitespace))
-  def toList: List[String] = TypeOfChemical.values.map(toc => toc.display).toList
-  def selectedIndex(target: String): Option[(String, Int)] = toList.zipWithIndex.find( (value, index) => value == target )
-
-enum UnitOfMeasure:
-  case gl, l, lb, kg, tablet
-
-object UnitOfMeasure:
-  def toList: List[String] = UnitOfMeasure.values.map(uom => uom.toString).toList
-  def toPoolList: List[String] = List( UnitOfMeasure.gl.toString, UnitOfMeasure.l.toString )
-  def selectedIndex(list: List[String], target: String): Option[(String, Int)] = list.zipWithIndex.find( (value, index) => value == target )
-  def gallonsToLiters(gallons: Double): Double = gallons * 3.785
-  def litersToGallons(liters: Double): Double = liters * 0.264
-  def poundsToKilograms(pounds: Double): Double = pounds * 0.454
-  def kilogramsToPounds(kilograms: Double): Double = kilograms * 2.205
