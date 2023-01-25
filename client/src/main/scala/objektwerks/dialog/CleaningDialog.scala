@@ -1,5 +1,6 @@
 package objektwerks.dialog
 
+import java.time.LocalDate
 import javax.swing.{JComponent, JLabel}
 
 import objektwerks.{Cleaning, Context}
@@ -44,7 +45,7 @@ final class CleaningDialog(cleaning: Cleaning) extends Dialog(Context.cleaning):
       Context.pumpBasket.asLabel -> pumpBasket,
       Context.pumpFilter.asLabel -> pumpFilter,
       Context.vacuum.asLabel -> vacuum,
-      Context.cleaned.asLabel -> JLabel(cleaning.cleaned)
+      Context.cleaned.asLabel -> JLabel( LocalDate.ofEpochDay(cleaning.cleaned).toString )
     )
   )
 

@@ -76,7 +76,7 @@ final class MeasurementDialog(measurement: Measurement) extends Dialog(Context.m
       Context.totalBromine.asLabel -> totalBromine,
       Context.salt.asLabel -> salt,
       Context.temperature.asLabel -> temperature,
-      Context.measured.asLabel -> JLabel( LocalDate.ofEpochDay(measurement.measured).toString)
+      Context.measured.asLabel -> JLabel( LocalDate.ofEpochDay(measurement.measured).toString )
     )
   )
 
