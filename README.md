@@ -12,6 +12,9 @@ Note
 >Consequently ZIO Quill users have had to considering transitioning to other persistence libraries
 >as a risk mitigation strategy.
 
+>You might consider these ZIO alternatives:
+1. [ZIO Schema](https://zio.dev/version-1.x/resources/ecosystem/officials/#zio-schema)
+
 Todo
 ----
 >Once this showstopper bug ( github.com/zio/zio-protoquill/issues/217 ) is fixed:
