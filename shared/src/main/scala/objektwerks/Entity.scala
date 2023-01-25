@@ -1,6 +1,6 @@
 package objektwerks
 
-import java.time.LocalDate
+import java.time.{LocalDate, Instant, ZoneId}
 import java.time.format.DateTimeFormatter
 import java.util.{Date, UUID}
 
@@ -38,6 +38,9 @@ sealed trait Entity:
   def toArray: Array[Any]
 
 object Entity:
+  def date(localDateAsLong: Long): Date =
+    Date.from( LocalDate.ofEpochDay( localDateAsLong ).atStartOfDay( ZoneId.systemDefault ).toInstant() )
+
   def applyLocalDateChanges(sourceLocalDate: LocalDate, targetLocalDateAsLong: Long): Long =
     LocalDate.ofEpochDay(targetLocalDateAsLong)
       .withYear(sourceLocalDate.getYear)

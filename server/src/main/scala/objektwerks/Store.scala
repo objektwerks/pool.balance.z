@@ -2,8 +2,9 @@ package objektwerks
 
 import com.typesafe.config.Config
 
-import javax.sql.DataSource
+import java.time.LocalDate
 import java.util.concurrent.TimeUnit
+import javax.sql.DataSource
 
 import io.getquill.*
 import io.getquill.jdbczio.Quill
@@ -53,7 +54,7 @@ final case class Store(quill: Quill.Postgres[SnakeCase],
       run( 
         query[Account]
           .filter( _.license == lift(license) )
-          .update( _.deactivated -> lift(Entity.instant), _.activated -> lift("") )
+          .update( _.deactivated -> lift(LocalDate.toEpochDay), _.activated -> lift("") )
           .returning(account => account)
       )
     )
@@ -63,7 +64,7 @@ final case class Store(quill: Quill.Postgres[SnakeCase],
       run(
         query[Account]
           .filter( _.license == lift(license) )
-          .update( _.activated -> lift(Entity.instant), _.deactivated -> lift("") )
+          .update( _.activated -> lift(LocalDate.toEpochDay), _.deactivated -> lift("") )
           .returning(account => account)
       )
     )
