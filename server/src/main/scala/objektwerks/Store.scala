@@ -54,7 +54,7 @@ final case class Store(quill: Quill.Postgres[SnakeCase],
       run( 
         query[Account]
           .filter( _.license == lift(license) )
-          .update( _.deactivated -> lift(LocalDate.toEpochDay), _.activated -> lift("") )
+          .update( _.deactivated -> lift(LocalDate.now.toEpochDay), _.activated -> lift(0) )
           .returning(account => account)
       )
     )
@@ -64,7 +64,7 @@ final case class Store(quill: Quill.Postgres[SnakeCase],
       run(
         query[Account]
           .filter( _.license == lift(license) )
-          .update( _.activated -> lift(LocalDate.toEpochDay), _.deactivated -> lift("") )
+          .update( _.activated -> lift(LocalDate.now.toEpochDay), _.deactivated -> lift(0) )
           .returning(account => account)
       )
     )
