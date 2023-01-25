@@ -1,5 +1,6 @@
 package objektwerks.dialog
 
+import java.time.LocalDate
 import javax.swing.JLabel
 
 import objektwerks.{Account, Context}
@@ -11,8 +12,8 @@ final class AccountDialog(account: Account) extends Dialog(Context.account):
     List[(String, JLabel)](
       Context.license -> JLabel(account.license),
       Context.pin -> JLabel(account.pin),
-      Context.activated -> JLabel(account.activated),
-      Context.deactivated -> JLabel(account.deactivated)
+      Context.activated -> JLabel( LocalDate.ofEpochDay(account.activated).toString ),
+      Context.deactivated -> JLabel( LocalDate.ofEpochDay(account.deactivated).toString )
     )
   )
 
