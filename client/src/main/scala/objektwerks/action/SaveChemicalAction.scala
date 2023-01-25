@@ -7,5 +7,4 @@ import objektwerks.{Model, Chemical}
 
 final class SaveChemicalAction(name: String,
                                chemical: Chemical) extends AbstractAction(name):
-  override def actionPerformed(event: ActionEvent): Unit = 
-    if chemical.id == 0 then Model.add(chemical) else Model.update(chemical)
+  override def actionPerformed(event: ActionEvent): Unit = Model.save(chemical)
