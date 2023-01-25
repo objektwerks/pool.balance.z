@@ -180,21 +180,16 @@ object Model extends LazyLogging:
         case _ => ()
     )
 
-  def add(measurement: Measurement): Unit =
+  def save(measurement: Measurement): Unit =
     Proxy.call(
       SaveMeasurement(observableAccount.get.license, measurement),
       (event: Event) => event match
-        case fault @ Fault(_, _) => onFault("Model.add measurement", measurement, fault)
-        case MeasurementSaved(id) => observableMeasurements += measurement.copy(id = id)
-        case _ => ()
-    )
-
-  def update(measurement: Measurement): Unit =
-    Proxy.call(
-      SaveMeasurement(observableAccount.get.license, measurement),
-      (event: Event) => event match
-        case fault @ Fault(_, _) => onFault("Model.update measurement", measurement, fault)
-        case MeasurementSaved(id) => observableMeasurements.update(observableMeasurements.indexOf(measurement), measurement)
+        case fault @ Fault(_, _) => onFault("Model.save measurement", measurement, fault)
+        case MeasurementSaved(id) =>
+          if measurement.id == 0 then observableMeasurements += measurement.copy(id = id)
+          else observableMeasurements.update(observableMeasurements.indexOf(measurement), measurement)
+          observableMeasurements.sort()
+          selectedMeasurementId.set(measurement.id)
         case _ => ()
     )
 
