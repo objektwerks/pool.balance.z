@@ -1,6 +1,6 @@
 package objektwerks
 
-import java.time.{Instant, ZoneId}
+import java.time.{Instant, LocalDate, ZoneId}
 import java.time.format.DateTimeFormatter
 import java.util.{Date, UUID}
 
@@ -14,6 +14,13 @@ object Entity:
   def instant: String = DateTimeFormatter.ISO_INSTANT.withZone(ZoneId.systemDefault()).format(Instant.now)
   def parse(instant: String): Instant = Instant.parse(instant)
   def date(instant:String): Date = new Date( parse(instant).toEpochMilli() )
+
+  def applyLocalDateChanges(sourceLocalDate: LocalDate, targetLocalDateAsLong: Long): Long =
+    LocalDate.ofEpochDay(targetLocalDateAsLong)
+      .withYear(sourceLocalDate.getYear)
+      .withMonth(sourceLocalDate.getMonthValue)
+      .withDayOfMonth(sourceLocalDate.getDayOfMonth)
+      .toEpochDay
 
   given poolOrdering: Ordering[Pool] = Ordering.by[Pool, String](p => p.name).reverse
   given cleaningOrdering: Ordering[Cleaning] = Ordering.by[Cleaning, Long](c => parse(c.cleaned).toEpochMilli).reverse
