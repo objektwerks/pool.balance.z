@@ -1,5 +1,6 @@
 package objektwerks.dialog
 
+import java.time.LocalDate
 import javax.swing.{JComponent, JLabel}
 
 import objektwerks.{Context, Chemical, TypeOfChemical, UnitOfMeasure}
@@ -31,7 +32,7 @@ final class ChemicalDialog(chemical: Chemical) extends Dialog(Context.chemical):
       Context.typeof.asLabel -> typeof,
       Context.amount.asLabel -> amount,
       Context.unit.asLabel -> unit,
-      Context.added.asLabel -> JLabel(chemical.added)
+      Context.added.asLabel -> JLabel( LocalDate.ofEpochDay(chemical.added).toString )
     )
   )
 
