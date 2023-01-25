@@ -14,6 +14,7 @@ Note
 
 >You might consider these ZIO alternatives:
 1. [ZIO Schema](https://zio.dev/version-1.x/resources/ecosystem/officials/#zio-schema)
+2. [TranzactIO](https://zio.dev/version-1.x/resources/ecosystem/community#tranzactio)
 
 Todo
 ----
