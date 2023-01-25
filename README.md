@@ -4,15 +4,13 @@ Pool Balance
 
 Note
 ----
->Is Quill ***production ready***?
+>Is ZIO Quill ***production ready***? See these issues: https://github.com/zio/zio-quill/issues
 
->See these Quill issues: https://github.com/zio/zio-quill/issues
+>The current steward of ZIO Quill is a 1-person team, whose priorities are ***not always*** aligned
+>with those of the Quill community.
 
->The current steward of Quill is a 1-person team, whose priorities
->are ***not always*** aligned with those of the Quill community.
-
->Consequently Quill users have had to considering transitioning
->to other persistence libraries as a risk mitigation strategy.
+>Consequently ZIO Quill users have had to considering transitioning to other persistence libraries
+>as a risk mitigation strategy.
 
 Todo
 ----
