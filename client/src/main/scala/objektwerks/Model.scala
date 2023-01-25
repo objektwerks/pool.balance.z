@@ -204,21 +204,16 @@ object Model extends LazyLogging:
         case _ => ()
     )
   
-  def add(chemical: Chemical): Unit =
+  def save(chemical: Chemical): Unit =
     Proxy.call(
       SaveChemical(observableAccount.get.license, chemical),
       (event: Event) => event match
-        case fault @ Fault(_, _) => onFault("Model.add chemical", chemical, fault)
-        case ChemicalSaved(id) => observableChemicals += chemical.copy(id = id)
-        case _ => ()
-    )
-
-  def update(chemical: Chemical): Unit =
-    Proxy.call(
-      SaveChemical(observableAccount.get.license, chemical),
-      (event: Event) => event match
-        case fault @ Fault(_, _) => onFault("Model.update chemical", chemical, fault)
-        case ChemicalSaved(id) => observableChemicals.update(observableChemicals.indexOf(chemical), chemical)
+        case fault @ Fault(_, _) => onFault("Model.save chemical", chemical, fault)
+        case ChemicalSaved(id) =>
+          if chemical.id == 0 then observableChemicals += chemical.copy(id = id)
+          else observableChemicals.update(observableChemicals.indexOf(chemical), chemical)
+          observableChemicals.sort()
+          selectedChemicalId.set(chemical.id)
         case _ => ()
     )
 
