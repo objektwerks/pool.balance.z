@@ -16,7 +16,7 @@ final case class Handler(store: Store, emailer: Emailer):
                       case Login(emailAddress, pin)        => login(emailAddress, pin)
                       case Deactivate(license)             => deactivateAccount(license)
                       case Reactivate(license)             => reactivateAccount(license)
-                      case ListPools(_)                    => listPools
+                      case ListPools(license)              => listPools(license)
                       case SavePool(_, pool)               => savePool(pool)
                       case ListCleanings(_, poolId)        => listCleanings(poolId)
                       case SaveCleaning(_, cleaning)       => saveCleaning(cleaning)
@@ -65,9 +65,9 @@ final case class Handler(store: Store, emailer: Emailer):
       account <- store.reactivateAccount(license)
     yield Reactivated(account)
 
-  private def listPools: Task[PoolsListed] =
+  private def listPools(license: String): Task[PoolsListed] =
     for
-      pools <- store.listPools
+      pools <- store.listPools(license)
     yield PoolsListed(pools)
 
   private def savePool(pool: Pool): Task[PoolSaved] =
