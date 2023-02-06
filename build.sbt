@@ -1,4 +1,5 @@
 val zioVersion = "2.0.6"
+val zioHttpVersion = "0.0.4"
 
 lazy val common = Defaults.coreDefaultSettings ++ Seq(
   organization := "objektwerks",
@@ -37,7 +38,7 @@ lazy val client = project
          exclude("org.openjfx", "javafx-web"),
         "org.jfree" % "jfreechart" % "1.5.3",
         "com.formdev" % "flatlaf" % "3.0",
-        "dev.zio" %% "zio-http" % "0.0.4"
+        "dev.zio" %% "zio-http" % zioHttpVersion
         exclude("dev.zio", "zio-streams"),
         "com.typesafe.scala-logging" %% "scala-logging" % "3.9.5",
         "ch.qos.logback" % "logback-classic" % "1.4.5"
@@ -55,7 +56,7 @@ lazy val server = project
   .settings(
     libraryDependencies ++= {
       Seq(
-        "dev.zio" %% "zio-http" % "0.0.4",
+        "dev.zio" %% "zio-http" % zioHttpVersion,
         "dev.zio" %% "zio-logging" % "2.1.7",
         "io.getquill" %% "quill-jdbc-zio" % "4.6.0",
         "dev.zio" %% "zio-cache" % "0.2.2",
