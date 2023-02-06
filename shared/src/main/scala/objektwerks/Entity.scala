@@ -92,6 +92,7 @@ object Account:
   )
 
 final case class Pool(id: Long = 0,
+                      license: String = "",
                       name: String = "", 
                       volume: Int = 0,
                       unit: String = UnitOfMeasure.gl.toString) extends Entity:
