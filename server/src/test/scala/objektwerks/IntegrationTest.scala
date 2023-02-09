@@ -40,6 +40,7 @@ object IntegrationTest extends ZIOSpecDefault:
       yield assertTrue(loggedIn.isSuccess)
     },
     test("add pool > pool added") {
+      pool = pool.copy(license = account.license)
       for
         poolAdded   <- addPool
       yield assertTrue(poolAdded.isSuccess)
