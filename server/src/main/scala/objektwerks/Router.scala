@@ -50,7 +50,7 @@ object Router extends ZIOAppDefault:
       config =  ServerConfig.default.binding(host, port)
       _      <- ZIO.log(s"*** Server running at http://$host:$port")
       server <- Server
-                  .serve(route)
+                  .serve(route.withDefaultErrorResponse)
                   .provide(
                     Store.dataSourceLayer(ds),
                     Store.namingStrategyLayer,
