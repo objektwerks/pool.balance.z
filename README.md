@@ -4,15 +4,15 @@ Pool Balance
 
 Note
 ----
->Is ZIO Quill ***production ready***? See these issues: https://github.com/zio/zio-quill/issues
+>Is ZIO Quill ***production ready***? See these open issues: https://github.com/zio/zio-quill/issues
 
 >The current steward of ZIO Quill is a 1-person team, whose priorities are ***not always*** aligned
 >with those of the Quill community.
 
 >Consequently ZIO Quill users have had to considering transitioning to other persistence libraries
->as a risk mitigation strategy. Because how well do ***non-ZIO*** database libraries work in ZIO?
+>as a risk mitigation strategy.
 
->One might consider looking into these ZIO database library alternatives:
+>Alternative ZIO database libraries:
 1. [ZIO Schema](https://zio.dev/version-1.x/resources/ecosystem/officials/#zio-schema)
 2. [TranzactIO](https://zio.dev/version-1.x/resources/ecosystem/community#tranzactio)
 3. [ZIO SQL](https://github.com/zio/zio-sql)
