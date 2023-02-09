@@ -1,5 +1,5 @@
 val zioVersion = "2.0.6"
-val zioHttpVersion = "0.0.4"
+val zioHttpVersion = "0.0.3" // 0.0.4 breaks Rouoter!!!
 
 lazy val common = Defaults.coreDefaultSettings ++ Seq(
   organization := "objektwerks",
