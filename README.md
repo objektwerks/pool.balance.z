@@ -23,7 +23,6 @@ Todo
 >Once this showstopper bug ( github.com/zio/zio-protoquill/issues/217 ) is fixed:
 1. run and pass server integration test
 2. test and refactor client as required
->Frankly, ZIO technology is not worth the effort. Period.
 
 Install
 -------
