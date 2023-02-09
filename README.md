@@ -10,13 +10,12 @@ Note
 >with those of the Quill community.
 
 >Consequently ZIO Quill users have had to considering transitioning to other persistence libraries
->as a risk mitigation strategy.
+>as a risk mitigation strategy. Because how well do ***non-ZIO*** database libraries work in ZIO?
 
 >One might consider looking into these ZIO database library alternatives:
 1. [ZIO Schema](https://zio.dev/version-1.x/resources/ecosystem/officials/#zio-schema)
 2. [TranzactIO](https://zio.dev/version-1.x/resources/ecosystem/community#tranzactio)
 3. [ZIO SQL](https://github.com/zio/zio-sql)
->Because how well do ***non-ZIO*** database libraries actually work in ZIO?
 
 Todo
 ----
