@@ -9,8 +9,8 @@ import Validator.*
 final case class Handler(store: Store, emailer: Emailer):
   def handle[E <: Event](command: Command): Task[Event] =
     for
-      isAuthorized <- authorize(command)
       isValid      <- validate(command)
+      isAuthorized <- authorize(command)
       event        <- if isAuthorized && isValid then command match
                       case Register(emailAddress)          => register(emailAddress)
                       case Login(emailAddress, pin)        => login(emailAddress, pin)
@@ -31,7 +31,7 @@ final case class Handler(store: Store, emailer: Emailer):
 
   private def authorize(command: Command): Task[Boolean] =
     command match
-      case license: License          => if license.isLicense then store.authorize(license.license) else ZIO.succeed(false)
+      case license: License          => store.authorize(license.license)
       case Register(_) | Login(_, _) => ZIO.succeed(true)
 
   private def validate(command: Command): Task[Boolean] = ZIO.succeed(command.isValid)
