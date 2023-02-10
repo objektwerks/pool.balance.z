@@ -2,24 +2,24 @@ Pool Balance
 ------------
 >Pool cleaning, measurement and chemical balancing distributed app using Swing, ZIO, Postgresql and Scala 3.
 
-Note
-----
+ZIO Quill
+---------
 >Is ZIO Quill ***production ready***? See these open issues: https://github.com/zio/zio-quill/issues
 
->The current steward of ZIO Quill is a 1-person team, whose priorities are ***not always*** aligned
->with those of the Quill community.
+>The current steward of ZIO Quill is a part-time, one-person team, whose priorities are ***not always***
+>aligned with those of the ZIO Quill community.
 
 >Consequently ZIO Quill users have had to considering transitioning to other persistence libraries
 >as a risk mitigation strategy.
 
->Alternative ZIO database libraries:
+>Alternative ZIO database libraries include:
 1. [ZIO Schema](https://zio.dev/version-1.x/resources/ecosystem/officials/#zio-schema)
 2. [TranzactIO](https://zio.dev/version-1.x/resources/ecosystem/community#tranzactio)
 3. [ZIO SQL](https://github.com/zio/zio-sql)
 
 Todo
 ----
->Once this showstopper bug ( github.com/zio/zio-protoquill/issues/217 ) is fixed:
+>Once this issue is fixed ( github.com/zio/zio-protoquill/issues/217 ):
 1. run and pass server integration test
 2. test and refactor client as required
 
