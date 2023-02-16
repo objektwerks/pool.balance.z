@@ -19,7 +19,10 @@ ZIO Quill
 
 Todo
 ----
->Once this issue is fixed ( github.com/zio/zio-protoquill/issues/217 ):
+>The following showstopper bugs have been fixed as of 2023.2.16:
+1. github.com/zio/zio-protoquill/issues/217
+2. github.com/zio/zio-protoquill/pull/242
+>Continue with:
 1. run and pass server integration test
 2. test and refactor client as required
 
