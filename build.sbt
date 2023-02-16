@@ -1,4 +1,4 @@
-val zioVersion = "2.0.8"
+val zioVersion = "2.0.9"
 val zioHttpVersion = "0.0.4"
 
 lazy val common = Defaults.coreDefaultSettings ++ Seq(
