@@ -57,7 +57,7 @@ lazy val server = project
     libraryDependencies ++= {
       Seq(
         "dev.zio" %% "zio-http" % zioHttpVersion,
-        "dev.zio" %% "zio-logging" % "2.1.8",
+        "dev.zio" %% "zio-logging" % "2.1.9",
         "io.getquill" %% "quill-jdbc-zio" % "4.6.0",
         "dev.zio" %% "zio-cache" % "0.2.2",
         "org.postgresql" % "postgresql" % "42.5.4",
