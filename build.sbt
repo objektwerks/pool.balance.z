@@ -58,7 +58,7 @@ lazy val server = project
       Seq(
         "dev.zio" %% "zio-http" % zioHttpVersion,
         "dev.zio" %% "zio-logging" % "2.1.9",
-        "io.getquill" %% "quill-jdbc-zio" % "4.6.0",
+        "io.getquill" %% "quill-jdbc-zio" % "4.6.0.1",
         "dev.zio" %% "zio-cache" % "0.2.2",
         "org.postgresql" % "postgresql" % "42.5.4",
         "org.jodd" % "jodd-mail" % "6.0.5",
