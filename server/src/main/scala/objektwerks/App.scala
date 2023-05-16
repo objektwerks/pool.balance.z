@@ -5,7 +5,7 @@ import java.nio.file.{Files, Path, Paths}
 import scala.sys
 
 import zio.{Runtime, Scope, ZIO, ZIOAppArgs, ZIOAppDefault, ZLayer}
-import zio.http.{!!, /, ->, Http, Request, Response, Server, ServerConfig}
+import zio.http.{!!, /, ->, Http, Request, Response, ServerConfig}
 import zio.http.model.Method
 import zio.json.{DecoderOps, EncoderOps}
 import zio.logging.file
@@ -49,7 +49,7 @@ object App extends ZIOAppDefault:
       email  =  conf.getConfig("email")
       config =  ServerConfig.default.binding(host, port)
       _      <- ZIO.log(s"*** Server running at http://$host:$port")
-      server <- Server
+      server <- zio.http.Server
                   .serve(route.withDefaultErrorResponse)
                   .provide(
                     Store.dataSourceLayer(ds),
@@ -59,7 +59,7 @@ object App extends ZIOAppDefault:
                     Emailer.layer(email),
                     Handler.layer,
                     ServerConfig.live(config),
-                    Server.live
+                    zio.http.Server.live
                   )
                   .debug
                   .exitCode
