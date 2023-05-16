@@ -9,6 +9,15 @@ Warning
 
 >Consequently, the current integration test **will not** pass! Yet it can be **rewritten** to **directly** invoke the **handler**.
 
+Todo
+----
+>The following showstopper bugs have been fixed as of 2023.2.16:
+1. github.com/zio/zio-protoquill/issues/217
+2. github.com/zio/zio-protoquill/pull/242
+>Continue with:
+1. run and pass server integration test
+2. test and refactor client as required
+
 ZIO Quill
 ---------
 >Is ZIO Quill ***production ready***? See these open issues: https://github.com/zio/zio-quill/issues
@@ -23,15 +32,6 @@ ZIO Quill
 1. [ZIO Schema](https://zio.dev/version-1.x/resources/ecosystem/officials/#zio-schema)
 2. [TranzactIO](https://zio.dev/version-1.x/resources/ecosystem/community#tranzactio)
 3. [ZIO SQL](https://github.com/zio/zio-sql)
-
-Todo
-----
->The following showstopper bugs have been fixed as of 2023.2.16:
-1. github.com/zio/zio-protoquill/issues/217
-2. github.com/zio/zio-protoquill/pull/242
->Continue with:
-1. run and pass server integration test
-2. test and refactor client as required
 
 Install
 -------
