@@ -8,7 +8,7 @@ import zio.{Runtime, Scope, ZIO, ZIOAppArgs, ZIOAppDefault, ZLayer}
 import zio.http.{!!, /, ->, Http, Request, Response, Server, ServerConfig}
 import zio.http.model.Method
 import zio.json.{DecoderOps, EncoderOps}
-import zio.logging.{LogFormat, file}
+import zio.logging.file
 
 import Serializer.given
 
