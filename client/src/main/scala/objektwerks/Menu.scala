@@ -6,7 +6,7 @@ import objektwerks.Context.*
 import objektwerks.action.ChartAction
 import objektwerks.chart.Chart.*
 
-final class Menu(frame: Frame) extends JMenuBar:
+final class Menu() extends JMenuBar:
   val charts = JMenu("Charts")
   charts.add( JMenuItem( ChartAction(totalChlorine, buildTotalChlorineChart) ) )
   charts.add( JMenuItem( ChartAction(freeChlorine, buildFreeChlorineChart) ) )
