@@ -7,7 +7,7 @@ import objektwerks.{Context, Measurement}
 import objektwerks.Context.asLabel
 import objektwerks.Measurement.*
 import objektwerks.action.{Actions, CancelAction, SaveMeasurementAction}
-import objektwerks.field.{DoubleRangeField, IntRangeField, StringField}
+import objektwerks.field.{DoubleRangeField, IntRangeField}
 import objektwerks.form.Form
 
 final class MeasurementDialog(measurement: Measurement) extends Dialog(Context.measurement):
