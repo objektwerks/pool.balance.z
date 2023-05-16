@@ -3,9 +3,8 @@ package objektwerks.pane
 import java.awt.BorderLayout
 import java.awt.event.ActionEvent
 import javax.swing.{JPanel, JScrollPane}
-import javax.swing.event.{ListSelectionEvent, ListSelectionListener}
 
-import objektwerks.{Context, Model, Pool}
+import objektwerks.{Context, Model}
 import objektwerks.Context.*
 import objektwerks.action.{Actions, AddPoolAction, EditPoolAction, ViewAccountAction, ViewFaultstAction}
 import objektwerks.table.{ColumnModel, Table, TableModel}
