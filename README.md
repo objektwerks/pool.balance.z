@@ -4,8 +4,10 @@ Pool Balance
 
 Warning
 -------
->As of 2023.5.16, App will not start. Consequently, the current integration test will not pass,
->which can be rewritten to use the handler.
+>As of 2023.5.16, App will not start: **java.lang.RuntimeException: No main class detected**. Adding a main
+>method does not help.
+
+>Consequently, the current integration test will not pass, which can be rewritten to use the handler.
 
 ZIO Quill
 ---------
