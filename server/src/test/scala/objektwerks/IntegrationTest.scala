@@ -12,7 +12,7 @@ import Validator.*
 
 object IntegrationTest extends ZIOSpecDefault:
   val exitCode = Process("psql -d poolbalance -f ddl.sql").run().exitValue()
-  val router = Router.run
+  App.run
 
   val conf = Resources.loadConfig("server.conf")
   val host = conf.getString("host")
