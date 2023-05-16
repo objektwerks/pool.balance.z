@@ -1,6 +1,6 @@
 package objektwerks.dialog
 
-import java.awt.{BorderLayout, Component}
+import java.awt.BorderLayout
 import javax.swing.JDialog
 
 import objektwerks.action.Actions
