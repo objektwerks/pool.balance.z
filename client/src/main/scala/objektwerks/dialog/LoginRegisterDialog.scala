@@ -1,6 +1,5 @@
 package objektwerks.dialog
 
-import java.awt.BorderLayout
 import javax.swing.{BoxLayout, JDialog, JPanel, JTextField}
 import javax.swing.border.TitledBorder
 
