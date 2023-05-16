@@ -2,6 +2,11 @@ Pool Balance
 ------------
 >Pool cleaning, measurement and chemical balancing distributed app using Swing, ScalaFX, ZIO, Postgresql and Scala 3.
 
+Warning
+-------
+>As of 2023.5.16, App will not start. Consequently, the current integration test will not pass,
+>which can be rewritten to use the handler.
+
 ZIO Quill
 ---------
 >Is ZIO Quill ***production ready***? See these open issues: https://github.com/zio/zio-quill/issues
