@@ -4,7 +4,7 @@ Pool Balance
 
 Warning
 -------
->As of 2023.5.16, **sbt run** on **App* fails with - **java.lang.RuntimeException: No main class detected**.
+>As of 2023.5.16, **sbt run** on **App** fails with - **java.lang.RuntimeException: No main class detected**.
 >So **ZIOAppDefault** does not appear to work as intended. Adding a **main** method does not help.
 
 >Consequently, the current integration test **will not** pass! Yet it can be **rewritten** to **directly** invoke the **handler**.
