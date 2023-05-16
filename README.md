@@ -16,7 +16,7 @@ ZIO Quill
 >The current steward of ZIO Quill is a part-time, one-person team, whose priorities are ***not always***
 >aligned with those of the ZIO Quill community.
 
->Consequently ZIO Quill users have had to consider transitioning to other persistence libraries
+>Consequently, ZIO Quill users have had to consider transitioning to other persistence libraries
 >as a risk mitigation strategy.
 
 >Alternative ZIO database libraries include:
