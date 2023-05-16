@@ -11,7 +11,10 @@ lazy val common = Defaults.coreDefaultSettings ++ Seq(
       "dev.zio" %% "zio-json" % "0.5.0",
       "com.typesafe" % "config" % "1.4.2"
     )
-  }
+  },
+  scalacOptions ++= Seq(
+    "-Wunused:all"
+  )
 )
 
 lazy val poolbalance = (project in file("."))
