@@ -1,9 +1,7 @@
 package objektwerks
 
 import zio.{Task, ZIO, ZLayer}
-import zio.json.{DecoderOps, EncoderOps}
 
-import Serializer.given
 import Validator.*
 
 final case class Handler(store: Store, emailer: Emailer):
