@@ -1,7 +1,6 @@
 package objektwerks
 
-import java.time.{LocalDate, Instant, ZoneId}
-import java.time.format.DateTimeFormatter
+import java.time.{LocalDate, ZoneId}
 import java.util.{Date, UUID}
 
 import scala.util.Random
@@ -12,7 +11,7 @@ enum UnitOfMeasure:
 object UnitOfMeasure:
   def toList: List[String] = UnitOfMeasure.values.map(uom => uom.toString).toList
   def toPoolList: List[String] = List( UnitOfMeasure.gl.toString, UnitOfMeasure.l.toString )
-  def selectedIndex(list: List[String], target: String): Option[(String, Int)] = list.zipWithIndex.find( (value, index) => value == target )
+  def selectedIndex(list: List[String], target: String): Option[(String, Int)] = list.zipWithIndex.find( (value, _) => value == target )
   def gallonsToLiters(gallons: Double): Double = gallons * 3.785
   def litersToGallons(liters: Double): Double = liters * 0.264
   def poundsToKilograms(pounds: Double): Double = pounds * 0.454
@@ -31,7 +30,7 @@ enum TypeOfChemical(val display: String):
 object TypeOfChemical:
   def toEnum(display: String): TypeOfChemical = TypeOfChemical.valueOf(display.filterNot(_.isWhitespace))
   def toList: List[String] = TypeOfChemical.values.map(toc => toc.display).toList
-  def selectedIndex(target: String): Option[(String, Int)] = toList.zipWithIndex.find( (value, index) => value == target )
+  def selectedIndex(target: String): Option[(String, Int)] = toList.zipWithIndex.find( (value, _) => value == target )
 
 sealed trait Entity:
   val id: Long
