@@ -65,7 +65,7 @@ lazy val server = project
         "dev.zio" %% "zio-cache" % "0.2.3",
         "org.postgresql" % "postgresql" % "42.6.0",
         "org.jodd" % "jodd-mail" % "6.0.5",
-        compilerPlugin("com.github.ghik" % "zerowaste" % "0.2.6" cross CrossVersion.full),
+        // Unavailable for latest Scala version. compilerPlugin("com.github.ghik" % "zerowaste" % "0.2.6" cross CrossVersion.full),
         "dev.zio" %% "zio-test" % zioVersion % Test,
         "dev.zio" %% "zio-test-sbt" % zioVersion % Test
       )
