@@ -1,7 +1,6 @@
 package objektwerks
 
 import com.formdev.flatlaf.FlatDarculaLaf
-import com.formdev.flatlaf.util.SystemInfo
 import com.typesafe.scalalogging.LazyLogging
 
 import java.awt.{EventQueue, Taskbar}
