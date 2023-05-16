@@ -16,7 +16,7 @@ import org.jfree.data.xy.XYDataset
 
 import scala.math.abs
 
-import objektwerks.{Context, Entity, Measurement, Model}
+import objektwerks.{Context, Entity, Model}
 
 object Chart:
   def buildTotalChlorineChart: ChartPanel =
