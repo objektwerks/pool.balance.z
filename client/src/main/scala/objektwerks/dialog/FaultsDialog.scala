@@ -2,9 +2,9 @@ package objektwerks.dialog
 
 import java.awt.Dimension
 
-import javax.swing.{JScrollPane, JTable}
+import javax.swing.JScrollPane
 import javax.swing.{JTable, ListSelectionModel}
-import javax.swing.table.{DefaultTableModel, DefaultTableColumnModel, TableColumn, TableColumnModel}
+import javax.swing.table.{DefaultTableModel, DefaultTableColumnModel, TableColumn}
 
 import objektwerks.{Context, Fault, Model}
 import objektwerks.action.{Actions, CloseAction}
