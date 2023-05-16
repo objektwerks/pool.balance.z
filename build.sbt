@@ -4,7 +4,7 @@ val zioHttpVersion = "0.0.5"
 lazy val common = Defaults.coreDefaultSettings ++ Seq(
   organization := "objektwerks",
   version := "0.7-SNAPSHOT",
-  scalaVersion := "3.3.0-RC5",
+  scalaVersion := "3.3.0-RC6",
   libraryDependencies ++= {
     Seq(
       "dev.zio" %% "zio" % zioVersion,
