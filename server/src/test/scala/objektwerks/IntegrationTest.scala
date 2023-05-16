@@ -2,14 +2,12 @@ package objektwerks
 
 import scala.sys.process.Process
 
-import zio.{Console, Scope, ZIO}
+import zio.Console
 import zio.http.{Body, Client}
 import zio.json.{DecoderOps, EncoderOps}
 import zio.test.{assertTrue, TestAspect, ZIOSpecDefault}
-import zio.test.Assertion.isSuccess
 
 import Serializer.given
-import Validator.given
 import Validator.*
 
 object IntegrationTest extends ZIOSpecDefault:
@@ -107,7 +105,7 @@ object IntegrationTest extends ZIOSpecDefault:
         chemicalsListed   <- listChemicals
       yield assertTrue(chemicalsListed.isSuccess)
     }
-  ).provide(Client.default, Scope.default) @@ TestAspect.sequential
+  ).provide(Client.default) @@ TestAspect.sequential
 
   val register =
     for
