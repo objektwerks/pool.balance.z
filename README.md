@@ -2,14 +2,6 @@ Pool Balance
 ------------
 >Pool cleaning, measurement and chemical balancing distributed app using Swing, ScalaFX, ZIO, Postgresql and Scala 3.
 
-Warning
--------
->As of 2023.5.16, **sbt run** on **Server** fails with - **java.lang.RuntimeException: No main class detected**.
->So **ZIOAppDefault** fails to work as intended. Adding a **main** method does not correct the issue.
-
->Consequently, the current **IntegrationTest** **will not** pass! Yet it can be **rewritten** to **directly** 
->invoke the **Handler**, bypassing the **Server**.
-
 Todo
 ----
 >The following showstopper bugs have been fixed as of 2023.2.16:
