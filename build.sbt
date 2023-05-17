@@ -1,5 +1,6 @@
 val zioVersion = "2.0.13"
 val zioHttpVersion = "0.0.5"
+val zioLoggingVersion = "2.1.12"
 
 lazy val common = Defaults.coreDefaultSettings ++ Seq(
   organization := "objektwerks",
@@ -60,7 +61,9 @@ lazy val server = project
     libraryDependencies ++= {
       Seq(
         "dev.zio" %% "zio-http" % zioHttpVersion,
-        "dev.zio" %% "zio-logging" % "2.1.12",
+        "dev.zio" %% "zio-logging" % zioLoggingVersion,
+        "dev.zio" %% "zio-logging-slf4j2" % zioLoggingVersion,
+        "dev.zio" %% "zio-logging-slf4j2-bridge" % zioLoggingVersion,
         "io.getquill" %% "quill-jdbc-zio" % "4.6.0.1",
         "dev.zio" %% "zio-cache" % "0.2.3",
         "org.postgresql" % "postgresql" % "42.6.0",
