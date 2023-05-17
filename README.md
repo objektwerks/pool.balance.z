@@ -2,6 +2,10 @@ Pool Balance
 ------------
 >Pool cleaning, measurement and chemical balancing distributed app using Swing, ScalaFX, ZIO, Postgresql and Scala 3.
 
+Warning
+-------
+>The Zio-Http server, **Server**, still does not run! So the **IntegrationTest** won't pass.
+
 Todo
 ----
 >The following showstopper bugs have been fixed as of 2023.2.16:
