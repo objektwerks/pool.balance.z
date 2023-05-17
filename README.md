@@ -41,6 +41,8 @@ Test
 
 Server Run
 ----------
+1. sbt server/run
+>or:
 1. sbt ( interactive session )
 2. project server
 3. run
