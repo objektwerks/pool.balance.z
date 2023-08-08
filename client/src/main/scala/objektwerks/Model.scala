@@ -165,7 +165,7 @@ object Model extends LazyLogging:
           if cleaning.id == 0 then observableCleanings += cleaning.copy(id = id)
           else observableCleanings.update(observableCleanings.indexOf(cleaning), cleaning)
           observableCleanings.sort()
-          selectedCleaningId.set(cleaning.id)
+          selectedCleaningId.set(id)
         case _ => ()
     )
 
