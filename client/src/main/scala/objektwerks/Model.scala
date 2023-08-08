@@ -213,7 +213,7 @@ object Model extends LazyLogging:
           if chemical.id == 0 then observableChemicals += chemical.copy(id = id)
           else observableChemicals.update(observableChemicals.indexOf(chemical), chemical)
           observableChemicals.sort()
-          selectedChemicalId.set(chemical.id)
+          selectedChemicalId.set(id)
         case _ => ()
     )
 
