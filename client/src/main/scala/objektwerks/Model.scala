@@ -189,7 +189,7 @@ object Model extends LazyLogging:
           if measurement.id == 0 then observableMeasurements += measurement.copy(id = id)
           else observableMeasurements.update(observableMeasurements.indexOf(measurement), measurement)
           observableMeasurements.sort()
-          selectedMeasurementId.set(measurement.id)
+          selectedMeasurementId.set(id)
         case _ => ()
     )
 
