@@ -141,7 +141,7 @@ object Model extends LazyLogging:
           if pool.id == 0 then observablePools += pool.copy(id = id)
           else observablePools.update(observablePools.indexOf(pool), pool)
           observablePools.sort()
-          selectedPoolId.set(pool.id)
+          selectedPoolId.set(id)
         case _ => ()
     )
 
