@@ -67,7 +67,7 @@ lazy val server = project
         "io.getquill" %% "quill-jdbc-zio" % "4.6.1",
         "dev.zio" %% "zio-cache" % "0.2.3",
         "org.postgresql" % "postgresql" % "42.6.0",
-        "org.jodd" % "jodd-mail" % "6.0.5",
+        "org.jodd" % "jodd-mail" % "7.0.0",
         compilerPlugin("com.github.ghik" % "zerowaste" % "0.2.11" cross CrossVersion.full),
         "dev.zio" %% "zio-test" % zioVersion % Test,
         "dev.zio" %% "zio-test-sbt" % zioVersion % Test
