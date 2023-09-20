@@ -2,29 +2,14 @@ Pool Balance
 ------------
 >Pool cleaning, measurement and chemical balancing distributed app using Swing, ScalaFX, ZIO, JoddMail, Postgresql and Scala 3.
 
-Warning
--------
->The Zio-Http server, **Server**, still does not run! So the **IntegrationTest** won't pass.
-
 Todo
 ----
 1. run and pass server integration test
 2. test and refactor client as required
 
-ZIO Quill
----------
->Is ZIO Quill ***production ready***? See these open issues: https://github.com/zio/zio-quill/issues
-
->The current steward of ZIO Quill is a part-time, one-person team, whose priorities are ***not always***
->aligned with those of the ZIO Quill community.
-
->Consequently, ZIO Quill users have had to consider transitioning to other persistence libraries
->as a risk mitigation strategy.
-
->Alternative ZIO database libraries include:
-1. [ZIO Schema](https://zio.dev/version-1.x/resources/ecosystem/officials/#zio-schema)
-2. [TranzactIO](https://zio.dev/version-1.x/resources/ecosystem/community#tranzactio)
-3. [ZIO SQL](https://github.com/zio/zio-sql)
+Warning
+-------
+>The Zio-Http server, **Server**, still does not run! So the **IntegrationTest** won't pass.
 
 Install
 -------
