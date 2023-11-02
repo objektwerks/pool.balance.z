@@ -182,8 +182,8 @@ export POOL_BALANCE_EMAIL_PASSWORD="your-email-password"
 
 Resources
 ---------
-1. [Swing](http://www.java2s.com/Tutorials/Java/Java_Swing/index.htm)
-4. [jDeploy](https://www.jdeploy.com/)
+* [Swing](http://www.java2s.com/Tutorials/Java/Java_Swing/index.htm)
+* [jDeploy](https://www.jdeploy.com/)
 
 License
 -------
