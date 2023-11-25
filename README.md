@@ -1,6 +1,6 @@
 Pool Balance
 ------------
->Pool cleaning, measurement and chemical balancing distributed app using Swing, ScalaFX, ZIO 2, ZIO-Http, JoddMail, Postgresql and Scala 3.
+>Pool balance app using Swing, ScalaFx, ZIO 2, ZIO-Http, JoddMail, Postgresql and Scala 3.
 
 Todo
 ----
