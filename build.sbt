@@ -10,7 +10,7 @@ lazy val common = Defaults.coreDefaultSettings ++ Seq(
     Seq(
       "dev.zio" %% "zio" % zioVersion,
       "dev.zio" %% "zio-json" % "0.6.2",
-      "com.typesafe" % "config" % "1.4.2"
+      "com.typesafe" % "config" % "1.4.3"
     )
   },
   scalacOptions ++= Seq(
