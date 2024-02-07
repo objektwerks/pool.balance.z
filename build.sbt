@@ -1,6 +1,6 @@
 val zioVersion = "2.1-RC1"
 val zioHttpVersion = "0.0.5"
-val zioLoggingVersion = "2.1.16"
+val zioLoggingVersion = "2.1.17"
 
 lazy val common = Defaults.coreDefaultSettings ++ Seq(
   organization := "objektwerks",
