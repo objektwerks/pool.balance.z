@@ -5,7 +5,7 @@ val zioLoggingVersion = "2.2.0"
 lazy val common = Defaults.coreDefaultSettings ++ Seq(
   organization := "objektwerks",
   version := "0.9-SNAPSHOT",
-  scalaVersion := "3.4.0-RC4",
+  scalaVersion := "3.4.0",
   libraryDependencies ++= {
     Seq(
       "dev.zio" %% "zio" % zioVersion,
