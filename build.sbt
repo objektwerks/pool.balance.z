@@ -64,7 +64,7 @@ lazy val server = project
         "dev.zio" %% "zio-logging" % zioLoggingVersion,
         "dev.zio" %% "zio-logging-slf4j2" % zioLoggingVersion,
         "dev.zio" %% "zio-logging-slf4j2-bridge" % zioLoggingVersion,
-        "io.getquill" %% "quill-jdbc-zio" % "4.8.2",
+        "io.getquill" %% "quill-jdbc-zio" % "4.8.3",
         "dev.zio" %% "zio-cache" % "0.2.3",
         "org.postgresql" % "postgresql" % "42.7.2",
         "org.jodd" % "jodd-mail" % "7.0.1",
