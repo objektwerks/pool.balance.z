@@ -9,7 +9,7 @@ lazy val common = Defaults.coreDefaultSettings ++ Seq(
   libraryDependencies ++= {
     Seq(
       "dev.zio" %% "zio" % zioVersion,
-      "dev.zio" %% "zio-json" % "0.6.2",
+      "dev.zio" %% "zio-json" % "0.7.0",
       "com.typesafe" % "config" % "1.4.3"
     )
   },
