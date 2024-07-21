@@ -105,7 +105,7 @@ final case class Cleaning(id: Long = 0,
                           pumpBasket: Boolean = false,
                           pumpFilter: Boolean = false,
                           vacuum: Boolean = false,
-                          cleaned: Long = LocalDate.now.toEpochDay) extends Entity:
+                          cleaned: Long = LocalDate.now.toEpochDay) extends Entity derives CanEqual:
   def toArray: Array[Any] = Array(id, poolId, brush, net, skimmerBasket, pumpBasket, pumpFilter, vacuum, cleaned)
 
 final case class Measurement(id: Long = 0,
