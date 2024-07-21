@@ -120,7 +120,7 @@ final case class Measurement(id: Long = 0,
                              totalBromine: Int = 5,
                              salt: Int = 3200,
                              temperature: Int = 85,
-                             measured: Long = LocalDate.now.toEpochDay) extends Entity:
+                             measured: Long = LocalDate.now.toEpochDay) extends Entity derives CanEqual:
   def toArray: Array[Any] = Array(id, poolId, totalChlorine, freeChlorine, combinedChlorine, ph, calciumHardness, totalAlkalinity, cyanuricAcid, totalBromine, salt, temperature, measured)
 
 object Measurement:
