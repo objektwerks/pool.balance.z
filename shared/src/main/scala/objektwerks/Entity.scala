@@ -140,5 +140,5 @@ final case class Chemical(id: Long = 0,
                           typeof: String = TypeOfChemical.LiquidChlorine.toString,
                           amount: Double = 1.0,
                           unit: String = UnitOfMeasure.gl.toString,
-                          added: Long = LocalDate.now.toEpochDay) extends Entity:
+                          added: Long = LocalDate.now.toEpochDay) extends Entity derives CanEqual:
   def toArray: Array[Any] = Array(id, poolId, typeof, amount, unit, added)
