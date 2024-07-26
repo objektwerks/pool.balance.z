@@ -5,8 +5,8 @@ Pool Balance
 Todo
 ----
 >The Zio-Http server, **Server**, still does not run! So the **IntegrationTest** won't pass.
-1. run and pass server integration test
-2. test and refactor client as required
+1. pass integration test
+2. refactor and test client
 
 Install
 -------
