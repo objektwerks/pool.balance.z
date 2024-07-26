@@ -1,14 +1,9 @@
 package objektwerks
 
-import java.nio.file.{Files, Path, Paths}
-
-import scala.sys
-
-import zio.{Runtime, Scope, ZIO, ZIOAppArgs, ZIOAppDefault, ZLayer}
+import zio.{Scope, ZIO, ZIOAppArgs, ZIOAppDefault, ZLayer}
 import zio.http.{!!, /, ->, Http, Request, Response, ServerConfig}
 import zio.http.model.Method
 import zio.json.{DecoderOps, EncoderOps}
-import zio.logging.file
 
 import Serializer.given
 
@@ -33,12 +28,6 @@ object Server extends ZIOAppDefault:
           ZIO.log(s"*** Router fault: $fault") *> ZIO.succeed(Response.json(fault.toJson))
     }
   }
-
-  override val bootstrap: ZLayer[ZIOAppArgs, Any, Environment] =
-    val serverDir =  s"${sys.props("user.home")}/.poolbalance.z"
-    var serverPath = Paths.get(serverDir)
-    if !Files.exists(serverPath) then serverPath = Files.createDirectory(serverPath)
-    Runtime.removeDefaultLoggers >>> file( Path.of(s"$serverDir/server.log") )
 
   override def run: ZIO[Environment & (ZIOAppArgs & Scope ), Any, Any] =
     for
