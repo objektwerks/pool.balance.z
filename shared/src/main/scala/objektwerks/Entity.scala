@@ -55,7 +55,7 @@ object Entity:
 final case class Account(id: Long = 0,
                          emailAddress: String = "",
                          license: String = newLicense,
-                         pin: String = newPin,
+                         pin: String = Pin.newInstance,
                          activated: Long = LocalDate.now.toEpochDay,
                          deactivated: Long = 0) extends Entity derives CanEqual:
   def toArray: Array[Any] = Array(id, license, pin, activated, deactivated)
