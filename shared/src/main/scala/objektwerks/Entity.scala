@@ -3,8 +3,6 @@ package objektwerks
 import java.time.{LocalDate, ZoneId}
 import java.util.{Date, UUID}
 
-import scala.util.Random
-
 enum UnitOfMeasure:
   case gl, l, lb, kg, tablet
 
