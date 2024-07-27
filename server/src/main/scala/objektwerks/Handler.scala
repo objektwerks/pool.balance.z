@@ -45,7 +45,7 @@ final case class Handler(store: Store, emailer: Emailer):
 
   private def email(emailAddress: String, pin: String): Boolean =
     val recipients = List(emailAddress)
-    val message = s"<p>Save this pin: <b>${pin}</b> in a safe place; then delete this email.</p>"
+    val message = s"Your new pin is: $pin\n\nWelcome aboard!"
     emailer.send(recipients, subject, message)
 
   private def login(emailAddress: String, pin: String): Task[LoggedIn | Fault] =
