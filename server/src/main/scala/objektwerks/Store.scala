@@ -130,10 +130,10 @@ object Store:
   val licenseCacheLayer: ZLayer[Any, Nothing, Cache[String, Nothing, String]] =
     ZLayer.fromZIO {
       Cache.make(capacity = 100,
-                timeToLive = Duration(12, TimeUnit.HOURS),
-                lookup = Lookup( (license: String) =>
-                  ZIO.log(s"*** License cache lookup: $license") zip
-                  ZIO.succeed( if license.isLicense then license else "" ) )
+                 timeToLive = Duration(12, TimeUnit.HOURS),
+                 lookup = Lookup( (license: String) =>
+                   ZIO.log(s"*** License cache lookup: $license") zip
+                   ZIO.succeed( if license.isLicense then license else "" ) )
                 )
     }
 
