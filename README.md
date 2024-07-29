@@ -2,11 +2,14 @@ Pool Balance
 ------------
 >Pool balance app using Swing, ScalaFx, ZIO 2, ZIO-Http, JoddMail, Postgresql and Scala 3.
 
+Note
+----
+>The Server finally runs!!!
+
 Todo
 ----
->The Zio-Http server, **Server**, still does not run! So the **IntegrationTest** won't pass.
-1. pass integration test
-2. refactor and test client
+1. IntegrationTest fails with connection refused errors.
+2. Client testing.
 
 Install
 -------
