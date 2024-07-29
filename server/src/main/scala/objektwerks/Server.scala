@@ -32,8 +32,8 @@ object Server extends ZIOAppDefault:
   override def run: ZIO[Environment & (ZIOAppArgs & Scope ), Any, Any] =
     for
       conf   <- Resources.loadZIOConfig("server.conf")
-      host   =  conf.getString("host")
-      port   =  conf.getInt("port")
+      host   =  conf.getString("server.host")
+      port   =  conf.getInt("server.port")
       ds     =  conf.getConfig("ds")
       email  =  conf.getConfig("email")
       config =  ServerConfig.default.binding(host, port)
