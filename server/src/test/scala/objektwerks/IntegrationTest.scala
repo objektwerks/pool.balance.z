@@ -34,75 +34,75 @@ object IntegrationTest extends ZIOSpecDefault:
     },
     test("login > loggedIn") {
       for
-        loggedIn   <- login
+        loggedIn <- login
       yield assertTrue(loggedIn.isSuccess)
     },
     test("add pool > pool added") {
       pool = pool.copy(license = account.license)
       for
-        poolAdded   <- addPool
+        poolAdded <- addPool
       yield assertTrue(poolAdded.isSuccess)
     },
     test("update pool > pool updated") {
       pool = pool.copy(volume = 9_000)
       for
-        poolUpdated   <- updatePool
+        poolUpdated <- updatePool
       yield assertTrue(poolUpdated.isSuccess)
     },
     test("list pools > pools listed") {
       for
-        poolsListed   <- listPools
+        poolsListed <- listPools
       yield assertTrue(poolsListed.isSuccess)
     },
     test("add cleaning > cleaning added") {
       cleaning = cleaning.copy(poolId = pool.id)
       for
-        cleaningAdded   <- addCleaning
+        cleaningAdded <- addCleaning
       yield assertTrue(cleaningAdded.isSuccess)
     },
     test("update cleaning > cleaning updated") {
       cleaning = cleaning.copy(vacuum = true)
       for
-        cleaningUpdated   <- updateCleaning
+        cleaningUpdated <- updateCleaning
       yield assertTrue(cleaningUpdated.isSuccess)
     },
     test("list cleanings > cleanings listed") {
       for
-        cleaningsListed   <- listCleanings
+        cleaningsListed <- listCleanings
       yield assertTrue(cleaningsListed.isSuccess)
     },
     test("add measurement > measurement added") {
       measurement = measurement.copy(poolId = pool.id)
       for
-        measurementAdded   <- addMeasurement
+        measurementAdded <- addMeasurement
       yield assertTrue(measurementAdded.isSuccess)
     },
     test("update measurement > measurement updated") {
       measurement = measurement.copy(temperature = 90)
       for
-        measurementUpdated   <- updateMeasurement
+        measurementUpdated <- updateMeasurement
       yield assertTrue(measurementUpdated.isSuccess)
     },
     test("list measurements > measurements listed") {
       for
-        measurementsListed   <- listMeasurements
+        measurementsListed <- listMeasurements
       yield assertTrue(measurementsListed.isSuccess)
     },
     test("add chemical > chemical added") {
       chemical = chemical.copy(poolId = pool.id)
       for
-        chemicalAdded   <- addChemical
+        chemicalAdded <- addChemical
       yield assertTrue(chemicalAdded.isSuccess)
     },
     test("update chemical > chemical updated") {
       chemical = chemical.copy(amount = 2.0)
       for
-        chemicalUpdated   <- updateChemical
+        chemicalUpdated <- updateChemical
       yield assertTrue(chemicalUpdated.isSuccess)
     },
     test("list chemicals > chemicals listed") {
       for
-        chemicalsListed   <- listChemicals
+        chemicalsListed <- listChemicals
       yield assertTrue(chemicalsListed.isSuccess)
     }
   ).provide(Client.default) @@ TestAspect.sequential
