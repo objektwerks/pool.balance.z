@@ -22,7 +22,9 @@ Build
 
 Test
 ----
-1. sbt clean test
+>Unable to run Server in IntegrationTest ( see comment ).
+1. sbt server/run
+2. sbt clean test
 
 Server Run
 ----------
