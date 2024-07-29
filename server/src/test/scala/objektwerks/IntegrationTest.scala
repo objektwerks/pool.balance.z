@@ -11,9 +11,6 @@ import Serializer.given
 import Validator.*
 
 object IntegrationTest extends ZIOSpecDefault:
-  val exitCode = Process("psql -d poolbalance -f ddl.sql").run().exitValue()
-  Server.run
-
   val conf = Resources.loadConfig("test.conf")
   val host = conf.getString("server.host")
   val port = conf.getInt("server.port")
@@ -25,6 +22,11 @@ object IntegrationTest extends ZIOSpecDefault:
   var cleaning = Cleaning(poolId = 0)
   var measurement = Measurement(poolId = 0)
   var chemical = Chemical(poolId = 0)
+
+  Process("psql -d poolbalance -f ddl.sql").run().exitValue()
+  
+  val exitCode = Server.run
+  println(s"*** Server exit code: ${exitCode.toString()}")
 
   def spec = suite("server")(
     test("register > registered") {
