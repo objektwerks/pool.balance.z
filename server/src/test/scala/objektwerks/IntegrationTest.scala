@@ -25,8 +25,7 @@ object IntegrationTest extends ZIOSpecDefault:
 
   Process("psql -d poolbalance -f ddl.sql").run().exitValue()
   
-  val exitCode = Server.run
-  println(s"*** Server exit code: ${exitCode.toString()}")
+  Process("sbt server/run").run().exitValue() // works, but blocks test from executing.
 
   def spec = suite("server")(
     test("register > registered") {
