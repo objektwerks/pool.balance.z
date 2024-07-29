@@ -8,7 +8,7 @@ Note
 
 Todo
 ----
-1. IntegrationTest fails with connection refused errors.
+1. IntegrationTest fails with ```unexpected end of input``` errors.
 2. Client testing.
 
 Install
