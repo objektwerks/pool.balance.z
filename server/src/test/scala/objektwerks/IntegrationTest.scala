@@ -15,8 +15,8 @@ object IntegrationTest extends ZIOSpecDefault:
   Server.run
 
   val conf = Resources.loadConfig("server.conf")
-  val host = conf.getString("host")
-  val port = conf.getInt("port")
+  val host = conf.getString("server.host")
+  val port = conf.getInt("server.port")
   val url = s"http://$host:$port/command"
 
   val emailAddress = "funkwerks@runbox.com"
