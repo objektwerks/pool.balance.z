@@ -25,7 +25,8 @@ object IntegrationTest extends ZIOSpecDefault:
 
   Process("psql -d poolbalance -f ddl.sql").run().exitValue()
   
-  Process("sbt server/run").run().exitValue() // works, but blocks test from executing. Server.run fails.
+  // This works, but blocks the test from executing. ```Server.run``` fails for reasons unknown.
+  // Process("sbt server/run").run().exitValue()
 
   def spec = suite("server")(
     test("register > registered") {
