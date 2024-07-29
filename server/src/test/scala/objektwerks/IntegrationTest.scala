@@ -14,7 +14,7 @@ object IntegrationTest extends ZIOSpecDefault:
   val exitCode = Process("psql -d poolbalance -f ddl.sql").run().exitValue()
   Server.run
 
-  val conf = Resources.loadConfig("server.conf")
+  val conf = Resources.loadConfig("test.conf")
   val host = conf.getString("server.host")
   val port = conf.getInt("server.port")
   val url = s"http://$host:$port/command"
