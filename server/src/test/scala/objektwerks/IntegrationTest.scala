@@ -2,7 +2,7 @@ package objektwerks
 
 import scala.sys.process.Process
 
-import zio.Console
+import zio.{Console, ZLayer}
 import zio.http.{Body, Client, Request}
 import zio.json.{DecoderOps, EncoderOps}
 import zio.test.{assertTrue, TestAspect, ZIOSpecDefault}
@@ -14,6 +14,9 @@ object IntegrationTest extends ZIOSpecDefault:
   val conf = Resources.loadConfig("test.conf")
   val host = conf.getString("server.host")
   val port = conf.getInt("server.port")
+  val ds = conf.getConfig("ds")
+  val email = conf.getConfig("email")
+  val config = zio.http.Server.Config.default.binding(host, port)
   val url = s"http://$host:$port/command"
   println(s"*** Server url: $url")
 
@@ -105,7 +108,16 @@ object IntegrationTest extends ZIOSpecDefault:
         chemicalsListed <- listChemicals
       yield assertTrue(chemicalsListed.isSuccess)
     }
-  ).provide(Handler.layer) @@ TestAspect.sequential
+  ).provide(
+    Store.dataSourceLayer(ds),
+    Store.namingStrategyLayer,
+    Store.licenseCacheLayer,
+    Store.layer,
+    Emailer.layer(email),
+    Handler.layer,
+    ZLayer.succeed(config),
+    zio.http.Server.live
+  ) @@ TestAspect.sequential
 
   val register =
     for
