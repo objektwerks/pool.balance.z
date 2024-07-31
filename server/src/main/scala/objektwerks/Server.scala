@@ -1,33 +1,34 @@
 package objektwerks
 
 import zio.{Scope, ZIO, ZIOAppArgs, ZIOAppDefault, ZLayer}
-import zio.http.{!!, /, ->, Http, Request, Response, ServerConfig}
-import zio.http.model.Method
+import zio.http.{handler, Method, Request, Response, Routes}
 import zio.json.{DecoderOps, EncoderOps}
 
 import Serializer.given
 
 object Server extends ZIOAppDefault:
-  val route: Http[Handler, Throwable, Request, Response] = Http.collectZIO[Request] {
-    case request @ Method.POST -> !! / "command" => request.body.asString.flatMap { json =>
-      json.fromJson[Command] match
-        case Right(command) =>
-          for
-            _       <- ZIO.log(s"*** Router command: $command")
-            handler <- ZIO.service[Handler]
-            event   <- handler
-                         .handle(command)
-                         .catchAll(throwable =>
-                            val message = s"*** Failed to process command: $command due to this error: ${throwable.getMessage}"
-                            ZIO.log(message) zip ZIO.succeed(Fault(message))
-                          )
-            _       <- ZIO.log(s"*** Router event: $event")
-          yield Response.json(event.toJson)
-        case Left(error) => 
-          val fault = Fault(error)
-          ZIO.log(s"*** Router fault: $fault") *> ZIO.succeed(Response.json(fault.toJson))
-    }
-  }
+  val routes = Routes(
+    Method.POST / "command" -> handler: (request: Request) =>
+        for
+          body    <- request.body.asString.orDie
+        yield
+          ZIO.fromEither( body.fromJson[Command] ) match
+            case Right(command: Command) =>
+              for
+                _       <- ZIO.log(s"*** Router command: $command")
+                handler <- ZIO.service[Handler]
+                event   <- handler
+                            .handle(command)
+                            .catchAll(throwable =>
+                                val message = s"*** Failed to process command: $command due to this error: ${throwable.getMessage}"
+                                ZIO.log(message) zip ZIO.succeed(Fault(message))
+                              )
+                _       <- ZIO.log(s"*** Router event: $event")
+              yield Response.json(event.toJson)
+            case Left(error: String) => 
+              val fault = Fault(error)
+              ZIO.log(s"*** Router fault: $fault") *> ZIO.succeed(Response.json(fault.toJson))
+  )
 
   override def run: ZIO[Environment & (ZIOAppArgs & Scope ), Any, Any] =
     for
@@ -39,7 +40,7 @@ object Server extends ZIOAppDefault:
       config =  ServerConfig.default.binding(host, port)
       _      <- ZIO.log(s"*** Server running at http://$host:$port")
       server <- zio.http.Server
-                  .serve(route.withDefaultErrorResponse)
+                  .serve(routes.withDefaultErrorResponse)
                   .provide(
                     Store.dataSourceLayer(ds),
                     Store.namingStrategyLayer,

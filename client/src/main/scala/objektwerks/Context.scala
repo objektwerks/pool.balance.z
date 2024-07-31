@@ -6,7 +6,7 @@ import java.awt.{Color, Image}
 import javax.imageio.ImageIO
 import javax.swing.ImageIcon
 
-import zio.http.model.{Header, Headers}
+import zio.http.{Header, Headers, MediaType}
 
 object Context:
   val conf = Resources.loadConfig("client.conf")
@@ -81,8 +81,8 @@ object Context:
   val fuchsia = Color(255, 0, 255)
 
   val headers = Headers (
-    Header("Content-Type", "application/json; charset=utf-8"),
-    Header("Accept", "application/json")
+    Header.ContentType(MediaType.application.json),
+    Header.Accept(MediaType.application.json)
   )
 
   private def loadImage(path: String): Image =
