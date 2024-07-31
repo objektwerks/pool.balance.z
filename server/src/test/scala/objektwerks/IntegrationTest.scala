@@ -182,7 +182,7 @@ object IntegrationTest extends ZIOSpecDefault:
 
   val listCleanings =
     for
-      response <- Request.post(url, Body.fromString(ListCleanings(account.license, pool.id).toJson))
+      response <- Server.routes.runZIO( Request.post(url, Body.fromString(ListCleanings(account.license, pool.id).toJson)) )
       result   <- response.body.asString.flatMap { json =>
                     json.fromJson[CleaningsListed] match
                       case Right(list) => assertTrue(list.cleanings.length == 1)
