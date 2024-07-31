@@ -19,6 +19,7 @@ object Server extends ZIOAppDefault:
       yield Response.json(event.toJson)
   ).handleError( _ match
     case error: String => Response.json( Fault(s"Invalid json: $error").toJson )
+    case _ => Response.json( Fault(s"Invalid json.").toJson )
   )
 
   override def run: ZIO[Environment & (ZIOAppArgs & Scope ), Any, Any] =
