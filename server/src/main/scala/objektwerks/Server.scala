@@ -9,10 +9,8 @@ import Serializer.given
 object Server extends ZIOAppDefault:
   val routes = Routes(
     Method.POST / "command" -> handler: (request: Request) =>
-        for
-          body    <- request.body.asString.orDie
-        yield
-          ZIO.fromEither( body.fromJson[Command] ) match
+        request.body.asString.flatMap { json =>
+          json.fromJson[Command] match
             case Right(command: Command) =>
               for
                 _       <- ZIO.log(s"*** Router command: $command")
@@ -28,6 +26,7 @@ object Server extends ZIOAppDefault:
             case Left(error: String) => 
               val fault = Fault(error)
               ZIO.log(s"*** Router fault: $fault") *> ZIO.succeed(Response.json(fault.toJson))
+        }
   )
 
   override def run: ZIO[Environment & (ZIOAppArgs & Scope ), Any, Any] =
@@ -37,10 +36,10 @@ object Server extends ZIOAppDefault:
       port   =  conf.getInt("server.port")
       ds     =  conf.getConfig("ds")
       email  =  conf.getConfig("email")
-      config =  ServerConfig.default.binding(host, port)
+      config =  zio.http.Server.Config.default.binding(host, port)
       _      <- ZIO.log(s"*** Server running at http://$host:$port")
       server <- zio.http.Server
-                  .serve(routes.withDefaultErrorResponse)
+                  .serve(routes)
                   .provide(
                     Store.dataSourceLayer(ds),
                     Store.namingStrategyLayer,
@@ -48,7 +47,7 @@ object Server extends ZIOAppDefault:
                     Store.layer,
                     Emailer.layer(email),
                     Handler.layer,
-                    ServerConfig.live(config),
+                    zio.http.Server.Config.live(config),
                     zio.http.Server.live
                   )
                   .debug

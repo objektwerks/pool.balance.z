@@ -3,22 +3,21 @@ package objektwerks
 import com.typesafe.scalalogging.LazyLogging
 
 import zio.{Unsafe, Runtime, ZIO}
-import zio.http.{Body, Client}
+import zio.http.{Body, Client, Request}
 import zio.json.{DecoderOps, EncoderOps}
 
 import Serializer.given
 
 object Proxy extends LazyLogging:
+  private val url = Context.url
+
   private def delegate(command: Command,
-                       handler: Event => Unit): ZIO[Any, Nothing, ZIO[Client, Throwable, Unit]] =
+                       handler: Event => Unit): ZIO[Any, Throwable, Unit] =
     ZIO.succeed(
       for
         _        <- ZIO.succeed( logger.info(s"*** Proxy command: $command") )
-        response <- Client.request(
-                      url = Context.url,
-                      headers = Context.headers,
-                      content = Body.fromString(command.toJson)
-                    )
+        request  = Request.post(url, Body.fromString(command.toJson)) // Context.headers
+        response <- Client.request(request)
         _        <- response.body.asString.flatMap { json =>
                       json.fromJson[Event] match
                         case Right(event) =>
