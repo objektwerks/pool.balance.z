@@ -1,6 +1,6 @@
 Pool Balance
 ------------
->Pool balance app using Swing, ScalaFx, ZIO 2, ZIO-Http, JoddMail, Postgresql and Scala 3.
+>Pool balance app using Swing, ScalaFx, ZIO 2, ZIO-HTTP, JoddMail, Postgresql and Scala 3.
 
 Note
 ----
@@ -8,7 +8,7 @@ Note
 
 Todo
 ----
-1. Integrate latest version of ZIO Http
+1. Integrate latest version of ZIO-HTTP.
 2. IntegrationTest fails with ```unexpected end of input``` errors.
 3. Client testing.
 
