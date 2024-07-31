@@ -13,7 +13,7 @@ object Server extends ZIOAppDefault:
           json.fromJson[Command] match
             case Right(command: Command) =>
               for
-                _       <- ZIO.log(s"*** Router command: $command")
+                _       <- ZIO.log(s"*** Command: $command")
                 handler <- ZIO.service[Handler]
                 event   <- handler
                             .handle(command)
@@ -21,11 +21,10 @@ object Server extends ZIOAppDefault:
                               val message = s"*** Failed to process command: $command due to this error: ${throwable.getMessage}"
                               ZIO.log(message) zip ZIO.succeed(Fault(message))
                             )
-                _       <- ZIO.log(s"*** Router event: $event")
+                _       <- ZIO.log(s"*** Event: $event")
               yield Response.json(event.toJson)
-            case Left(error: String) => 
-              val fault = Fault(error)
-              ZIO.log(s"*** Router fault: $fault") *> ZIO.succeed(Response.json(fault.toJson))
+            case Left(error: String) =>
+              ZIO.log(s"*** Fault: $fault") *> Response.json(Fault(error).toJson)
         }
   ).handleError( _ match
     case error: String => Response.json( Fault(s"Invalid json: $error").toJson )
