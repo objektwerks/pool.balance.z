@@ -172,7 +172,7 @@ object IntegrationTest extends ZIOSpecDefault:
 
   val updateCleaning =
     for
-      response <- Request.post(url, Body.fromString(SaveCleaning(account.license, cleaning).toJson))
+      response <- Server.routes.runZIO( Request.post(url, Body.fromString(SaveCleaning(account.license, cleaning).toJson)) )
       result   <- response.body.asString.flatMap { json =>
                     json.fromJson[CleaningSaved] match
                       case Right(updated) => assertTrue(updated.id == 1L)
