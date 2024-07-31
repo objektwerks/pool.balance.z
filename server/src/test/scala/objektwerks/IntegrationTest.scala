@@ -122,7 +122,7 @@ object IntegrationTest extends ZIOSpecDefault:
 
   val login =
     for
-      response <- Request.post(url = url, content = Body.fromString(Login(account.emailAddress, account.pin).toJson))
+      response <- Request.post(url, content = Body.fromString(Login(account.emailAddress, account.pin).toJson))
       result   <- response.body.asString.flatMap { json =>
                     json.fromJson[LoggedIn] match
                       case Right(loggedIn) => assertTrue(loggedIn.account.isActivated)
@@ -132,7 +132,7 @@ object IntegrationTest extends ZIOSpecDefault:
 
   val addPool =
     for
-      response <- Request.post(url = url, content = Body.fromString(SavePool(account.license, pool).toJson))
+      response <- Request.post(url, content = Body.fromString(SavePool(account.license, pool).toJson))
       result   <- response.body.asString.flatMap { json =>
                     json.fromJson[PoolSaved] match
                       case Right(added) => pool = pool.copy(id = added.id); assertTrue(added.id == 1L)
@@ -142,7 +142,7 @@ object IntegrationTest extends ZIOSpecDefault:
 
   val updatePool =
     for
-      response <- Request.post(url = url, content = Body.fromString(SavePool(account.license, pool).toJson))
+      response <- Request.post(url, content = Body.fromString(SavePool(account.license, pool).toJson))
       result   <- response.body.asString.flatMap { json =>
                     json.fromJson[PoolSaved] match
                       case Right(updated) => assertTrue(updated.id == 1L)
@@ -152,7 +152,7 @@ object IntegrationTest extends ZIOSpecDefault:
 
   val listPools =
     for
-      response <- Request.post(url = url, content = Body.fromString(ListPools(account.license).toJson))
+      response <- Request.post(url, content = Body.fromString(ListPools(account.license).toJson))
       result   <- response.body.asString.flatMap { json =>
                     json.fromJson[PoolsListed] match
                       case Right(list) => assertTrue(list.pools.length == 1)
@@ -162,7 +162,7 @@ object IntegrationTest extends ZIOSpecDefault:
 
   val addCleaning =
     for
-      response <- Request.post(url = url, content = Body.fromString(SaveCleaning(account.license, cleaning).toJson))
+      response <- Request.post(url, content = Body.fromString(SaveCleaning(account.license, cleaning).toJson))
       result   <- response.body.asString.flatMap { json =>
                     json.fromJson[CleaningSaved] match
                       case Right(added) => cleaning = cleaning.copy(id = added.id); assertTrue(added.id == 1L)
@@ -172,7 +172,7 @@ object IntegrationTest extends ZIOSpecDefault:
 
   val updateCleaning =
     for
-      response <- Request.post(url = url, content = Body.fromString(SaveCleaning(account.license, cleaning).toJson))
+      response <- Request.post(url, content = Body.fromString(SaveCleaning(account.license, cleaning).toJson))
       result   <- response.body.asString.flatMap { json =>
                     json.fromJson[CleaningSaved] match
                       case Right(updated) => assertTrue(updated.id == 1L)
@@ -182,7 +182,7 @@ object IntegrationTest extends ZIOSpecDefault:
 
   val listCleanings =
     for
-      response <- Request.post(url = url, content = Body.fromString(ListCleanings(account.license, pool.id).toJson))
+      response <- Request.post(url, content = Body.fromString(ListCleanings(account.license, pool.id).toJson))
       result   <- response.body.asString.flatMap { json =>
                     json.fromJson[CleaningsListed] match
                       case Right(list) => assertTrue(list.cleanings.length == 1)
@@ -192,7 +192,7 @@ object IntegrationTest extends ZIOSpecDefault:
 
   val addMeasurement =
     for
-      response <- Request.post(url = url, content = Body.fromString(SaveMeasurement(account.license, measurement).toJson))
+      response <- Request.post(url, content = Body.fromString(SaveMeasurement(account.license, measurement).toJson))
       result   <- response.body.asString.flatMap { json =>
                     json.fromJson[MeasurementSaved] match
                       case Right(added) => measurement = measurement.copy(id = added.id); assertTrue(added.id == 1L)
@@ -202,7 +202,7 @@ object IntegrationTest extends ZIOSpecDefault:
 
   val updateMeasurement =
     for
-      response <- Request.post(url = url, content = Body.fromString(SaveMeasurement(account.license, measurement).toJson))
+      response <- Request.post(url, content = Body.fromString(SaveMeasurement(account.license, measurement).toJson))
       result   <- response.body.asString.flatMap { json =>
                     json.fromJson[MeasurementSaved] match
                       case Right(updated) => assertTrue(updated.id == 1L)
@@ -212,7 +212,7 @@ object IntegrationTest extends ZIOSpecDefault:
 
   val listMeasurements =
     for
-      response <- Request.post(url = url, content = Body.fromString(ListMeasurements(account.license, pool.id).toJson))
+      response <- Request.post(url, content = Body.fromString(ListMeasurements(account.license, pool.id).toJson))
       result   <- response.body.asString.flatMap { json =>
                     json.fromJson[MeasurementsListed] match
                       case Right(list) => assertTrue(list.measurements.length == 1)
@@ -222,7 +222,7 @@ object IntegrationTest extends ZIOSpecDefault:
 
   val addChemical =
     for
-      response <- Request.post(url = url, content = Body.fromString(SaveChemical(account.license, chemical).toJson))
+      response <- Request.post(url, content = Body.fromString(SaveChemical(account.license, chemical).toJson))
       result   <- response.body.asString.flatMap { json =>
                     json.fromJson[ChemicalSaved] match
                       case Right(added) => chemical = chemical.copy(id = added.id); assertTrue(added.id == 1L)
@@ -232,7 +232,7 @@ object IntegrationTest extends ZIOSpecDefault:
 
   val updateChemical =
     for
-      response <- Request.post(url = url, content = Body.fromString(SaveChemical(account.license, chemical).toJson))
+      response <- Request.post(url, content = Body.fromString(SaveChemical(account.license, chemical).toJson))
       result   <- response.body.asString.flatMap { json =>
                     json.fromJson[ChemicalSaved] match
                       case Right(updated) => assertTrue(updated.id == 1L)
@@ -242,7 +242,7 @@ object IntegrationTest extends ZIOSpecDefault:
 
   val listChemicals =
     for
-      response <- Request.post(url = url, content = Body.fromString(ListChemicals(account.license, pool.id).toJson))
+      response <- Request.post(url, content = Body.fromString(ListChemicals(account.license, pool.id).toJson))
       result   <- response.body.asString.flatMap { json =>
                     json.fromJson[ChemicalsListed] match
                       case Right(list) => assertTrue(list.chemicals.length == 1)
