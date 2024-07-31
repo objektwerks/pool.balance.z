@@ -25,9 +25,6 @@ object IntegrationTest extends ZIOSpecDefault:
   var chemical = Chemical(poolId = 0)
 
   Process("psql -d poolbalance -f ddl.sql").run().exitValue()
-  
-  // This works, but blocks the test from executing. ```Server.run``` fails for reasons unknown.
-  // Process("sbt server/run").run().exitValue()
 
   def spec = suite("server")(
     test("register > registered") {
