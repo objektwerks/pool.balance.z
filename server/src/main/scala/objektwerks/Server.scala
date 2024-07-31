@@ -27,6 +27,8 @@ object Server extends ZIOAppDefault:
               val fault = Fault(error)
               ZIO.log(s"*** Router fault: $fault") *> ZIO.succeed(Response.json(fault.toJson))
         }
+  ).handleError( _ match
+    case error: String => Response.json( Fault(s"Invalid json: $error").toJson )
   )
 
   override def run: ZIO[Environment & (ZIOAppArgs & Scope ), Any, Any] =
