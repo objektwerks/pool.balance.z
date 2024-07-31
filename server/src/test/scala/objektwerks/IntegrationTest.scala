@@ -142,7 +142,7 @@ object IntegrationTest extends ZIOSpecDefault:
 
   val updatePool =
     for
-      response <- Request.post(url, Body.fromString(SavePool(account.license, pool).toJson))
+      response <- Server.routes.runZIO( Request.post(url, Body.fromString(SavePool(account.license, pool).toJson)) )
       result   <- response.body.asString.flatMap { json =>
                     json.fromJson[PoolSaved] match
                       case Right(updated) => assertTrue(updated.id == 1L)
