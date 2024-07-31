@@ -23,8 +23,9 @@ object Server extends ZIOAppDefault:
                             )
                 _       <- ZIO.log(s"*** Event: $event")
               yield Response.json(event.toJson)
-            case Left(error: String) =>
-              ZIO.log(s"*** Fault: $fault") *> Response.json(Fault(error).toJson)
+            case Left(error: String) => 
+              val fault = Fault(error)
+              ZIO.log(s"*** Fault: $fault") *> Response.json(fault.toJson)
         }
   ).handleError( _ match
     case error: String => Response.json( Fault(s"Invalid json: $error").toJson )
