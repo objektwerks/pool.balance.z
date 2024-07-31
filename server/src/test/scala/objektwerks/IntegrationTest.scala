@@ -192,7 +192,7 @@ object IntegrationTest extends ZIOSpecDefault:
 
   val addMeasurement =
     for
-      response <- Request.post(url, Body.fromString(SaveMeasurement(account.license, measurement).toJson))
+      response <- Server.routes.runZIO( Request.post(url, Body.fromString(SaveMeasurement(account.license, measurement).toJson)) )
       result   <- response.body.asString.flatMap { json =>
                     json.fromJson[MeasurementSaved] match
                       case Right(added) => measurement = measurement.copy(id = added.id); assertTrue(added.id == 1L)
