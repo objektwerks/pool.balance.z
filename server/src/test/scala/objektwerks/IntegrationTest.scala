@@ -122,7 +122,7 @@ object IntegrationTest extends ZIOSpecDefault:
 
   val login =
     for
-      response <- Request.post(url, Body.fromString(Login(account.emailAddress, account.pin).toJson))
+      response <- Server.routes.runZIO( Request.post(url, Body.fromString(Login(account.emailAddress, account.pin).toJson)) )
       result   <- response.body.asString.flatMap { json =>
                     json.fromJson[LoggedIn] match
                       case Right(loggedIn) => assertTrue(loggedIn.account.isActivated)
