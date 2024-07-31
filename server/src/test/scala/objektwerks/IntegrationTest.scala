@@ -105,7 +105,7 @@ object IntegrationTest extends ZIOSpecDefault:
         chemicalsListed <- listChemicals
       yield assertTrue(chemicalsListed.isSuccess)
     }
-  )
+  ).provide(Handler.layer) @@ TestAspect.sequential
 
   val register =
     for
