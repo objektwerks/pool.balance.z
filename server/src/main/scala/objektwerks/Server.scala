@@ -7,7 +7,7 @@ import zio.json.{DecoderOps, EncoderOps}
 import Serializer.given
 
 object Server extends ZIOAppDefault:
-  val routes = Routes(
+  val routes: Routes[Any, Response] = Routes(
     Method.POST / "command" -> handler: (request: Request) =>
         request.body.asString.flatMap { json =>
           json.fromJson[Command] match
@@ -17,10 +17,10 @@ object Server extends ZIOAppDefault:
                 handler <- ZIO.service[Handler]
                 event   <- handler
                             .handle(command)
-                            .catchAll(throwable =>
-                                val message = s"*** Failed to process command: $command due to this error: ${throwable.getMessage}"
-                                ZIO.log(message) zip ZIO.succeed(Fault(message))
-                              )
+                            .catchAll( throwable =>
+                              val message = s"*** Failed to process command: $command due to this error: ${throwable.getMessage}"
+                              ZIO.log(message) zip ZIO.succeed(Fault(message))
+                            )
                 _       <- ZIO.log(s"*** Router event: $event")
               yield Response.json(event.toJson)
             case Left(error: String) => 
@@ -49,7 +49,7 @@ object Server extends ZIOAppDefault:
                     Store.layer,
                     Emailer.layer(email),
                     Handler.layer,
-                    zio.http.Server.Config.live(config),
+                    ZLayer.succeed(config),
                     zio.http.Server.live
                   )
                   .debug
