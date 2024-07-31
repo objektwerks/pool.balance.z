@@ -8,8 +8,9 @@ Note
 
 Todo
 ----
-1. IntegrationTest fails with ```unexpected end of input``` errors.
-2. Client testing.
+1. Integrate latest version of ZIO Http
+2. IntegrationTest fails with ```unexpected end of input``` errors.
+3. Client testing.
 
 Install
 -------
