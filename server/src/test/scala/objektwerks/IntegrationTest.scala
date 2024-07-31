@@ -222,7 +222,7 @@ object IntegrationTest extends ZIOSpecDefault:
 
   val addChemical =
     for
-      response <- Request.post(url, Body.fromString(SaveChemical(account.license, chemical).toJson))
+      response <- Server.routes.runZIO( Request.post(url, Body.fromString(SaveChemical(account.license, chemical).toJson)) )
       result   <- response.body.asString.flatMap { json =>
                     json.fromJson[ChemicalSaved] match
                       case Right(added) => chemical = chemical.copy(id = added.id); assertTrue(added.id == 1L)
