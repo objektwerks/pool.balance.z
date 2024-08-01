@@ -4,7 +4,7 @@ Pool Balance
 
 Todo
 ----
-1. IntegrationTest, failing with zio-json invalid disambiguator error.
+1. IntegrationTest. Zio-Json fails to add type discriminator to sealed trait famiies of Entity, Command and Event.
 2. Client testing.
 
 Install
