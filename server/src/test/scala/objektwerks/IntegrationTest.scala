@@ -122,7 +122,6 @@ object IntegrationTest extends ZIOSpecDefault:
       response <- Server.routes.runZIO( Request.post(url, Body.fromString(Register(emailAddress).toJson)) )
       result   <- response.body.asString.flatMap { json =>
                     println(s"********* Registered json: $json")
-                    println(s"********* Registered json: ${json.fromJson[Registered]}")
                     json.fromJson[Registered] match
                       case Right(registered) =>
                         this.account = registered.account
