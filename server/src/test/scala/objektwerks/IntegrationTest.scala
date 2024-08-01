@@ -124,7 +124,9 @@ object IntegrationTest extends ZIOSpecDefault:
       response <- Server.routes.runZIO( Request.post(url, Body.fromString(Register(emailAddress).toJson)) )
       result   <- response.body.asString.flatMap { json =>
                     json.fromJson[Registered] match
-                      case Right(registered) => this.account = registered.account; assertTrue(account.isActivated)
+                      case Right(registered) =>
+                        this.account = registered.account
+                        assertTrue(account.isActivated)
                       case Left(error) => Console.printLine(s"Register > Registered failed: $error") *> assertTrue(false)
                   }
     yield result
@@ -144,7 +146,9 @@ object IntegrationTest extends ZIOSpecDefault:
       response <- Server.routes.runZIO( Request.post(url, Body.fromString(SavePool(account.license, pool).toJson)) )
       result   <- response.body.asString.flatMap { json =>
                     json.fromJson[PoolSaved] match
-                      case Right(added) => pool = pool.copy(id = added.id); assertTrue(added.id == 1L)
+                      case Right(added) =>
+                        pool = pool.copy(id = added.id)
+                        assertTrue(added.id == 1L)
                       case Left(error) => Console.printLine(s"SavePool > PoolSaved ( add ) failed: $error") *> assertTrue(false)
                   }
     yield result
@@ -174,7 +178,9 @@ object IntegrationTest extends ZIOSpecDefault:
       response <- Server.routes.runZIO( Request.post(url, Body.fromString(SaveCleaning(account.license, cleaning).toJson)) )
       result   <- response.body.asString.flatMap { json =>
                     json.fromJson[CleaningSaved] match
-                      case Right(added) => cleaning = cleaning.copy(id = added.id); assertTrue(added.id == 1L)
+                      case Right(added) =>
+                        cleaning = cleaning.copy(id = added.id)
+                        assertTrue(added.id == 1L)
                       case Left(error) => Console.printLine(s"SaveCleaning > CleaningSaved ( add ) failed: $error") *> assertTrue(false)
                   }
     yield result
@@ -204,7 +210,9 @@ object IntegrationTest extends ZIOSpecDefault:
       response <- Server.routes.runZIO( Request.post(url, Body.fromString(SaveMeasurement(account.license, measurement).toJson)) )
       result   <- response.body.asString.flatMap { json =>
                     json.fromJson[MeasurementSaved] match
-                      case Right(added) => measurement = measurement.copy(id = added.id); assertTrue(added.id == 1L)
+                      case Right(added) =>
+                        measurement = measurement.copy(id = added.id)
+                        assertTrue(added.id == 1L)
                       case Left(error) => Console.printLine(s"SaveMeasurement > MeasurementSaved ( add ) failed: $error") *> assertTrue(false)
                   }
     yield result
@@ -234,7 +242,9 @@ object IntegrationTest extends ZIOSpecDefault:
       response <- Server.routes.runZIO( Request.post(url, Body.fromString(SaveChemical(account.license, chemical).toJson)) )
       result   <- response.body.asString.flatMap { json =>
                     json.fromJson[ChemicalSaved] match
-                      case Right(added) => chemical = chemical.copy(id = added.id); assertTrue(added.id == 1L)
+                      case Right(added) =>
+                        chemical = chemical.copy(id = added.id)
+                        assertTrue(added.id == 1L)
                       case Left(error) => Console.printLine(s"SavePool > PoolSaved ( add ) failed: $error") *> assertTrue(false)
                   }
     yield result
