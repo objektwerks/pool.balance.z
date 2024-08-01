@@ -10,9 +10,9 @@ object Server extends ZIOAppDefault:
   val routes = Routes(
     Method.POST / "command" -> handler: (request: Request) =>
       for
-        body    <- request.body.asString.orDie
-        _       <- Console.printLine(s"*** Json: $body")
-        command <- ZIO.fromEither( body.fromJson[Command] )
+        json    <- request.body.asString.orDie
+        _       <- Console.printLine(s"*** Json: $json")
+        command <- ZIO.fromEither( json.fromJson[Command] )
         _       <- Console.printLine(s"*** Command: $command")
         handler <- ZIO.service[Handler]
         event   <- handler.handle(command)
