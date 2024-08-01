@@ -24,14 +24,15 @@ object Server extends ZIOAppDefault:
 
   override def run: ZIO[Environment & (ZIOAppArgs & Scope ), Any, Any] =
     for
-      conf   <- Resources.loadZIOConfig("server.conf")
-      host   =  conf.getString("server.host")
-      port   =  conf.getInt("server.port")
-      ds     =  conf.getConfig("ds")
-      email  =  conf.getConfig("email")
-      config =  zio.http.Server.Config.default.binding(host, port)
-      _      <- ZIO.log(s"*** Server running at http://$host:$port")
-      server <- zio.http.Server
+      conf     <- Resources.loadZIOConfig("server.conf")
+      host     =  conf.getString("server.host")
+      port     =  conf.getInt("server.port")
+      endpoint =  conf.getString("server.endpoint")
+      ds       =  conf.getConfig("ds")
+      email    =  conf.getConfig("email")
+      config   =  zio.http.Server.Config.default.binding(host, port)
+      _        <- ZIO.log(s"*** Server running at http://$host:$port$endpoint")
+      server   <- zio.http.Server
                   .serve(routes)
                   .provide(
                     Store.dataSourceLayer(ds),
