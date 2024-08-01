@@ -2,9 +2,13 @@ Pool Balance
 ------------
 >Pool balance app using Swing, ScalaFx, ZIO 2, ZIO-HTTP, JoddMail, Postgresql and Scala 3.
 
+Warning
+-------
+>The ZIO ecosytem of libraries endlessly confuses Metals.
+
 Todo
 ----
-1. IntegrationTest. Zio-Json fails to add type discriminator to Command and Event ADTs.
+1. IntegrationTest.
 2. Client testing.
 
 Install
