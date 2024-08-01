@@ -36,7 +36,7 @@ object IntegrationTest extends ZIOSpecDefault:
         registered <- register
         _          <- Console.printLine(s"*** Registered test result: $register")
       yield assertTrue(registered.isSuccess)
-    } /*,
+    },
     test("login > loggedIn") {
       for
         loggedIn <- login
@@ -109,7 +109,7 @@ object IntegrationTest extends ZIOSpecDefault:
       for
         chemicalsListed <- listChemicals
       yield assertTrue(chemicalsListed.isSuccess)
-    }*/
+    }
   ).provide(
     Store.dataSourceLayer(ds),
     Store.namingStrategyLayer,
