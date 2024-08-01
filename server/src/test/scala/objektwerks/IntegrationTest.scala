@@ -11,13 +11,14 @@ import Serializer.given
 import Validator.*
 
 object IntegrationTest extends ZIOSpecDefault:
+  Process("psql -d poolbalance -f ddl.sql").run().exitValue()
+
   val conf = Resources.loadConfig("test.conf")
   val host = conf.getString("server.host")
   val port = conf.getInt("server.port")
   val endpoint = conf.getString("server.endpoint")
   val ds = conf.getConfig("ds")
   val email = conf.getConfig("email")
-  val config = zio.http.Server.Config.default.binding(host, port)
   val url = s"http://$host:$port$endpoint"
   println(s"*** Server url: $url")
 
@@ -27,8 +28,6 @@ object IntegrationTest extends ZIOSpecDefault:
   var cleaning = Cleaning(poolId = 0)
   var measurement = Measurement(poolId = 0)
   var chemical = Chemical(poolId = 0)
-
-  Process("psql -d poolbalance -f ddl.sql").run().exitValue()
 
   def spec = suite("server")(
     test("register > registered") {
