@@ -6,10 +6,15 @@ Warning
 -------
 >The ZIO ecosytem of libraries endlessly confuses Metals.
 
+Issues
+------
+1. Zio-Json fails to add type discriminator to Command and Event ADTs.
+
 Todo
 ----
-1. IntegrationTest.
-2. Client testing.
+1. Replace ZIO-Json with Jsoniter.
+2. IntegrationTest.
+3. Client testing.
 
 Install
 -------
