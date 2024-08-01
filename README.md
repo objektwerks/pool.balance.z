@@ -13,8 +13,7 @@ Issues
 Todo
 ----
 1. Replace ZIO-Json with Jsoniter.
-2. IntegrationTest.
-3. Client testing.
+2. Client testing.
 
 Install
 -------
