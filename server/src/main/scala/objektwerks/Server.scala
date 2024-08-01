@@ -4,7 +4,7 @@ import zio.{Console, Scope, ZIO, ZIOAppArgs, ZIOAppDefault, ZLayer}
 import zio.http.{handler, Method, Request, Response, Routes}
 import zio.json.{DecoderOps, EncoderOps}
 
-//import Serializer.given
+import Serializer.given
 
 object Server extends ZIOAppDefault:
   val routes = Routes(
