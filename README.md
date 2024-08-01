@@ -4,7 +4,7 @@ Pool Balance
 
 Todo
 ----
-1. IntegrationTest. Zio-Json fails to add type discriminator to sealed trait famiies of Entity, Command and Event.
+1. IntegrationTest. Zio-Json fails to add type discriminator to Command and Event ADTs.
 2. Client testing.
 
 Install
