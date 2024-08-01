@@ -3,7 +3,7 @@ package objektwerks
 import scala.sys.process.Process
 
 import zio.{Console, ZLayer}
-import zio.http.{Body, Client, Request}
+import zio.http.{Body, Request}
 import zio.json.{DecoderOps, EncoderOps}
 import zio.test.{assertTrue, TestAspect, ZIOSpecDefault}
 
