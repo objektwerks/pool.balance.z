@@ -4,11 +4,11 @@ Pool Balance
 
 Warning
 -------
->The ZIO ecosytem of libraries endlessly confuses Metals and Intellij. Enjoy! :)
+>The ZIO ecosytem endlessly confuses Metals and Intellij. So enjoy! :)
 
 Issues
 ------
-1. Zio-Json fails to add a type discriminator to Command and Event ADTs. No such issue with the Entity ADT.
+1. Zio-Json fails to add a type discriminator to Command and Event ADTs. No such issue with the Entity ADT, though.
 
 Todo
 ----
