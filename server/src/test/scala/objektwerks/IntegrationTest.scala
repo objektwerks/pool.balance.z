@@ -14,10 +14,11 @@ object IntegrationTest extends ZIOSpecDefault:
   val conf = Resources.loadConfig("test.conf")
   val host = conf.getString("server.host")
   val port = conf.getInt("server.port")
+  val endpoint = conf.getString("server.endpoint")
   val ds = conf.getConfig("ds")
   val email = conf.getConfig("email")
   val config = zio.http.Server.Config.default.binding(host, port)
-  val url = s"http://$host:$port/command"
+  val url = s"http://$host:$port$endpoint"
   println(s"*** Server url: $url")
 
   val emailAddress = "funkwerks@runbox.com"
@@ -33,6 +34,7 @@ object IntegrationTest extends ZIOSpecDefault:
     test("register > registered") {
       for
         registered <- register
+        _          <- Console.printLine(s"*** Registered test result: $register")
       yield assertTrue(registered.isSuccess)
     },
     test("login > loggedIn") {
