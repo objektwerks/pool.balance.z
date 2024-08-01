@@ -119,7 +119,7 @@ object IntegrationTest extends ZIOSpecDefault:
     Handler.layer
   ) @@ TestAspect.sequential
 
-  val register =
+  def register =
     for
       response <- Server.routes.runZIO( Request.post(url, Body.fromString(Register(emailAddress).toJson)) )
       result   <- response.body.asString.flatMap { json =>
@@ -131,7 +131,7 @@ object IntegrationTest extends ZIOSpecDefault:
                   }
     yield result
 
-  val login =
+  def login =
     for
       response <- Server.routes.runZIO( Request.post(url, Body.fromString(Login(account.emailAddress, account.pin).toJson)) )
       result   <- response.body.asString.flatMap { json =>
@@ -141,7 +141,7 @@ object IntegrationTest extends ZIOSpecDefault:
                   }
     yield result
 
-  val addPool =
+  def addPool =
     for
       response <- Server.routes.runZIO( Request.post(url, Body.fromString(SavePool(account.license, pool).toJson)) )
       result   <- response.body.asString.flatMap { json =>
@@ -153,7 +153,7 @@ object IntegrationTest extends ZIOSpecDefault:
                   }
     yield result
 
-  val updatePool =
+  def updatePool =
     for
       response <- Server.routes.runZIO( Request.post(url, Body.fromString(SavePool(account.license, pool).toJson)) )
       result   <- response.body.asString.flatMap { json =>
@@ -163,7 +163,7 @@ object IntegrationTest extends ZIOSpecDefault:
                   }
     yield result
 
-  val listPools =
+  def listPools =
     for
       response <- Server.routes.runZIO( Request.post(url, Body.fromString(ListPools(account.license).toJson)) )
       result   <- response.body.asString.flatMap { json =>
@@ -173,7 +173,7 @@ object IntegrationTest extends ZIOSpecDefault:
                   }
     yield result
 
-  val addCleaning =
+  def addCleaning =
     for
       response <- Server.routes.runZIO( Request.post(url, Body.fromString(SaveCleaning(account.license, cleaning).toJson)) )
       result   <- response.body.asString.flatMap { json =>
@@ -185,7 +185,7 @@ object IntegrationTest extends ZIOSpecDefault:
                   }
     yield result
 
-  val updateCleaning =
+  def updateCleaning =
     for
       response <- Server.routes.runZIO( Request.post(url, Body.fromString(SaveCleaning(account.license, cleaning).toJson)) )
       result   <- response.body.asString.flatMap { json =>
@@ -195,7 +195,7 @@ object IntegrationTest extends ZIOSpecDefault:
                   }
     yield result
 
-  val listCleanings =
+  def listCleanings =
     for
       response <- Server.routes.runZIO( Request.post(url, Body.fromString(ListCleanings(account.license, pool.id).toJson)) )
       result   <- response.body.asString.flatMap { json =>
@@ -205,7 +205,7 @@ object IntegrationTest extends ZIOSpecDefault:
                   }
     yield result
 
-  val addMeasurement =
+  def addMeasurement =
     for
       response <- Server.routes.runZIO( Request.post(url, Body.fromString(SaveMeasurement(account.license, measurement).toJson)) )
       result   <- response.body.asString.flatMap { json =>
@@ -217,7 +217,7 @@ object IntegrationTest extends ZIOSpecDefault:
                   }
     yield result
 
-  val updateMeasurement =
+  def updateMeasurement =
     for
       response <- Server.routes.runZIO( Request.post(url, Body.fromString(SaveMeasurement(account.license, measurement).toJson)) )
       result   <- response.body.asString.flatMap { json =>
@@ -227,7 +227,7 @@ object IntegrationTest extends ZIOSpecDefault:
                   }
     yield result
 
-  val listMeasurements =
+  def listMeasurements =
     for
       response <- Server.routes.runZIO( Request.post(url, Body.fromString(ListMeasurements(account.license, pool.id).toJson)) )
       result   <- response.body.asString.flatMap { json =>
@@ -237,7 +237,7 @@ object IntegrationTest extends ZIOSpecDefault:
                   }
     yield result
 
-  val addChemical =
+  def addChemical =
     for
       response <- Server.routes.runZIO( Request.post(url, Body.fromString(SaveChemical(account.license, chemical).toJson)) )
       result   <- response.body.asString.flatMap { json =>
@@ -249,7 +249,7 @@ object IntegrationTest extends ZIOSpecDefault:
                   }
     yield result
 
-  val updateChemical =
+  def updateChemical =
     for
       response <- Server.routes.runZIO( Request.post(url, Body.fromString(SaveChemical(account.license, chemical).toJson)) )
       result   <- response.body.asString.flatMap { json =>
@@ -259,7 +259,7 @@ object IntegrationTest extends ZIOSpecDefault:
                   }
     yield result
 
-  val listChemicals =
+  def listChemicals =
     for
       response <- Server.routes.runZIO( Request.post(url, Body.fromString(ListChemicals(account.license, pool.id).toJson)) )
       result   <- response.body.asString.flatMap { json =>
