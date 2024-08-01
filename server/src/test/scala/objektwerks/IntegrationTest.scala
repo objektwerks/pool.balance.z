@@ -114,9 +114,7 @@ object IntegrationTest extends ZIOSpecDefault:
     Store.licenseCacheLayer,
     Store.layer,
     Emailer.layer(email),
-    Handler.layer,
-    ZLayer.succeed(config),
-    zio.http.Server.live
+    Handler.layer
   ) @@ TestAspect.sequential
 
   val register =
