@@ -33,7 +33,6 @@ object IntegrationTest extends ZIOSpecDefault:
     test("register > registered") {
       for
         registered <- register
-        _          <- Console.printLine(s"*** Registered test result: $register")
       yield assertTrue(registered.isSuccess)
     },
     test("login > loggedIn") {
