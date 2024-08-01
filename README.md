@@ -8,7 +8,7 @@ Warning
 
 Issues
 ------
-1. Zio-Json fails to add a type discriminator to Command and Event ADTs.
+1. Zio-Json fails to add a type discriminator to Command and Event ADTs. No such issue with the Entity ADT.
 
 Todo
 ----
