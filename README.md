@@ -2,10 +2,6 @@ Pool Balance
 ------------
 >Pool balance app using Swing, ScalaFx, ZIO 2, ZIO-HTTP, JoddMail, Postgresql and Scala 3.
 
-Note
-----
->The Server finally runs!!!
-
 Todo
 ----
 1. IntegrationTest
