@@ -4,7 +4,7 @@ Pool Balance
 
 Todo
 ----
-1. IntegrationTest
+1. IntegrationTest, failing with zio-json invalid disambiguator error.
 2. Client testing.
 
 Install
