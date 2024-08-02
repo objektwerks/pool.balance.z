@@ -5,7 +5,7 @@ import com.github.plokhotnyuk.jsoniter_scala.core.*
 import scala.sys.process.Process
 
 import zio.ZLayer
-import zio.http.{Body, Request}
+import zio.http.{Body, MediaType, Request}
 import zio.test.{assertTrue, TestAspect, ZIOSpecDefault}
 
 import Serializer.given
@@ -120,7 +120,7 @@ object IntegrationTest extends ZIOSpecDefault:
 
   def register =
     val register = writeToString[Register](Register(emailAddress))
-    val request  = Request.post(url, Body.fromString(register))
+    val request  = Request.post(url, Body.fromString(register).contentType(MediaType.application.json))
     for
       response   <- Server.routes.runZIO(request)
       json       <- response.body.asString
