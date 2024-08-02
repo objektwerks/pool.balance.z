@@ -4,9 +4,8 @@ import com.github.plokhotnyuk.jsoniter_scala.core.*
 
 import scala.sys.process.Process
 
-import zio.{Console, ZLayer}
+import zio.ZLayer
 import zio.http.{Body, Request}
-import zio.json.{DecoderOps, EncoderOps}
 import zio.test.{assertTrue, TestAspect, ZIOSpecDefault}
 
 import Serializer.given
