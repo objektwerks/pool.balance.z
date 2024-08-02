@@ -6,7 +6,7 @@ Notes
 -----
 >ZIO-Json fails to add a type discriminator to Command and Event ADTs. No such issue with the Entity ADT, though.
 
->Replaced ZIO-Json with Jsoniter. Server.routes still produces ```unexpected end of input``` errors.
+>Replaced ZIO-Json with Jsoniter. Server.routes still produces an ```unexpected end of input``` error at ```readFromString[Command](json)```.
 
 Todo
 ----
