@@ -140,16 +140,15 @@ object IntegrationTest extends ZIOSpecDefault:
     yield assertTrue(loggedIn.account.isActivated)
 
   def addPool =
+    val savePool = writeToString[SavePool](SavePool(account.license, pool))
+    val request = Request.post(url, Body.fromString(savePool))
     for
-      response <- Server.routes.runZIO( Request.post(url, Body.fromString(SavePool(account.license, pool))) )
-      result   <- response.body.asString.flatMap { json =>
-                    json.fromJson[PoolSaved] match
-                      case Right(added) =>
-                        pool = pool.copy(id = added.id)
-                        assertTrue(added.id == 1L)
-                      case Left(error) => Console.printLine(s"*** SavePool > PoolSaved ( add ) failed: $error") *> assertTrue(false)
-                  }
-    yield result
+      response  <- Server.routes.runZIO(request)
+      json      <- response.body.asString.orDie
+      poolSaved =  readFromString[PoolSaved](json)
+    yield
+      pool = pool.copy(id = poolSaved.id)
+      assertTrue(poolSaved.id == 1L)
 
   def updatePool =
     for
