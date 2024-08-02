@@ -3,7 +3,7 @@ package objektwerks
 import com.github.plokhotnyuk.jsoniter_scala.core.*
 
 import zio.{Console, Scope, ZIO, ZIOAppArgs, ZIOAppDefault, ZLayer}
-import zio.http.{handler, Method, Request, Response, Routes}
+import zio.http.{Charsets, handler, Method, Request, Response, Routes}
 
 import Serializer.given
 
@@ -11,7 +11,7 @@ object Server extends ZIOAppDefault:
   val routes: Routes[Handler, Response] = Routes(
     Method.POST / "command" -> handler: (request: Request) =>
       for
-        json    <- request.body.asString
+        json    <- request.body.asString(Charsets.Utf8)
         _       <- Console.printLine(s"*** MediaType: ${request.body.mediaType.get.fullType} Json: $json")
         command =  readFromString[Command](json) // `unexpected end of input error` exception thrown here!
         _       <- Console.printLine(s"*** Command: $command")
