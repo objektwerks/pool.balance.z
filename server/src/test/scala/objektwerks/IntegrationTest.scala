@@ -141,7 +141,7 @@ object IntegrationTest extends ZIOSpecDefault:
 
   def addPool =
     for
-      response <- Server.routes.runZIO( Request.post(url, Body.fromString(SavePool(account.license, pool).toJson)) )
+      response <- Server.routes.runZIO( Request.post(url, Body.fromString(SavePool(account.license, pool))) )
       result   <- response.body.asString.flatMap { json =>
                     json.fromJson[PoolSaved] match
                       case Right(added) =>
@@ -153,7 +153,7 @@ object IntegrationTest extends ZIOSpecDefault:
 
   def updatePool =
     for
-      response <- Server.routes.runZIO( Request.post(url, Body.fromString(SavePool(account.license, pool).toJson)) )
+      response <- Server.routes.runZIO( Request.post(url, Body.fromString(SavePool(account.license, pool))) )
       result   <- response.body.asString.flatMap { json =>
                     json.fromJson[PoolSaved] match
                       case Right(updated) => assertTrue(updated.id == 1L)
@@ -163,7 +163,7 @@ object IntegrationTest extends ZIOSpecDefault:
 
   def listPools =
     for
-      response <- Server.routes.runZIO( Request.post(url, Body.fromString(ListPools(account.license).toJson)) )
+      response <- Server.routes.runZIO( Request.post(url, Body.fromString(ListPools(account.license))) )
       result   <- response.body.asString.flatMap { json =>
                     json.fromJson[PoolsListed] match
                       case Right(list) => assertTrue(list.pools.length == 1)
@@ -173,7 +173,7 @@ object IntegrationTest extends ZIOSpecDefault:
 
   def addCleaning =
     for
-      response <- Server.routes.runZIO( Request.post(url, Body.fromString(SaveCleaning(account.license, cleaning).toJson)) )
+      response <- Server.routes.runZIO( Request.post(url, Body.fromString(SaveCleaning(account.license, cleaning))) )
       result   <- response.body.asString.flatMap { json =>
                     json.fromJson[CleaningSaved] match
                       case Right(added) =>
@@ -185,7 +185,7 @@ object IntegrationTest extends ZIOSpecDefault:
 
   def updateCleaning =
     for
-      response <- Server.routes.runZIO( Request.post(url, Body.fromString(SaveCleaning(account.license, cleaning).toJson)) )
+      response <- Server.routes.runZIO( Request.post(url, Body.fromString(SaveCleaning(account.license, cleaning))) )
       result   <- response.body.asString.flatMap { json =>
                     json.fromJson[CleaningSaved] match
                       case Right(updated) => assertTrue(updated.id == 1L)
@@ -195,7 +195,7 @@ object IntegrationTest extends ZIOSpecDefault:
 
   def listCleanings =
     for
-      response <- Server.routes.runZIO( Request.post(url, Body.fromString(ListCleanings(account.license, pool.id).toJson)) )
+      response <- Server.routes.runZIO( Request.post(url, Body.fromString(ListCleanings(account.license, pool.id))) )
       result   <- response.body.asString.flatMap { json =>
                     json.fromJson[CleaningsListed] match
                       case Right(list) => assertTrue(list.cleanings.length == 1)
@@ -205,7 +205,7 @@ object IntegrationTest extends ZIOSpecDefault:
 
   def addMeasurement =
     for
-      response <- Server.routes.runZIO( Request.post(url, Body.fromString(SaveMeasurement(account.license, measurement).toJson)) )
+      response <- Server.routes.runZIO( Request.post(url, Body.fromString(SaveMeasurement(account.license, measurement))) )
       result   <- response.body.asString.flatMap { json =>
                     json.fromJson[MeasurementSaved] match
                       case Right(added) =>
@@ -217,7 +217,7 @@ object IntegrationTest extends ZIOSpecDefault:
 
   def updateMeasurement =
     for
-      response <- Server.routes.runZIO( Request.post(url, Body.fromString(SaveMeasurement(account.license, measurement).toJson)) )
+      response <- Server.routes.runZIO( Request.post(url, Body.fromString(SaveMeasurement(account.license, measurement))) )
       result   <- response.body.asString.flatMap { json =>
                     json.fromJson[MeasurementSaved] match
                       case Right(updated) => assertTrue(updated.id == 1L)
@@ -227,7 +227,7 @@ object IntegrationTest extends ZIOSpecDefault:
 
   def listMeasurements =
     for
-      response <- Server.routes.runZIO( Request.post(url, Body.fromString(ListMeasurements(account.license, pool.id).toJson)) )
+      response <- Server.routes.runZIO( Request.post(url, Body.fromString(ListMeasurements(account.license, pool.id))) )
       result   <- response.body.asString.flatMap { json =>
                     json.fromJson[MeasurementsListed] match
                       case Right(list) => assertTrue(list.measurements.length == 1)
@@ -237,7 +237,7 @@ object IntegrationTest extends ZIOSpecDefault:
 
   def addChemical =
     for
-      response <- Server.routes.runZIO( Request.post(url, Body.fromString(SaveChemical(account.license, chemical).toJson)) )
+      response <- Server.routes.runZIO( Request.post(url, Body.fromString(SaveChemical(account.license, chemical))) )
       result   <- response.body.asString.flatMap { json =>
                     json.fromJson[ChemicalSaved] match
                       case Right(added) =>
@@ -249,7 +249,7 @@ object IntegrationTest extends ZIOSpecDefault:
 
   def updateChemical =
     for
-      response <- Server.routes.runZIO( Request.post(url, Body.fromString(SaveChemical(account.license, chemical).toJson)) )
+      response <- Server.routes.runZIO( Request.post(url, Body.fromString(SaveChemical(account.license, chemical))) )
       result   <- response.body.asString.flatMap { json =>
                     json.fromJson[ChemicalSaved] match
                       case Right(updated) => assertTrue(updated.id == 1L)
@@ -259,7 +259,7 @@ object IntegrationTest extends ZIOSpecDefault:
 
   def listChemicals =
     for
-      response <- Server.routes.runZIO( Request.post(url, Body.fromString(ListChemicals(account.license, pool.id).toJson)) )
+      response <- Server.routes.runZIO( Request.post(url, Body.fromString(ListChemicals(account.license, pool.id))) )
       result   <- response.body.asString.flatMap { json =>
                     json.fromJson[ChemicalsListed] match
                       case Right(list) => assertTrue(list.chemicals.length == 1)
