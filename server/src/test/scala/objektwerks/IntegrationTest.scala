@@ -123,7 +123,7 @@ object IntegrationTest extends ZIOSpecDefault:
     val request  = Request.post(url, Body.fromString(register))
     for
       response   <- Server.routes.runZIO(request)
-      json       <- response.body.asString.orDie
+      json       <- response.body.asString
       registered =  readFromString[Registered](json)
     yield
       account = registered.account
@@ -134,7 +134,7 @@ object IntegrationTest extends ZIOSpecDefault:
     val request = Request.post(url, Body.fromString(login))
     for
       response <- Server.routes.runZIO(request)
-      json     <- response.body.asString.orDie
+      json     <- response.body.asString
       loggedIn =  readFromString[LoggedIn](json)
     yield assertTrue(loggedIn.account.isActivated)
 
@@ -143,7 +143,7 @@ object IntegrationTest extends ZIOSpecDefault:
     val request  = Request.post(url, Body.fromString(savePool))
     for
       response  <- Server.routes.runZIO(request)
-      json      <- response.body.asString.orDie
+      json      <- response.body.asString
       poolSaved =  readFromString[PoolSaved](json)
     yield
       pool = pool.copy(id = poolSaved.id)
@@ -154,7 +154,7 @@ object IntegrationTest extends ZIOSpecDefault:
     val request  = Request.post(url, Body.fromString(savePool))
     for
       response  <- Server.routes.runZIO(request)
-      json      <- response.body.asString.orDie
+      json      <- response.body.asString
       poolSaved =  readFromString[PoolSaved](json)
     yield assertTrue(poolSaved.id == 1L)
 
@@ -163,7 +163,7 @@ object IntegrationTest extends ZIOSpecDefault:
     val request   = Request.post(url, Body.fromString(listPools))
     for
       response    <- Server.routes.runZIO(request)
-      json        <- response.body.asString.orDie
+      json        <- response.body.asString
       poolsListed =  readFromString[PoolsListed](json)
     yield assertTrue(poolsListed.pools.length == 1)
 
@@ -172,7 +172,7 @@ object IntegrationTest extends ZIOSpecDefault:
     val request      = Request.post(url, Body.fromString(saveCleaning))
     for
       response      <- Server.routes.runZIO(request)
-      json          <- response.body.asString.orDie
+      json          <- response.body.asString
       cleaningSaved =  readFromString[CleaningSaved](json)
     yield
       cleaning = cleaning.copy(id = cleaningSaved.id)
@@ -183,7 +183,7 @@ object IntegrationTest extends ZIOSpecDefault:
     val request      = Request.post(url, Body.fromString(saveCleaning))
     for
       response      <- Server.routes.runZIO(request)
-      json          <- response.body.asString.orDie
+      json          <- response.body.asString
       cleaningSaved =  readFromString[CleaningSaved](json)
     yield assertTrue(cleaningSaved.id == 1L)
 
@@ -192,7 +192,7 @@ object IntegrationTest extends ZIOSpecDefault:
     val request       = Request.post(url, Body.fromString(listCleanings))
     for
       response        <- Server.routes.runZIO(request)
-      json            <- response.body.asString.orDie
+      json            <- response.body.asString
       cleaningsListed =  readFromString[CleaningsListed](json)
     yield assertTrue(cleaningsListed.cleanings.length == 1)
 
@@ -201,7 +201,7 @@ object IntegrationTest extends ZIOSpecDefault:
     val request         = Request.post(url, Body.fromString(saveMeasurement))
     for
       response         <- Server.routes.runZIO(request)
-      json             <- response.body.asString.orDie
+      json             <- response.body.asString
       measurementSaved =  readFromString[MeasurementSaved](json)
     yield
       measurement = measurement.copy(id = measurementSaved.id)
@@ -212,7 +212,7 @@ object IntegrationTest extends ZIOSpecDefault:
     val request         = Request.post(url, Body.fromString(saveMeasurement))
     for
       response         <- Server.routes.runZIO(request)
-      json             <- response.body.asString.orDie
+      json             <- response.body.asString
       measurementSaved =  readFromString[MeasurementSaved](json)
     yield assertTrue(measurementSaved.id == 1L)
 
@@ -221,7 +221,7 @@ object IntegrationTest extends ZIOSpecDefault:
     val request          = Request.post(url, Body.fromString(listMeasurements))
     for
       response            <- Server.routes.runZIO(request)
-      json                <- response.body.asString.orDie
+      json                <- response.body.asString
       measurementsListed  =  readFromString[MeasurementsListed](json)
     yield assertTrue(measurementsListed.measurements.length == 1)
 
@@ -230,7 +230,7 @@ object IntegrationTest extends ZIOSpecDefault:
     val request      = Request.post(url, Body.fromString(saveChemical))
     for
       response      <- Server.routes.runZIO(request)
-      json          <- response.body.asString.orDie
+      json          <- response.body.asString
       chemicalSaved =  readFromString[ChemicalSaved](json)
     yield
       chemical = chemical.copy(id = chemicalSaved.id)
@@ -241,7 +241,7 @@ object IntegrationTest extends ZIOSpecDefault:
     val request      = Request.post(url, Body.fromString(saveChemical))
     for
       response      <- Server.routes.runZIO(request)
-      json          <- response.body.asString.orDie
+      json          <- response.body.asString
       chemicalSaved =  readFromString[ChemicalSaved](json)
     yield assertTrue(chemicalSaved.id == 1L)
 
@@ -250,6 +250,6 @@ object IntegrationTest extends ZIOSpecDefault:
     val request       = Request.post(url, Body.fromString(listChemicals))
     for
       response        <- Server.routes.runZIO(request)
-      json            <- response.body.asString.orDie
+      json            <- response.body.asString
       chemicalsListed =  readFromString[ChemicalsListed](json)
     yield assertTrue(chemicalsListed.chemicals.length == 1)
