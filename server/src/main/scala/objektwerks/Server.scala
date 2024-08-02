@@ -8,20 +8,21 @@ import zio.http.{Charsets, handler, Method, Request, Response, Routes}
 import Serializer.given
 
 object Server extends ZIOAppDefault:
-  val routes: Routes[Handler, Response] = Routes(
-    Method.POST / "command" -> handler: (request: Request) =>
-      for
-        json    <- request.body.asString(Charsets.Utf8)
-        _       <- Console.printLine(s"*** MediaType: ${request.body.mediaType.get.fullType} Json: $json")
-        command =  readFromString[Command](json) // `unexpected end of input error` exception thrown here!
-        _       <- Console.printLine(s"*** Command: $command")
-        handler <- ZIO.service[Handler]
-        event   <- handler.handle(command)
-        _       <- Console.printLine(s"*** Event: $event")
-      yield Response.json( writeToString[Event](event) )
-  ).handleError( _ match
-    case error: Throwable => Response.json( writeToString[Fault]( Fault(s"*** Invalid json: ${error.getMessage}") ) )
-  )
+  val routes: Routes[Handler, Response] =
+    Routes(
+      Method.POST / "command" -> handler: (request: Request) =>
+        for
+          json    <- request.body.asString(Charsets.Utf8)
+          _       <- Console.printLine(s"*** MediaType: ${request.body.mediaType.get.fullType} Json: $json")
+          command =  readFromString[Command](json) // `unexpected end of input error` exception thrown here!
+          _       <- Console.printLine(s"*** Command: $command")
+          handler <- ZIO.service[Handler]
+          event   <- handler.handle(command)
+          _       <- Console.printLine(s"*** Event: $event")
+        yield Response.json( writeToString[Event](event) )
+    ).handleError( _ match
+      case error: Throwable => Response.json( writeToString[Fault]( Fault(s"*** Invalid json: ${error.getMessage}") ) )
+    )
 
   override def run: ZIO[Environment & (ZIOAppArgs & Scope ), Any, Any] =
     for
