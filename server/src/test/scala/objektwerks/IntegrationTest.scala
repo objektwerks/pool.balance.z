@@ -228,16 +228,15 @@ object IntegrationTest extends ZIOSpecDefault:
     yield assertTrue(measurementsListed.measurements.length == 1)
 
   def addChemical =
+    val saveChemical = writeToString[SaveChemical](SaveChemical(account.license, chemical))
+    val request      = Request.post(url, Body.fromString(saveChemical))
     for
-      response <- Server.routes.runZIO( Request.post(url, Body.fromString(SaveChemical(account.license, chemical))) )
-      result   <- response.body.asString.flatMap { json =>
-                    json.fromJson[ChemicalSaved] match
-                      case Right(added) =>
-                        chemical = chemical.copy(id = added.id)
-                        assertTrue(added.id == 1L)
-                      case Left(error) => Console.printLine(s"*** SavePool > PoolSaved ( add ) failed: $error") *> assertTrue(false)
-                  }
-    yield result
+      response      <- Server.routes.runZIO(request)
+      json          <- response.body.asString.orDie
+      chemicalSaved =  readFromString[ChemicalSaved](json)
+    yield
+      chemical = chemical.copy(id = chemicalSaved.id)
+      assertTrue(chemicalSaved.id == 1L)
 
   def updateChemical =
     for
