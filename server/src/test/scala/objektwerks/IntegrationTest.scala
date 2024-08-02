@@ -180,14 +180,13 @@ object IntegrationTest extends ZIOSpecDefault:
       assertTrue(cleaningSaved.id == 1L)
 
   def updateCleaning =
+    val saveCleaning = writeToString[SaveCleaning](SaveCleaning(account.license, cleaning))
+    val request      = Request.post(url, Body.fromString(saveCleaning))
     for
-      response <- Server.routes.runZIO( Request.post(url, Body.fromString(SaveCleaning(account.license, cleaning))) )
-      result   <- response.body.asString.flatMap { json =>
-                    json.fromJson[CleaningSaved] match
-                      case Right(updated) => assertTrue(updated.id == 1L)
-                      case Left(error) => Console.printLine(s"*** SaveCleaning > CleaningSaved ( update ) failed: $error") *> assertTrue(false)
-                  }
-    yield result
+      response      <- Server.routes.runZIO(request)
+      json          <- response.body.asString.orDie
+      cleaningSaved =  readFromString[CleaningSaved](json)
+    yield assertTrue(cleaningSaved.id == 1L)
 
   def listCleanings =
     for
