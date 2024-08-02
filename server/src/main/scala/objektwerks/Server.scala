@@ -8,7 +8,7 @@ import zio.http.{handler, Method, Request, Response, Routes}
 import Serializer.given
 
 object Server extends ZIOAppDefault:
-  val routes = Routes(
+  val routes: Routes[Handler, Response] = Routes(
     Method.POST / "command" -> handler: (request: Request) =>
       for
         json    <- request.body.asString.orDie
