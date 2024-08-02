@@ -132,14 +132,12 @@ object IntegrationTest extends ZIOSpecDefault:
 
   def login =
     val command = writeToString[Login](Login(account.emailAddress, account.pin))
+    val request = Request.post(url, Body.fromString(command))
     for
-      response <- Server.routes.runZIO( Request.post(url, Body.fromString(command)) )
-      result   <- response.body.asString.flatMap { json =>
-                    json.fromJson[LoggedIn] match
-                      case Right(loggedIn) => assertTrue(loggedIn.account.isActivated)
-                      case Left(error) => Console.printLine(s"*** Login > LoggedIn failed: $error") *> assertTrue(false)
-                  }
-    yield result
+      response <- Server.routes.runZIO(request)
+      json     <- response.body.asString.orDie
+      loggedIn =  readFromString[LoggedIn](json)
+    yield assertTrue(loggedIn.account.isActivated)
 
   def addPool =
     for
