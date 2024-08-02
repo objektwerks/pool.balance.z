@@ -11,7 +11,7 @@ object Server extends ZIOAppDefault:
   val routes: Routes[Handler, Response] = Routes(
     Method.POST / "command" -> handler: (request: Request) =>
       for
-        json    <- request.body.asString.orDie
+        json    <- request.body.asString
         _       <- Console.printLine(s"*** Json: $json")
         command =  readFromString[Command](json) // `unexpected end of input error` thrown here!
         _       <- Console.printLine(s"*** Command: $command")
