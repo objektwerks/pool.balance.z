@@ -198,16 +198,15 @@ object IntegrationTest extends ZIOSpecDefault:
     yield assertTrue(cleaningsListed.cleanings.length == 1)
 
   def addMeasurement =
+    val saveMeasurement = writeToString[SaveMeasurement](SaveMeasurement(account.license, measurement))
+    val request         = Request.post(url, Body.fromString(saveMeasurement))
     for
-      response <- Server.routes.runZIO( Request.post(url, Body.fromString(SaveMeasurement(account.license, measurement))) )
-      result   <- response.body.asString.flatMap { json =>
-                    json.fromJson[MeasurementSaved] match
-                      case Right(added) =>
-                        measurement = measurement.copy(id = added.id)
-                        assertTrue(added.id == 1L)
-                      case Left(error) => Console.printLine(s"*** SaveMeasurement > MeasurementSaved ( add ) failed: $error") *> assertTrue(false)
-                  }
-    yield result
+      response         <- Server.routes.runZIO(request)
+      json             <- response.body.asString.orDie
+      measurementSaved =  readFromString[MeasurementSaved](json)
+    yield
+      measurement = measurement.copy(id = measurementSaved.id)
+      assertTrue(measurementSaved.id == 1L)
 
   def updateMeasurement =
     for
