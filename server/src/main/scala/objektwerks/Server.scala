@@ -13,7 +13,7 @@ object Server extends ZIOAppDefault:
       for
         json    <- request.body.asString
         _       <- Console.printLine(s"*** MediaType: ${request.body.mediaType.get.fullType} Json: $json")
-        command =  readFromString[Command](json) // `unexpected end of input error` thrown here!
+        command =  readFromString[Command](json) // `unexpected end of input error` exception thrown here!
         _       <- Console.printLine(s"*** Command: $command")
         handler <- ZIO.service[Handler]
         event   <- handler.handle(command)
