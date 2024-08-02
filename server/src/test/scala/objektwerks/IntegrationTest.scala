@@ -120,8 +120,8 @@ object IntegrationTest extends ZIOSpecDefault:
   ) @@ TestAspect.sequential
 
   def register =
-    val command = writeToString[Register](Register(emailAddress))
-    val request = Request.post(url, Body.fromString(command))
+    val register = writeToString[Register](Register(emailAddress))
+    val request  = Request.post(url, Body.fromString(register))
     for
       response   <- Server.routes.runZIO(request)
       json       <- response.body.asString.orDie
@@ -131,8 +131,8 @@ object IntegrationTest extends ZIOSpecDefault:
       assertTrue(account.isActivated)
 
   def login =
-    val command = writeToString[Login](Login(account.emailAddress, account.pin))
-    val request = Request.post(url, Body.fromString(command))
+    val login   = writeToString[Login](Login(account.emailAddress, account.pin))
+    val request = Request.post(url, Body.fromString(login))
     for
       response <- Server.routes.runZIO(request)
       json     <- response.body.asString.orDie
