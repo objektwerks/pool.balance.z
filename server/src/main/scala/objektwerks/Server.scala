@@ -1,5 +1,7 @@
 package objektwerks
 
+import com.github.plokhotnyuk.jsoniter_scala.core.*
+
 import zio.{Console, Scope, ZIO, ZIOAppArgs, ZIOAppDefault, ZLayer}
 import zio.http.{handler, Method, Request, Response, Routes}
 import zio.json.{DecoderOps, EncoderOps}
@@ -12,7 +14,7 @@ object Server extends ZIOAppDefault:
       for
         json    <- request.body.asString.orDie
         _       <- Console.printLine(s"*** Json: $json")
-        command <- ZIO.fromEither( json.fromJson[Command] ) // Zio-Json toJson fails to add type discriminator!
+        command =  readFromString[Command](json)
         _       <- Console.printLine(s"*** Command: $command")
         handler <- ZIO.service[Handler]
         event   <- handler.handle(command)
