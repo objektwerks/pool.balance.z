@@ -131,7 +131,7 @@ object IntegrationTest extends ZIOSpecDefault:
 
   def login =
     val login   = writeToString[Login](Login(account.emailAddress, account.pin))
-    val request = Request.post(url, Body.fromString(login))
+    val request = Request.post(url, Body.fromString(login).contentType(MediaType.application.json))
     for
       response <- Server.routes.runZIO(request)
       json     <- response.body.asString
@@ -140,7 +140,7 @@ object IntegrationTest extends ZIOSpecDefault:
 
   def addPool =
     val savePool = writeToString[SavePool](SavePool(account.license, pool))
-    val request  = Request.post(url, Body.fromString(savePool))
+    val request  = Request.post(url, Body.fromString(savePool).contentType(MediaType.application.json))
     for
       response  <- Server.routes.runZIO(request)
       json      <- response.body.asString
@@ -151,7 +151,7 @@ object IntegrationTest extends ZIOSpecDefault:
 
   def updatePool =
     val savePool = writeToString[SavePool](SavePool(account.license, pool))
-    val request  = Request.post(url, Body.fromString(savePool))
+    val request  = Request.post(url, Body.fromString(savePool).contentType(MediaType.application.json))
     for
       response  <- Server.routes.runZIO(request)
       json      <- response.body.asString
@@ -160,7 +160,7 @@ object IntegrationTest extends ZIOSpecDefault:
 
   def listPools =
     val listPools = writeToString[ListPools](ListPools(account.license))
-    val request   = Request.post(url, Body.fromString(listPools))
+    val request   = Request.post(url, Body.fromString(listPools).contentType(MediaType.application.json))
     for
       response    <- Server.routes.runZIO(request)
       json        <- response.body.asString
@@ -169,7 +169,7 @@ object IntegrationTest extends ZIOSpecDefault:
 
   def addCleaning =
     val saveCleaning = writeToString[SaveCleaning](SaveCleaning(account.license, cleaning))
-    val request      = Request.post(url, Body.fromString(saveCleaning))
+    val request      = Request.post(url, Body.fromString(saveCleaning).contentType(MediaType.application.json))
     for
       response      <- Server.routes.runZIO(request)
       json          <- response.body.asString
@@ -180,7 +180,7 @@ object IntegrationTest extends ZIOSpecDefault:
 
   def updateCleaning =
     val saveCleaning = writeToString[SaveCleaning](SaveCleaning(account.license, cleaning))
-    val request      = Request.post(url, Body.fromString(saveCleaning))
+    val request      = Request.post(url, Body.fromString(saveCleaning).contentType(MediaType.application.json))
     for
       response      <- Server.routes.runZIO(request)
       json          <- response.body.asString
@@ -189,7 +189,7 @@ object IntegrationTest extends ZIOSpecDefault:
 
   def listCleanings =
     val listCleanings = writeToString[ListCleanings](ListCleanings(account.license, pool.id))
-    val request       = Request.post(url, Body.fromString(listCleanings))
+    val request       = Request.post(url, Body.fromString(listCleanings).contentType(MediaType.application.json))
     for
       response        <- Server.routes.runZIO(request)
       json            <- response.body.asString
@@ -198,7 +198,7 @@ object IntegrationTest extends ZIOSpecDefault:
 
   def addMeasurement =
     val saveMeasurement = writeToString[SaveMeasurement](SaveMeasurement(account.license, measurement))
-    val request         = Request.post(url, Body.fromString(saveMeasurement))
+    val request         = Request.post(url, Body.fromString(saveMeasurement).contentType(MediaType.application.json))
     for
       response         <- Server.routes.runZIO(request)
       json             <- response.body.asString
@@ -209,7 +209,7 @@ object IntegrationTest extends ZIOSpecDefault:
 
   def updateMeasurement =
     val saveMeasurement = writeToString[SaveMeasurement](SaveMeasurement(account.license, measurement))
-    val request         = Request.post(url, Body.fromString(saveMeasurement))
+    val request         = Request.post(url, Body.fromString(saveMeasurement).contentType(MediaType.application.json))
     for
       response         <- Server.routes.runZIO(request)
       json             <- response.body.asString
@@ -218,7 +218,7 @@ object IntegrationTest extends ZIOSpecDefault:
 
   def listMeasurements =
     val listMeasurements = writeToString[ListMeasurements](ListMeasurements(account.license, pool.id))
-    val request          = Request.post(url, Body.fromString(listMeasurements))
+    val request          = Request.post(url, Body.fromString(listMeasurements).contentType(MediaType.application.json))
     for
       response            <- Server.routes.runZIO(request)
       json                <- response.body.asString
@@ -227,7 +227,7 @@ object IntegrationTest extends ZIOSpecDefault:
 
   def addChemical =
     val saveChemical = writeToString[SaveChemical](SaveChemical(account.license, chemical))
-    val request      = Request.post(url, Body.fromString(saveChemical))
+    val request      = Request.post(url, Body.fromString(saveChemical).contentType(MediaType.application.json))
     for
       response      <- Server.routes.runZIO(request)
       json          <- response.body.asString
@@ -238,7 +238,7 @@ object IntegrationTest extends ZIOSpecDefault:
 
   def updateChemical =
     val saveChemical = writeToString[SaveChemical](SaveChemical(account.license, chemical))
-    val request      = Request.post(url, Body.fromString(saveChemical))
+    val request      = Request.post(url, Body.fromString(saveChemical).contentType(MediaType.application.json))
     for
       response      <- Server.routes.runZIO(request)
       json          <- response.body.asString
@@ -247,7 +247,7 @@ object IntegrationTest extends ZIOSpecDefault:
 
   def listChemicals =
     val listChemicals = writeToString[ListChemicals](ListChemicals(account.license, pool.id))
-    val request       = Request.post(url, Body.fromString(listChemicals))
+    val request       = Request.post(url, Body.fromString(listChemicals).contentType(MediaType.application.json))
     for
       response        <- Server.routes.runZIO(request)
       json            <- response.body.asString
