@@ -3,7 +3,7 @@ package objektwerks
 import com.github.plokhotnyuk.jsoniter_scala.core.*
 import com.typesafe.scalalogging.LazyLogging
 
-import zio.{Unsafe, Runtime, ZIO}
+import zio.ZIO
 import zio.http.{Body, Client, Request}
 
 import Serializer.given
