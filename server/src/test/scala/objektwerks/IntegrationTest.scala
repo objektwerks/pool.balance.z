@@ -169,16 +169,15 @@ object IntegrationTest extends ZIOSpecDefault:
     yield assertTrue(poolsListed.pools.length == 1)
 
   def addCleaning =
+    val saveCleaning = writeToString[SaveCleaning](SaveCleaning(account.license, cleaning))
+    val request      = Request.post(url, Body.fromString(saveCleaning))
     for
-      response <- Server.routes.runZIO( Request.post(url, Body.fromString(SaveCleaning(account.license, cleaning))) )
-      result   <- response.body.asString.flatMap { json =>
-                    json.fromJson[CleaningSaved] match
-                      case Right(added) =>
-                        cleaning = cleaning.copy(id = added.id)
-                        assertTrue(added.id == 1L)
-                      case Left(error) => Console.printLine(s"*** SaveCleaning > CleaningSaved ( add ) failed: $error") *> assertTrue(false)
-                  }
-    yield result
+      response      <- Server.routes.runZIO(request)
+      json          <- response.body.asString.orDie
+      cleaningSaved =  readFromString[CleaningSaved](json)
+    yield
+      cleaning = cleaning.copy(id = cleaningSaved.id)
+      assertTrue(cleaningSaved.id == 1L)
 
   def updateCleaning =
     for
