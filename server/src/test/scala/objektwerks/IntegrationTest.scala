@@ -1,5 +1,7 @@
 package objektwerks
 
+import com.github.plokhotnyuk.jsoniter_scala.core.*
+
 import scala.sys.process.Process
 
 import zio.{Console, ZLayer}
@@ -119,7 +121,7 @@ object IntegrationTest extends ZIOSpecDefault:
 
   def register =
     for
-      response <- Server.routes.runZIO( Request.post(url, Body.fromString(Register(emailAddress).toJson)) )
+      response <- Server.routes.runZIO( Request.post(url, Body.fromString(writeToString[Register](Register(emailAddress))) )
       result   <- response.body.asString.flatMap { json =>
                     json.fromJson[Registered] match
                       case Right(registered) =>
