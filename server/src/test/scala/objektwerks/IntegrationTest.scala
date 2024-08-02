@@ -120,20 +120,20 @@ object IntegrationTest extends ZIOSpecDefault:
   ) @@ TestAspect.sequential
 
   def register =
+    val command = writeToString[Register](Register(emailAddress))
+    val request = Request.post(url, Body.fromString(command))
     for
-      response <- Server.routes.runZIO( Request.post(url, Body.fromString(writeToString[Register](Register(emailAddress))) )
-      result   <- response.body.asString.flatMap { json =>
-                    json.fromJson[Registered] match
-                      case Right(registered) =>
-                        this.account = registered.account
-                        assertTrue(account.isActivated)
-                      case Left(error) => Console.printLine(s"*** Register > Registered failed: $error") *> assertTrue(false)
-                  }
-    yield result
+      response   <- Server.routes.runZIO(request)
+      json       <- response.body.asString.orDie
+      registered =  readFromString[Registered](json)
+    yield
+      this.account = registered.account
+      assertTrue(account.isActivated)
 
   def login =
+    val command = writeToString[Login](Login(account.emailAddress, account.pin))
     for
-      response <- Server.routes.runZIO( Request.post(url, Body.fromString(Login(account.emailAddress, account.pin).toJson)) )
+      response <- Server.routes.runZIO( Request.post(url, Body.fromString(command)) )
       result   <- response.body.asString.flatMap { json =>
                     json.fromJson[LoggedIn] match
                       case Right(loggedIn) => assertTrue(loggedIn.account.isActivated)
