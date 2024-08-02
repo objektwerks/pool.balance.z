@@ -11,8 +11,8 @@ import Serializer.given
 object Proxy extends LazyLogging:
   private val url = Context.url
 
-  private def delegate(command: Command,
-                       handler: Event => Unit) =
+  def call(command: Command,
+           handler: Event => Unit): Unit =
     (
       for
         _           <- ZIO.succeed( logger.info(s"*** Proxy command: $command") )
@@ -25,15 +25,7 @@ object Proxy extends LazyLogging:
       yield ()
     ).catchAll { error =>
         val fault = Fault(error.getMessage)
-        ZIO.succeed( logger.info(s"*** Proxy fault: $fault") ) *> ZIO.succeed( handler(fault) )
-    }
-
-  def call(command: Command,
-           handler: Event => Unit): Unit =
-    Unsafe.unsafe { implicit unsafe =>
-      Runtime
-        .default
-        .unsafe
-        .run( delegate(command, handler) )
-        .exitCode
+        for
+          _ <- ZIO.succeed( logger.info(s"*** Proxy fault: $fault") ) *> ZIO.succeed( handler(fault) )
+        yield ()
     }
