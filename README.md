@@ -2,18 +2,15 @@ Pool Balance
 ------------
 >Pool balance app using Swing, ScalaFx, ZIO 2, ZIO-HTTP, ZIO-Json, JoddMail, Postgresql and Scala 3.
 
-Warning
--------
->The ZIO ecosytem endlessly confuses Metals and Intellij. So enjoy! :)
+Notes
+-----
+>ZIO-Json fails to add a type discriminator to Command and Event ADTs. No such issue with the Entity ADT, though.
 
-Issues
-------
-1. Zio-Json fails to add a type discriminator to Command and Event ADTs. No such issue with the Entity ADT, though.
+>Replaced ZIO-Json with Jsoniter. Server.routes still produces ```unexpected end of input``` errors.
 
 Todo
 ----
-1. Replace ZIO-Json with Jsoniter.
-2. Client testing.
+1. Client testing.
 
 Install
 -------
