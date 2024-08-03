@@ -45,7 +45,9 @@ object IntegrationTest extends ZIOSpecDefault:
       pool = pool.copy(license = account.license)
       for
         poolAdded <- addPool
-      yield assertTrue(poolAdded.isSuccess)
+        _         <- Console.printLine(s"*** Pool Added is success: ${poolAdded.isSuccess}")
+      yield
+        assertTrue(poolAdded.isSuccess)
     },/*
     test("update pool > pool updated") {
       pool = pool.copy(volume = 9_000)
@@ -145,15 +147,11 @@ object IntegrationTest extends ZIOSpecDefault:
       response <- Server.routes.runZIO(request)
       json     <- response.body.asString
       event    =  readFromString[Event](json)
+      _        <- Console.printLine(s"*** Test Event: $event")
     yield
-      event match
-        case PoolSaved(id) =>
-          pool = pool.copy(id = id)
-          assertTrue(id == 1L)
-        case Fault(cause, _) =>
-          Console.printLine(s"*** Fault: $cause")
-          assertTrue(false)
-        case _ => assertTrue(false)
+      val poolSaved = event.asInstanceOf[PoolSaved]
+      pool = pool.copy(id = poolSaved.id)
+      assertTrue(poolSaved.id == 1L)
 
   def updatePool =
     val command = writeToString[Command](SavePool(account.license, pool))

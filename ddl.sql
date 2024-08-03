@@ -15,7 +15,7 @@ CREATE TABLE pool (
   license VARCHAR(36) REFERENCES account(license),
   name VARCHAR(24) NOT NULL,
   volume INT NOT NULL,
-  unit INT NOT NULL
+  unit VARCHAR NOT NULL
 );
 
 CREATE TABLE cleaning (
