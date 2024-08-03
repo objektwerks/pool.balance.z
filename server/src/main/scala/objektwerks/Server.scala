@@ -22,8 +22,9 @@ object Server extends ZIOAppDefault:
         yield Response.json( writeToString[Event](event) )
     ).handleError( _ match
       case error: Throwable =>
-        val fault = Fault(s"*** Invalid json: ${error.getMessage}")
-        val json  = writeToString[Fault](fault)
+        val fault = Fault(s"*** Fault: ${error.getMessage}")
+        Console.printLine(s"*** $fault")
+        val json  = writeToString[Event](fault)
         Response.json(json)
     )
 
