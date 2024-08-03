@@ -14,7 +14,7 @@ object Server extends ZIOAppDefault:
         for
           json    <- request.body.asString(Charsets.Utf8)
           _       <- Console.printLine(s"*** Json: $json")
-          command =  readFromString[Command](json) // `unexpected end of input error` exception thrown here!
+          command =  readFromString[Command](json)
           _       <- Console.printLine(s"*** Command: $command")
           handler <- ZIO.service[Handler]
           event   <- handler.handle(command)
