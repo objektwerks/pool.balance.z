@@ -36,7 +36,7 @@ object Server extends ZIOAppDefault:
       ds       =  conf.getConfig("ds")
       email    =  conf.getConfig("email")
       config   =  zio.http.Server.Config.default.binding(host, port)
-      _        <- ZIO.log(s"*** Server running at http://$host:$port$endpoint")
+      _        <- Console.printLine(s"*** Server running at http://$host:$port$endpoint")
       server   <- zio.http.Server
                   .serve(routes)
                   .provide(
