@@ -4,7 +4,7 @@ import com.github.plokhotnyuk.jsoniter_scala.core.*
 
 import scala.sys.process.Process
 
-import zio.{Console, ZLayer}
+import zio.ZLayer
 import zio.http.{Body, MediaType, Request}
 import zio.test.{assertTrue, TestAspect, ZIOSpecDefault}
 
@@ -45,10 +45,9 @@ object IntegrationTest extends ZIOSpecDefault:
       pool = pool.copy(license = account.license)
       for
         poolAdded <- addPool
-        _         <- Console.printLine(s"*** Pool Added is success: ${poolAdded.isSuccess}")
       yield
         assertTrue(poolAdded.isSuccess)
-    },/*
+    },
     test("update pool > pool updated") {
       pool = pool.copy(volume = 9_000)
       for
@@ -110,7 +109,7 @@ object IntegrationTest extends ZIOSpecDefault:
       for
         chemicalsListed <- listChemicals
       yield assertTrue(chemicalsListed.isSuccess)
-    }*/
+    }
   ).provide(
     Store.dataSourceLayer(ds),
     Store.namingStrategyLayer,
@@ -147,7 +146,6 @@ object IntegrationTest extends ZIOSpecDefault:
       response <- Server.routes.runZIO(request)
       json     <- response.body.asString
       event    =  readFromString[Event](json)
-      _        <- Console.printLine(s"*** Test Event: $event")
     yield
       val poolSaved = event.asInstanceOf[PoolSaved]
       pool = pool.copy(id = poolSaved.id)
