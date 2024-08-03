@@ -13,7 +13,7 @@ object Server extends ZIOAppDefault:
       Method.POST / "command" -> handler: (request: Request) =>
         for
           json    <- request.body.asString(Charsets.Utf8)
-          _       <- Console.printLine(s"*** MediaType: ${request.body.mediaType.get.fullType} Json: $json")
+          _       <- Console.printLine(s"*** Json: $json")
           command =  readFromString[Command](json) // `unexpected end of input error` exception thrown here!
           _       <- Console.printLine(s"*** Command: $command")
           handler <- ZIO.service[Handler]
@@ -22,8 +22,8 @@ object Server extends ZIOAppDefault:
         yield Response.json( writeToString[Event](event) )
     ).handleError( _ match
       case error: Throwable =>
-        val fault = Fault(s"*** Fault: ${error.getMessage}")
-        Console.printLine(s"*** $fault")
+        val fault = Fault(s"*** Error: ${error.getMessage}")
+        Console.printLine(s"*** Fault: $fault")
         val json  = writeToString[Event](fault)
         Response.json(json)
     )
