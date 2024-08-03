@@ -2,17 +2,6 @@ Pool Balance
 ------------
 >Pool balance app using Swing, ScalaFx, ZIO 2, ZIO-HTTP, Jsoniter, JoddMail, Postgresql and Scala 3.
 
-Notes
------
->ZIO-Json fails to add a type discriminator to Command and Event ADTs. No such issue with the Entity ADT, though.
-
->Consequently, replaced ZIO-Json with Jsoniter.
-
->Jsoniter throws an ```unexpected end of input``` exception at ```readFromString[Command](json)``` in Server.routes.
-Encountered same error with ZIO-Json early on. Consequently, IntegrationTest fails.
-
->Corrected all json issues. Now, IntegrationTest passes!
-
 Todo
 ----
 1. Client testing.
