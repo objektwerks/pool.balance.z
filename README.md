@@ -11,6 +11,8 @@ Notes
 >Jsoniter throws an ```unexpected end of input``` exception at ```readFromString[Command](json)``` in Server.routes.
 Encountered same error with ZIO-Json early on. Consequently, IntegrationTest fails.
 
+>Corrected all json issues. Now, IntegrationTest passes!
+
 Todo
 ----
 1. Client testing.
