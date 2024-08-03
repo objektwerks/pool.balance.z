@@ -24,8 +24,7 @@ object Server extends ZIOAppDefault:
       case error: Throwable =>
         val fault = Fault(s"*** Error: ${error.getMessage}")
         Console.printLine(s"*** Fault: $fault")
-        val json  = writeToString[Event](fault)
-        Response.json(json)
+        Response.json( writeToString[Event](fault) )
     )
 
   override def run: ZIO[Environment & (ZIOAppArgs & Scope ), Any, Any] =
