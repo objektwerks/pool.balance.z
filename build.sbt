@@ -70,8 +70,6 @@ lazy val server = project
         "dev.zio" %% "zio-cache" % "0.2.3",
         "org.postgresql" % "postgresql" % "42.7.3",
         "org.jodd" % "jodd-mail" % "7.0.1",
-        // Zerowaste 0.2.21 supports Scala 3.4.2 --- which blows up the project ( and others as well ).
-        // compilerPlugin("com.github.ghik" % "zerowaste" % "0.2.21" cross CrossVersion.full),
         "dev.zio" %% "zio-test" % zioVersion % Test,
         "dev.zio" %% "zio-test-sbt" % zioVersion % Test
       )
