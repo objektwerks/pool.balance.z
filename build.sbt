@@ -16,7 +16,7 @@ lazy val common = Defaults.coreDefaultSettings ++ Seq(
     )
   },
   scalacOptions ++= Seq(
-    "-Wunused:all"
+    "-Wall"
   )
 )
 
