@@ -1,6 +1,6 @@
 Pool Balance
 ------------
->Pool balance app using Swing, ScalaFx, ZIO 2, ZIO-HTTP, Jsoniter, JoddMail, Postgresql and Scala 3.
+>Pool balance app using Swing, ScalaFx, JFreeChart, ZIO 2, ZIO-HTTP, Jsoniter, JoddMail, Postgresql and Scala 3.
 
 Todo
 ----
