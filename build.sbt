@@ -42,7 +42,7 @@ lazy val client = project
          exclude("org.openjfx", "javafx-media")
          exclude("org.openjfx", "javafx-swing")
          exclude("org.openjfx", "javafx-web"),
-        "org.jfree" % "jfreechart" % "1.5.4",
+        "org.jfree" % "jfreechart" % "1.5.5",
         "com.formdev" % "flatlaf" % "3.5.3",
         "dev.zio" %% "zio-http" % zioHttpVersion
         exclude("dev.zio", "zio-streams"),
