@@ -5,7 +5,7 @@ val zioLoggingVersion = "2.5.0"
 lazy val common = Defaults.coreDefaultSettings ++ Seq(
   organization := "objektwerks",
   version := "0.18-SNAPSHOT",
-  scalaVersion := "3.6.4", // Scala 3.7.0-RC3 breaks ScalaFx!
+  scalaVersion := "3.6.4", // Scala 3.7.0-RC4 breaks ScalaFx!
   libraryDependencies ++= {
     val jsoniterVersion = "2.35.1"
     Seq(
@@ -35,7 +35,7 @@ lazy val client = project
   .settings(
     libraryDependencies ++= {
       Seq(
-        "org.scalafx" %% "scalafx" % "23.0.1-R34"
+        "org.scalafx" %% "scalafx" % "24.0.0-R35"
          exclude("org.openjfx", "javafx-controls")
          exclude("org.openjfx", "javafx-fxml")
          exclude("org.openjfx", "javafx-graphics")
