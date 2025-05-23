@@ -7,7 +7,7 @@ lazy val common = Defaults.coreDefaultSettings ++ Seq(
   version := "0.18-SNAPSHOT",
   scalaVersion := "3.6.4", // Scala 3.7.1-RC1 breaks ScalaFx!
   libraryDependencies ++= {
-    val jsoniterVersion = "2.36.1"
+    val jsoniterVersion = "2.36.2"
     Seq(
       "dev.zio" %% "zio" % zioVersion,
       "com.github.plokhotnyuk.jsoniter-scala" %% "jsoniter-scala-core" % jsoniterVersion,
