@@ -7,3 +7,4 @@ target/
 client/target/
 shared/target/
 server/target/
+sbt-launch.jar
