@@ -37,7 +37,7 @@ lazy val client = project
   .settings(
     libraryDependencies ++= {
       Seq(
-        "org.scalafx" %% "scalafx" % "24.0.0-R35"
+        "org.scalafx" %% "scalafx" % "24.0.2-R36"
          exclude("org.openjfx", "javafx-controls")
          exclude("org.openjfx", "javafx-fxml")
          exclude("org.openjfx", "javafx-graphics")
