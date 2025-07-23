@@ -16,9 +16,7 @@ lazy val common = Defaults.coreDefaultSettings ++ Seq(
     )
   },
   scalacOptions ++= Seq(
-    "-Wunused:all",
-    // Silences 3.7.0+ implicit using warnings:
-    "-Wconf:msg=Implicit parameters should be provided with a `using` clause:s"
+    "-Wunused:all"
   )
 )
 
