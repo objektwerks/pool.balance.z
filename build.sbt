@@ -1,4 +1,4 @@
-val zioVersion = "2.1.23"
+val zioVersion = "2.1.24"
 val zioHttpVersion = "3.7.4"
 val zioLoggingVersion = "2.5.2"
 
