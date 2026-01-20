@@ -47,7 +47,7 @@ lazy val client = project
         "dev.zio" %% "zio-http" % zioHttpVersion
         exclude("dev.zio", "zio-streams"),
         "com.typesafe.scala-logging" %% "scala-logging" % "3.9.5",
-        "ch.qos.logback" % "logback-classic" % "1.5.22"
+        "ch.qos.logback" % "logback-classic" % "1.5.23"
       )
     }
   )
