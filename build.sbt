@@ -5,7 +5,7 @@ val zioLoggingVersion = "2.5.2"
 lazy val common = Defaults.coreDefaultSettings ++ Seq(
   organization := "objektwerks",
   version := "0.18-SNAPSHOT",
-  scalaVersion := "3.8.4-RC1",
+  scalaVersion := "3.8.4-RC2",
   libraryDependencies ++= {
     val jsoniterVersion = "2.38.9"
     Seq(
