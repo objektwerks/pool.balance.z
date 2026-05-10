@@ -7,7 +7,7 @@ lazy val common = Defaults.coreDefaultSettings ++ Seq(
   version := "0.18-SNAPSHOT",
   scalaVersion := "3.8.4-RC2",
   libraryDependencies ++= {
-    val jsoniterVersion = "2.38.9"
+    val jsoniterVersion = "2.38.10"
     Seq(
       "dev.zio" %% "zio" % zioVersion,
       "com.github.plokhotnyuk.jsoniter-scala" %% "jsoniter-scala-core" % jsoniterVersion,
